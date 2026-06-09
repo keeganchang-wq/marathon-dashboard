@@ -616,14 +616,15 @@ body {
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🏃 Recent Strava Activities</span><button class="sec-toggle" data-toggle="runs">−</button></div>
   <div class="sec-body" id="body-runs">
     <table class="tbl">
-      <thead><tr><th>Date</th><th>Activity</th><th>Distance</th><th>Pace</th><th>Effort</th><th>PRs</th><th>Shoe</th></tr></thead>
+      <thead><tr><th>Date</th><th>Activity</th><th>Dist</th><th>Pace</th><th>Effort</th><th>PRs</th><th>Shoe</th><th></th></tr></thead>
       <tbody>
-        <tr style="background:var(--mint-50)"><td><strong>9 Jun ★</strong></td><td><strong>First run back from injury</strong></td><td><b>5.0km</b></td><td style="color:var(--mint-600);font-weight:700">7:13/km ✅</td><td>49</td><td>—</td><td>Superblast 3</td></tr>
-        <tr><td>30 May</td><td>Afternoon Run</td><td>9.0km</td><td>6:17/km</td><td>73</td><td>43</td><td>Superblast 3</td></tr>
-        <tr><td>26 May</td><td>🔥 Intervals · Olympic Park</td><td>5.0km</td><td>4:36/km</td><td>58</td><td style="color:var(--peach-500);font-weight:700">107 PRs</td><td>Vaporfly 4</td></tr>
-        <tr><td>24 May</td><td>✅ 20km Hotspot Long Run</td><td>20.1km</td><td>5:52/km</td><td>183</td><td style="color:var(--mint-600);font-weight:700">93 PRs</td><td>Superblast 3</td></tr>
-        <tr><td>21 May</td><td>Evening Run</td><td>9.1km</td><td>5:51/km</td><td>84</td><td>—</td><td>Superblast 3</td></tr>
-        <tr><td>10 May</td><td>18.3km Long Run</td><td>18.3km</td><td>5:53/km</td><td>200</td><td style="color:var(--mint-600);font-weight:700">139 PRs</td><td>Superblast 3</td></tr>
+        <tr style="background:rgba(39,174,96,.08);cursor:pointer" data-strava="18845629096"><td><strong>9 Jun ★</strong></td><td><strong>First run back</strong></td><td><b>5.0km</b></td><td style="color:#2ECC71;font-weight:700">7:13/km</td><td>49</td><td>—</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18845629096" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
+        <tr style="cursor:pointer" data-strava="18821092907"><td>7 Jun</td><td>🏊 Evening Swim</td><td>200m</td><td>—</td><td>4</td><td>—</td><td>—</td><td><a href="https://www.strava.com/activities/18821092907" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
+        <tr style="cursor:pointer" data-strava="18711637254"><td>30 May</td><td>Afternoon Run</td><td>9.0km</td><td>6:17/km</td><td>73</td><td style="color:var(--golden);font-weight:700">43</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18711637254" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
+        <tr style="cursor:pointer" data-strava="18659441753"><td>26 May</td><td>🔥 Intervals · Olympic Park</td><td>5.0km</td><td>4:36/km</td><td>58</td><td style="color:#E74C3C;font-weight:700">106</td><td>Vaporfly 4</td><td><a href="https://www.strava.com/activities/18659441753" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
+        <tr style="cursor:pointer" data-strava="18628147720"><td>24 May</td><td>✅ 20km Hotspot LR</td><td>20.1km</td><td>5:52/km</td><td>183</td><td style="color:#2ECC71;font-weight:700">93</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18628147720" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
+        <tr style="cursor:pointer" data-strava="18592467984"><td>21 May</td><td>Evening Run</td><td>9.1km</td><td>5:51/km</td><td>84</td><td>—</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18592467984" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
+        <tr style="cursor:pointer" data-strava="18445455558"><td>10 May</td><td>18.3km Long Run</td><td>18.3km</td><td>5:53/km</td><td>200</td><td style="color:#2ECC71;font-weight:700">139</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18445455558" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -1081,7 +1082,7 @@ function renderPlan(){
         + '<div class="cal-card-name">' + s.name + '</div>'
         + '<div class="cal-card-km">' + km + '</div>'
         + (isDoneSess ? '<div class="cal-card-done">✓ Done</div>' : '')
-        + (sm ? '<div style="font-size:8px;color:#2ECC71;margin-top:1px">📡 Strava</div>' : '')
+        + (sm ? '<div style="font-size:8px;color:#2ECC71;margin-top:1px">📡 <a href="https://www.strava.com/activities/'+sm.id+'" target="_blank" style="color:#2ECC71;text-decoration:none">Strava ↗</a></div>' : '')
         + '</div>'
         + '</div>'
         + '</div>';
@@ -1179,7 +1180,7 @@ function openSessModal(wk,day,sessKey,weekDone){
   const BL={wu:'WU',go:'GO',rest:'REST',cd:'CD',rc:'🏁'};
   const BB={wu:'rgba(39,174,96,.1)',go:'rgba(231,76,60,.1)',rest:'rgba(30,95,168,.1)',cd:'rgba(35,79,96,.1)',rc:'rgba(212,160,82,.1)'};
   const blks=sess.blocks.map(b=>`<div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;border-radius:6px;background:${BB[b.t]||'var(--surface-2)'};margin-bottom:5px"><div style="width:26px;height:26px;border-radius:5px;background:${BC[b.t]||'#888'};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">${BL[b.t]||'GO'}</div><div style="font-size:12px;color:var(--text);line-height:1.6;flex:1">${b.x}</div></div>`).join('');
-  const sv=sm?`<div style="background:rgba(39,174,96,.1);border-left:3px solid #27AE60;border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:11px;line-height:1.7"><strong style="color:var(--mint-600)">📡 Strava verified ✅</strong><br><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px"><div><span style="color:var(--text-3)">Activity:</span> <strong>${sm.name}</strong></div><div><span style="color:var(--text-3)">Distance:</span> <strong>${sm.dist.toFixed(1)}km</strong></div><div><span style="color:var(--text-3)">Effort:</span> <strong>${sm.re||'—'}</strong></div><div><span style="color:var(--text-3)">PRs:</span> <strong>${sm.prs>0?'🏅 '+sm.prs+' PRs':'—'}</strong></div></div></div>`:'';
+  const sv=sm?`<div style="background:rgba(39,174,96,.1);border-left:3px solid #27AE60;border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:11px;line-height:1.7"><strong style="color:var(--mint-600)">📡 Strava verified ✅</strong> · <a href="https://www.strava.com/activities/${sm.id}" target="_blank" style="color:var(--golden);font-weight:600;text-decoration:none;font-size:11px">View on Strava ↗</a><br><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px"><div><span style="color:var(--text-3)">Activity:</span> <strong>${sm.name}</strong></div><div><span style="color:var(--text-3)">Distance:</span> <strong>${sm.dist.toFixed(1)}km</strong></div><div><span style="color:var(--text-3)">Effort:</span> <strong>${sm.re||'—'}</strong></div><div><span style="color:var(--text-3)">PRs:</span> <strong>${sm.prs>0?'🏅 '+sm.prs+' PRs':'—'}</strong></div></div></div>`:'';
   document.getElementById('sessModalTitle').innerHTML=`<span style="color:${col}">${TL[sess.type]}</span> · ${sessKey} <span style="font-size:12px;color:var(--text-3)">Wk${wk} ${day}</span>`;
   document.getElementById('sessModalBody').innerHTML=`<div style="display:flex;gap:6px;align-items:center;margin-bottom:12px;flex-wrap:wrap"><span style="background:${col};color:white;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">${sess.km}</span>${isDone?'<span style="background:rgba(39,174,96,.15);color:#2ECC71;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">✓ Completed</span>':''}</div>${sv}<div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6"><strong>🎯 What this trains:</strong> ${sess.trains||'Aerobic development.'}</div><div style="margin-bottom:10px">${blks}</div>${sess.tip?`<div style="background:rgba(212,160,82,.1);border-left:3px solid var(--golden);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:12px;font-size:12px;color:var(--text);line-height:1.6"><strong>Coach tip:</strong> ${sess.tip}</div>`:''}${generateDebrief(sess.type,sessKey,sm)}<button data-done-modal="${wk}|${day}" style="width:100%;padding:10px;border:2px solid ${isDone?'rgba(39,174,96,.4)':'var(--golden)'};border-radius:8px;background:${isDone?'rgba(39,174,96,.15)':'transparent'};color:${isDone?'#2ECC71':'var(--golden)'};font-size:12px;font-weight:700;cursor:pointer">${isDone?'✓ Completed — tap to undo':'Mark this session as done ✓'}</button>`;
   document.getElementById('sessModal').classList.add('open');
@@ -1455,7 +1456,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 // EVENT DELEGATION — replaces all inline onclick handlers (CSP-safe)
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('click', function(e) {
-  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del]');
+  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del],[data-strava]');
   if (!el) return;
 
   // TAB SWITCHING
@@ -1548,6 +1549,7 @@ document.addEventListener('click', function(e) {
   // GEAR CYCLE / DELETE
   if (el.dataset.cycle) { cycleGearCond(el.dataset.cycle); return; }
   if (el.dataset.delGear) { delGear(el.dataset.delGear); return; }
+  if (el.dataset.strava) { window.open('https://www.strava.com/activities/' + el.dataset.strava, '_blank'); return; }
   if (el.dataset.editGear) { editGear(el.dataset.editGear); return; }
   if (el.dataset.wishBuy) { toggleWishBought(el.dataset.wishBuy); return; }
   if (el.dataset.wishDel) { if(confirm('Remove?')) deleteWishItem(el.dataset.wishDel); return; }
