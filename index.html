@@ -11,79 +11,64 @@
    Golden   #D4A052  Sapphire #234F60  Black Tie #121111
    ══════════════════════════════════════════════════════════════ */
 :root {
-  /* Luxury palette */
-  --diamond:#FFFFFF; --silver:#EFEFEF; --ice:#DFE6E6;
-  --golden:#D4A052; --golden-lt:#F0D9A8; --golden-dk:#A06E20;
-  --sapphire:#234F60; --sapphire-lt:#2E6880; --blacktie:#121111;
+  /* Core palette */
+  --diamond:      #FFFFFF;
+  --silver:       #EFEFEF;
+  --ice:          #DFE6E6;
+  --golden:       #D4A052;
+  --golden-lt:    #F0D9A8;
+  --golden-dk:    #A06E20;
+  --sapphire:     #234F60;
+  --sapphire-lt:  #2E6880;
+  --blacktie:     #121111;
 
-  /* ── DARK (default) ── */
-  --bg:#0E0E0E; --surface:#1A1A1A; --surface-2:#222222; --surface-3:#2A2A2A;
-  --border:#2E2E2E; --border-2:#3A3A3A;
-  --text:#F5EEDF; --text-2:#C8BEA8; --text-3:#7A7060;
-  --nav-bg:#0A0A0A; --header-bg:#1E1E1E;
-  --accent:#D4A052; --accent-lt:#F0D9A8; --accent-dk:#A06E20;
-
-  --mint-50:#0F1F12;--mint-100:#163320;--mint-200:#1E4A2C;
-  --mint-400:#4ADE80;--mint-500:#22C55E;--mint-600:#16A34A;
-  --blue-50:#0D1520;--blue-100:#132030;--blue-200:#1A3A50;
-  --blue-300:#1D6FA8;--blue-400:#2E87C5;--blue-500:#3B9FE0;--blue-600:#5AB5EE;
-  --peach-50:#1E1408;--peach-100:#2E2010;--peach-200:#4A3318;
-  --peach-400:#E67E22;--peach-500:#D35400;
-  --rose-50:#1E0808;--rose-100:#2E1010;--rose-200:#451818;
-  --rose-400:#E74C3C;--rose-500:#C0392B;
-  --lav-50:#160E1F;--lav-100:#231530;--lav-200:#352048;
-  --lav-400:#8E44AD;--lav-500:#6C3483;
-
-  --shadow-sm:0 1px 6px rgba(0,0,0,.45);
-  --shadow-md:0 4px 20px rgba(0,0,0,.60);
-  --radius:12px; --radius-sm:8px;
-}
-
-/* ── LIGHT MODE ── */
-[data-light] {
-  --bg:#F5EEDF; --surface:#FFFFFF; --surface-2:#EFEFEF; --surface-3:#E8E0D0;
-  --border:#DFE6E6; --border-2:#C8D6D6;
-  --text:#121111; --text-2:#234F60; --text-3:#5A7E8E;
-  --nav-bg:#234F60; --header-bg:#DFE6E6;
-  --mint-50:#F0FDF4;--mint-100:#DCFCE7;--mint-200:#BBF7D0;
-  --mint-400:#4ADE80;--mint-500:#22C55E;--mint-600:#16A34A;
-  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-200:#BFDBFE;
-  --blue-300:#93C5FD;--blue-400:#60A5FA;--blue-500:#3B82F6;--blue-600:#2563EB;
-  --peach-50:#FFF7ED;--peach-100:#FFEDD5;--peach-200:#FED7AA;
-  --peach-400:#FB923C;--peach-500:#F97316;
-  --rose-50:#FFF1F2;--rose-100:#FFE4E6;--rose-200:#FECDD3;
-  --rose-400:#FB7185;--rose-500:#F43F5E;
-  --lav-50:#F5F3FF;--lav-100:#EDE9FE;--lav-200:#DDD6FE;
-  --lav-400:#A78BFA;--lav-500:#8B5CF6;
-  --shadow-sm:0 1px 6px rgba(35,79,96,.10);
-  --shadow-md:0 4px 20px rgba(35,79,96,.14);
-}
-/* Light mode: force body/nav background via CSS vars */
-[data-light] body, [data-light] { background:var(--bg) !important; color:var(--text) !important; }
-
-
-/* [data-dark] retired — dark is now the :root default */
-.unused-dark-block {
+  /* App roles — permanent dark */
   --bg:        #0E0E0E;
   --surface:   #1A1A1A;
   --surface-2: #222222;
   --surface-3: #2A2A2A;
   --border:    #2E2E2E;
   --border-2:  #3A3A3A;
-  --text:      #F5EEDF;
-  --text-2:    #C8BEA8;
-  --text-3:    #7A7060;
+
+  /* Text */
+  --text:   #F5EEDF;
+  --text-2: #C8BEA8;
+  --text-3: #7A7060;
+
+  /* Nav & header */
   --nav-bg:    #0A0A0A;
   --header-bg: #1E1E1E;
-  --mint-50:#0F1F12;--mint-100:#163320;--mint-200:#1E4A2C;
-  --blue-50:#0D1520;--blue-100:#132030;--blue-200:#1A3A50;
-  --peach-50:#1E1408;--peach-100:#2E2010;--peach-200:#4A3318;
-  --rose-50:#1E0808;--rose-100:#2E1010;--rose-200:#451818;
-  --lav-50:#160E1F;--lav-100:#231530;--lav-200:#352048;
+
+  /* Accents (semantic) */
+  --accent:    #D4A052;
+  --accent-lt: #F0D9A8;
+  --accent-dk: #A06E20;
+
+  /* Mint (complete / positive) */
+  --mint-50:  #0F1F12; --mint-100:#163320; --mint-200:#1E4A2C;
+  --mint-400: #2ECC71; --mint-500:#27AE60; --mint-600:#1E8449;
+
+  /* Blue (info) */
+  --blue-50:  #0D1520; --blue-100:#132030; --blue-200:#1A3A50;
+  --blue-300: #1D6FA8; --blue-400:#2E87C5; --blue-500:#3B9FE0; --blue-600:#5AB5EE;
+
+  /* Peach / amber (warning) */
+  --peach-50:  #1E1408; --peach-100:#2E2010; --peach-200:#4A3318;
+  --peach-400: #E67E22; --peach-500:#D35400;
+
+  /* Rose / red (alert) */
+  --rose-50:  #1E0808; --rose-100:#2E1010; --rose-200:#451818;
+  --rose-400: #E74C3C; --rose-500:#C0392B;
+
+  /* Lavender */
+  --lav-50:  #160E1F; --lav-100:#231530; --lav-200:#352048;
+  --lav-400: #8E44AD; --lav-500:#6C3483;
+
   --shadow-sm: 0 1px 6px rgba(0,0,0,.45);
   --shadow-md: 0 4px 20px rgba(0,0,0,.60);
+  --radius:    12px;
+  --radius-sm: 8px;
 }
-
 
 /* ── BASE ───────────────────────────────────────────────────── */
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -413,6 +398,43 @@ body {
 
 /* ── ANIMATIONS ─────────────────────────────────────────────── */
 @keyframes spin { to { transform:rotate(360deg); } }
+
+[data-light] {
+  --bg:#F5EEDF; --surface:#FFFFFF; --surface-2:#EFEFEF; --surface-3:#E8E0D0;
+  --border:#DFE6E6; --border-2:#C8D6D6;
+  --text:#121111; --text-2:#234F60; --text-3:#5A7E8E;
+  --nav-bg:#234F60; --header-bg:#DFE6E6;
+  --mint-50:#F0FDF4;--mint-100:#DCFCE7;--mint-200:#BBF7D0;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-200:#BFDBFE;
+  --peach-50:#FFF7ED;--peach-100:#FFEDD5;
+  --rose-50:#FFF1F2;--rose-100:#FFE4E6;
+}
+[data-light] body { background:var(--bg); color:var(--text); }
+[data-light] .topbar, [data-light] .tab-bar { background:var(--nav-bg) !important; }
+[data-light] .section-card { background:var(--surface); border-color:var(--border); }
+[data-light] .sec-header { background:var(--header-bg); }
+[data-light] .sec-body { background:var(--surface); }
+[data-light] .metric { background:var(--surface-2); border-color:var(--border); }
+[data-light] .metric-label, [data-light] .metric-sub { color:var(--text-2); }
+[data-light] .tbl th { background:var(--header-bg); }
+[data-light] .tbl td { border-color:var(--border); color:var(--text); }
+[data-light] .tbl tr:nth-child(even) td { background:var(--surface-2); }
+[data-light] .modal { background:var(--surface); border-color:var(--border); }
+[data-light] .modal input, [data-light] .modal select, [data-light] .modal textarea {
+  background:var(--surface-2); border-color:var(--border); color:var(--text);
+}
+[data-light] .shoe-card { background:var(--surface-2); }
+[data-light] .gear-item { border-color:var(--border); }
+[data-light] .upload-area { background:var(--surface-2); border-color:var(--border-2); }
+[data-light] .upload-method { background:var(--surface); border-color:var(--border); }
+[data-light] .week-block { background:var(--surface); border-color:var(--border); }
+[data-light] .sess-card { background:var(--surface); border-color:var(--border); }
+[data-light] .sess-body-inner { background:var(--surface); }
+[data-light] .milestone-card { background:var(--surface-2); border-color:var(--border); }
+[data-light] .prog-track, [data-light] .pr-t { background:var(--border); }
+[data-light] .sec-label { border-color:var(--border); }
+[data-light] .tab { color:rgba(255,255,255,.7); }
+[data-light] .tab.active { color:var(--golden) !important; border-bottom-color:var(--golden) !important; }
 </style>
 </head>
 <body>
@@ -429,30 +451,11 @@ body {
 </div>
 <div class="sync-bar-wrap"><div class="sync-bar" id="syncBar"></div></div>
 <div class="sync-label" id="syncLabel"></div>
-<div class="tab-bar">
-  <button class="tab active" data-tab="dashboard">Dashboard</button>
-  <button class="tab" data-tab="plan">Training Plan</button>
-  <button class="tab" data-tab="shoes-gear">Shoes &amp; Gear</button>
-  <button class="tab" data-tab="pace-efforts">Pace &amp; Efforts</button>
-  <button class="tab" data-tab="milestones">Milestones</button>
-  <button class="tab" data-tab="settings">Settings</button>
-</div>
-
+<div class="tab-bar"><button class="tab active" data-tab="dashboard">Dashboard</button><button class="tab" data-tab="plan">Training Plan</button><button class="tab" data-tab="shoes-gear">Shoes &amp; Gear</button><button class="tab" data-tab="pace-efforts">Pace &amp; Efforts</button><button class="tab" data-tab="milestones">Milestones</button><button class="tab" data-tab="settings">Settings</button></div>
 
 <!-- ═══ DASHBOARD ═══ -->
 <div id="tab-dashboard" class="panel active">
-<div id="dashControls" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-  <button data-action="toggleLock" id="lockBtn" style="display:flex;align-items:center;gap:6px;background:rgba(212,160,82,.12);border:1.5px solid var(--golden);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:600;color:var(--golden);transition:all .2s">
-    🔓 Unlocked
-  </button>
-  <button data-action="collapseAll" style="display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-2);transition:all .2s">
-    ↑ Collapse all
-  </button>
-  <button data-action="expandAll" style="display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-2);transition:all .2s">
-    ↓ Expand all
-  </button>
-  <span id="lockHint" style="font-size:10px;color:var(--text-3);margin-left:4px">Drag ⠿ handles to reorder sections</span>
-</div>
+<div id="dashControls" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap"><button data-action="toggleLock" id="lockBtn" style="background:rgba(212,160,82,.12);border:1.5px solid var(--golden);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:600;color:var(--golden)">🔓 Unlocked</button><button data-action="collapseAll" style="background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-2)">↑ Collapse all</button><button data-action="expandAll" style="background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-2)">↓ Expand all</button><span id="lockHint" style="font-size:10px;color:var(--text-3)">Drag ⠿ handles to reorder</span></div>
 <div id="dash-sections">
 
 <!-- COUNTDOWNS -->
@@ -581,22 +584,7 @@ body {
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk6 May25</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:4%;height:100%;background:var(--rose-400);border-radius:5px"></div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--rose-500);flex-shrink:0">10 ❌</div></div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk7 Jun1</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:10px;color:var(--text-3)">Rest ✓</div><div style="width:44px;text-align:right;font-weight:600;color:var(--text-2);flex-shrink:0">0</div></div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk8 Jun9</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:11%;height:100%;background:var(--blue-400);border-radius:5px;display:flex;align-items:center;padding-left:6px;font-size:9px;font-weight:700;color:white">49</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--blue-600);flex-shrink:0">49 ▶</div></div>
-        <div class="alert alert-amber" style="margin-top:4px">
-    <strong>🔄 Shoe rotation:</strong>
-    <strong>Easy &amp; recovery runs</strong> → ASICS Superblast 3 (always — your default daily driver) ·
-    <strong>Intervals</strong> → Alternate between Adidas Adios Pro 4 and Nike Vaporfly 4 ·
-    <strong>Tempo runs</strong> → Adidas Adios Pro 4 ·
-    <strong>Long runs</strong> → ASICS Superblast 3 ·
-    <strong>Half marathon (Jul 19)</strong> → ASICS Superblast 3 ·
-    <strong>Full marathon (Oct 11)</strong> → Nike Alphafly 3 🏆
-    <br><br>
-    <strong>⚡ Alphafly 3 break-in plan</strong> (14km on them — need ~35km before race day):
-    Do 3 easy runs in them to dial in the feel —
-    <strong>Wk10 Tue Jun 22</strong> (5km easy) ·
-    <strong>Wk14 Thu Jul 16</strong> (8km easy, post-half recovery week) ·
-    <strong>Wk17 Tue Aug 11</strong> (8km easy) → then lock them away until Oct 11.
-    Carbon shoes peak at 20–80km, so this puts them in the sweet spot on race day.
-  </div>
+        <div class="alert alert-amber" style="margin-top:10px;font-size:11px">Wk4→Wk5 spike was 173% — caused Wk6 illness. Safe ceiling is 130%. This chart catches overreach before it happens in August's peak block.</div>
       </div>
     </div>
   </div>
@@ -621,30 +609,7 @@ body {
 </div>
 
 <!-- COMING SOON -->
-<div class="section-card" id="sec-future" draggable="true">
-  <div class="sec-header">
-    <span class="drag-handle">⠿</span>
-    <span class="sec-title">🗺️ Roadmap — what's being built next</span>
-    <button class="sec-toggle" data-toggle="future">−</button>
-  </div>
-  <div class="sec-body" id="body-future">
-    <!-- Priority legend + controls -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span>
-        <span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span>
-        <span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span>
-        <span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span>
-        <span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span>
-      </div>
-      <div style="display:flex;gap:6px">
-        <button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Urgency ↑</button>
-        <button class="add-btn" data-action="addRoadmapItem" style="font-size:11px;padding:5px 12px">+ Add item</button>
-      </div>
-    </div>
-    <div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div>
-  </div>
-</div>
+<div class="section-card" id="sec-future" draggable="true"><div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Roadmap — what's being built next</span><button class="sec-toggle" data-toggle="future">−</button></div><div class="sec-body" id="body-future"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span><span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span><span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span><span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span><span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span></div><div style="display:flex;gap:6px"><button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Urgency ↑</button><button class="add-btn" data-action="addRoadmapItem" style="font-size:11px;padding:5px 12px">+ Add item</button></div></div><div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div></div>
 
 </div><!-- end dash-sections -->
 </div><!-- end tab-dashboard -->
@@ -661,227 +626,107 @@ body {
 </div>
 
 <!-- ═══ PACE GUIDE ═══ -->
-
-<!-- ═══ SHOES & GEAR ═══ -->
 <div id="tab-shoes-gear" class="panel">
-
-  <!-- SHOES SECTION -->
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:16px;font-weight:700;color:var(--text)">👟 Shoe Tracker</div>
-      <div style="font-size:11px;color:var(--text-2);margin-top:2px">Live from Strava · 6 active shoes · Tap Edit to update</div>
-    </div>
-    <div style="display:flex;gap:8px">
-      <button class="add-btn" data-action="addShoe">+ Add shoe</button>
-      <button class="btn btn-d" data-action="toggleRetired">Retired shoes</button>
-    </div>
+    <div><div style="font-size:16px;font-weight:700;color:var(--text)">👟 Shoe Tracker</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Live from Strava · 6 active shoes</div></div>
+    <div style="display:flex;gap:8px"><button class="add-btn" data-action="addShoe">+ Add shoe</button><button class="btn btn-d" data-action="toggleRetired">Retired</button></div>
   </div>
-
   <div class="g3" id="shoeGrid" style="margin-bottom:16px"></div>
-
   <div style="background:rgba(212,160,82,.1);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:24px;font-size:12px;line-height:1.8;color:var(--text)">
     <strong style="color:var(--golden)">🔄 Rotation:</strong>
-    <strong>Easy &amp; recovery</strong> → ASICS Superblast 3 (always) ·
+    <strong>Easy &amp; recovery</strong> → ASICS Superblast 3 (always — your default) ·
     <strong>Intervals</strong> → Alternate Adios Pro 4 ↔ Vaporfly 4 ·
     <strong>Tempo</strong> → Adios Pro 4 ·
-    <strong>Long runs</strong> → Superblast 3 ·
-    <strong>Half marathon Jul 19</strong> → Superblast 3 ·
-    <strong>Full marathon Oct 11</strong> → Alphafly 3 🏆
-    <br>
-    <strong style="color:var(--golden)">⚡ Alphafly 3 break-in:</strong>
-    Wk10 Tue Jun 22 (5km easy) · Wk14 Thu Jul 16 (8km easy) · Wk17 Tue Aug 11 (8km easy) → lock away until Oct 11
+    <strong>Long runs &amp; Half marathon</strong> → Superblast 3 ·
+    <strong>Full marathon Oct 11</strong> → Alphafly 3 🏆<br>
+    <strong style="color:var(--golden)">⚡ Alphafly break-in:</strong> Wk10 Jun 22 (5km) · Wk14 Jul 16 (8km) · Wk17 Aug 11 (8km) → lock away until Oct 11
   </div>
-
-  <div id="retired-section" style="display:none;margin-bottom:24px">
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Retired shoes</div>
-    <div id="retired-list" style="color:var(--text-3);font-size:12px;padding:20px;text-align:center;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No retired shoes yet.</div>
-  </div>
-
-  <!-- DIVIDER -->
+  <div id="retired-section" style="display:none;margin-bottom:16px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Retired shoes</div><div id="retired-list" style="padding:16px;text-align:center;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No retired shoes yet.</div></div>
   <div style="border-top:1px solid var(--border);margin:8px 0 20px"></div>
-
-  <!-- GEAR SECTION -->
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:16px;font-weight:700;color:var(--text)">🎒 Gear Inventory</div>
-      <div style="font-size:11px;color:var(--text-2);margin-top:2px">Upload receipts to add items · Tap condition badge to cycle: New → Good → Worn → Replace</div>
-    </div>
-    <button class="add-btn" data-action="addGear">+ Add gear manually</button>
+    <div><div style="font-size:16px;font-weight:700;color:var(--text)">🎒 Gear Inventory</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Tap condition badge to cycle: New → Good → Worn → Replace</div></div>
+    <button class="add-btn" data-action="addGear">+ Add gear</button>
   </div>
-
-  <!-- UPLOAD AREA -->
   <div class="upload-area" id="uploadAreaInner" style="margin-bottom:16px">
-    <div style="font-size:32px;margin-bottom:8px">📧</div>
-    <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Upload a purchase receipt or confirmation email</div>
-    <div style="font-size:11px;color:var(--text-2)">Drop a file here, paste email text, or take a photo — I'll extract product details automatically</div>
-    <div class="upload-methods">
-      <div class="upload-method" data-action="openPaste">
-        <div style="font-size:20px;margin-bottom:4px">📋</div>
-        <div style="font-size:11px;font-weight:600;color:var(--text)">Paste email text</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:2px">Copy & paste any purchase email</div>
-      </div>
-      <div class="upload-method" data-action="openFile">
-        <div style="font-size:20px;margin-bottom:4px">📄</div>
-        <div style="font-size:11px;font-weight:600;color:var(--text)">Upload file</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:2px">PDF, image, or .eml file</div>
-      </div>
-      <div class="upload-method" data-action="openFile">
-        <div style="font-size:20px;margin-bottom:4px">📸</div>
-        <div style="font-size:11px;font-weight:600;color:var(--text)">Photo of receipt</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:2px">Screenshot or photo</div>
-      </div>
+    <div style="font-size:28px;margin-bottom:8px">📧</div>
+    <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Drop a file, paste email, or take a photo</div>
+    <div style="font-size:11px;color:var(--text-2)">I'll extract product details automatically</div>
+    <div class="upload-methods" style="margin-top:14px">
+      <div class="upload-method" data-action="openPaste"><div style="font-size:20px;margin-bottom:4px">📋</div><div style="font-size:11px;font-weight:600;color:var(--text)">Paste email text</div></div>
+      <div class="upload-method" data-action="openFile"><div style="font-size:20px;margin-bottom:4px">📄</div><div style="font-size:11px;font-weight:600;color:var(--text)">Upload file</div></div>
+      <div class="upload-method" data-action="openFile"><div style="font-size:20px;margin-bottom:4px">📸</div><div style="font-size:11px;font-weight:600;color:var(--text)">Photo of receipt</div></div>
     </div>
     <input type="file" id="fileInputEl" style="display:none" accept=".pdf,.png,.jpg,.jpeg,.eml,.txt">
   </div>
-
-  <!-- GEAR LIST -->
-  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Current gear inventory</div>
+  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Current gear</div>
   <div class="section-card"><div class="sec-body" style="padding:8px 16px" id="gearItems"></div></div>
 </div>
 
-<!-- ═══ PACE & BEST EFFORTS ═══ -->
 <div id="tab-pace-efforts" class="panel">
-
-  <!-- HERO STATS ROW -->
   <div class="g4" style="margin-bottom:20px">
-    <div class="metric"><div class="metric-label">10km PB</div><div class="metric-val" style="color:var(--golden)">50:03</div><div class="metric-sub">Strava verified · May 17</div></div>
-    <div class="metric"><div class="metric-label">1km PR</div><div class="metric-val" style="color:var(--golden)">4:17</div><div class="metric-sub">4:17/km · Olympic Park · May 26</div></div>
-    <div class="metric"><div class="metric-label">400m PR</div><div class="metric-val" style="color:var(--golden)">1:42</div><div class="metric-sub">4:15/km · Olympic Park · May 26</div></div>
-    <div class="metric"><div class="metric-label">Max HR observed</div><div class="metric-val" style="color:var(--golden)">179 bpm</div><div class="metric-sub">Intervals · May 26</div></div>
+    <div class="metric"><div class="metric-label">10km PB</div><div class="metric-val" style="color:var(--golden)">50:03</div><div class="metric-sub">May 17 · Strava verified</div></div>
+    <div class="metric"><div class="metric-label">1km PR</div><div class="metric-val" style="color:var(--golden)">4:17</div><div class="metric-sub">May 26 · Olympic Park</div></div>
+    <div class="metric"><div class="metric-label">400m PR</div><div class="metric-val" style="color:var(--golden)">1:42</div><div class="metric-sub">May 26 · Olympic Park</div></div>
+    <div class="metric"><div class="metric-label">Max HR</div><div class="metric-val" style="color:var(--golden)">179 bpm</div><div class="metric-sub">Intervals · May 26</div></div>
   </div>
-
-  <!-- BEST EFFORTS CARDS -->
   <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Personal Records</div>
   <div class="g5" style="margin-bottom:20px">
-    <div class="effort-card e-ahead"><div class="effort-dist">400m</div><div class="effort-time">1:42</div><div class="effort-pace">4:15/km · May 26</div><div class="effort-tgt" style="color:#2ECC71;margin-top:6px;font-size:10px;font-weight:600">✅ Ahead of 3:30 target</div></div>
-    <div class="effort-card e-ahead"><div class="effort-dist">½ mile</div><div class="effort-time">3:26</div><div class="effort-pace">4:16/km · May 26</div><div class="effort-tgt" style="color:#2ECC71;margin-top:6px;font-size:10px;font-weight:600">✅ Ahead</div></div>
-    <div class="effort-card e-ahead"><div class="effort-dist">1km</div><div class="effort-time">4:17</div><div class="effort-pace">4:17/km · May 26</div><div class="effort-tgt" style="color:#2ECC71;margin-top:6px;font-size:10px;font-weight:600">✅ Ahead</div></div>
-    <div class="effort-card e-close"><div class="effort-dist">5km</div><div class="effort-time">25:56</div><div class="effort-pace">5:11/km · May 24</div><div class="effort-tgt" style="color:#E67E22;margin-top:6px;font-size:10px;font-weight:600">⚠ Need ~24:30</div></div>
-    <div class="effort-card e-gap"><div class="effort-dist">10km</div><div class="effort-time">55:03</div><div class="effort-pace">5:30/km · May 24</div><div class="effort-tgt" style="color:#E74C3C;margin-top:6px;font-size:10px;font-weight:600">🔴 Need ~51:00</div></div>
+    <div class="effort-card e-ahead"><div class="effort-dist">400m</div><div class="effort-time">1:42</div><div class="effort-pace">4:15/km · May 26</div><div style="font-size:10px;color:#2ECC71;font-weight:600;margin-top:6px">✅ Ahead</div></div>
+    <div class="effort-card e-ahead"><div class="effort-dist">½ mile</div><div class="effort-time">3:26</div><div class="effort-pace">4:16/km · May 26</div><div style="font-size:10px;color:#2ECC71;font-weight:600;margin-top:6px">✅ Ahead</div></div>
+    <div class="effort-card e-ahead"><div class="effort-dist">1km</div><div class="effort-time">4:17</div><div class="effort-pace">4:17/km · May 26</div><div style="font-size:10px;color:#2ECC71;font-weight:600;margin-top:6px">✅ Ahead</div></div>
+    <div class="effort-card e-close"><div class="effort-dist">5km</div><div class="effort-time">25:56</div><div class="effort-pace">5:11/km · May 24</div><div style="font-size:10px;color:#E67E22;font-weight:600;margin-top:6px">⚠ Need ~24:30</div></div>
+    <div class="effort-card e-gap"><div class="effort-dist">10km</div><div class="effort-time">55:03</div><div class="effort-pace">5:30/km · May 24</div><div style="font-size:10px;color:#E74C3C;font-weight:600;margin-top:6px">🔴 Need ~51:00</div></div>
   </div>
-
-  <!-- PREDICTIONS -->
-  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Race predictions · if you raced today</div>
-  <div class="g3" style="margin-bottom:24px">
-    <div class="metric" style="border-color:rgba(231,76,60,.4)"><div class="metric-label">Predicted — 5km basis</div><div class="metric-val" style="color:#E74C3C">3:43–3:50</div><div class="metric-sub">McMillan formula + fatigue factor</div></div>
-    <div class="metric" style="border-color:rgba(231,76,60,.4)"><div class="metric-label">Predicted — 10km basis</div><div class="metric-val" style="color:#E74C3C">3:50–3:58</div><div class="metric-sub">Riegel formula</div></div>
-    <div class="metric" style="border-color:rgba(212,160,82,.5)"><div class="metric-label">Projected after peak block</div><div class="metric-val" style="color:var(--golden)">3:28–3:35</div><div class="metric-sub">After Weeks 15–22 ↑ confidence</div></div>
+  <div class="g3" style="margin-bottom:20px">
+    <div class="metric"><div class="metric-label">Predicted — 5km basis</div><div class="metric-val" style="color:#E74C3C">3:43–3:50</div><div class="metric-sub">McMillan formula</div></div>
+    <div class="metric"><div class="metric-label">Predicted — 10km basis</div><div class="metric-val" style="color:#E74C3C">3:50–3:58</div><div class="metric-sub">Riegel formula</div></div>
+    <div class="metric"><div class="metric-label">After peak block</div><div class="metric-val" style="color:var(--golden)">3:28–3:35</div><div class="metric-sub">Weeks 15–22 training ↑</div></div>
   </div>
-
-  <!-- DIVIDER -->
-  <div style="border-top:1px solid var(--border);margin:8px 0 20px"></div>
-
-  <!-- PACE ZONES -->
+  <div style="border-top:1px solid var(--border);margin:4px 0 18px"></div>
   <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">HR Zones · Max HR 179–184 bpm</div>
-  <div style="margin-bottom:6px">
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:rgba(39,174,96,.06);margin-bottom:5px">
-      <div style="width:12px;height:12px;border-radius:50%;background:#1E4A2C;border:2px solid #27AE60;flex-shrink:0"></div>
-      <div style="font-size:12px;font-weight:700;color:var(--text);min-width:50px">Z1</div>
-      <div style="font-size:11px;color:var(--text-2);flex:1">Recovery — cool-downs</div>
-      <div style="font-size:11px;font-weight:600;color:var(--text);min-width:90px;text-align:right">≤124 bpm</div>
-      <div style="font-size:11px;color:var(--text-3);min-width:90px;text-align:right">7:30+/km</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:rgba(39,174,96,.10);margin-bottom:5px">
-      <div style="width:12px;height:12px;border-radius:50%;background:#27AE60;flex-shrink:0"></div>
-      <div style="font-size:12px;font-weight:700;color:var(--text);min-width:50px">Z2</div>
-      <div style="font-size:11px;color:var(--text-2);flex:1">Aerobic base — ALL easy &amp; long runs · <strong style="color:#2ECC71">80% of training</strong></div>
-      <div style="font-size:11px;font-weight:600;color:var(--text);min-width:90px;text-align:right">125–154 bpm</div>
-      <div style="font-size:11px;color:var(--text-3);min-width:90px;text-align:right">6:20–7:20/km</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:rgba(212,160,82,.08);margin-bottom:5px">
-      <div style="width:12px;height:12px;border-radius:50%;background:var(--golden);flex-shrink:0"></div>
-      <div style="font-size:12px;font-weight:700;color:var(--text);min-width:50px">Z3</div>
-      <div style="font-size:11px;color:var(--text-2);flex:1">Marathon pace — MP blocks, hotspot surges</div>
-      <div style="font-size:11px;font-weight:600;color:var(--text);min-width:90px;text-align:right">155–169 bpm</div>
-      <div style="font-size:11px;color:var(--text-3);min-width:90px;text-align:right">5:00–6:20/km</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:rgba(231,76,60,.08);margin-bottom:5px">
-      <div style="width:12px;height:12px;border-radius:50%;background:#E74C3C;flex-shrink:0"></div>
-      <div style="font-size:12px;font-weight:700;color:var(--text);min-width:50px">Z4</div>
-      <div style="font-size:11px;color:var(--text-2);flex:1">Threshold — tempo runs, mile reps, half marathon effort</div>
-      <div style="font-size:11px;font-weight:600;color:var(--text);min-width:90px;text-align:right">170–179 bpm</div>
-      <div style="font-size:11px;color:var(--text-3);min-width:90px;text-align:right">4:45–5:10/km</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:rgba(231,76,60,.12);margin-bottom:5px">
-      <div style="width:12px;height:12px;border-radius:50%;background:#991B1B;flex-shrink:0"></div>
-      <div style="font-size:12px;font-weight:700;color:var(--text);min-width:50px">Z5</div>
-      <div style="font-size:11px;color:var(--text-2);flex:1">VO2max — short fast reps only</div>
-      <div style="font-size:11px;font-weight:600;color:var(--text);min-width:90px;text-align:right">180+ bpm</div>
-      <div style="font-size:11px;color:var(--text-3);min-width:90px;text-align:right">&lt;4:45/km</div>
-    </div>
+  <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius-sm);background:rgba(39,174,96,.06)"><div style="width:12px;height:12px;border-radius:50%;background:#27AE60;flex-shrink:0"></div><div style="font-size:12px;font-weight:700;color:var(--text);min-width:44px">Z1</div><div style="font-size:11px;color:var(--text-2);flex:1">Recovery — cool-downs</div><div style="font-size:11px;font-weight:600;min-width:80px;text-align:right">≤124 bpm</div><div style="font-size:11px;color:var(--text-3);min-width:80px;text-align:right">7:30+/km</div></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius-sm);background:rgba(39,174,96,.12)"><div style="width:12px;height:12px;border-radius:50%;background:#22C55E;flex-shrink:0"></div><div style="font-size:12px;font-weight:700;color:var(--text);min-width:44px">Z2</div><div style="font-size:11px;color:var(--text-2);flex:1">Aerobic base — ALL easy &amp; long runs · <strong style="color:#2ECC71">80% of training</strong></div><div style="font-size:11px;font-weight:600;min-width:80px;text-align:right">125–154 bpm</div><div style="font-size:11px;color:var(--text-3);min-width:80px;text-align:right">6:20–7:20/km</div></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius-sm);background:rgba(212,160,82,.08)"><div style="width:12px;height:12px;border-radius:50%;background:var(--golden);flex-shrink:0"></div><div style="font-size:12px;font-weight:700;color:var(--text);min-width:44px">Z3</div><div style="font-size:11px;color:var(--text-2);flex:1">Marathon pace — MP blocks, hotspot surges</div><div style="font-size:11px;font-weight:600;min-width:80px;text-align:right">155–169 bpm</div><div style="font-size:11px;color:var(--text-3);min-width:80px;text-align:right">5:00–6:20/km</div></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius-sm);background:rgba(231,76,60,.08)"><div style="width:12px;height:12px;border-radius:50%;background:#E74C3C;flex-shrink:0"></div><div style="font-size:12px;font-weight:700;color:var(--text);min-width:44px">Z4</div><div style="font-size:11px;color:var(--text-2);flex:1">Threshold — tempo, mile reps, half marathon effort</div><div style="font-size:11px;font-weight:600;min-width:80px;text-align:right">170–179 bpm</div><div style="font-size:11px;color:var(--text-3);min-width:80px;text-align:right">4:45–5:10/km</div></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius-sm);background:rgba(231,76,60,.14)"><div style="width:12px;height:12px;border-radius:50%;background:#991B1B;flex-shrink:0"></div><div style="font-size:12px;font-weight:700;color:var(--text);min-width:44px">Z5</div><div style="font-size:11px;color:var(--text-2);flex:1">VO2max — short reps only</div><div style="font-size:11px;font-weight:600;min-width:80px;text-align:right">180+ bpm</div><div style="font-size:11px;color:var(--text-3);min-width:80px;text-align:right">&lt;4:45/km</div></div>
   </div>
-
-  <div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:20px;font-size:12px;color:var(--text);line-height:1.7">
-    <strong>Golden rule: HR is master, pace is output.</strong> Runna ceiling ≤5:50/km. Your ideal Z2: 6:30–7:00/km. <strong style="color:var(--golden)">HR under 150 bpm on easy days overrides all pace targets.</strong>
-  </div>
-
-  <!-- PACE TABLES -->
-  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Session pace targets · 10k PB 50:03</div>
-  <table class="tbl" style="margin-bottom:20px">
+  <div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--text);line-height:1.7"><strong>Golden rule: HR is master, pace is output.</strong> Runna ceiling ≤5:50/km. Ideal Z2: 6:30–7:00/km. <strong style="color:var(--golden)">HR under 150 bpm on easy days overrides all pace targets.</strong></div>
+  <table class="tbl" style="margin-bottom:16px">
     <tr><th>Type</th><th>Pace</th><th>HR</th><th>Sessions</th><th>Feel</th></tr>
-    <tr><td><b>Easy/Z2</b></td><td>6:20–7:20/km</td><td>125–154</td><td>All easy runs, long runs, WU, CD</td><td>Could sing a song</td></tr>
-    <tr><td><b>Marathon</b></td><td>4:57–5:07/km</td><td>160–168</td><td>Race-practice long runs, hotspot surges</td><td>Controlled effort</td></tr>
+    <tr><td><b>Easy/Z2</b></td><td>6:20–7:20/km</td><td>125–154</td><td>Easy runs, long runs, WU, CD</td><td>Could sing</td></tr>
+    <tr><td><b>Marathon</b></td><td>4:57–5:07/km</td><td>160–168</td><td>Race-practice LRs, hotspot surges</td><td>Controlled</td></tr>
     <tr><td><b>Threshold</b></td><td>4:45–5:10/km</td><td>165–174</td><td>Tempo runs, mile reps</td><td>Comfortably hard</td></tr>
-    <tr><td><b>Interval</b></td><td>4:20–4:35/km</td><td>174–184</td><td>800m/1km reps, pyramid</td><td>Hard</td></tr>
-    <tr><td><b>Speed</b></td><td>&lt;4:15/km</td><td>Z5 brief</td><td>300m/400m, strides</td><td>All-out sprint</td></tr>
+    <tr><td><b>Interval</b></td><td>4:20–4:35/km</td><td>174–184</td><td>800m/1km reps</td><td>Hard</td></tr>
+    <tr><td><b>Speed</b></td><td>&lt;4:15/km</td><td>Z5 brief</td><td>300m/400m, strides</td><td>All-out</td></tr>
   </table>
-
-  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Race day strategy</div>
   <table class="tbl">
-    <tr><th>Race</th><th>Date</th><th>Target</th><th>Km 0–7</th><th>Middle</th><th>Final stretch</th><th>HR cap</th></tr>
-    <tr style="background:rgba(212,160,82,.06)"><td><b>Half</b></td><td>19 Jul</td><td style="color:var(--golden)">1:43–1:46</td><td>5:05/km — hold back</td><td>4:55–5:00/km</td><td>Race it home</td><td>170–176 bpm</td></tr>
-    <tr style="background:rgba(35,79,96,.15)"><td><b>Full</b></td><td>11 Oct</td><td style="color:var(--golden)">3:28–3:35</td><td>5:10/km — easy</td><td>5:00–5:07/km</td><td>Race from km 30</td><td>&lt;165 first 30km</td></tr>
+    <tr><th>Race</th><th>Date</th><th>Target</th><th>Km 0–7</th><th>Middle</th><th>Final</th><th>HR cap</th></tr>
+    <tr><td><b>Half</b></td><td>19 Jul</td><td style="color:var(--golden)">1:43–1:46</td><td>5:05/km — hold back</td><td>4:55–5:00/km</td><td>Race it home</td><td>170–176 bpm</td></tr>
+    <tr><td><b>Full</b></td><td>11 Oct</td><td style="color:var(--golden)">3:28–3:35</td><td>5:10/km — conservative</td><td>5:00–5:07/km</td><td>Race from km 30</td><td>&lt;165 first 30km</td></tr>
   </table>
 </div>
 
-<!-- ═══ MILESTONES ═══ -->
 <div id="tab-milestones" class="panel">
-
-  <!-- JOURNEY STATS BAR -->
-  <div style="background:linear-gradient(135deg,#1A1A1A,#222222);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--golden);margin-bottom:14px">🏃 Your running journey — Jan 13 → Oct 11 2026</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--golden);margin-bottom:14px">🏃 Jan 13 → Oct 11 2026</div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;text-align:center">
-      <div>
-        <div style="font-size:28px;font-weight:800;color:var(--text);line-height:1">148</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">days running</div>
-      </div>
-      <div style="border-left:1px solid var(--border)">
-        <div style="font-size:28px;font-weight:800;color:var(--text);line-height:1">88</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">activities logged</div>
-      </div>
-      <div style="border-left:1px solid var(--border)">
-        <div style="font-size:28px;font-weight:800;color:var(--golden);line-height:1">487</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">km run total</div>
-      </div>
-      <div style="border-left:1px solid var(--border)">
-        <div style="font-size:28px;font-weight:800;color:var(--golden);line-height:1">1,011</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">personal records</div>
-      </div>
-      <div style="border-left:1px solid var(--border)">
-        <div style="font-size:28px;font-weight:800;color:var(--text);line-height:1">124</div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">days to marathon</div>
-      </div>
+      <div><div style="font-size:26px;font-weight:800;color:var(--text)">148</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">days running</div></div>
+      <div style="border-left:1px solid var(--border)"><div style="font-size:26px;font-weight:800;color:var(--text)">88</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">activities</div></div>
+      <div style="border-left:1px solid var(--border)"><div style="font-size:26px;font-weight:800;color:var(--golden)">487km</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">total distance</div></div>
+      <div style="border-left:1px solid var(--border)"><div style="font-size:26px;font-weight:800;color:var(--golden)">1,011</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">personal records</div></div>
+      <div style="border-left:1px solid var(--border)"><div style="font-size:26px;font-weight:800;color:var(--text)">124</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">days to marathon</div></div>
     </div>
-    <!-- Progress bar: Jan 13 → Oct 11 -->
     <div style="margin-top:16px">
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-bottom:6px">
-        <span>Jan 13 — First run</span>
-        <span style="color:var(--golden);font-weight:700">▶ Today — 54% through the journey</span>
-        <span>Oct 11 — Marathon 🏆</span>
-      </div>
-      <div style="background:var(--surface-3);border-radius:10px;height:8px;overflow:hidden">
-        <div style="width:54%;height:100%;background:linear-gradient(90deg,var(--golden),#A06E20);border-radius:10px"></div>
-      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-bottom:5px"><span>Jan 13 — First run</span><span style="color:var(--golden);font-weight:700">You are here — 54%</span><span>Oct 11 — Marathon 🏆</span></div>
+      <div style="background:var(--surface-2);border-radius:10px;height:8px;overflow:hidden"><div style="width:54%;height:100%;background:linear-gradient(90deg,var(--golden),var(--golden-dk));border-radius:10px"></div></div>
     </div>
   </div>
-
   <div class="g2">
-    <!-- UNLOCKED MILESTONES -->
     <div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:16px">✅ Unlocked — 14 milestones</div>
       <div id="ms-unlocked" style="position:relative;padding-left:30px"></div>
     </div>
-    <!-- UPCOMING MILESTONES -->
     <div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:16px">🔒 Upcoming — 7 milestones</div>
       <div id="ms-upcoming" style="position:relative;padding-left:30px"></div>
@@ -889,190 +734,48 @@ body {
   </div>
 </div>
 
-<!-- ═══ SETTINGS ═══ -->
 <div id="tab-settings" class="panel">
-
-  <!-- PROFILE CARD -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em">👤 Athlete Profile</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">👤 Athlete Profile</div>
     <div class="g2" style="gap:8px">
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Name</label>
-        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Keegan Chang</div>
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Location</label>
-        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Melbourne, VIC</div>
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Weight</label>
-        <input id="set-weight" type="number" value="74" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none" data-setting="weight">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Max HR (bpm)</label>
-        <input id="set-maxhr" type="number" value="184" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none" data-setting="maxhr">
-      </div>
+      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Name</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Keegan Chang</div></div>
+      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Location</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Melbourne, VIC</div></div>
+      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Weight (kg)</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div>
+      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Max HR (bpm)</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div>
     </div>
   </div>
-
-  <!-- RACE TARGETS -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em">🎯 Race Targets</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div style="background:linear-gradient(135deg,rgba(212,160,82,.12),rgba(160,110,32,.08));border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:14px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--golden);margin-bottom:8px">🏃 Half Marathon — 19 Jul 2026</div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Target time</label>
-        <input id="set-half-target" type="text" value="1:43–1:46" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;font-weight:700;color:var(--golden);outline:none" data-setting="halfTarget">
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">4:54–5:00/km race pace</div>
-      </div>
-      <div style="background:linear-gradient(135deg,rgba(35,79,96,.2),rgba(22,47,58,.15));border:1px solid rgba(35,79,96,.5);border-radius:var(--radius-sm);padding:14px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#5AB5EE;margin-bottom:8px">🏆 Full Marathon — 11 Oct 2026</div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Target time</label>
-        <input id="set-full-target" type="text" value="Sub 3:30" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;font-weight:700;color:#5AB5EE;outline:none" data-setting="fullTarget">
-        <div style="font-size:10px;color:var(--text-3);margin-top:4px">4:57–5:07/km race pace</div>
-      </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎯 Race Targets</div>
+    <div class="g2" style="gap:12px">
+      <div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:var(--golden);margin-bottom:8px">🏃 HALF MARATHON — 19 JUL</div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Target time</label><input id="set-half-target" type="text" value="1:43–1:46" data-setting="halfTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:var(--golden);outline:none"></div>
+      <div style="background:rgba(35,79,96,.15);border:1px solid rgba(35,79,96,.4);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;margin-bottom:8px">🏆 FULL MARATHON — 11 OCT</div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Target time</label><input id="set-full-target" type="text" value="Sub 3:30" data-setting="fullTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:#5AB5EE;outline:none"></div>
     </div>
   </div>
-
-  <!-- ZONE 2 SETTINGS -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em">❤️ Zone 2 Rules</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">HR ceiling (bpm)</label>
-        <input id="set-z2hr" type="number" value="150" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none" data-setting="z2hrCeiling">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Pace ceiling (Runna max)</label>
-        <input id="set-z2pace" type="text" value="5:50/km" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none" data-setting="z2paceCeiling">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Ideal easy pace</label>
-        <input id="set-easypace" type="text" value="6:30–7:00/km" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none" data-setting="easyPace">
-      </div>
-    </div>
-    <div style="background:rgba(212,160,82,.1);border-left:3px solid var(--golden);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 12px;margin-top:12px;font-size:12px;color:var(--text);line-height:1.6">
-      <strong>Master rule:</strong> HR under <strong id="z2hrDisplay">150</strong> bpm on easy days overrides all pace targets. If HR buzzes on COROS, back off to 7:00+/km.
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎨 Appearance</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Dark / Light mode</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Dark is default · Light uses luxury cream palette</div></div>
+      <button class="btn btn-d" data-action="theme" id="settingsThemeBtn" style="min-width:90px">🌙 Dark</button>
     </div>
   </div>
-
-  <!-- APPEARANCE -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em">🎨 Appearance</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text)">Dark / Light mode</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Toggle between dark (default) and light theme</div>
-      </div>
-      <button class="btn btn-d" data-action="theme" style="min-width:80px" id="settingsThemeBtn">🌙 Dark</button>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text)">Colour palette</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Luxury · Diamond · Silver · Icy Lake · Golden · Sapphire · Black Tie</div>
-      </div>
-      <div style="display:flex;gap:6px">
-        <div style="width:16px;height:16px;border-radius:50%;background:#FFFFFF;border:1px solid var(--border)"></div>
-        <div style="width:16px;height:16px;border-radius:50%;background:#EFEFEF;border:1px solid var(--border)"></div>
-        <div style="width:16px;height:16px;border-radius:50%;background:#DFE6E6;border:1px solid var(--border)"></div>
-        <div style="width:16px;height:16px;border-radius:50%;background:#D4A052"></div>
-        <div style="width:16px;height:16px;border-radius:50%;background:#234F60"></div>
-        <div style="width:16px;height:16px;border-radius:50%;background:#121111;border:1px solid var(--border)"></div>
-      </div>
-    </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🔄 Strava Sync</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Last sync</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Jun 9 2026 · 88 activities · 1,011 PRs</div></div><button class="btn btn-b" data-action="sync">⟳ Sync now</button></div>
+    <div style="padding:8px 0"><div style="font-size:12px;font-weight:600;color:var(--text)">How to get fresh data</div><div style="font-size:11px;color:var(--text-2);margin-top:3px;line-height:1.6">Say "sync my Strava" in a new chat message. I'll pull live data, update the file, and you push to GitHub — live in 30 seconds.</div></div>
   </div>
-
-  <!-- STRAVA SYNC -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em">🔄 Strava Sync</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text)">Last sync</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Jun 9 2026 · 88 activities · 1,011 PRs</div>
-      </div>
-      <button class="btn btn-b" data-action="sync">⟳ Sync now</button>
-    </div>
-    <div style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <div style="font-size:12px;font-weight:600;color:var(--text)">How sync works</div>
-      <div style="font-size:11px;color:var(--text-2);margin-top:4px;line-height:1.6">
-        Strava data is pulled into this chat by Claude. The sync button re-runs the local matching engine against the activity data from your last chat session.
-        To get genuinely fresh data (new runs), open a new message and say "sync my Strava" — I'll pull live data and rebuild.
-      </div>
-    </div>
-    <div style="padding:10px 0">
-      <div style="font-size:12px;font-weight:600;color:var(--text)">Connected account</div>
-      <div style="font-size:11px;color:var(--text-2);margin-top:2px">Keegan Chang · Strava ID 70913500 · Melbourne, VIC</div>
-    </div>
-  </div>
-
-  <!-- CHECKPOINT & DATA -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em">💾 Data Management</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text)">🔖 Last checkpoint</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Jun 9 2026 · Keegan_Dashboard_CHECKPOINT_Jun9_v2.html · All tabs functional, luxury palette applied</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text)">Completed sessions</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Stored in browser localStorage — persists between sessions</div>
-      </div>
-      <button data-action="clearDone" style="background:none;border:1px solid var(--rose-400);color:var(--rose-400);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Clear manual marks</button>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Section order and collapsed state saved in browser</div>
-      </div>
-      <button data-action="resetLayout" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset layout</button>
-    </div>
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">💾 Data &amp; Layout</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Completed sessions</div><div style="font-size:11px;color:var(--text-3)">Stored in browser localStorage</div></div><button data-action="clearDone" style="background:none;border:1px solid var(--rose-400);color:var(--rose-400);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Clear marks</button></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:11px;color:var(--text-3)">Section order and collapsed state</div></div><button data-action="resetLayout" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset layout</button></div>
   </div>
 </div>
 
-<!-- ═══ MODALS ═══ -->
+<!-- MODALS -->
 <div class="modal-bg" id="sessModal"><div class="modal"><button class="modal-close" data-close="sessModal">✕</button><h3 id="sessModalTitle"></h3><div id="sessModalBody"></div></div></div>
-<div class="modal-bg" id="addShoeModal"><div class="modal">
-  <button class="modal-close" data-close="addShoeModal">✕</button>
-  <h3>Add a shoe</h3>
-  <label>Brand</label><input id="sh-brand" placeholder="e.g. Nike">
-  <label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4">
-  <label>Nickname / colour</label><input id="sh-name" placeholder="e.g. Pink">
-  <label>Type</label>
-  <select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo/speed</option><option value="recovery">Recovery/cushion</option></select>
-  <label>Intended use</label><input id="sh-use" placeholder="e.g. Easy runs, race day only">
-  <label>Starting km (if not new)</label><input id="sh-km" type="number" placeholder="0" value="0">
-  <label>Purchase date</label><input id="sh-date" type="date">
-  <label>Price (AUD)</label><input id="sh-price" type="number" placeholder="0">
-  <div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div>
-</div></div>
-<div class="modal-bg" id="addGearModal"><div class="modal">
-  <button class="modal-close" data-close="addGearModal">✕</button>
-  <h3 id="addGearTitle">Add gear manually</h3>
-  <label>Category</label>
-  <select id="g-cat">
-    <option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option>
-    <option value="socks">Socks</option><option value="watch">Watch</option>
-    <option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option>
-    <option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option>
-    <option value="recovery">Recovery tools</option><option value="other">Other</option>
-  </select>
-  <label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3">
-  <label>Colour / Description</label><input id="g-desc" placeholder="e.g. Black">
-  <label>Purchase date</label><input id="g-date" type="date">
-  <label>Price (AUD)</label><input id="g-price" type="number" placeholder="0">
-  <label>Notes</label><textarea id="g-notes" rows="2" placeholder="Any notes..."></textarea>
-  <div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGear">Add gear</button></div>
-</div></div>
-<div class="modal-bg" id="pasteModal"><div class="modal" style="max-width:540px">
-  <button class="modal-close" data-close="pasteModal">✕</button>
-  <h3>📋 Paste purchase email</h3>
-  <div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Paste the full text of your purchase confirmation below — I'll extract product details automatically.</div>
-  <textarea id="pasteText" rows="8" placeholder="Paste email text here..."></textarea>
-  <div class="modal-footer"><button class="btn-cancel" data-close="pasteModal">Cancel</button><button class="btn-primary" data-action="parsePaste">Extract &amp; add gear</button></div>
-</div></div>
-
+<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Starting km</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
+<div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label>Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label>Description</label><input id="g-desc" placeholder="e.g. Black"><label>Purchase date</label><input id="g-date" type="date"><label>Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label>Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGear">Add gear</button></div></div></div>
+<div class="modal-bg" id="pasteModal"><div class="modal" style="max-width:540px"><button class="modal-close" data-close="pasteModal">✕</button><h3>📋 Paste purchase email</h3><div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Paste your purchase confirmation — I'll extract the details automatically.</div><textarea id="pasteText" rows="8" placeholder="Paste email text here..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="pasteModal">Cancel</button><button class="btn-primary" data-action="parsePaste">Extract &amp; add gear</button></div></div></div>
+<div class="modal-bg" id="addRoadmapModal"><div class="modal"><button class="modal-close" data-close="addRoadmapModal">✕</button><h3 id="rmModalTitle">📝 Add item</h3><input type="hidden" id="rm-id"><label>Priority</label><select id="rm-priority"><option value="urgent">🔴 Urgent</option><option value="want" selected>🟠 Want</option><option value="nice">🟢 Nice to have</option><option value="brainstorm">🟣 Brainstorm</option></select><label>Title</label><input id="rm-title" placeholder="What needs doing?"><label>Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addRoadmapModal">Cancel</button><button class="btn-primary" data-action="saveRoadmapItem">Save</button></div></div></div>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // ALL DATA DEFINED FIRST — no functions execute until window.load
@@ -1218,11 +921,11 @@ const PLAN = [
 let completed = JSON.parse(localStorage.getItem('kc_done') || '{}');
 let shoes = JSON.parse(localStorage.getItem('kc_shoes') || 'null') || [
   {id:'30605717',brand:'ASICS',model:'Superblast 3',name:'White',type:'daily',use:'Default daily driver — all easy runs, recovery runs &amp; long runs',km:182.2,warn:800,retire:1000,race:false},
-  {id:'30100397',brand:'Nike',model:'Alphafly 3',name:'Platinum',type:'carbon',use:'Race day: Oct 11 marathon 🏆 · Break-in runs: Wk10 Tue Jun 22 (5km), Wk14 Thu Jul 16 (8km), Wk17 Tue Aug 11 (8km) — then rest until race day',km:14.0,warn:400,retire:500,race:true,raceTag:'🏆 MARATHON RACE SHOE'},
+  {id:'30100397',brand:'Nike',model:'Alphafly 3',name:'Platinum',type:'carbon',use:'Race day Oct 11 marathon 🏆 · Break-in: Wk10 Jun 22 (5km), Wk14 Jul 16 (8km), Wk17 Aug 11 (8km)',km:14.0,warn:400,retire:500,race:true,raceTag:'🏆 MARATHON RACE SHOE'},
   {id:'29078819',brand:'Nike',model:'Vaporfly 4',name:'White',type:'carbon',use:'Interval sessions — rotate with Adios Pro 4',km:119.5,warn:400,retire:500,race:false,raceTag:null},
   {id:'28897817',brand:'Adidas',model:'Adios Pro 4',name:'White cloud',type:'carbon',use:'Intervals (rotate with Vaporfly 4) &amp; tempo runs',km:85.7,warn:400,retire:500,race:false},
-  {id:'29156194',brand:'Nike',model:'Vomero Plus',name:'Tan',type:'daily',use:'Backup easy/recovery shoe',km:43.2,warn:800,retire:1000,race:false},
-  {id:'28800916',brand:'Adidas',model:'EVO SL 2',name:'',type:'daily',use:'Backup easy/recovery shoe',km:56.2,warn:800,retire:1000,race:false},
+  {id:'29156194',brand:'Nike',model:'Vomero Plus',name:'Tan',type:'daily',use:'Easy runs, long runs (protect Superblast)',km:43.2,warn:800,retire:1000,race:false},
+  {id:'28800916',brand:'Adidas',model:'EVO SL 2',name:'',type:'daily',use:'Easy runs, recovery days',km:56.2,warn:800,retire:1000,race:false},
 ];
 function saveShoes(){localStorage.setItem('kc_shoes',JSON.stringify(shoes));}
 
@@ -1234,14 +937,14 @@ function saveGear(){localStorage.setItem('kc_gear',JSON.stringify(gearList));}
 
 let collapsed = JSON.parse(localStorage.getItem('kc_coll') || '{}');
 let sectionOrder = JSON.parse(localStorage.getItem('kc_order') || '[]');
-let darkMode = localStorage.getItem('kc_dark') !== '0'; // true=dark (default), false=light
+let darkMode = localStorage.getItem('kc_dark') === '1';
 
 // ═══════════════════════════════════════════════════════════════
 // ALL FUNCTIONS (defined after all data — safe to call each other)
 // ═══════════════════════════════════════════════════════════════
 
-function applyTheme(){document.documentElement.toggleAttribute('data-light',!darkMode);var t=darkMode?'☀️ Light':'🌙 Dark';var b=document.getElementById('themeBtn');if(b)b.textContent=t;var sb=document.getElementById('settingsThemeBtn');if(sb)sb.textContent=t;}
-function toggleTheme(){darkMode=!darkMode;localStorage.setItem('kc_dark',darkMode?'1':'0');applyTheme();// settings btn now updated in applyTheme()}
+function applyTheme(){if(darkMode){document.documentElement.removeAttribute('data-light');}else{document.documentElement.setAttribute('data-light','');}var lbl=darkMode?'☀️ Light':'🌙 Dark';var b=document.getElementById('themeBtn');if(b)b.textContent=lbl;var sb=document.getElementById('settingsThemeBtn');if(sb)sb.textContent=lbl;}
+function toggleTheme(){darkMode=!darkMode;localStorage.setItem('kc_dark',darkMode?'1':'0');applyTheme();}
 
 function showTab(id,el){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');el.classList.add('active');}
 
@@ -1256,84 +959,15 @@ function toggleSec(id){const b=document.getElementById('body-'+id);if(!b)return;
 function restoreCollapsed(){Object.keys(collapsed).forEach(id=>{const b=document.getElementById('body-'+id);if(b){b.classList.add('collapsed');const btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='+';}});}
 
 let dragSrc=null;
-// ── PANEL LOCK & DRAG ─────────────────────────────────────────
-let panelsLocked = localStorage.getItem('kc_locked') === '1';
-
-function applyLockState() {
-  const c = document.getElementById('dash-sections');
-  if (!c) return;
-  const btn = document.getElementById('lockBtn');
-  const hint = document.getElementById('lockHint');
-  // Update button appearance
-  if (btn) {
-    btn.textContent = panelsLocked ? '🔒 Locked' : '🔓 Unlocked';
-    btn.style.background = panelsLocked ? 'rgba(231,76,60,.12)' : 'rgba(212,160,82,.12)';
-    btn.style.borderColor = panelsLocked ? '#E74C3C' : 'var(--golden)';
-    btn.style.color = panelsLocked ? '#E74C3C' : 'var(--golden)';
-  }
-  if (hint) hint.textContent = panelsLocked ? 'Panels are locked — unlock to reorder' : 'Drag ⠿ handles to reorder sections';
-  // Toggle draggable + handle visibility on all cards
-  c.querySelectorAll('.section-card').forEach(card => {
-    card.draggable = !panelsLocked;
-    const handle = card.querySelector('.drag-handle, .drag-h');
-    if (handle) {
-      handle.style.opacity = panelsLocked ? '0.2' : '1';
-      handle.style.cursor = panelsLocked ? 'default' : 'grab';
-      handle.style.pointerEvents = panelsLocked ? 'none' : 'auto';
-    }
-  });
-}
-
-function toggleLock() {
-  panelsLocked = !panelsLocked;
-  localStorage.setItem('kc_locked', panelsLocked ? '1' : '0');
-  applyLockState();
-}
-
-function collapseAll() {
-  document.querySelectorAll('#dash-sections .sec-body, #dash-sections .sc-body').forEach(body => {
-    const id = body.id ? body.id.replace('body-', '') : null;
-    if (!body.classList.contains('collapsed') && !body.classList.contains('closed')) {
-      body.classList.add('collapsed');
-      const btn = body.parentElement.querySelector('.sec-toggle, .sc-tog');
-      if (btn) btn.textContent = '+';
-      if (id) { collapsed[id] = true; }
-    }
-  });
-  localStorage.setItem('kc_coll', JSON.stringify(collapsed));
-}
-
-function expandAll() {
-  document.querySelectorAll('#dash-sections .sec-body, #dash-sections .sc-body').forEach(body => {
-    const id = body.id ? body.id.replace('body-', '') : null;
-    body.classList.remove('collapsed');
-    body.classList.remove('closed');
-    const btn = body.parentElement.querySelector('.sec-toggle, .sc-tog');
-    if (btn) btn.textContent = '−';
-    if (id) { delete collapsed[id]; }
-  });
-  localStorage.setItem('kc_coll', JSON.stringify(collapsed));
-}
-
 function initDrag(){
   const c=document.getElementById('dash-sections');if(!c)return;
-  c.querySelectorAll('.section-card').forEach(card=>{
-    card.addEventListener('dragstart',e=>{
-      if(panelsLocked){e.preventDefault();return;}
-      dragSrc=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';
-    });
+  c.querySelectorAll('.section-card[draggable]').forEach(card=>{
+    card.addEventListener('dragstart',e=>{dragSrc=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
     card.addEventListener('dragend',()=>{card.classList.remove('dragging');c.querySelectorAll('.section-card').forEach(x=>x.classList.remove('drag-over'));saveOrder();});
-    card.addEventListener('dragover',e=>{
-      if(panelsLocked)return;
-      e.preventDefault();if(card!==dragSrc)card.classList.add('drag-over');
-    });
+    card.addEventListener('dragover',e=>{e.preventDefault();if(card!==dragSrc)card.classList.add('drag-over');});
     card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
-    card.addEventListener('drop',e=>{
-      if(panelsLocked)return;
-      e.preventDefault();if(dragSrc&&card!==dragSrc){const cards=[...c.querySelectorAll('.section-card')];const si=cards.indexOf(dragSrc),ti=cards.indexOf(card);si<ti?c.insertBefore(dragSrc,card.nextSibling):c.insertBefore(dragSrc,card);}card.classList.remove('drag-over');
-    });
+    card.addEventListener('drop',e=>{e.preventDefault();if(dragSrc&&card!==dragSrc){const cards=[...c.querySelectorAll('.section-card')];const si=cards.indexOf(dragSrc),ti=cards.indexOf(card);si<ti?c.insertBefore(dragSrc,card.nextSibling):c.insertBefore(dragSrc,card);}card.classList.remove('drag-over');});
   });
-  applyLockState();
 }
 function saveOrder(){localStorage.setItem('kc_order',JSON.stringify([...document.querySelectorAll('#dash-sections .section-card')].map(x=>x.id)));}
 function restoreLayout(){if(!sectionOrder.length)return;const c=document.getElementById('dash-sections');if(!c)return;sectionOrder.forEach(id=>{const el=document.getElementById(id);if(el)c.appendChild(el);});}
@@ -1602,11 +1236,13 @@ document.addEventListener('click', function(e) {
       case 'saveShoe':    saveShoe(); break;
       case 'parsePaste':  parsePastedEmail(); break;
       case 'addRoadmapItem': openAddRoadmapItem(); break;
-      case 'toggleLock':   toggleLock(); break;
+      case 'saveRoadmapItem': saveRoadmapItem(); break;
       case 'toggleRmSort': toggleRmSort(); break;
+      case 'toggleLock':   toggleLock(); break;
       case 'collapseAll':  collapseAll(); break;
       case 'expandAll':    expandAll(); break;
-      case 'saveRoadmapItem': saveRoadmapItem(); break;
+      case 'clearDone':    if(confirm('Clear all manually marked sessions?')){completed={};localStorage.removeItem('kc_done');renderPlan();} break;
+      case 'resetLayout':  localStorage.removeItem('kc_order');localStorage.removeItem('kc_coll');location.reload(); break;
     }
     return;
   }
@@ -1619,42 +1255,9 @@ document.addEventListener('click', function(e) {
   // GEAR CYCLE / DELETE
   if (el.dataset.cycle) { cycleGearCond(el.dataset.cycle); return; }
   if (el.dataset.delGear) { delGear(el.dataset.delGear); return; }
-  // ROADMAP EDIT (pencil button — stop card click from also toggling)
-  if (el.dataset.rmEdit) {
-    e.stopPropagation();
-    editRoadmapItem(el.dataset.rmEdit);
-    return;
-  }
-  // ROADMAP DELETE
-  if (el.dataset.rmDel) {
-    e.stopPropagation();
-    if (confirm('Remove this item from the roadmap?')) deleteRoadmapItem(el.dataset.rmDel);
-    return;
-  }
-  // ROADMAP TOGGLE (click card = strikethrough/done)
-  if (el.dataset.rm) { toggleRoadmapItem(el.dataset.rm); return; }
-  // SETTINGS DATA MANAGEMENT
-  if (el.dataset.action === 'clearDone') {
-    if (confirm('Clear all manually marked sessions? Strava-verified sessions will remain.')) {
-      completed = {}; localStorage.removeItem('kc_done'); renderPlan();
-    }
-    return;
-  }
-  if (el.dataset.action === 'resetLayout') {
-    localStorage.removeItem('kc_order'); localStorage.removeItem('kc_coll'); location.reload();
-    return;
-  }
-});
-
-// Input change delegation (settings fields)
-document.addEventListener('change', function(e) {
-  if (e.target.id === 'fileInputEl') {
-    var f = e.target.files[0]; if (f) readReceiptFile(f);
-    return;
-  }
-  if (e.target.dataset.setting) {
-    saveSetting(e.target.dataset.setting, e.target.value);
-  }
+  if (el.dataset.rmEdit) { e.stopPropagation(); editRoadmapItem(el.dataset.rmEdit); return; }
+  if (el.dataset.rmDel)  { e.stopPropagation(); if(confirm('Remove this item?')) deleteRoadmapItem(el.dataset.rmDel); return; }
+  if (el.dataset.rm)     { toggleRoadmapItem(el.dataset.rm); return; }
 });
 
 // Modal background click to close
@@ -1664,7 +1267,10 @@ document.addEventListener('click', function(e) {
   }
 });
 
-
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'fileInputEl') { var f=e.target.files[0]; if(f) readReceiptFile(f); return; }
+  if (e.target.dataset.setting) { saveSetting(e.target.dataset.setting, e.target.value); }
+});
 
 // Drag events on upload area (CSP-safe)
 document.addEventListener('DOMContentLoaded', function() {
@@ -1687,202 +1293,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ── SETTINGS ──────────────────────────────────────────────────
-function saveSetting(key, val) {
-  var s = JSON.parse(localStorage.getItem('kc_settings') || '{}');
-  s[key] = val;
-  localStorage.setItem('kc_settings', JSON.stringify(s));
-  if (key === 'z2hrCeiling') {
-    var el = document.getElementById('z2hrDisplay');
-    if (el) el.textContent = val;
-  }
-}
-function loadSettings() {
-  var s = JSON.parse(localStorage.getItem('kc_settings') || '{}');
-  var fields = {weight:'set-weight',maxhr:'set-maxhr',halfTarget:'set-half-target',fullTarget:'set-full-target',z2hrCeiling:'set-z2hr',z2paceCeiling:'set-z2pace',easyPace:'set-easypace'};
-  Object.entries(fields).forEach(function([k,id]){ var el=document.getElementById(id); if(el&&s[k]) el.value=s[k]; });
-  if (s.z2hrCeiling) { var d=document.getElementById('z2hrDisplay'); if(d) d.textContent=s.z2hrCeiling; }
-  var sb=document.getElementById('settingsThemeBtn'); if(sb) sb.textContent=darkMode?'☀️ Light':'🌙 Dark';
-}
-
-
-// ── ROADMAP DATA ───────────────────────────────────────────────
-const PRIORITY = {
-  urgent:    {label:'🔴 Urgent',    color:'#E74C3C', bg:'rgba(231,76,60,.12)',   border:'rgba(231,76,60,.5)'},
-  want:      {label:'🟠 Want',      color:'#E67E22', bg:'rgba(230,126,34,.12)',  border:'rgba(230,126,34,.5)'},
-  nice:      {label:'🟢 Nice to have', color:'#27AE60', bg:'rgba(39,174,96,.10)',  border:'rgba(39,174,96,.4)'},
-  brainstorm:{label:'🟣 Brainstorm', color:'#8E44AD', bg:'rgba(142,68,173,.12)', border:'rgba(142,68,173,.4)'},
-};
-
-const DEFAULT_ROADMAP = [
-  {id:'rm1', priority:'urgent', title:'📎 Fix upload', desc:'Make paste/drop/photo upload actually extract product details and populate gear tracker automatically.', done:false},
-  {id:'rm2', priority:'want',   title:'⛽ Race nutrition timer', desc:'Exact gel clock times, breakfast alarm, pre-race routine for Jul 19 half and Oct 11 marathon.', done:false},
-  {id:'rm3', priority:'want',   title:'🎯 Dynamic probability scores', desc:'62%/72% scores auto-update as PRs improve after every Strava sync.', done:false},
-  {id:'rm4', priority:'nice',   title:'🌡️ Weather-adjusted pace', desc:'Melbourne forecast integrated into session pace targets. Race day heat alert.', done:false},
-  {id:'rm5', priority:'nice',   title:'💬 Post-run AI debrief', desc:'AI feedback after every session comparing actual vs Runna prescription.', done:false},
-  {id:'rm6', priority:'brainstorm', title:'📍 Route map', desc:'Albert Park long run routes with lap markers, hotspot points, aid stations.', done:false},
-  {id:'rm7', priority:'brainstorm', title:'📊 Live Strava sync', desc:'Auto-pull new activities without coming back to chat — would need a backend.', done:false},
-];
-
-// Migrate old schema (cat→priority) or use defaults
-(function migrateRoadmap() {
-  const raw = localStorage.getItem('kc_roadmap');
-  if (!raw) { roadmapItems = DEFAULT_ROADMAP; return; }
-  try {
-    let stored = JSON.parse(raw);
-    // If any item has `cat` but no `priority`, migrate
-    const CAT_MAP = {done:'nice',tab:'nice',fix:'urgent',feature:'nice',custom:'want'};
-    let changed = false;
-    stored = stored.map(item => {
-      if (!item.priority && item.cat) {
-        item.priority = CAT_MAP[item.cat] || 'want';
-        changed = true;
-      }
-      if (!item.priority) { item.priority = 'want'; changed = true; }
-      return item;
-    });
-    roadmapItems = stored;
-    if (changed) localStorage.setItem('kc_roadmap', JSON.stringify(roadmapItems));
-  } catch(e) {
-    roadmapItems = DEFAULT_ROADMAP;
-    localStorage.setItem('kc_roadmap', JSON.stringify(roadmapItems));
-  }
-})();
-function saveRoadmap(){ localStorage.setItem('kc_roadmap', JSON.stringify(roadmapItems)); }
-
-let rmSortMode = 'priority'; // always default to urgency sort on load
-const PRIORITY_ORDER = ['urgent','want','nice','brainstorm']; // urgent always first
-
-function getSortedRoadmap() {
-  const active = roadmapItems.filter(x => !x.done);
-  const done   = roadmapItems.filter(x => x.done);
-  if (rmSortMode === 'priority') {
-    active.sort((a,b) => PRIORITY_ORDER.indexOf(a.priority) - PRIORITY_ORDER.indexOf(b.priority));
-  }
-  return [...active, ...done];
-}
-
-function renderRoadmap() {
-  const grid = document.getElementById('roadmapGrid');
-  if (!grid) return;
-
-  // Update sort button label
-  const sortBtn = document.getElementById('rmSortBtn');
-  if (sortBtn) sortBtn.textContent = rmSortMode === 'priority' ? '↕ Urgency ↑' : '↕ Date added';
-
-  if (!roadmapItems.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-3);font-size:12px">No items yet — click "+ Add item" to get started.</div>';
-    return;
-  }
-
-  const sorted = getSortedRoadmap();
-  grid.innerHTML = sorted.map(item => {
-    const p = PRIORITY[item.priority] || PRIORITY.nice;
-    return `<div
-      data-rm="${item.id}"
-      style="
-        background:${item.done ? 'var(--surface-2)' : p.bg};
-        border:1.5px solid ${item.done ? 'var(--border)' : p.border};
-        border-left:4px solid ${item.done ? 'var(--border)' : p.color};
-        border-radius:var(--radius-sm);
-        padding:10px 12px 10px 14px;
-        cursor:pointer;
-        position:relative;
-        transition:all .2s;
-        opacity:${item.done ? '.4' : '1'};
-      "
-      title="Click to mark complete / incomplete"
-    >
-      <div style="position:absolute;top:6px;right:6px;display:flex;gap:2px">
-        <button data-rm-edit="${item.id}"
-          style="background:none;border:none;color:var(--text-3);font-size:12px;cursor:pointer;padding:2px 5px;border-radius:4px;line-height:1"
-          title="Edit this item">✏️</button>
-        <button data-rm-del="${item.id}"
-          style="background:none;border:none;color:var(--text-3);font-size:14px;cursor:pointer;padding:2px 5px;border-radius:4px;line-height:1"
-          title="Delete this item">×</button>
-      </div>
-      <div style="font-size:9px;font-weight:700;color:${item.done ? 'var(--text-3)' : p.color};text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">
-        ${item.done ? '✓ Done' : p.label}
-      </div>
-      <div style="
-        font-size:11px;font-weight:700;
-        color:${item.done ? 'var(--text-3)' : 'var(--text)'};
-        padding-right:40px;
-        line-height:1.3;
-        margin-bottom:${item.desc ? '4px' : '0'};
-        ${item.done ? 'text-decoration:line-through;' : ''}
-      ">${item.title}</div>
-      ${item.desc ? `<div style="
-        font-size:10px;
-        color:${item.done ? 'var(--text-3)' : 'var(--text-2)'};
-        line-height:1.5;
-        ${item.done ? 'text-decoration:line-through;' : ''}
-      ">${item.desc}</div>` : ''}
-    </div>`;
-  }).join('');
-}
-
-function toggleRoadmapItem(id) {
-  const item = roadmapItems.find(x => x.id === id);
-  if (!item) return;
-  item.done = !item.done;
-  saveRoadmap();
-  renderRoadmap();
-}
-
-function deleteRoadmapItem(id) {
-  roadmapItems = roadmapItems.filter(x => x.id !== id);
-  saveRoadmap();
-  renderRoadmap();
-}
-
-function toggleRmSort() {
-  rmSortMode = rmSortMode === 'priority' ? 'added' : 'priority';
-  renderRoadmap();
-}
-
-function openAddRoadmapItem() {
-  document.getElementById('rm-id').value = '';
-  document.getElementById('rm-title').value = '';
-  document.getElementById('rm-desc').value = '';
-  document.getElementById('rm-priority').value = 'want';
-  document.querySelector('#addRoadmapModal h3').textContent = '📝 Add item';
-  document.getElementById('addRoadmapModal').classList.add('open');
-  setTimeout(() => document.getElementById('rm-title').focus(), 50);
-}
-
-function editRoadmapItem(id) {
-  const item = roadmapItems.find(x => x.id === id);
-  if (!item) return;
-  document.getElementById('rm-id').value = id;
-  document.getElementById('rm-title').value = item.title;
-  document.getElementById('rm-desc').value = item.desc || '';
-  document.getElementById('rm-priority').value = item.priority || 'want';
-  document.querySelector('#addRoadmapModal h3').textContent = '✏️ Edit item';
-  document.getElementById('addRoadmapModal').classList.add('open');
-  setTimeout(() => document.getElementById('rm-title').focus(), 50);
-}
-
-function saveRoadmapItem() {
-  const id    = document.getElementById('rm-id').value;
-  const title = document.getElementById('rm-title').value.trim();
-  const desc  = document.getElementById('rm-desc').value.trim();
-  const priority = document.getElementById('rm-priority').value;
-  if (!title) return;
-
-  if (id) {
-    // Edit existing
-    const item = roadmapItems.find(x => x.id === id);
-    if (item) { item.title = title; item.desc = desc; item.priority = priority; }
-  } else {
-    // Add new
-    roadmapItems.push({ id: 'rm_' + Date.now(), priority, title, desc, done: false });
-  }
-  saveRoadmap();
-  renderRoadmap();
-  closeModal('addRoadmapModal');
-}
-
+const PRIORITY={urgent:{label:'🔴 Urgent',color:'#E74C3C',bg:'rgba(231,76,60,.12)',border:'rgba(231,76,60,.5)'},want:{label:'🟠 Want',color:'#E67E22',bg:'rgba(230,126,34,.12)',border:'rgba(230,126,34,.5)'},nice:{label:'🟢 Nice to have',color:'#27AE60',bg:'rgba(39,174,96,.10)',border:'rgba(39,174,96,.4)'},brainstorm:{label:'🟣 Brainstorm',color:'#8E44AD',bg:'rgba(142,68,173,.12)',border:'rgba(142,68,173,.4)'}};
+const DEFAULT_ROADMAP=[{id:'rm1',priority:'urgent',title:'📎 Fix upload',desc:'Make paste/drop/photo extract product details into gear tracker.',done:false},{id:'rm2',priority:'want',title:'⛽ Race nutrition timer',desc:'Exact gel times and pre-race routine for Jul 19 and Oct 11.',done:false},{id:'rm3',priority:'want',title:'🎯 Dynamic probability',desc:'62%/72% scores update after every Strava sync.',done:false},{id:'rm4',priority:'nice',title:'🌡️ Weather-adjusted pace',desc:'Melbourne forecast integrated into session pace targets.',done:false},{id:'rm5',priority:'nice',title:'💬 Post-run AI debrief',desc:'AI feedback comparing actual run to Runna prescription.',done:false},{id:'rm6',priority:'brainstorm',title:'📍 Route map',desc:'Albert Park routes with lap markers and hotspot points.',done:false},{id:'rm7',priority:'brainstorm',title:'📊 Live Strava sync',desc:'Auto-pull new activities — needs a backend.',done:false}];
+const RM_CAT_MAP={done:'nice',tab:'nice',fix:'urgent',feature:'nice',custom:'want'};
+const PORD=['urgent','want','nice','brainstorm'];
+var roadmapItems;
+(function(){var raw=localStorage.getItem('kc_roadmap');if(!raw){roadmapItems=DEFAULT_ROADMAP;return;}try{var s=JSON.parse(raw);var ch=false;s=s.map(function(i){if(!i.priority){i.priority=RM_CAT_MAP[i.cat]||'want';ch=true;}return i;});roadmapItems=s;if(ch)localStorage.setItem('kc_roadmap',JSON.stringify(roadmapItems));}catch(e){roadmapItems=DEFAULT_ROADMAP;}})();
+function saveRoadmap(){localStorage.setItem('kc_roadmap',JSON.stringify(roadmapItems));}
+var rmSortMode='priority';
+function getSortedRoadmap(){var a=roadmapItems.filter(function(x){return !x.done;});var d=roadmapItems.filter(function(x){return x.done;});if(rmSortMode==='priority')a.sort(function(a,b){return PORD.indexOf(a.priority)-PORD.indexOf(b.priority);});return a.concat(d);}
+function renderRoadmap(){var g=document.getElementById('roadmapGrid');if(!g)return;var sb=document.getElementById('rmSortBtn');if(sb)sb.textContent=rmSortMode==='priority'?'↕ Urgency ↑':'↕ Date added';if(!roadmapItems.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-3);font-size:12px">No items. Click + Add item.</div>';return;}g.innerHTML=getSortedRoadmap().map(function(item){var p=PRIORITY[item.priority]||PRIORITY.nice;return'<div data-rm="'+item.id+'" style="background:'+(item.done?'var(--surface-2)':p.bg)+';border:1.5px solid '+(item.done?'var(--border)':p.border)+';border-left:4px solid '+(item.done?'var(--border)':p.color)+';border-radius:var(--radius-sm);padding:10px 12px 10px 14px;cursor:pointer;position:relative;opacity:'+(item.done?'.4':'1')+'">'+'<div style="position:absolute;top:6px;right:6px;display:flex;gap:2px"><button data-rm-edit="'+item.id+'" style="background:none;border:none;color:var(--text-3);font-size:12px;cursor:pointer;padding:2px 5px">✏️</button><button data-rm-del="'+item.id+'" style="background:none;border:none;color:var(--text-3);font-size:15px;cursor:pointer;padding:2px 5px">×</button></div>'+'<div style="font-size:9px;font-weight:700;color:'+(item.done?'var(--text-3)':p.color)+';text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">'+(item.done?'✓ Done':p.label)+'</div>'+'<div style="font-size:11px;font-weight:700;color:'+(item.done?'var(--text-3)':'var(--text)')+';padding-right:44px;line-height:1.3;margin-bottom:'+(item.desc?'4px':'0')+';'+(item.done?'text-decoration:line-through;':'')+'">' +item.title+'</div>'+(item.desc?'<div style="font-size:10px;color:'+(item.done?'var(--text-3)':'var(--text-2)')+';line-height:1.5;'+(item.done?'text-decoration:line-through;':'')+'">'+item.desc+'</div>':'')+'</div>';}).join('');}
+function toggleRoadmapItem(id){var i=roadmapItems.find(function(x){return x.id===id;});if(!i)return;i.done=!i.done;saveRoadmap();renderRoadmap();}
+function deleteRoadmapItem(id){roadmapItems=roadmapItems.filter(function(x){return x.id!==id;});saveRoadmap();renderRoadmap();}
+function toggleRmSort(){rmSortMode=rmSortMode==='priority'?'added':'priority';renderRoadmap();}
+function openAddRoadmapItem(){document.getElementById('rm-id').value='';document.getElementById('rm-title').value='';document.getElementById('rm-desc').value='';document.getElementById('rm-priority').value='want';document.getElementById('rmModalTitle').textContent='📝 Add item';document.getElementById('addRoadmapModal').classList.add('open');setTimeout(function(){document.getElementById('rm-title').focus();},50);}
+function editRoadmapItem(id){var i=roadmapItems.find(function(x){return x.id===id;});if(!i)return;document.getElementById('rm-id').value=id;document.getElementById('rm-title').value=i.title;document.getElementById('rm-desc').value=i.desc||'';document.getElementById('rm-priority').value=i.priority||'want';document.getElementById('rmModalTitle').textContent='✏️ Edit item';document.getElementById('addRoadmapModal').classList.add('open');}
+function saveRoadmapItem(){var id=document.getElementById('rm-id').value;var title=document.getElementById('rm-title').value.trim();var desc=document.getElementById('rm-desc').value.trim();var priority=document.getElementById('rm-priority').value;if(!title)return;if(id){var i=roadmapItems.find(function(x){return x.id===id;});if(i){i.title=title;i.desc=desc;i.priority=priority;}}else{roadmapItems.push({id:'rm_'+Date.now(),priority:priority,title:title,desc:desc,done:false});}saveRoadmap();renderRoadmap();closeModal('addRoadmapModal');}
+var panelsLocked=localStorage.getItem('kc_locked')==='1';
+function applyLockState(){var c=document.getElementById('dash-sections');if(!c)return;var btn=document.getElementById('lockBtn');var hint=document.getElementById('lockHint');if(btn){btn.textContent=panelsLocked?'🔒 Locked':'🔓 Unlocked';btn.style.background=panelsLocked?'rgba(231,76,60,.12)':'rgba(212,160,82,.12)';btn.style.borderColor=panelsLocked?'#E74C3C':'var(--golden)';btn.style.color=panelsLocked?'#E74C3C':'var(--golden)';}if(hint)hint.textContent=panelsLocked?'Panels locked':'Drag ⠿ handles to reorder';c.querySelectorAll('.section-card').forEach(function(card){card.draggable=!panelsLocked;var h=card.querySelector('.drag-handle');if(h){h.style.opacity=panelsLocked?'0.2':'1';h.style.cursor=panelsLocked?'default':'grab';h.style.pointerEvents=panelsLocked?'none':'auto';}});}
+function toggleLock(){panelsLocked=!panelsLocked;localStorage.setItem('kc_locked',panelsLocked?'1':'0');applyLockState();}
+function collapseAll(){document.querySelectorAll('#dash-sections .sec-body').forEach(function(b){if(!b.classList.contains('collapsed')){b.classList.add('collapsed');var id=b.id?b.id.replace('body-',''):null;var btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='+';if(id)collapsed[id]=true;}});localStorage.setItem('kc_coll',JSON.stringify(collapsed));}
+function expandAll(){document.querySelectorAll('#dash-sections .sec-body').forEach(function(b){b.classList.remove('collapsed');var id=b.id?b.id.replace('body-',''):null;var btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='−';if(id)delete collapsed[id];});localStorage.setItem('kc_coll',JSON.stringify(collapsed));}
+function saveSetting(key,val){var s=JSON.parse(localStorage.getItem('kc_settings')||'{}');s[key]=val;localStorage.setItem('kc_settings',JSON.stringify(s));}
+function loadSettings(){var s=JSON.parse(localStorage.getItem('kc_settings')||'{}');[['weight','set-weight'],['maxhr','set-maxhr'],['halfTarget','set-half-target'],['fullTarget','set-full-target']].forEach(function(p){var el=document.getElementById(p[1]);if(el&&s[p[0]])el.value=s[p[0]];});var sb=document.getElementById('settingsThemeBtn');if(sb)sb.textContent=darkMode?'☀️ Light':'🌙 Dark';}
 
 window.addEventListener('load', function init() {
   applyTheme();
@@ -1896,31 +1329,10 @@ window.addEventListener('load', function init() {
   initDrag();
   restoreLayout();
   restoreCollapsed();
-  loadSettings();
   renderRoadmap();
   applyLockState();
+  loadSettings();
 });
 </script>
-
-<!-- ADD / EDIT ROADMAP ITEM MODAL -->
-<div class="modal-bg" id="addRoadmapModal"><div class="modal">
-  <button class="modal-close" data-close="addRoadmapModal">✕</button>
-  <h3>📝 Add item</h3>
-  <input type="hidden" id="rm-id">
-  <label>Priority</label>
-  <select id="rm-priority" style="margin-bottom:10px">
-    <option value="urgent">🔴 Urgent — needs doing now</option>
-    <option value="want" selected>🟠 Want — would be great soon</option>
-    <option value="nice">🟢 Nice to have — no rush</option>
-    <option value="brainstorm">🟣 Brainstorm — idea, not decided yet</option>
-  </select>
-  <label>Title</label><input id="rm-title" placeholder="e.g. Fix the pace calculator">
-  <label>Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail about what needs doing..."></textarea>
-  <div class="modal-footer">
-    <button class="btn-cancel" data-close="addRoadmapModal">Cancel</button>
-    <button class="btn-primary" data-action="saveRoadmapItem">Save</button>
-  </div>
-</div></div>
-
 </body>
 </html>
