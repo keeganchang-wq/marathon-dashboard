@@ -1100,26 +1100,124 @@ function readReceiptFile(f){const r=new FileReader();r.onload=e=>prefillFromText
 function openPasteModal(){document.getElementById('pasteModal').classList.add('open');}
 function parsePastedEmail(){const t=document.getElementById('pasteText').value;if(!t.trim())return;prefillFromText(t);closeModal('pasteModal');}
 function prefillFromText(txt){
-  var l=txt.toLowerCase();var cat='other';
-  if(['shoe','runner','vaporfly','alphafly','superblast','pegasus','nimbus','kayano','novablast','hoka'].some(function(k){return l.includes(k);}))cat='shoe_hint';
-  else if(['watch','coros','garmin','suunto','polar','fenix','forerunner'].some(function(k){return l.includes(k);}))cat='watch';
-  else if(['headphone','earphone','shokz','airpod','openrun'].some(function(k){return l.includes(k);}))cat='headphones';
-  else if(['gel','gu energy','maurten','clif','nuun','sis ','tailwind','electrolyte'].some(function(k){return l.includes(k);}))cat='nutrition';
-  else if(['short','tight','legging'].some(function(k){return l.includes(k);}))cat='apparel_bottom';
-  else if(['singlet','shirt','top','vest','tank','tee'].some(function(k){return l.includes(k);}))cat='apparel_top';
-  else if(['sock','balega','feetures'].some(function(k){return l.includes(k);}))cat='socks';
-  else if(['sunglass','oakley','goodr'].some(function(k){return l.includes(k);}))cat='sunglasses';
-  else if(['foam roller','theragun','normatec','massage'].some(function(k){return l.includes(k);}))cat='recovery';
-  else if(['hr monitor','heart rate','hrm','chest strap'].some(function(k){return l.includes(k);}))cat='hr_monitor';
-  var pm=txt.match(/\$\s?([\d,]+(?:\.\d{2})?)/);var pm2=txt.match(/AUD\s?([\d,]+)/i);var price=(pm?pm[1]:pm2?pm2[1]:'').replace(',','');
-  var brands=['nike','adidas','asics','coros','garmin','shokz','new balance','saucony','brooks','hoka','puma','under armour','2xu','on running','maurten','oakley'];
-  var lines=txt.split('\n').map(function(x){return x.trim();}).filter(function(x){return x.length>3&&x.length<120;});
-  var name='';for(var i=0;i<lines.length;i++){var line=lines[i];if(line.includes('@')||line.includes('http')||/^(Order|Invoice|Receipt|Thank|Dear|Hi )/i.test(line))continue;var lc=line.toLowerCase();if(brands.some(function(b){return lc.includes(b);})){name=line;break;}if(!name&&/^[A-Z]/.test(line))name=line;}
-  var sizeMatch=txt.match(/[Ss]ize[:\s]+([A-Za-z0-9\/\s\.]+)/);
-  document.getElementById('g-cat').value=cat==='shoe_hint'?'other':cat;
-  document.getElementById('g-name').value=name;document.getElementById('g-desc').value=sizeMatch?sizeMatch[1].trim():'';
-  document.getElementById('g-price').value=price;document.getElementById('g-notes').value=name?'Auto-extracted — verify':'Could not auto-detect — fill in manually.';
-  document.getElementById('addGearTitle').textContent='📧 Extracted from receipt';document.getElementById('addGearModal').classList.add('open');
+  // Clean garbled chars
+  txt = txt.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,'');
+  var lines = txt.split('\n').map(function(x){return x.trim();}).filter(function(x){return x.length>0;});
+
+  // ── Detect multiple items ──
+  var items = [];
+  var sizeRE = /^(XXS|XS|S|M|L|XL|XXL|O\/S|OS|ONE SIZE|\d{1,2}(\.\d)?)$/i;
+  var itemRE1 = /^(\d+)\s*[×xX]\s*(.+)/;       // "1 × PRODUCT NAME"
+  var itemRE2 = /^(.+?)\s*[×xX]\s*(\d+)\s*/;    // "PRODUCT NAME × 1"
+  var skipRE  = /^(subtotal|shipping|tax|total|order|invoice|receipt|free gift|you saved|thank|dear|hi |hello|payment|visa|mastercard|amex)/i;
+
+  for(var i=0; i<lines.length; i++){
+    var line = lines[i];
+    if(skipRE.test(line)) continue;
+    var m1 = line.match(itemRE1);
+    var m2 = !m1 ? line.match(itemRE2) : null;
+    var productName = m1 ? m1[2] : (m2 ? m2[1] : null);
+    if(!productName) continue;
+
+    // Clean price from product name
+    productName = productName.replace(/\$[\d,]+\.?\d*/g,'').replace(/FREE$/i,'').trim();
+    if(productName.length < 3) continue;
+
+    // Look ahead for colour and size on next lines
+    var colour = '', size = '';
+    if(i+1 < lines.length){
+      var next1 = lines[i+1];
+      if(sizeRE.test(next1)){ size = next1; i++; }
+      else if(next1.length < 30 && !skipRE.test(next1) && !/^\d+\s*[×x]/i.test(next1) && !/\$/.test(next1)){
+        // Probably a colour line like "BLACK/WHITE"
+        colour = next1; i++;
+        if(i+1 < lines.length && sizeRE.test(lines[i+1])){ size = lines[i+1]; i++; }
+      }
+    }
+
+    // Detect category from name + colour
+    var combined = (productName + ' ' + colour).toLowerCase();
+    var cat = 'other';
+    if(/sock/i.test(combined)) cat = 'socks';
+    else if(/t-shirt|tee|shirt|top|singlet|vest|jersey/i.test(combined)) cat = 'apparel_top';
+    else if(/tank/i.test(combined)) cat = 'apparel_top';
+    else if(/tight|short|brief|legging|pant/i.test(combined)) cat = 'apparel_bottom';
+    else if(/cap|hat|visor|headband|beanie/i.test(combined)) cat = 'other';
+    else if(/shoe|runner|vaporfly|alphafly|superblast/i.test(combined)) cat = 'other'; // shoe_hint
+    else if(/watch|coros|garmin/i.test(combined)) cat = 'watch';
+    else if(/headphone|earphone|shokz/i.test(combined)) cat = 'headphones';
+    else if(/gel |energy|maurten|nuun/i.test(combined)) cat = 'nutrition';
+
+    items.push({name: productName, colour: colour, size: size, cat: cat});
+  }
+
+  // ── Extract total price ──
+  var totalMatch = txt.match(/Total\s*\$?([\d,]+\.?\d*)/i);
+  var subtotalMatch = txt.match(/Subtotal\s*\$?([\d,]+\.?\d*)/i);
+  var totalPrice = subtotalMatch ? subtotalMatch[1].replace(',','') : (totalMatch ? totalMatch[1].replace(',','') : '');
+
+  // ── Extract date ──
+  var dateMatch = txt.match(/(\d{1,2})[\/\-\s]((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[\/\-\s](\d{2,4})/i);
+  var dateVal = '';
+  if(dateMatch){
+    var mo={'jan':'01','feb':'02','mar':'03','apr':'04','may':'05','jun':'06','jul':'07','aug':'08','sep':'09','oct':'10','nov':'11','dec':'12'};
+    var m=dateMatch[2].toLowerCase().substring(0,3);
+    if(mo[m]){var y=dateMatch[3].length===2?'20'+dateMatch[3]:dateMatch[3];dateVal=y+'-'+mo[m]+'-'+dateMatch[1].toString().padStart(2,'0');}
+  }
+
+  // ── Multi-item: add all directly ──
+  if(items.length > 1){
+    var perItemPrice = totalPrice && items.length > 0 ? (parseFloat(totalPrice) / items.length).toFixed(2) : '';
+    items.forEach(function(item){
+      gearList.push({
+        id: 'g' + Date.now() + Math.random().toString(36).substr(2,5),
+        cat: item.cat,
+        name: item.name,
+        desc: (item.colour ? item.colour : '') + (item.size ? ' · Size ' + item.size : ''),
+        date: dateVal,
+        price: perItemPrice,
+        notes: 'Auto-extracted from receipt — verify details',
+        condition: 'new'
+      });
+    });
+    saveGear(); renderGearList();
+    // Show success banner
+    var banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--golden);color:var(--blacktie);padding:10px 24px;border-radius:20px;font-size:13px;font-weight:700;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.4)';
+    banner.textContent = '✅ Added ' + items.length + ' items from receipt' + (totalPrice ? ' · Total $' + totalPrice : '');
+    document.body.appendChild(banner);
+    setTimeout(function(){ banner.style.transition='opacity .5s'; banner.style.opacity='0'; setTimeout(function(){banner.remove();},600); }, 3000);
+    return;
+  }
+
+  // ── Single item: open modal with pre-fill ──
+  var singleName = items.length === 1 ? items[0].name : '';
+  var singleCat = items.length === 1 ? items[0].cat : 'other';
+  var singleDesc = items.length === 1 ? (items[0].colour + (items[0].size ? ' · Size ' + items[0].size : '')) : '';
+
+  if(!singleName){
+    // Fallback: find best product line
+    var brands = ['nike','adidas','asics','coros','garmin','shokz','new balance','saucony','brooks','hoka','puma','under armour','2xu','on running','maurten','oakley'];
+    for(var j=0; j<lines.length; j++){
+      var ln = lines[j]; if(ln.includes('@')||ln.includes('http')||skipRE.test(ln)) continue;
+      var lc = ln.toLowerCase();
+      if(brands.some(function(b){return lc.includes(b);})){ singleName=ln; break; }
+      if(!singleName && /^[A-Z]/.test(ln)) singleName=ln;
+    }
+  }
+
+  // Extract single price
+  var priceMatch = txt.match(/\$\s?([\d,]+(?:\.\d{2})?)/);
+  var singlePrice = priceMatch ? priceMatch[1].replace(',','') : '';
+
+  document.getElementById('g-cat').value = singleCat;
+  document.getElementById('g-name').value = singleName;
+  document.getElementById('g-desc').value = singleDesc;
+  document.getElementById('g-price').value = singlePrice;
+  document.getElementById('g-date').value = dateVal;
+  document.getElementById('g-notes').value = singleName ? 'Auto-extracted — verify' : 'Could not detect — fill in manually';
+  document.getElementById('addGearTitle').textContent = '📧 Extracted from receipt';
+  document.getElementById('addGearModal').classList.add('open');
 }
 
 // MILESTONES
