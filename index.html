@@ -1025,7 +1025,7 @@ function openSessModal(wk,day,sessKey,weekDone){
   const blks=sess.blocks.map(b=>`<div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;border-radius:6px;background:${BB[b.t]||'var(--surface-2)'};margin-bottom:5px"><div style="width:26px;height:26px;border-radius:5px;background:${BC[b.t]||'#888'};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">${BL[b.t]||'GO'}</div><div style="font-size:12px;color:var(--text);line-height:1.6;flex:1">${b.x}</div></div>`).join('');
   const sv=sm?`<div style="background:rgba(39,174,96,.1);border-left:3px solid #27AE60;border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:11px;line-height:1.7"><strong style="color:var(--mint-600)">📡 Strava verified ✅</strong><br><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px"><div><span style="color:var(--text-3)">Activity:</span> <strong>${sm.name}</strong></div><div><span style="color:var(--text-3)">Distance:</span> <strong>${sm.dist.toFixed(1)}km</strong></div><div><span style="color:var(--text-3)">Effort:</span> <strong>${sm.re||'—'}</strong></div><div><span style="color:var(--text-3)">PRs:</span> <strong>${sm.prs>0?'🏅 '+sm.prs+' PRs':'—'}</strong></div></div></div>`:'';
   document.getElementById('sessModalTitle').innerHTML=`<span style="color:${col}">${TL[sess.type]}</span> · ${sessKey} <span style="font-size:12px;color:var(--text-3)">Wk${wk} ${day}</span>`;
-  document.getElementById('sessModalBody').innerHTML=`<div style="display:flex;gap:6px;align-items:center;margin-bottom:12px;flex-wrap:wrap"><span style="background:${col};color:white;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">${sess.km}</span>${isDone?'<span style="background:rgba(39,174,96,.15);color:#2ECC71;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">✓ Completed</span>':''}</div>${sv}<div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6"><strong>🎯 What this trains:</strong> ${sess.trains||'Aerobic development.'}</div><div style="margin-bottom:10px">${blks}</div>${sess.tip?`<div style="background:rgba(212,160,82,.1);border-left:3px solid var(--golden);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:12px;font-size:12px;color:var(--text);line-height:1.6"><strong>Coach tip:</strong> ${sess.tip}</div>`:''}<button data-done-modal="${wk}|${day}" style="width:100%;padding:10px;border:2px solid ${isDone?'rgba(39,174,96,.4)':'var(--golden)'};border-radius:8px;background:${isDone?'rgba(39,174,96,.15)':'transparent'};color:${isDone?'#2ECC71':'var(--golden)'};font-size:12px;font-weight:700;cursor:pointer">${isDone?'✓ Completed — tap to undo':'Mark this session as done ✓'}</button>`;
+  document.getElementById('sessModalBody').innerHTML=`<div style="display:flex;gap:6px;align-items:center;margin-bottom:12px;flex-wrap:wrap"><span style="background:${col};color:white;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">${sess.km}</span>${isDone?'<span style="background:rgba(39,174,96,.15);color:#2ECC71;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">✓ Completed</span>':''}</div>${sv}<div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6"><strong>🎯 What this trains:</strong> ${sess.trains||'Aerobic development.'}</div><div style="margin-bottom:10px">${blks}</div>${sess.tip?`<div style="background:rgba(212,160,82,.1);border-left:3px solid var(--golden);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:12px;font-size:12px;color:var(--text);line-height:1.6"><strong>Coach tip:</strong> ${sess.tip}</div>`:''}${generateDebrief(sess.type,sessKey,sm)}<button data-done-modal="${wk}|${day}" style="width:100%;padding:10px;border:2px solid ${isDone?'rgba(39,174,96,.4)':'var(--golden)'};border-radius:8px;background:${isDone?'rgba(39,174,96,.15)':'transparent'};color:${isDone?'#2ECC71':'var(--golden)'};font-size:12px;font-weight:700;cursor:pointer">${isDone?'✓ Completed — tap to undo':'Mark this session as done ✓'}</button>`;
   document.getElementById('sessModal').classList.add('open');
 }
 
@@ -1632,6 +1632,59 @@ function formatPace(decimalMin) {
   var mins = Math.floor(decimalMin);
   var secs = Math.round((decimalMin - mins) * 60);
   return mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+
+var STRAVA_HR = {
+  '18845629096':{avgHR:147,maxHR:156,pace:7.23},
+  '18711637254':{avgHR:null,maxHR:null,pace:6.27},
+  '18659441753':{avgHR:166,maxHR:179,pace:4.60},
+  '18628147720':{avgHR:154,maxHR:177,pace:5.87},
+  '18592467984':{avgHR:null,maxHR:null,pace:5.86},
+  '18579314918':{avgHR:null,maxHR:null,pace:6.00},
+  '18562945760':{avgHR:null,maxHR:null,pace:5.86},
+  '18535634020':{avgHR:null,maxHR:null,pace:6.53},
+  '18445455558':{avgHR:null,maxHR:null,pace:5.87},
+  '18381754652':{avgHR:null,maxHR:null,pace:6.04},
+  '18354567424':{avgHR:null,maxHR:null,pace:5.99},
+  '18258644796':{avgHR:null,maxHR:null,pace:6.02},
+};
+function generateDebrief(sessType, sessKey, sm) {
+  if (!sm) return '';
+  var sd = STRAVA_HR[sm.id] || {};
+  var pace = sd.pace || 6.0;
+  var avgHR = sd.avgHR;
+  var maxHR = sd.maxHR;
+  var prs = sm.prs || 0;
+  var re = sm.re || 0;
+  var v = [];
+  var grade = 'B';
+  if (sessType === 'easy' || sessType === 'long') {
+    if (avgHR && avgHR <= 150) { v.push('<span style="color:#2ECC71">\u2705 HR avg '+avgHR+' bpm \u2014 under 150 ceiling. Excellent Z2 discipline.</span>'); grade = avgHR<=145?'A+':'A'; }
+    else if (avgHR && avgHR <= 158) { v.push('<span style="color:#E67E22">\u26A0 HR avg '+avgHR+' bpm \u2014 drifting above Z2. Slow down next time.</span>'); }
+    else if (avgHR && avgHR > 158) { v.push('<span style="color:#E74C3C">\uD83D\uDD34 HR avg '+avgHR+' bpm \u2014 too high for easy. This was Z3+ effort.</span>'); grade='C'; }
+    if (pace >= 6.3 && pace <= 7.3) { v.push('<span style="color:#2ECC71">\u2705 Pace '+formatPace(pace)+'/km \u2014 ideal Z2 range.</span>'); }
+    else if (pace >= 5.5 && pace < 6.3) { v.push('<span style="color:#E67E22">\u26A0 Pace '+formatPace(pace)+'/km \u2014 faster than ideal Z2.</span>'); }
+    else if (pace < 5.5) { v.push('<span style="color:#E74C3C">\uD83D\uDD34 Pace '+formatPace(pace)+'/km \u2014 too fast for easy day.</span>'); if(grade<'C')grade='C'; }
+    else if (pace > 7.3) { v.push('<span style="color:#2ECC71">\u2705 Pace '+formatPace(pace)+'/km \u2014 slow is perfect for easy days.</span>'); }
+  } else if (sessType === 'tempo') {
+    if (re > 70) { v.push('<span style="color:#2ECC71">\u2705 Relative effort '+re+' \u2014 solid threshold stimulus.</span>'); grade='A'; }
+    else { v.push('<span style="color:#E67E22">\u26A0 Relative effort '+re+' \u2014 may have been conservative.</span>'); }
+    if (pace <= 5.25 && pace >= 4.8) { v.push('<span style="color:#2ECC71">\u2705 Pace '+formatPace(pace)+'/km \u2014 in threshold zone.</span>'); }
+  } else if (sessType === 'interval') {
+    if (prs > 20) { v.push('<span style="color:#2ECC71">\u2705 '+prs+' PRs \u2014 exceptional speed session.</span>'); grade='A+'; }
+    else if (prs > 5) { v.push('<span style="color:#2ECC71">\u2705 '+prs+' PRs \u2014 strong interval work.</span>'); grade='A'; }
+    if (maxHR && maxHR >= 175) { v.push('<span style="color:#2ECC71">\u2705 Max HR '+maxHR+' bpm \u2014 hit Z4/Z5 as intended.</span>'); }
+  }
+  if (prs > 50) v.push('<span style="color:var(--golden)">\uD83C\uDFC5 '+prs+' personal records \u2014 massive breakthrough.</span>');
+  else if (prs > 10) v.push('<span style="color:var(--golden)">\uD83C\uDFC5 '+prs+' PRs \u2014 good progress.</span>');
+  if (!v.length) { v.push('<span style="color:var(--text-2)">Session completed. Keep the momentum going.</span>'); }
+  var gc = {'A+':'#2ECC71','A':'#27AE60','B':'#E67E22','C':'#E74C3C'};
+  var bg = grade.startsWith('A')?'39,174,96':grade==='B'?'230,126,34':'231,76,60';
+  return '<div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:12px 14px;margin-top:12px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-size:11px;font-weight:700;color:var(--golden);text-transform:uppercase;letter-spacing:.06em">\uD83D\uDCAC Post-Run Debrief</div><div style="font-size:18px;font-weight:800;color:'+(gc[grade]||'var(--text)')+';background:rgba('+bg+',.12);padding:2px 10px;border-radius:6px">'+grade+'</div></div>'
+    +v.map(function(x){return '<div style="font-size:11px;line-height:1.6;margin-bottom:4px">'+x+'</div>';}).join('')
+    +'</div>';
 }
 
 window.addEventListener('load', function init() {
