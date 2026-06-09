@@ -435,6 +435,32 @@ body {
 [data-light] .sec-label { border-color:var(--border); }
 [data-light] .tab { color:rgba(255,255,255,.7); }
 [data-light] .tab.active { color:var(--golden) !important; border-bottom-color:var(--golden) !important; }
+
+/* ── CALENDAR GRID ─────────────────────────────────────────── */
+.cal-week { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:8px; overflow:hidden; }
+.cal-hdr { padding:10px 14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); border-top:1px solid var(--border); }
+.cal-day-hdr { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--text-3); text-align:center; padding:6px 4px; border-right:1px solid var(--border); background:var(--header-bg); }
+.cal-day-hdr:last-child { border-right:none; }
+.cal-cell { min-height:90px; border-right:1px solid var(--border); border-top:1px solid var(--border); padding:4px; position:relative; transition:background .15s; }
+.cal-cell:last-child { border-right:none; }
+.cal-cell.cal-empty { background:var(--surface); }
+.cal-cell.cal-rest { background:var(--surface); }
+.cal-cell.cal-has { background:var(--surface-2); }
+.cal-cell.cal-drop-target { background:rgba(212,160,82,.15) !important; border:2px dashed var(--golden) !important; }
+.cal-date { font-size:9px; color:var(--text-3); margin-bottom:3px; }
+.cal-card { border-radius:6px; overflow:hidden; cursor:pointer; transition:box-shadow .15s; }
+.cal-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.3); }
+.cal-card.cal-done { opacity:.7; }
+.cal-card-hdr { padding:3px 6px; font-size:8px; font-weight:700; color:white; text-transform:uppercase; letter-spacing:.04em; }
+.cal-card-body { padding:6px; background:var(--surface); }
+.cal-card-name { font-size:10px; font-weight:700; color:var(--text); line-height:1.3; margin-bottom:2px; }
+.cal-card-km { font-size:9px; color:var(--golden); font-weight:600; }
+.cal-card-done { font-size:8px; color:#2ECC71; font-weight:700; margin-top:2px; }
+.cal-card-rest { text-align:center; padding:10px 4px; font-size:10px; color:var(--text-3); }
+.cal-card[draggable="true"] { cursor:grab; }
+.cal-card[draggable="true"]:active { cursor:grabbing; opacity:.7; }
+@media(max-width:700px) { .cal-grid { grid-template-columns:repeat(7,1fr); } .cal-cell { min-height:60px; } .cal-card-name { font-size:9px; } }
 </style>
 </head>
 <body>
@@ -989,31 +1015,161 @@ const TL={easy:'Easy Run',tempo:'Tempo',interval:'Intervals',long:'Long Run',rac
 const PC={Base:'#1A3040',Build:'#0F2A20',Peak:'#2A1A08',Taper:'#1A0A0A',Race:'#2A1A08',Recovery:'#0F2020'};
 const PP={Base:'background:#1A3040;color:#5AB5EE',Build:'background:#0F2A20;color:#2ECC71',Peak:'background:#2A1A08;color:#E67E22',Taper:'background:#1A0A0A;color:#E74C3C',Race:'background:#2A1A08;color:#D4A052',Recovery:'background:#0F2020;color:#5A7E8E'};
 
-function renderPlan(){
-  const grid=document.getElementById('planGrid');if(!grid)return;
-  let total=0,done=0;
-  grid.innerHTML=PLAN.map(week=>{
-    const isDone=week.done,isCur=!!week.current;
-    const hBg=isDone?'#0F2020':isCur?'#1A3040':PC[week.phase]||'#234F60';
-    const cards=week.sessions.map(s=>{
-      if(s.type==='rest')return`<div class="sess-card is-rest"><div class="sess-hdr" style="background:#CBD5E1"><div class="sess-day">${s.day}</div><div class="sess-type" style="color:#475569">Rest</div></div><div class="sess-body-inner" style="padding:9px 10px;font-size:10px;color:var(--text-3)">Walk, stretch, recover.</div></div>`;
-      const k=sid(week.wk,s.day);let sm=null;try{if(!isDone&&s.key)sm=getStravaMatch(week.wk,s.day);}catch(e){}
-      const isDoneSess=isDone||!!completed[k]||!!sm;if(s.type!=='rest'){total++;if(isDoneSess)done++;}
-      const sess=s.key?SESSIONS[s.key]:null;const km=sess?sess.km:'—';const col=TC[s.type]||'#888';
-      const blks=sess?sess.blocks.slice(0,3).map(b=>`<div class="sess-block"><div class="blk-icon bi-${b.t==='wu'?'wu':b.t==='cd'?'cd':b.t==='rest'||b.t==='rc'?'rest':'go'}">${b.t==='wu'?'WU':b.t==='cd'?'CD':b.t==='rest'?'R':'GO'}</div><div class="blk-text">${b.x}</div></div>`).join('')+(sess.blocks.length>3?`<div style="font-size:10px;color:var(--blue-600);margin-top:3px">+${sess.blocks.length-3} more — tap to see ↗</div>`:''): '';
-      const sv=sm?`<div class="strava-badge"><span style="font-weight:700;color:#2ECC71">📡 Strava verified</span> · ${sm.dist.toFixed(1)}km${sm.prs>0?` · 🏅${sm.prs} PRs`:''}</div>`:'';
-      return`<div class="sess-card${isDoneSess?' is-done':''}" data-sess="${week.wk}|${s.day}|${s.key||''}|${isDone}"><div class="done-check">✓</div><div class="sess-hdr" style="background:${col}"><div class="sess-day">${s.day}</div><div class="sess-type">${TL[s.type]}</div></div><div class="sess-body-inner"><div class="sess-name">${s.name}</div><div class="sess-km-pill">${km}</div><div>${blks}</div>${sv}<button class="mark-btn" data-done="${week.wk}|${s.day}">${isDoneSess?'✓ Done — tap to undo':'Mark as done'}</button></div></div>`;
-    }).join('');
-    const wD=week.sessions.filter(s=>s.type!=='rest'&&(isDone||completed[sid(week.wk,s.day)])).length;
-    const wT=week.sessions.filter(s=>s.type!=='rest').length;
-    const bid=`pb-${week.wk}`;const show=isCur||!isDone;
-    return`<div class="week-block" id="wb-${week.wk}"><div class="week-hdr" style="background:${hBg}" data-wk="${bid}"><div class="wl"><span class="wk-num">${isDone?'✅ ':isCur?'▶ ':''}Wk ${week.wk}</span><span class="wk-dates">${week.dates}</span><span class="phase-pill" style="${PP[week.phase]||''}">${week.phase}</span></div><div class="wr"><span>${week.km}km</span><span>${isDone?'Complete':`${wD}/${wT} done`}</span><span id="arr-${bid}" style="opacity:.5">▾</span></div></div><div class="sess-grid" id="${bid}" style="display:${show?'grid':'none'}">${cards}</div></div>`;
-  }).join('');
-  const pct=total>0?Math.round(done/total*100):0;const el=document.getElementById('planProg');if(el)el.textContent=`${done}/${total} sessions · ${pct}% complete`;
+// ── RESCHEDULE STORAGE ─────────────────────────────────────
+var reschedules = JSON.parse(localStorage.getItem('kc_reschedule') || '{}');
+function saveReschedules(){ localStorage.setItem('kc_reschedule', JSON.stringify(reschedules)); }
+
+var DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+function getWeekDates(dateRange) {
+  // Parse "Apr 20–26" → array of date strings for Mon–Sun
+  // We use the plan start date and week number to compute
+  return null; // dates computed differently
 }
-function toggleWk(id){const el=document.getElementById(id);const arr=document.getElementById('arr-'+id);if(!el)return;const open=el.style.display!=='none';el.style.display=open?'none':'grid';if(arr)arr.textContent=open?'▸':'▾';}
-function toggleDone(wk,day){const k=sid(wk,day);if(completed[k])delete completed[k];else completed[k]=new Date().toISOString();localStorage.setItem('kc_done',JSON.stringify(completed));renderPlan();}
-function jumpCurrent(){showTab('plan',document.querySelectorAll('.tab')[1]);setTimeout(()=>{const el=document.getElementById('wb-8');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});const b=document.getElementById('pb-8');if(b)b.style.display='grid';},50);}
+
+function renderPlan(){
+  var grid = document.getElementById('planGrid'); if(!grid) return;
+  var total=0, done=0;
+
+  grid.innerHTML = PLAN.map(function(week){
+    var isDone = week.done, isCur = !!week.current;
+    var hBg = isDone ? '#0F2020' : isCur ? '#1A3040' : PC[week.phase] || '#1A3040';
+
+    // Build session map: day → session
+    var sessMap = {};
+    week.sessions.forEach(function(s){
+      var actualDay = reschedules[week.wk + '__' + s.day] || s.day;
+      sessMap[actualDay] = s;
+    });
+
+    // Count done
+    var wDone = 0, wTotal = 0;
+    week.sessions.forEach(function(s){
+      if(s.type !== 'rest'){ wTotal++; total++;
+        var k = sid(week.wk, s.day);
+        var sm = null; try{ sm = getStravaMatch(week.wk, s.day); }catch(e){}
+        if(isDone || completed[k] || sm){ done++; wDone++; }
+      }
+    });
+
+    // Day headers
+    var dayHdrs = DAYS.map(function(d){ return '<div class="cal-day-hdr">' + d + '</div>'; }).join('');
+
+    // Day cells
+    var dayCells = DAYS.map(function(dayName){
+      var s = sessMap[dayName];
+      if(!s){
+        // Empty day — drop target for rescheduling
+        return '<div class="cal-cell cal-empty" data-cal-drop="' + week.wk + '|' + dayName + '"></div>';
+      }
+
+      if(s.type === 'rest'){
+        return '<div class="cal-cell cal-rest"><div class="cal-card-rest">😴<br>Rest</div></div>';
+      }
+
+      var k = sid(week.wk, s.day); // use original day for completion tracking
+      var sm = null; try{ if(!isDone) sm = getStravaMatch(week.wk, s.day); }catch(e){}
+      var isDoneSess = isDone || !!completed[k] || !!sm;
+      var sess = s.key ? SESSIONS[s.key] : null;
+      var km = sess ? sess.km : '—';
+      var col = TC[s.type] || '#333';
+
+      return '<div class="cal-cell cal-has" data-cal-drop="' + week.wk + '|' + dayName + '">'
+        + '<div class="cal-card' + (isDoneSess ? ' cal-done' : '') + '" draggable="true" data-cal-drag="' + week.wk + '|' + s.day + '|' + dayName + '" data-sess="' + week.wk + '|' + s.day + '|' + (s.key||'') + '|' + isDone + '">'
+        + '<div class="cal-card-hdr" style="background:' + col + '">' + TL[s.type] + '</div>'
+        + '<div class="cal-card-body">'
+        + '<div class="cal-card-name">' + s.name + '</div>'
+        + '<div class="cal-card-km">' + km + '</div>'
+        + (isDoneSess ? '<div class="cal-card-done">✓ Done</div>' : '')
+        + (sm ? '<div style="font-size:8px;color:#2ECC71;margin-top:1px">📡 Strava</div>' : '')
+        + '</div>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+
+    var bid = 'cal-' + week.wk;
+    var show = isCur || !isDone;
+
+    return '<div class="cal-week" id="wb-' + week.wk + '">'
+      + '<div class="cal-hdr" style="background:' + hBg + '" data-wk="' + bid + '">'
+      + '<div class="wl"><span class="wk-num">' + (isDone ? '✅ ' : isCur ? '▶ ' : '') + 'Wk ' + week.wk + '</span>'
+      + '<span class="wk-dates">' + week.dates + '</span>'
+      + '<span class="phase-pill" style="' + (PP[week.phase] || '') + '">' + week.phase + '</span></div>'
+      + '<div class="wr"><span>' + week.km + 'km</span><span>' + (isDone ? 'Complete' : wDone + '/' + wTotal + ' done') + '</span><span style="opacity:.5">▾</span></div>'
+      + '</div>'
+      + '<div class="cal-grid" id="' + bid + '" style="display:' + (show ? 'grid' : 'none') + '">'
+      + dayHdrs + dayCells
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  // Update progress pill
+  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  var el = document.getElementById('planProg');
+  if(el) el.textContent = done + '/' + total + ' sessions · ' + pct + '% complete';
+
+  // Setup calendar drag/drop
+  initCalDrag();
+}
+
+function initCalDrag(){
+  document.querySelectorAll('[data-cal-drag]').forEach(function(card){
+    card.addEventListener('dragstart', function(e){
+      e.dataTransfer.setData('text/plain', card.dataset.calDrag);
+      e.dataTransfer.effectAllowed = 'move';
+      card.style.opacity = '0.4';
+      // Highlight drop targets in same week
+      var wk = card.dataset.calDrag.split('|')[0];
+      document.querySelectorAll('[data-cal-drop^="' + wk + '|"]').forEach(function(cell){
+        cell.classList.add('cal-drop-target');
+      });
+    });
+    card.addEventListener('dragend', function(){
+      card.style.opacity = '1';
+      document.querySelectorAll('.cal-drop-target').forEach(function(c){ c.classList.remove('cal-drop-target'); });
+    });
+  });
+  document.querySelectorAll('[data-cal-drop]').forEach(function(cell){
+    cell.addEventListener('dragover', function(e){ e.preventDefault(); });
+    cell.addEventListener('drop', function(e){
+      e.preventDefault();
+      var dragData = e.dataTransfer.getData('text/plain'); // "wk|originalDay|currentDay"
+      var dropData = cell.dataset.calDrop; // "wk|targetDay"
+      var parts = dragData.split('|');
+      var dropParts = dropData.split('|');
+      if(parts[0] !== dropParts[0]) return; // only within same week
+      var wk = parts[0], origDay = parts[1], currentDay = parts[2], targetDay = dropParts[1];
+      if(currentDay === targetDay) return; // already here, no change
+      // Save or clear reschedule
+      if(origDay === targetDay){
+        // Dragging back to original position — clear the override
+        delete reschedules[wk + '__' + origDay];
+      } else {
+        reschedules[wk + '__' + origDay] = targetDay;
+      }
+      saveReschedules();
+      renderPlan();
+      // Show brief notification
+      var b = document.createElement('div');
+      b.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--golden);color:var(--blacktie);padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.4)';
+      b.textContent = '📅 Moved Wk' + wk + ' ' + currentDay + ' → ' + targetDay;
+      document.body.appendChild(b);
+      setTimeout(function(){ b.style.transition='opacity .5s'; b.style.opacity='0'; setTimeout(function(){b.remove();},600); }, 2000);
+    });
+  });
+}
+
+function toggleWk(id){var el=document.getElementById(id);if(!el)return;var open=el.style.display!=='none';el.style.display=open?'none':'grid';}
+
+function jumpCurrent(){
+  showTab('plan',document.querySelectorAll('.tab')[1]);
+  setTimeout(function(){
+    var el=document.getElementById('wb-8');
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    var b=document.getElementById('cal-8');
+    if(b) b.style.display='grid';
+  },50);
+}
 
 function openSessModal(wk,day,sessKey,weekDone){
   if(!sessKey)return;const sess=SESSIONS[sessKey];if(!sess)return;
