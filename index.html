@@ -641,6 +641,7 @@ body {
     <strong>Full marathon Oct 11</strong> → Alphafly 3 🏆<br>
     <strong style="color:var(--golden)">⚡ Alphafly break-in:</strong> Wk10 Jun 22 (5km) · Wk14 Jul 16 (8km) · Wk17 Aug 11 (8km) → lock away until Oct 11
   </div>
+  <div style="background:var(--surface);border:1px solid var(--golden);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--golden);margin-bottom:4px">💰 Total spend</div><div style="font-size:22px;font-weight:800;color:var(--golden)" id="spendTotal">$0 AUD</div></div><div style="display:flex;gap:16px"><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="shoeSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Shoes</div></div><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="gearSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Gear</div></div></div></div></div>
   <div id="retired-section" style="display:none;margin-bottom:16px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Retired shoes</div><div id="retired-list" style="padding:16px;text-align:center;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No retired shoes yet.</div></div>
   <div style="border-top:1px solid var(--border);margin:8px 0 20px"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
@@ -660,6 +661,8 @@ body {
   </div>
   <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Current gear</div>
   <div class="section-card"><div class="sec-body" style="padding:8px 16px" id="gearItems"></div></div>
+
+  <div style="border-top:1px solid var(--border);margin:20px 0 16px"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)">🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
 </div>
 
 <div id="tab-pace-efforts" class="panel">
@@ -1075,42 +1078,48 @@ const GCATS={apparel_top:{label:'Tops / Singlets',icon:'👕'},apparel_bottom:{l
 const CSEQ=['new','good','worn','replace'];const CL={new:'New',good:'Good',worn:'Worn',replace:'Replace'};const CCL={new:'t-green',good:'t-blue',worn:'t-amber',replace:'t-red'};
 
 function renderGearList(){
-  const el=document.getElementById('gearItems');if(!el)return;
-  if(!gearList.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-3);font-size:12px">No gear added yet. Upload a receipt or tap + Add gear.</div>';return;}
-  const grouped={};gearList.forEach(g=>{const c=GCATS[g.cat]||GCATS.other;if(!grouped[c.label])grouped[c.label]={icon:c.icon,items:[]};grouped[c.label].items.push(g);});
-  el.innerHTML=Object.entries(grouped).map(([cat,{icon,items}])=>`<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);margin-bottom:6px">${icon} ${cat}</div>${items.map(g=>`<div class="gear-item"><div class="gear-icon">${GCATS[g.cat]?.icon||'📦'}</div><div><div class="gear-name">${g.name}</div><div class="gear-sub">${g.desc||''}${g.date?' · '+g.date:''}</div></div><span class="gear-condition ${CCL[g.condition||'good']}" data-cycle="${g.id}" title="Tap to change condition">${CL[g.condition||'good']}</span><button data-del-gear="${g.id}" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:16px;margin-left:4px">×</button></div>`).join('')}</div>`).join('');
+  var el=document.getElementById('gearItems');if(!el)return;
+  var tg=0;gearList.forEach(function(g){if(g.price)tg+=parseFloat(g.price)||0;});
+  var ts=0;shoes.forEach(function(s){if(s.price)ts+=parseFloat(s.price)||0;});
+  var se=document.getElementById('spendTotal');if(se)se.textContent='$'+Math.round(tg+ts).toLocaleString()+' AUD';
+  var ge=document.getElementById('gearSpend');if(ge)ge.textContent='$'+Math.round(tg).toLocaleString();
+  var she=document.getElementById('shoeSpend');if(she)she.textContent='$'+Math.round(ts).toLocaleString();
+  if(!gearList.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-3);font-size:12px">No gear yet.</div>';return;}
+  var grouped={};gearList.forEach(function(g){var c=GCATS[g.cat]||GCATS.other;if(!grouped[c.label])grouped[c.label]={icon:c.icon,items:[]};grouped[c.label].items.push(g);});
+  el.innerHTML=Object.entries(grouped).map(function(ent){return'<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);margin-bottom:6px">'+ent[1].icon+' '+ent[0]+'</div>'+ent[1].items.map(function(g){return'<div class="gear-item" style="flex-wrap:wrap"><div class="gear-icon">'+(GCATS[g.cat]?GCATS[g.cat].icon:'📦')+'</div><div style="flex:1;min-width:140px"><div class="gear-name">'+g.name+'</div><div class="gear-sub">'+(g.desc||'')+(g.date?' · '+g.date:'')+(g.price?' · $'+g.price:'')+'</div>'+(g.notes?'<div style="font-size:10px;color:var(--golden);margin-top:2px;font-style:italic">📝 '+g.notes+'</div>':'')+'</div><span class="gear-condition '+CCL[g.condition||'good']+'" data-cycle="'+g.id+'">'+CL[g.condition||'good']+'</span><button data-edit-gear="'+g.id+'" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:13px;padding:2px 5px">✏️</button><button data-del-gear="'+g.id+'" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:16px;padding:0 4px">×</button></div>';}).join('')+'</div>';}).join('');
 }
 function cycleGearCond(id){const g=gearList.find(x=>x.id===id);if(!g)return;g.condition=CSEQ[(CSEQ.indexOf(g.condition||'good')+1)%CSEQ.length];saveGear();renderGearList();}
 function delGear(id){if(!confirm('Remove this item?'))return;gearList=gearList.filter(x=>x.id!==id);saveGear();renderGearList();}
-function openAddGear(){document.getElementById('addGearModal').classList.add('open');}
-function saveGearItem(){gearList.push({id:'g'+Date.now(),cat:document.getElementById('g-cat').value,name:document.getElementById('g-name').value,desc:document.getElementById('g-desc').value,date:document.getElementById('g-date').value,price:document.getElementById('g-price').value,notes:document.getElementById('g-notes').value,condition:'new'});saveGear();renderGearList();closeModal('addGearModal');}
+function openAddGear(){['g-name','g-desc','g-date','g-price','g-notes'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('g-cat').value='apparel_top';delete document.getElementById('addGearModal').dataset.eid;document.getElementById('addGearTitle').textContent='Add gear';document.getElementById('addGearModal').classList.add('open');}
+function editGear(id){var g=gearList.find(function(x){return x.id===id;});if(!g)return;document.getElementById('g-cat').value=g.cat||'other';document.getElementById('g-name').value=g.name||'';document.getElementById('g-desc').value=g.desc||'';document.getElementById('g-date').value=g.date||'';document.getElementById('g-price').value=g.price||'';document.getElementById('g-notes').value=g.notes||'';document.getElementById('addGearModal').dataset.eid=id;document.getElementById('addGearTitle').textContent='✏️ Edit gear';document.getElementById('addGearModal').classList.add('open');}
+function editGear(id){var g=gearList.find(function(x){return x.id===id;});if(!g)return;document.getElementById('g-cat').value=g.cat||'other';document.getElementById('g-name').value=g.name||'';document.getElementById('g-desc').value=g.desc||'';document.getElementById('g-date').value=g.date||'';document.getElementById('g-price').value=g.price||'';document.getElementById('g-notes').value=g.notes||'';document.getElementById('addGearModal').dataset.eid=id;document.getElementById('addGearTitle').textContent='✏️ Edit gear';document.getElementById('addGearModal').classList.add('open');}
+function saveGearItem(){var eid=document.getElementById('addGearModal').dataset.eid;var d={cat:document.getElementById('g-cat').value,name:document.getElementById('g-name').value,desc:document.getElementById('g-desc').value,date:document.getElementById('g-date').value,price:document.getElementById('g-price').value,notes:document.getElementById('g-notes').value};if(eid){var g=gearList.find(function(x){return x.id===eid;});if(g)Object.assign(g,d);delete document.getElementById('addGearModal').dataset.eid;}else{d.id='g'+Date.now();d.condition='new';gearList.push(d);}saveGear();renderGearList();closeModal('addGearModal');}
 function handleDrop(e){e.preventDefault();document.getElementById('uploadArea').classList.remove('drag-active');const f=e.dataTransfer.files[0];if(f)readReceiptFile(f);}
 function handleFileUpload(e){const f=e.target.files[0];if(f)readReceiptFile(f);}
 function readReceiptFile(f){const r=new FileReader();r.onload=e=>prefillFromText(e.target.result);r.readAsText(f);}
 function openPasteModal(){document.getElementById('pasteModal').classList.add('open');}
 function parsePastedEmail(){const t=document.getElementById('pasteText').value;if(!t.trim())return;prefillFromText(t);closeModal('pasteModal');}
 function prefillFromText(txt){
-  const l=txt.toLowerCase();
-  let cat='other';
-  if(['shoe','runner','vaporfly','alphafly','superblast','pegasus','nimbus','kayano','brooks','saucony','asics','hoka'].some(k=>l.includes(k)))cat='shoe_hint';
-  else if(['watch','coros','garmin','suunto','polar'].some(k=>l.includes(k)))cat='watch';
-  else if(['headphone','earphone','shokz','airpod'].some(k=>l.includes(k)))cat='headphones';
-  else if(['hr monitor','heart rate monitor'].some(k=>l.includes(k)))cat='hr_monitor';
-  else if(['gel','gu energy','maurten','energy chew','isotonic','electrolyte tab'].some(k=>l.includes(k)))cat='nutrition';
-  else if(['short','tight','brief'].some(k=>l.includes(k)))cat='apparel_bottom';
-  else if(['singlet','shirt','top','long sleeve'].some(k=>l.includes(k)))cat='apparel_top';
-  else if(['sock','compression sock'].some(k=>l.includes(k)))cat='socks';
-  else if(['sunglass','goggle'].some(k=>l.includes(k)))cat='sunglasses';
-  else if(['foam roller','massage','recovery boot'].some(k=>l.includes(k)))cat='recovery';
-  const pm=txt.match(/\$\s?([\d,]+(?:\.\d{2})?)/);
-  const lines=txt.split('\n').map(x=>x.trim()).filter(x=>x.length>3&&x.length<80);
-  const name=lines.find(x=>/^[A-Z]/.test(x)&&!x.includes('@')&&!x.includes('http'))||'';
+  var l=txt.toLowerCase();var cat='other';
+  if(['shoe','runner','vaporfly','alphafly','superblast','pegasus','nimbus','kayano','novablast','hoka'].some(function(k){return l.includes(k);}))cat='shoe_hint';
+  else if(['watch','coros','garmin','suunto','polar','fenix','forerunner'].some(function(k){return l.includes(k);}))cat='watch';
+  else if(['headphone','earphone','shokz','airpod','openrun'].some(function(k){return l.includes(k);}))cat='headphones';
+  else if(['gel','gu energy','maurten','clif','nuun','sis ','tailwind','electrolyte'].some(function(k){return l.includes(k);}))cat='nutrition';
+  else if(['short','tight','legging'].some(function(k){return l.includes(k);}))cat='apparel_bottom';
+  else if(['singlet','shirt','top','vest','tank','tee'].some(function(k){return l.includes(k);}))cat='apparel_top';
+  else if(['sock','balega','feetures'].some(function(k){return l.includes(k);}))cat='socks';
+  else if(['sunglass','oakley','goodr'].some(function(k){return l.includes(k);}))cat='sunglasses';
+  else if(['foam roller','theragun','normatec','massage'].some(function(k){return l.includes(k);}))cat='recovery';
+  else if(['hr monitor','heart rate','hrm','chest strap'].some(function(k){return l.includes(k);}))cat='hr_monitor';
+  var pm=txt.match(/\$\s?([\d,]+(?:\.\d{2})?)/);var pm2=txt.match(/AUD\s?([\d,]+)/i);var price=(pm?pm[1]:pm2?pm2[1]:'').replace(',','');
+  var brands=['nike','adidas','asics','coros','garmin','shokz','new balance','saucony','brooks','hoka','puma','under armour','2xu','on running','maurten','oakley'];
+  var lines=txt.split('\n').map(function(x){return x.trim();}).filter(function(x){return x.length>3&&x.length<120;});
+  var name='';for(var i=0;i<lines.length;i++){var line=lines[i];if(line.includes('@')||line.includes('http')||/^(Order|Invoice|Receipt|Thank|Dear|Hi )/i.test(line))continue;var lc=line.toLowerCase();if(brands.some(function(b){return lc.includes(b);})){name=line;break;}if(!name&&/^[A-Z]/.test(line))name=line;}
+  var sizeMatch=txt.match(/[Ss]ize[:\s]+([A-Za-z0-9\/\s\.]+)/);
   document.getElementById('g-cat').value=cat==='shoe_hint'?'other':cat;
-  document.getElementById('g-name').value=name;
-  document.getElementById('g-price').value=pm?pm[1].replace(',',''):'';
-  document.getElementById('g-notes').value='Auto-extracted from receipt — please verify details.';
-  document.getElementById('addGearModal').classList.add('open');
-  if(cat==='shoe_hint'){const h=document.createElement('div');h.className='alert alert-blue';h.style.marginBottom='10px';h.innerHTML='💡 Looks like a shoe purchase — consider adding it in the <strong>Shoes</strong> tab for full km tracking.';document.getElementById('addGearTitle').after(h);setTimeout(()=>h.remove(),6000);}
+  document.getElementById('g-name').value=name;document.getElementById('g-desc').value=sizeMatch?sizeMatch[1].trim():'';
+  document.getElementById('g-price').value=price;document.getElementById('g-notes').value=name?'Auto-extracted — verify':'Could not auto-detect — fill in manually.';
+  document.getElementById('addGearTitle').textContent='📧 Extracted from receipt';document.getElementById('addGearModal').classList.add('open');
 }
 
 // MILESTONES
@@ -1166,7 +1175,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 // EVENT DELEGATION — replaces all inline onclick handlers (CSP-safe)
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('click', function(e) {
-  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit]');
+  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del]');
   if (!el) return;
 
   // TAB SWITCHING
@@ -1235,6 +1244,8 @@ document.addEventListener('click', function(e) {
       case 'saveGear':    saveGearItem(); break;
       case 'saveShoe':    saveShoe(); break;
       case 'parsePaste':  parsePastedEmail(); break;
+      case 'addWishlistItem': openAddWishlistItem(); break;
+      case 'saveWishlistItem': saveWishlistItem(); break;
       case 'addRoadmapItem': openAddRoadmapItem(); break;
       case 'saveRoadmapItem': saveRoadmapItem(); break;
       case 'toggleRmSort': toggleRmSort(); break;
@@ -1255,6 +1266,9 @@ document.addEventListener('click', function(e) {
   // GEAR CYCLE / DELETE
   if (el.dataset.cycle) { cycleGearCond(el.dataset.cycle); return; }
   if (el.dataset.delGear) { delGear(el.dataset.delGear); return; }
+  if (el.dataset.editGear) { editGear(el.dataset.editGear); return; }
+  if (el.dataset.wishBuy) { toggleWishBought(el.dataset.wishBuy); return; }
+  if (el.dataset.wishDel) { if(confirm('Remove?')) deleteWishItem(el.dataset.wishDel); return; }
   if (el.dataset.rmEdit) { e.stopPropagation(); editRoadmapItem(el.dataset.rmEdit); return; }
   if (el.dataset.rmDel)  { e.stopPropagation(); if(confirm('Remove this item?')) deleteRoadmapItem(el.dataset.rmDel); return; }
   if (el.dataset.rm)     { toggleRoadmapItem(el.dataset.rm); return; }
@@ -1317,6 +1331,13 @@ function expandAll(){document.querySelectorAll('#dash-sections .sec-body').forEa
 function saveSetting(key,val){var s=JSON.parse(localStorage.getItem('kc_settings')||'{}');s[key]=val;localStorage.setItem('kc_settings',JSON.stringify(s));}
 function loadSettings(){var s=JSON.parse(localStorage.getItem('kc_settings')||'{}');[['weight','set-weight'],['maxhr','set-maxhr'],['halfTarget','set-half-target'],['fullTarget','set-full-target']].forEach(function(p){var el=document.getElementById(p[1]);if(el&&s[p[0]])el.value=s[p[0]];});var sb=document.getElementById('settingsThemeBtn');if(sb)sb.textContent=darkMode?'☀️ Light':'🌙 Dark';}
 
+var wishlist=JSON.parse(localStorage.getItem('kc_wishlist')||'[]');
+function saveWishlist(){localStorage.setItem('kc_wishlist',JSON.stringify(wishlist));}
+function renderWishlist(){var el=document.getElementById('wishlistItems');if(!el)return;if(!wishlist.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">Nothing on the wishlist yet.</div>';return;}el.innerHTML=wishlist.map(function(w){return'<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px'+(w.bought?';opacity:.4':'')+'"><div style="font-size:18px">'+(w.icon||'🛒')+'</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text)'+(w.bought?';text-decoration:line-through':'')+'">'+w.name+'</div>'+(w.size?'<div style="font-size:10px;color:var(--text-2)">'+w.size+'</div>':'')+(w.notes?'<div style="font-size:10px;color:var(--golden);font-style:italic">📝 '+w.notes+'</div>':'')+'</div>'+(w.price?'<div style="font-size:12px;font-weight:700;color:var(--golden);min-width:60px;text-align:right">$'+w.price+'</div>':'')+'<button data-wish-buy="'+w.id+'" style="background:none;border:1px solid '+(w.bought?'var(--text-3)':'var(--golden)')+';color:'+(w.bought?'var(--text-3)':'var(--golden)')+';border-radius:6px;padding:3px 8px;font-size:10px;cursor:pointer">'+(w.bought?'Undo':'Bought')+'</button><button data-wish-del="'+w.id+'" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:16px">×</button></div>';}).join('');}
+function openAddWishlistItem(){document.getElementById('w-name').value='';document.getElementById('w-size').value='';document.getElementById('w-price').value='';document.getElementById('w-notes').value='';document.getElementById('w-icon').value='🛒';document.getElementById('addWishlistModal').classList.add('open');}
+function saveWishlistItem(){var n=document.getElementById('w-name').value.trim();if(!n)return;wishlist.push({id:'w'+Date.now(),name:n,size:document.getElementById('w-size').value.trim(),price:document.getElementById('w-price').value.trim(),notes:document.getElementById('w-notes').value.trim(),icon:document.getElementById('w-icon').value,bought:false});saveWishlist();renderWishlist();closeModal('addWishlistModal');}
+function toggleWishBought(id){var w=wishlist.find(function(x){return x.id===id;});if(w)w.bought=!w.bought;saveWishlist();renderWishlist();}
+function deleteWishItem(id){wishlist=wishlist.filter(function(x){return x.id!==id;});saveWishlist();renderWishlist();}
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -1332,7 +1353,9 @@ window.addEventListener('load', function init() {
   renderRoadmap();
   applyLockState();
   loadSettings();
+  renderWishlist();
 });
 </script>
+<div class="modal-bg" id="addWishlistModal"><div class="modal"><button class="modal-close" data-close="addWishlistModal">✕</button><h3>🛒 Add to wishlist</h3><label>Icon</label><select id="w-icon"><option value="👟">👟 Shoes</option><option value="⌚">⌚ Watch</option><option value="🎧">🎧 Headphones</option><option value="👕">👕 Apparel</option><option value="🧦">🧦 Socks</option><option value="⛽">⛽ Nutrition</option><option value="🛒" selected>🛒 Other</option></select><label>Product name</label><input id="w-name" placeholder="e.g. ASICS Novablast 5"><label>Size / Colour</label><input id="w-size" placeholder="e.g. US 10 / White"><label>Est. price (AUD)</label><input id="w-price" type="number" placeholder="0"><label>Notes</label><textarea id="w-notes" rows="2" placeholder="Sizing, colour, where to buy..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addWishlistModal">Cancel</button><button class="btn-primary" data-action="saveWishlistItem">Add</button></div></div></div>
 </body>
 </html>
