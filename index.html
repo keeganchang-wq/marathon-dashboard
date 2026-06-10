@@ -3555,105 +3555,31 @@ function saveAllSettings() {
 
 
 // ── WEATHER-ADJUSTED PACE ─────────────────────────────────
-function renderWeather() {
-  var el = document.getElementById('body-weather'); if(!el) return;
-
-  // Melbourne forecast (updated each session via Claude)
-  var forecast = [
-    {day:'Wed Jun 11',temp:17,rain:15,wind:12,session:'Rest day'},
-    {day:'Thu Jun 12',temp:20,rain:10,wind:8,session:'5km Easy Run'},
-    {day:'Fri Jun 13',temp:17,rain:65,wind:15,session:'Rest'},
-    {day:'Sat Jun 14',temp:15,rain:0,wind:10,session:'Parkrun option'},
-    {day:'Sun Jun 15',temp:13,rain:0,wind:5,session:'5km Easy Run'},
+function renderWeather(){
+  var el=document.getElementById('body-weather'); if(!el) return;
+  var forecast=[
+    {day:'Thu',temp:17,rain:15,session:'Easy Run'},
+    {day:'Fri',temp:20,rain:10,session:'Rest'},
+    {day:'Sat',temp:17,rain:65,session:'Parkrun'},
+    {day:'Sun',temp:15,rain:0,session:'Easy Run'},
   ];
+  var now={temp:13,condition:'Partly cloudy'};
+  function calcAdj(t,r){var a=0;if(t>10)a+=(t-10)*0.3;if(r>40)a+=2;return Math.round(a*10)/10;}
+  var adj=calcAdj(now.temp,0);
+  var gc=function(a){return a<=1?'#2ECC71':a<=3?'#E67E22':'#E74C3C';};
 
-  var current = {temp:13, condition:'Partly cloudy', humidity:72};
-
-  // Pace adjustment formula
-  function calcAdj(temp, rain, wind) {
-    var adj = 0;
-    var optimal = 10;
-    if (temp > optimal) adj += (temp - optimal) * 0.3;
-    else if (temp < 5) adj += (5 - temp) * 0.1;
-    if (rain > 40) adj += 2;
-    else if (rain > 20) adj += 1;
-    if (wind > 20) adj += 2;
-    else if (wind > 12) adj += 1;
-    return Math.round(adj * 10) / 10;
-  }
-
-  function adjPace(basePace, adjPct) {
-    return basePace * (1 + adjPct / 100);
-  }
-
-  var basePaces = {easy:6.75, tempo:5.08, interval:4.42, marathon:4.97, long:6.75};
-  var gc = function(adj) { return adj <= 1 ? '#2ECC71' : adj <= 3 ? '#E67E22' : '#E74C3C'; };
-
-  // Current conditions card
-  var nowAdj = calcAdj(current.temp, 0, 10);
-
-  el.innerHTML =
-    // Current conditions
-    '<div class="g2" style="margin-bottom:14px">'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;align-items:center;gap:14px">'
-    +'<div style="font-size:36px">🌤</div>'
-    +'<div><div style="font-size:20px;font-weight:800;color:var(--text)">'+current.temp+'°C</div>'
-    +'<div style="font-size:11px;color:var(--text-2)">'+current.condition+' · Melbourne</div>'
-    +'<div style="font-size:10px;color:var(--text-3);margin-top:2px">Humidity: '+current.humidity+'%</div></div>'
-    +'</div>'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">'
-    +'<div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">Current pace adjustment</div>'
-    +'<div style="font-size:28px;font-weight:800;color:'+gc(nowAdj)+'">+'+(nowAdj>0?nowAdj.toFixed(1):'0')+'%</div>'
-    +'<div style="font-size:10px;color:var(--text-2);margin-top:2px">'+(nowAdj<=1?'✅ Near-optimal conditions':'⚠ Adjust targets slightly')+'</div>'
-    +'<div style="font-size:9px;color:var(--text-3);margin-top:4px">Optimal: 8–12°C · Melbourne winter = ideal running</div>'
-    +'</div></div>'
-
-    // Pace adjustment table
-    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);margin-bottom:8px">Adjusted targets for today ('+current.temp+'°C)</div>'
-    +'<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px">'
-    +['easy','tempo','marathon','interval','long'].map(function(type) {
-      var base = basePaces[type];
-      var adjusted = adjPace(base, nowAdj);
-      var labels = {easy:'Easy/Z2',tempo:'Tempo',marathon:'Marathon',interval:'Intervals',long:'Long Run'};
-      return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px;text-align:center">'
-        +'<div style="font-size:9px;color:var(--text-3);margin-bottom:3px">'+labels[type]+'</div>'
-        +'<div style="font-size:14px;font-weight:700;color:var(--text)">'+formatPace(adjusted)+'</div>'
-        +'<div style="font-size:9px;color:var(--text-3);margin-top:2px">base '+formatPace(base)+'</div>'
-        +'</div>';
+  el.innerHTML='<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">'
+    +'<div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">🌤</span><span style="font-size:16px;font-weight:800;color:var(--text)">'+now.temp+'°C</span></div>'
+    +'<div style="font-size:11px;color:var(--text-2)">Pace adj: <strong style="color:'+gc(adj)+'">+'+adj.toFixed(1)+'%</strong></div>'
+    +'<div style="height:20px;width:1px;background:var(--border)"></div>'
+    +forecast.map(function(f){
+      var fa=calcAdj(f.temp,f.rain);
+      var icon=f.rain>40?'🌧':f.temp>20?'☀':'⛅';
+      return '<div style="text-align:center;min-width:48px"><div style="font-size:9px;color:var(--text-3)">'+f.day+'</div><div style="font-size:12px">'+icon+'</div><div style="font-size:10px;font-weight:700;color:var(--text)">'+f.temp+'°</div><div style="font-size:8px;color:'+gc(fa)+'">+'+fa.toFixed(1)+'%</div></div>';
     }).join('')
-    +'</div>'
-
-    // 5-day forecast with session matching
-    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);margin-bottom:8px">5-day training forecast</div>'
-    +'<div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">'
-    +forecast.map(function(f) {
-      var adj = calcAdj(f.temp, f.rain, f.wind);
-      var icon = f.rain > 40 ? '🌧' : f.rain > 20 ? '🌦' : f.temp > 20 ? '☀️' : '⛅';
-      return '<div style="display:grid;grid-template-columns:90px 30px 50px 60px 50px 1fr 55px;align-items:center;gap:6px;padding:6px 10px;background:var(--surface-2);border-radius:5px;font-size:11px">'
-        +'<span style="color:var(--text-2);font-weight:600">'+f.day.split(' ').slice(0,2).join(' ')+'</span>'
-        +'<span>'+icon+'</span>'
-        +'<span style="font-weight:700;color:var(--text)">'+f.temp+'°C</span>'
-        +'<span style="color:'+(f.rain>40?'#3B82F6':'var(--text-3)')+'">💧 '+f.rain+'%</span>'
-        +'<span style="color:var(--text-3)">💨 '+f.wind+'km/h</span>'
-        +'<span style="color:var(--golden);font-weight:600">'+f.session+'</span>'
-        +'<span style="font-weight:700;color:'+gc(adj)+';text-align:right">+'+(adj>0?adj.toFixed(1):'0')+'%</span>'
-        +'</div>';
-    }).join('')
-    +'</div>'
-
-    // Temperature impact reference
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px">'
-    +'<div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">Temperature impact on pace</div>'
-    +'<div style="display:flex;gap:4px;height:24px;border-radius:4px;overflow:hidden;margin-bottom:6px">'
-    +'<div style="flex:1;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">❄ 0-5°C</div>'
-    +'<div style="flex:2;background:#2ECC71;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">✅ 6-15°C OPTIMAL</div>'
-    +'<div style="flex:1;background:#E67E22;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">⚠ 16-22°C</div>'
-    +'<div style="flex:1;background:#E74C3C;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">🔥 23°C+</div>'
-    +'</div>'
-    +'<div style="font-size:10px;color:var(--text-3)">Melbourne Jun: 8–15°C (optimal). Sep–Oct marathon prep: 14–22°C (expect 2–5% pace adjustment). Race day Oct 11: typically 12–18°C.</div>'
-    +'</div>'
-
-    +'<div style="font-size:9px;color:var(--text-3);text-align:center">Updated via Claude each session · Formula: +0.3%/°C above 10°C · +2% rain · +1% wind >12km/h</div>';
+    +'<div style="height:20px;width:1px;background:var(--border)"></div>'
+    +'<div style="font-size:9px;color:var(--text-3)">Optimal 8–12°C · +0.3%/°C above</div>'
+    +'</div>';
 }
 
 
