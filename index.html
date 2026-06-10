@@ -528,6 +528,65 @@ input[type=number] { -moz-appearance:textfield; }
 .compact-mode .cal-card-hdr { padding:2px 4px; font-size:7px; }
 .compact-mode .cal-card-body { padding:4px; }
 .compact-mode .coach-panel { max-height:400px; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width:768px) {
+  .topbar { grid-template-columns:1fr auto; height:48px; padding:0 12px; }
+  .topbar-center { text-align:left; }
+  .topbar-title { font-size:13px; }
+  .topbar-sub { display:none; }
+  .topbar-right { gap:4px; }
+  .topbar-right .btn { font-size:10px; padding:4px 8px; }
+  .tab-bar { top:48px; gap:0; justify-content:flex-start; padding:0 4px; }
+  .tab { padding:10px 10px; font-size:10px; white-space:nowrap; }
+  .panel { padding:10px; }
+  .section-card { margin-bottom:10px; }
+  .sec-header { padding:8px 10px; }
+  .sec-title { font-size:12px; }
+  .sec-body { padding:10px; }
+  .g2 { grid-template-columns:1fr !important; }
+  .g3 { grid-template-columns:1fr 1fr !important; }
+  .g4 { grid-template-columns:1fr 1fr !important; }
+  .g5 { grid-template-columns:1fr 1fr !important; }
+  .metric-val { font-size:18px; }
+  .modal { max-width:95%; padding:16px; }
+  .shoe-card { padding:10px; }
+  .shoe-img-placeholder { height:50px; }
+  .effort-card { padding:8px; }
+  .effort-time { font-size:16px; }
+  .cal-grid { grid-template-columns:repeat(7,1fr) !important; }
+  .cal-cell { min-height:55px !important; }
+  .cal-card-name { font-size:8px !important; }
+  .cal-card-hdr { font-size:7px !important; padding:2px 4px !important; }
+  .cal-card-body { padding:3px !important; }
+  .coach-panel { width:calc(100vw - 16px); right:8px; bottom:74px; }
+  .coach-fab { width:48px; height:48px; bottom:12px; right:12px; font-size:20px; }
+  #buildPalette { padding:8px 10px; top:106px; }
+  #buildPalette button { font-size:9px; padding:4px 8px; }
+}
+@media(max-width:480px) {
+  .g3 { grid-template-columns:1fr !important; }
+  .cal-grid { grid-template-columns:repeat(4,1fr) !important; }
+  .tab { padding:8px 6px; font-size:9px; }
+}
+/* ── DYNAMIC TRANSITIONS ────────────────────────────────── */
+.section-card { transition:box-shadow .2s, border-color .2s, transform .15s; }
+.section-card:hover { box-shadow:0 4px 20px rgba(0,0,0,.3); }
+.metric { transition:transform .15s, box-shadow .15s; }
+.metric:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.2); }
+.shoe-card { transition:transform .15s, box-shadow .15s; }
+.shoe-card:hover { transform:translateY(-2px); }
+.btn, .btn-primary, .btn-cancel, .add-btn { transition:all .15s; }
+.tab { transition:all .15s; }
+.milestone-card, .ms-card { transition:border-color .2s, box-shadow .15s; }
+.effort-card { transition:transform .15s; }
+.effort-card:hover { transform:translateY(-2px); }
+.gear-item { transition:background .15s; }
+.gear-item:hover { background:var(--surface-2); }
+/* Smooth scroll */
+html { scroll-behavior:smooth; }
+/* Better focus states */
+input:focus, select:focus, textarea:focus { border-color:var(--golden) !important; box-shadow:0 0 0 2px rgba(212,160,82,.2); }
 </style>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#D4A052">
@@ -1029,34 +1088,32 @@ input[type=number] { -moz-appearance:textfield; }
   <div class="section-card" id="sec-course" draggable="true">
     <div class="sec-header"><span class="sec-title">🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
     <div class="sec-body" id="body-course">
-      <div class="g2" style="gap:12px">
-        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
-          <div style="font-size:11px;font-weight:700;color:var(--golden);margin-bottom:8px">🏃 Half Marathon Course</div>
-          <div style="font-size:11px;color:var(--text-2);line-height:1.8">
-            <strong>Start/Finish:</strong> Batman Avenue, Melbourne<br>
-            <strong>Surface:</strong> 100% road, mostly flat<br>
-            <strong>Key points:</strong><br>
-            · Km 0–3: Along the Yarra — easy start, don't get caught up in the crowd pace<br>
-            · Km 3–7: St Kilda Road stretch — long and straight, find your rhythm<br>
-            · Km 7–14: Beaconsfield Parade — coastal section, possible headwind<br>
-            · Km 14–18: Return via Albert Park — this is where you race<br>
-            · Km 18–21: Final push back to city — everything you've got<br>
-            <strong style="color:var(--golden)">⚠ Wind:</strong> The St Kilda coastal section (km 7–14) often has headwind. Tuck behind a group. Don't fight it alone.
-          </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <button id="courseHalfBtn" data-action="courseHalf" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:11px;cursor:pointer">🏃 Half Marathon · 21.1km</button>
+        <button id="courseFullBtn" data-action="courseFull" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:11px;cursor:pointer">🏆 Full Marathon · 42.2km</button>
+      </div>
+
+      <!-- HALF COURSE -->
+      <div id="courseHalfPanel">
+        <div id="halfElevChart" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px"></div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px">
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 0–3</div><div style="font-size:10px;font-weight:700;color:#2ECC71">Yarra flat</div><div style="font-size:9px;color:var(--text-3)">Don't chase</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 3–7</div><div style="font-size:10px;font-weight:700;color:#2ECC71">St Kilda Rd</div><div style="font-size:9px;color:var(--text-3)">Find rhythm</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 7–14</div><div style="font-size:10px;font-weight:700;color:#E67E22">Coastal</div><div style="font-size:9px;color:var(--text-3)">⚠ Headwind</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 14–18</div><div style="font-size:10px;font-weight:700;color:var(--golden)">Albert Park</div><div style="font-size:9px;color:var(--text-3)">Race here</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 18–21</div><div style="font-size:10px;font-weight:700;color:#E74C3C">City finish</div><div style="font-size:9px;color:var(--text-3)">🔥 All out</div></div>
         </div>
-        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
-          <div style="font-size:11px;font-weight:700;color:#5AB5EE;margin-bottom:8px">🏆 Full Marathon Course</div>
-          <div style="font-size:11px;color:var(--text-2);line-height:1.8">
-            <strong>Start/Finish:</strong> Batman Avenue, Melbourne<br>
-            <strong>Surface:</strong> 100% road, mostly flat, one hill<br>
-            <strong>Key points:</strong><br>
-            · Km 0–10: City loop — conservative, bank time by NOT going fast<br>
-            · Km 10–21: Same as half course — St Kilda, coastal<br>
-            · Km 21–30: Return loop via Albert Park Lake — stay controlled<br>
-            · Km 30–35: The Tan / Botanical Gardens — THE HARD PART<br>
-            · Km 35–42: Final city stretch — race it home<br>
-            <strong style="color:#E74C3C">⚠ The Wall:</strong> Km 30–35 is where the marathon starts. Everything before is just getting there. Stay fuelled. One km at a time.
-          </div>
+      </div>
+
+      <!-- FULL COURSE -->
+      <div id="courseFullPanel" style="display:none">
+        <div id="fullElevChart" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px"></div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px">
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 0–10</div><div style="font-size:10px;font-weight:700;color:#2ECC71">City loop</div><div style="font-size:9px;color:var(--text-3)">Bank time</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 10–21</div><div style="font-size:10px;font-weight:700;color:#2ECC71">Coastal</div><div style="font-size:9px;color:var(--text-3)">⚠ Headwind</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 21–30</div><div style="font-size:10px;font-weight:700;color:#E67E22">Albert Park</div><div style="font-size:9px;color:var(--text-3)">Stay controlled</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 30–35</div><div style="font-size:10px;font-weight:700;color:#E74C3C">The Tan 🏔</div><div style="font-size:9px;color:var(--text-3)">⚠ THE WALL</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 35–42</div><div style="font-size:10px;font-weight:700;color:var(--golden)">MCG finish</div><div style="font-size:9px;color:var(--text-3)">🏆 Race home</div></div>
         </div>
       </div>
     </div>
@@ -1904,9 +1961,27 @@ function msLine(arr,isLocked){
   }).join('');
 }
 function renderMilestones(){
-  const du=document.getElementById('ms-unlocked');const up=document.getElementById('ms-upcoming');
-  if(du)du.innerHTML=msLine(MS_DONE,false);
-  if(up)up.innerHTML=msLine(MS_UPCOMING,true);
+  var du=document.getElementById('ms-unlocked');
+  var up=document.getElementById('ms-upcoming');
+  if(du) du.innerHTML=MS_DONE.map(function(m,i){
+    return '<div style="position:relative;margin-bottom:10px;padding-left:6px">'
+      +'<div style="position:absolute;left:-23px;width:18px;height:18px;border-radius:50%;background:var(--golden);display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid var(--bg);z-index:1">'+m.i+'</div>'
+      +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;transition:border-color .2s" onmouseenter="this.style.borderColor=\'var(--golden)\'" onmouseleave="this.style.borderColor=\'var(--border)\'">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:11px;font-weight:700;color:var(--text)">'+m.t+'</div><div style="font-size:9px;color:var(--text-3)">'+m.d+'</div></div>'
+      +'<div style="font-size:10px;color:var(--text-2);margin-top:2px;line-height:1.4">'+m.x+'</div>'
+      +'</div></div>';
+  }).join('');
+  if(up) up.innerHTML=MS_UPCOMING.map(function(m,i){
+    var isKey = m.t.indexOf('🔑') >= 0 || m.t.indexOf('CRITICAL') >= 0 || m.t.indexOf('CONFIRMATION') >= 0;
+    var dotBg = isKey ? '#E74C3C' : i===0 ? 'var(--sapphire)' : 'var(--surface-3)';
+    var dotAnim = i===0 ? ';animation:pulse 2s ease-in-out infinite' : '';
+    return '<div style="position:relative;margin-bottom:10px;padding-left:6px">'
+      +'<div style="position:absolute;left:-23px;width:18px;height:18px;border-radius:50%;background:'+dotBg+';display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid var(--bg);z-index:1'+dotAnim+'">'+m.i+'</div>'
+      +'<div style="background:var(--surface-2);border:1px solid '+(isKey?'rgba(231,76,60,.4)':'var(--border)')+';border-radius:var(--radius-sm);padding:8px 12px;'+(i>3?'opacity:.5':'')+'">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:11px;font-weight:700;color:'+(isKey?'#E74C3C':'var(--text)')+'">'+m.t+'</div><div style="font-size:9px;color:var(--text-3)">'+m.d+'</div></div>'
+      +'<div style="font-size:10px;color:var(--text-2);margin-top:2px;line-height:1.4">'+m.x+'</div>'
+      +'</div></div>';
+  }).join('');
 }
 
 function closeModal(id){document.getElementById(id).classList.remove('open');}
@@ -2031,6 +2106,7 @@ document.addEventListener('click', function(e) {
         renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
+  try{renderElevation();}catch(e){}
         break;
       }
       case 'toggleEditMode': toggleEditMode(); break;
@@ -2038,6 +2114,8 @@ document.addEventListener('click', function(e) {
       case 'resetAppearance': appearance={}; saveAppearance(); break;
       case 'probHalf': document.getElementById('probHalfPanel').style.display='block'; document.getElementById('probFullPanel').style.display='none'; document.getElementById('probHalfBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('probHalfBtn').style.borderColor='var(--golden)'; document.getElementById('probHalfBtn').style.color='var(--golden)'; document.getElementById('probFullBtn').style.background='transparent'; document.getElementById('probFullBtn').style.borderColor='var(--border)'; document.getElementById('probFullBtn').style.color='var(--text-2)'; break;
       case 'probFull': document.getElementById('probFullPanel').style.display='block'; document.getElementById('probHalfPanel').style.display='none'; document.getElementById('probFullBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('probFullBtn').style.borderColor='var(--golden)'; document.getElementById('probFullBtn').style.color='var(--golden)'; document.getElementById('probHalfBtn').style.background='transparent'; document.getElementById('probHalfBtn').style.borderColor='var(--border)'; document.getElementById('probHalfBtn').style.color='var(--text-2)'; break;
+      case 'courseHalf': document.getElementById('courseHalfPanel').style.display='block';document.getElementById('courseFullPanel').style.display='none';document.getElementById('courseHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseHalfBtn').style.borderColor='var(--golden)';document.getElementById('courseHalfBtn').style.color='var(--golden)';document.getElementById('courseFullBtn').style.background='transparent';document.getElementById('courseFullBtn').style.borderColor='var(--border)';document.getElementById('courseFullBtn').style.color='var(--text-2)'; break;
+      case 'courseFull': document.getElementById('courseFullPanel').style.display='block';document.getElementById('courseHalfPanel').style.display='none';document.getElementById('courseFullBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseFullBtn').style.borderColor='var(--golden)';document.getElementById('courseFullBtn').style.color='var(--golden)';document.getElementById('courseHalfBtn').style.background='transparent';document.getElementById('courseHalfBtn').style.borderColor='var(--border)';document.getElementById('courseHalfBtn').style.color='var(--text-2)'; break;
       case 'nutHalf': showNutHalf(); break;
       case 'nutFull': showNutFull(); break;
       case 'clHalf': activeChecklist='half'; renderChecklist(); break;
@@ -2986,6 +3064,7 @@ function togglePanelVisibility(id) {
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
+  try{renderElevation();}catch(e){}
   applyRaceTargets();
   loadTimePickers();
 }
@@ -3009,6 +3088,7 @@ function toggleEditMode() {
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
+  try{renderElevation();}catch(e){}
   applyRaceTargets();
   loadTimePickers();
 }
@@ -3316,6 +3396,7 @@ function saveWidgetFromModal() {
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
+  try{renderElevation();}catch(e){}
   closeModal('widgetModal');
   // Switch to dashboard to see the widget
   if(!editId) {
@@ -3534,6 +3615,97 @@ function renderWeather() {
     +'<div style="font-size:9px;color:var(--text-3);text-align:center">Updated via Claude each session · Formula: +0.3%/°C above 10°C · +2% rain · +1% wind >12km/h</div>';
 }
 
+
+// ── ELEVATION PROFILES ────────────────────────────────────
+function renderElevation() {
+  // Half marathon elevation (21.1km, mostly flat)
+  var halfElev = [5,5,4,3,3,4,5,6,5,4,3,3,4,5,6,5,4,5,6,8,10,12,10,8,6,5,4,3,3,5,6,5,4,3,4,5,6,8,7,5,4,5];
+  // Full marathon elevation (42.2km, hill at km 30-35)
+  var fullElev = [5,5,4,3,3,4,5,6,5,4,3,3,4,5,6,5,4,5,6,8,10,12,10,8,6,5,4,3,3,5,6,5,4,3,4,5,6,8,7,5,4,5,6,5,4,3,4,6,8,10,8,6,5,5,6,8,12,18,25,32,35,30,22,15,10,8,7,6,5,4,5,6,8,10,12,10,8,6,5,4,5,5,4,5];
+
+  function drawElev(containerId, data, dist, markers) {
+    var el = document.getElementById(containerId); if(!el) return;
+    var W=520, H=110, padL=30, padR=10, padT=8, padB=22;
+    var pW=W-padL-padR, pH=H-padT-padB;
+    var maxE = Math.max.apply(null, data);
+    var minE = Math.min.apply(null, data);
+    var range = Math.max(maxE - minE, 5);
+
+    var points = data.map(function(e, i) {
+      var x = padL + (i / (data.length-1)) * pW;
+      var y = padT + pH - ((e - minE) / range) * pH;
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    });
+    var line = 'M' + points.join(' L');
+    var area = line + ' L' + (padL+pW).toFixed(1) + ',' + (padT+pH) + ' L' + padL + ',' + (padT+pH) + ' Z';
+
+    // Grid
+    var grid = '';
+    for (var g = 0; g <= maxE; g += 10) {
+      var gy = padT + pH - ((g - minE) / range) * pH;
+      if (gy > padT && gy < padT + pH) {
+        grid += '<line x1="'+padL+'" x2="'+(W-padR)+'" y1="'+gy.toFixed(1)+'" y2="'+gy.toFixed(1)+'" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2"/>';
+        grid += '<text x="'+(padL-3)+'" y="'+(gy+3).toFixed(1)+'" fill="var(--text-3)" font-size="7" text-anchor="end">'+g+'m</text>';
+      }
+    }
+
+    // Km markers
+    var kmMarks = '';
+    for (var k = 0; k <= dist; k += 5) {
+      var kx = padL + (k / dist) * pW;
+      kmMarks += '<line x1="'+kx.toFixed(1)+'" y1="'+(padT+pH)+'" y2="'+(padT+pH+4)+'" stroke="var(--text-3)" stroke-width="0.5"/>';
+      kmMarks += '<text x="'+kx.toFixed(1)+'" y="'+(H-4)+'" fill="var(--text-3)" font-size="7" text-anchor="middle">'+k+'</text>';
+    }
+
+    // Special markers (gel points, key sections)
+    var specials = '';
+    if (markers) {
+      markers.forEach(function(m) {
+        var mx = padL + (m.km / dist) * pW;
+        var mi = Math.round(m.km / dist * (data.length-1));
+        var my = padT + pH - ((data[mi] - minE) / range) * pH;
+        specials += '<circle cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="3" fill="'+m.color+'" stroke="var(--surface)" stroke-width="1.5"/>';
+        specials += '<text x="'+mx.toFixed(1)+'" y="'+(my-6).toFixed(1)+'" fill="'+m.color+'" font-size="7" font-weight="700" text-anchor="middle">'+m.label+'</text>';
+      });
+    }
+
+    // Colour gradient for difficulty
+    var gradId = containerId + 'Grad';
+    var gradient = '<defs><linearGradient id="'+gradId+'" x1="0" x2="1" y1="0" y2="0">';
+    var gradStops = dist > 30
+      ? '<stop offset="0%" stop-color="rgba(39,174,96,.15)"/><stop offset="50%" stop-color="rgba(230,126,34,.15)"/><stop offset="72%" stop-color="rgba(231,76,60,.25)"/><stop offset="85%" stop-color="rgba(231,76,60,.15)"/><stop offset="100%" stop-color="rgba(212,160,82,.2)"/>'
+      : '<stop offset="0%" stop-color="rgba(39,174,96,.15)"/><stop offset="33%" stop-color="rgba(39,174,96,.1)"/><stop offset="60%" stop-color="rgba(230,126,34,.15)"/><stop offset="85%" stop-color="rgba(212,160,82,.2)"/>';
+    gradient += gradStops + '</linearGradient></defs>';
+
+    el.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">'
+      + gradient + grid
+      + '<path d="' + area + '" fill="url(#'+gradId+')"/>'
+      + '<path d="' + line + '" fill="none" stroke="var(--golden)" stroke-width="1.5" stroke-linejoin="round"/>'
+      + kmMarks + specials
+      + '<text x="'+(W-padR)+'" y="'+(padT+8)+'" fill="var(--text-3)" font-size="7" text-anchor="end">km →</text>'
+      + '</svg>';
+  }
+
+  drawElev('halfElevChart', halfElev, 21.1, [
+    {km:0,label:'START',color:'#2ECC71'},
+    {km:7,label:'⛽ Gel 1',color:'var(--golden)'},
+    {km:14,label:'⛽ Gel 2',color:'var(--golden)'},
+    {km:21.1,label:'FINISH',color:'var(--golden)'},
+  ]);
+
+  drawElev('fullElevChart', fullElev, 42.2, [
+    {km:0,label:'START',color:'#2ECC71'},
+    {km:8,label:'⛽',color:'var(--golden)'},
+    {km:14,label:'⛽',color:'var(--golden)'},
+    {km:20,label:'⛽',color:'var(--golden)'},
+    {km:26,label:'⛽☕',color:'#E74C3C'},
+    {km:30,label:'🏔 HILL',color:'#E74C3C'},
+    {km:32,label:'⛽',color:'var(--golden)'},
+    {km:38,label:'⛽☕',color:'#E74C3C'},
+    {km:42.2,label:'🏆',color:'var(--golden)'},
+  ]);
+}
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -3555,6 +3727,7 @@ window.addEventListener('load', function init() {
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
+  try{renderElevation();}catch(e){}
   applyRaceTargets();
   loadTimePickers();
   renderWishlist();
