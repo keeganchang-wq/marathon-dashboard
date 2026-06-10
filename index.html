@@ -746,7 +746,7 @@ input[type=number] { -moz-appearance:textfield; }
 <!-- ═══ RACE MANTRAS ═══ -->
 
 
-<div class="section-card" id="sec-future" draggable="true"><div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Roadmap — what's being built next</span><button class="sec-toggle" data-toggle="future">−</button></div><div class="sec-body" id="body-future"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span><span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span><span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span><span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span><span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span></div><div style="display:flex;gap:6px"><button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Urgency ↑</button><button class="add-btn" data-action="addRoadmapItem" style="font-size:11px;padding:5px 12px">+ Add item</button></div></div><div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div></div>
+<div class="section-card" id="sec-future" draggable="true"><div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Roadmap — what's being built next</span><button class="sec-toggle" data-toggle="future">−</button></div><div class="sec-body" id="body-future"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span><span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span><span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span><span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span><span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span></div><div style="display:flex;gap:6px"><button data-action="toggleRmEdit" id="rmEditBtn" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">✏️ Edit</button><button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Sort</button></div></div><div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div></div>
 
 </div><!-- end dash-sections -->
 </div><!-- end tab-dashboard -->
@@ -1015,7 +1015,7 @@ input[type=number] { -moz-appearance:textfield; }
   <div class="sec-header"><span class="sec-title">🧠 Race Mantras & Mental Notes</span><button class="sec-toggle" data-toggle="mantras">−</button></div>
   <div class="sec-body" id="body-mantras">
     <div id="mantraList"></div>
-    <button class="add-btn" data-action="addMantra" style="font-size:11px;padding:5px 12px;margin-top:8px">+ Add mantra</button>
+    <div style="display:flex;gap:6px;margin-top:8px"><button data-action="toggleMantraEdit" id="mantraEditBtn" style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:10px;font-weight:600;cursor:pointer">✏️ Edit</button></div>
   </div>
 </div>
 
@@ -2001,6 +2001,11 @@ document.addEventListener('click', function(e) {
       case 'compactOff': appearance.compact=false; saveAppearance(); break;
       case 'compactOn': appearance.compact=true; saveAppearance(); break;
       case 'saveAll': saveAllSettings(); break;
+      case 'toggleRmEdit': window.roadmapEditMode=!window.roadmapEditMode; renderRoadmap(); break;
+      case 'addRmInline': addRmInline(); break;
+      case 'rmDelInline': { var rid=el.dataset.rmId; if(rid&&confirm('Delete?')){deleteRoadmapItem(rid);} break; }
+      case 'toggleMantraEdit': window.mantraEditMode=!window.mantraEditMode; renderMantras(); break;
+      case 'addMantraInline': addMantraInline(); break;
       case 'toggleCoach': toggleCoach(); break;
       case 'sendCoach': sendCoachMessage(); break;
       case 'coachSetup': coachSetup(); break;
@@ -2029,7 +2034,6 @@ document.addEventListener('click', function(e) {
       case 'clFull': activeChecklist='full'; renderChecklist(); break;
       case 'toggleCheckEdit': window.checklistEditMode=!window.checklistEditMode; renderChecklist(); break;
       case 'addCheckItem': { var ci=parseInt(el.dataset.clCat); addCheckItem(ci); break; }
-      case 'editCheckItem': { var eci=parseInt(el.dataset.clCat),eii=parseInt(el.dataset.clIdx); editCheckItem(eci,eii); break; }
       case 'delCheckItem': { var dci=parseInt(el.dataset.clCat),dii=parseInt(el.dataset.clIdx); if(confirm('Remove this item?')) delCheckItem(dci,dii); break; }
       case 'clReset': checkedItems={}; CHECKLISTS=JSON.parse(JSON.stringify(DEFAULT_CHECKLISTS)); saveChecklist(); saveChecklists(); renderChecklist(); break;
       case 'addNiggle': openAddNiggle(); break;
@@ -2117,7 +2121,53 @@ var roadmapItems;
 function saveRoadmap(){localStorage.setItem('kc_roadmap',JSON.stringify(roadmapItems));}
 var rmSortMode='priority';
 function getSortedRoadmap(){var a=roadmapItems.filter(function(x){return !x.done;});var d=roadmapItems.filter(function(x){return x.done;});if(rmSortMode==='priority')a.sort(function(a,b){return PORD.indexOf(a.priority)-PORD.indexOf(b.priority);});return a.concat(d);}
-function renderRoadmap(){var g=document.getElementById('roadmapGrid');if(!g)return;var sb=document.getElementById('rmSortBtn');if(sb)sb.textContent=rmSortMode==='priority'?'↕ Urgency ↑':'↕ Date added';if(!roadmapItems.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-3);font-size:12px">No items. Click + Add item.</div>';return;}g.innerHTML=getSortedRoadmap().map(function(item){var p=PRIORITY[item.priority]||PRIORITY.nice;return'<div data-rm="'+item.id+'" style="background:'+(item.done?'var(--surface-2)':p.bg)+';border:1.5px solid '+(item.done?'var(--border)':p.border)+';border-left:4px solid '+(item.done?'var(--border)':p.color)+';border-radius:var(--radius-sm);padding:10px 12px 10px 14px;cursor:pointer;position:relative;opacity:'+(item.done?'.4':'1')+'">'+'<div style="position:absolute;top:6px;right:6px;display:flex;gap:2px"><button data-rm-edit="'+item.id+'" style="background:none;border:none;color:var(--text-3);font-size:12px;cursor:pointer;padding:2px 5px">✏️</button><button data-rm-del="'+item.id+'" style="background:none;border:none;color:var(--text-3);font-size:15px;cursor:pointer;padding:2px 5px">×</button></div>'+'<div style="font-size:9px;font-weight:700;color:'+(item.done?'var(--text-3)':p.color)+';text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">'+(item.done?'✓ Done':p.label)+'</div>'+'<div style="font-size:11px;font-weight:700;color:'+(item.done?'var(--text-3)':'var(--text)')+';padding-right:44px;line-height:1.3;margin-bottom:'+(item.desc?'4px':'0')+';'+(item.done?'text-decoration:line-through;':'')+'">' +item.title+'</div>'+(item.desc?'<div style="font-size:10px;color:'+(item.done?'var(--text-3)':'var(--text-2)')+';line-height:1.5;'+(item.done?'text-decoration:line-through;':'')+'">'+item.desc+'</div>':'')+'</div>';}).join('');}
+function renderRoadmap(){
+  var g=document.getElementById('roadmapGrid');if(!g)return;
+  var isEdit = !!window.roadmapEditMode;
+  var sb=document.getElementById('rmSortBtn');
+  if(sb)sb.textContent=rmSortMode==='priority'?'↕ Urgency':'↕ Date';
+  var eb=document.getElementById('rmEditBtn');
+  if(eb){eb.textContent=isEdit?'✓ Done':'✏️ Edit';eb.style.borderColor=isEdit?'var(--golden)':'var(--border)';eb.style.background=isEdit?'rgba(212,160,82,.15)':'var(--surface-3)';eb.style.color=isEdit?'var(--golden)':'var(--text-2)';}
+
+  if(!roadmapItems.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-3);font-size:12px">No items yet.</div>';return;}
+
+  g.innerHTML=getSortedRoadmap().map(function(item){
+    var p=PRIORITY[item.priority]||PRIORITY.nice;
+    if(isEdit) {
+      return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;position:relative">'
+        +'<div style="display:flex;gap:6px;margin-bottom:6px;align-items:center">'
+        +'<select onchange="saveRmField(\''+item.id+'\',\'priority\',this.value)" style="background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:3px 6px;font-size:10px;color:var(--text)">'
+        +'<option value="urgent" '+(item.priority==='urgent'?'selected':'')+'>🔴 Urgent</option>'
+        +'<option value="want" '+(item.priority==='want'?'selected':'')+'>🟠 Want</option>'
+        +'<option value="nice" '+(item.priority==='nice'?'selected':'')+'>🟢 Nice</option>'
+        +'<option value="brainstorm" '+(item.priority==='brainstorm'?'selected':'')+'>🟣 Idea</option>'
+        +'</select>'
+        +'<button data-action="rmDelInline" data-rm-id="'+item.id+'" style="margin-left:auto;background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:16px">×</button>'
+        +'</div>'
+        +'<input value="'+item.title.replace(/"/g,'&quot;')+'" onblur="saveRmField(\''+item.id+'\',\'title\',this.value)" style="width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:11px;font-weight:600;color:var(--text);outline:none;font-family:inherit;margin-bottom:4px;box-sizing:border-box">'
+        +'<input value="'+(item.desc||'').replace(/"/g,'&quot;')+'" placeholder="Description..." onblur="saveRmField(\''+item.id+'\',\'desc\',this.value)" style="width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:10px;color:var(--text-2);outline:none;font-family:inherit;box-sizing:border-box">'
+        +'</div>';
+    }
+    return '<div data-rm="'+item.id+'" style="background:'+(item.done?'var(--surface-2)':p.bg)+';border:1.5px solid '+(item.done?'var(--border)':p.border)+';border-left:4px solid '+(item.done?'var(--border)':p.color)+';border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer;opacity:'+(item.done?'.4':'1')+'">'
+      +'<div style="font-size:9px;font-weight:700;color:'+(item.done?'var(--text-3)':p.color)+';text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">'+(item.done?'✓ Done':p.label)+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:'+(item.done?'var(--text-3)':'var(--text)')+';line-height:1.3;'+(item.done?'text-decoration:line-through;':'')+'">'+item.title+'</div>'
+      +(item.desc?'<div style="font-size:10px;color:'+(item.done?'var(--text-3)':'var(--text-2)')+';line-height:1.5;margin-top:4px;'+(item.done?'text-decoration:line-through;':'')+'">'+item.desc+'</div>':'')
+      +'</div>';
+  }).join('')
+  +(isEdit?'<div data-action="addRmInline" style="background:transparent;border:1.5px dashed var(--golden);border-radius:var(--radius-sm);padding:14px;cursor:pointer;text-align:center;color:var(--golden);font-size:11px;font-weight:600">+ Add item</div>':'');
+}
+function saveRmField(id, field, val) {
+  var item = roadmapItems.find(function(x){return x.id===id;});
+  if(!item) return;
+  if(field==='title' && !val.trim()) { deleteRoadmapItem(id); return; }
+  item[field] = val.trim ? val.trim() : val;
+  saveRoadmap();
+}
+function addRmInline() {
+  roadmapItems.push({id:'rm_'+Date.now(), priority:'want', title:'New item — click to edit', desc:'', done:false});
+  saveRoadmap(); renderRoadmap();
+}
+
 function toggleRoadmapItem(id){var i=roadmapItems.find(function(x){return x.id===id;});if(!i)return;i.done=!i.done;saveRoadmap();renderRoadmap();}
 function deleteRoadmapItem(id){roadmapItems=roadmapItems.filter(function(x){return x.id!==id;});saveRoadmap();renderRoadmap();}
 function toggleRmSort(){rmSortMode=rmSortMode==='priority'?'added':'priority';renderRoadmap();}
@@ -2431,12 +2481,30 @@ function renderChecklist(){
   var isEdit = !!window.checklistEditMode;
 
   grid.innerHTML = list.map(function(cat, catIdx){
-    return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase">'+cat.cat+'</div>'+(isEdit?'<button data-action="addCheckItem" data-cl-cat="'+catIdx+'" style="background:none;border:1px dashed var(--golden);color:var(--golden);border-radius:6px;padding:2px 8px;font-size:9px;cursor:pointer;font-weight:600">+ Add</button>':'')+'</div>'+cat.items.map(function(item, itemIdx){
-      var key = activeChecklist + '_' + item;
-      var checked = !!checkedItems[key];
-      total++; if(checked) done++;
-      return '<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><div data-check="'+key+'" style="width:16px;height:16px;border-radius:4px;border:1.5px solid '+(checked?'#2ECC71':'var(--border)')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;background:'+(checked?'rgba(39,174,96,.2)':'transparent')+';cursor:pointer">'+(checked?'<span style="color:#2ECC71;font-size:11px">✓</span>':'')+'</div><span data-check="'+key+'" style="flex:1;font-size:11px;color:'+(checked?'var(--text-3)':'var(--text)')+';'+(checked?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer">'+item+'</span>'+(isEdit?'<button data-action="editCheckItem" data-cl-cat="'+catIdx+'" data-cl-idx="'+itemIdx+'" style="background:none;border:none;color:var(--golden);cursor:pointer;font-size:11px;padding:0 3px">✏️</button><button data-action="delCheckItem" data-cl-cat="'+catIdx+'" data-cl-idx="'+itemIdx+'" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:13px;padding:0 3px">×</button>':'')+'</div>';
-    }).join('')+'</div>';
+    return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
+      +'<div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase">'+cat.cat+'</div>'
+      +(isEdit?'<button data-action="addCheckItem" data-cl-cat="'+catIdx+'" style="background:none;border:1px dashed var(--golden);color:var(--golden);border-radius:6px;padding:2px 8px;font-size:9px;cursor:pointer;font-weight:600">+ Add</button>':'')
+      +'</div>'
+      +cat.items.map(function(item, itemIdx){
+        var key = activeChecklist + '_' + item;
+        var checked = !!checkedItems[key];
+        total++; if(checked) done++;
+        if(isEdit) {
+          // EDIT MODE: editable text + delete button only
+          return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border)">'
+            +'<input data-cl-edit-cat="'+catIdx+'" data-cl-edit-idx="'+itemIdx+'" value="'+item.replace(/"/g,'&quot;')+'" style="flex:1;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--text);outline:none;font-family:inherit" onblur="saveCheckEdit('+catIdx+','+itemIdx+',this.value)">'
+            +'<button data-action="delCheckItem" data-cl-cat="'+catIdx+'" data-cl-idx="'+itemIdx+'" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0">×</button>'
+            +'</div>';
+        } else {
+          // VIEW MODE: checkbox + text
+          return '<div data-check="'+key+'" style="display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer">'
+            +'<div style="width:16px;height:16px;border-radius:4px;border:1.5px solid '+(checked?'#2ECC71':'var(--border)')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;background:'+(checked?'rgba(39,174,96,.2)':'transparent')+'">'+(checked?'<span style="color:#2ECC71;font-size:11px">✓</span>':'')+'</div>'
+            +'<span style="flex:1;font-size:11px;color:'+(checked?'var(--text-3)':'var(--text)')+';'+(checked?'text-decoration:line-through;opacity:.5;':'')+'">'+item+'</span>'
+            +'</div>';
+        }
+      }).join('')
+      +'</div>';
   }).join('');
 
   var counter = document.getElementById('checklistCount');
@@ -2444,9 +2512,21 @@ function renderChecklist(){
   var hb=document.getElementById('clHalfBtn'),fb=document.getElementById('clFullBtn');
   if(hb){hb.style.background=activeChecklist==='half'?'rgba(212,160,82,.15)':'transparent';hb.style.borderColor=activeChecklist==='half'?'var(--golden)':'var(--border)';hb.style.color=activeChecklist==='half'?'var(--golden)':'var(--text-2)';}
   if(fb){fb.style.background=activeChecklist==='full'?'rgba(212,160,82,.15)':'transparent';fb.style.borderColor=activeChecklist==='full'?'var(--golden)':'var(--border)';fb.style.color=activeChecklist==='full'?'var(--golden)':'var(--text-2)';}
-  // Update edit button
   var eb=document.getElementById('clEditBtn');
-  if(eb){eb.style.borderColor=isEdit?'var(--golden)':'var(--border)';eb.style.background=isEdit?'rgba(212,160,82,.15)':'transparent';eb.style.color=isEdit?'var(--golden)':'var(--text-2)';eb.textContent=isEdit?'✏️ Done editing':'✏️ Edit';}
+  if(eb){eb.style.borderColor=isEdit?'var(--golden)':'var(--border)';eb.style.background=isEdit?'rgba(212,160,82,.15)':'transparent';eb.style.color=isEdit?'var(--golden)':'var(--text-2)';eb.textContent=isEdit?'✓ Done':'✏️ Edit';}
+}
+// Save inline edit on blur
+function saveCheckEdit(catIdx, itemIdx, newVal) {
+  var list = CHECKLISTS[activeChecklist];
+  var oldItem = list[catIdx].items[itemIdx];
+  newVal = newVal.trim();
+  if(!newVal) { delCheckItem(catIdx, itemIdx); return; }
+  if(newVal === oldItem) return;
+  var oldKey = activeChecklist + '_' + oldItem;
+  var newKey = activeChecklist + '_' + newVal;
+  if(checkedItems[oldKey]) { checkedItems[newKey]=true; delete checkedItems[oldKey]; saveChecklist(); }
+  list[catIdx].items[itemIdx] = newVal;
+  saveChecklists();
 }
 function addCheckItem(catIdx) {
   var item = prompt('Add checklist item:');
@@ -2454,18 +2534,7 @@ function addCheckItem(catIdx) {
   CHECKLISTS[activeChecklist][catIdx].items.push(item.trim());
   saveChecklists(); renderChecklist();
 }
-function editCheckItem(catIdx, itemIdx) {
-  var current = CHECKLISTS[activeChecklist][catIdx].items[itemIdx];
-  var newVal = prompt('Edit item:', current);
-  if (newVal === null) return;
-  if (!newVal.trim()) { delCheckItem(catIdx, itemIdx); return; }
-  // Update checked state key
-  var oldKey = activeChecklist + '_' + current;
-  var newKey = activeChecklist + '_' + newVal.trim();
-  if (checkedItems[oldKey]) { checkedItems[newKey] = true; delete checkedItems[oldKey]; saveChecklist(); }
-  CHECKLISTS[activeChecklist][catIdx].items[itemIdx] = newVal.trim();
-  saveChecklists(); renderChecklist();
-}
+
 function delCheckItem(catIdx, itemIdx) {
   var item = CHECKLISTS[activeChecklist][catIdx].items[itemIdx];
   CHECKLISTS[activeChecklist][catIdx].items.splice(itemIdx, 1);
@@ -2508,11 +2577,44 @@ var mantras = JSON.parse(localStorage.getItem('kc_mantras') || 'null') || [
 function saveMantras(){ localStorage.setItem('kc_mantras', JSON.stringify(mantras)); }
 function renderMantras(){
   var el = document.getElementById('mantraList'); if(!el) return;
+  var isEdit = !!window.mantraEditMode;
   var typeCol = {pace:'var(--golden)',strategy:'var(--sapphire-lt)',grit:'#E74C3C',focus:'#27AE60',custom:'#8E44AD'};
-  el.innerHTML = mantras.map(function(m){
-    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface-2);border-left:3px solid '+(typeCol[m.type]||'var(--golden)')+';border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:5px"><div style="font-size:18px">'+(m.type==='pace'?'🏃':m.type==='strategy'?'🧠':m.type==='grit'?'🔥':m.type==='focus'?'🎯':'💭')+'</div><div style="flex:1;font-size:12px;color:var(--text);font-style:italic;line-height:1.5">"'+m.text+'"</div><button data-del-mantra="'+m.id+'" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:14px">×</button></div>';
-  }).join('');
+  var typeIcon = {pace:'🏃',strategy:'🧠',grit:'🔥',focus:'🎯',custom:'💭'};
+
+  el.innerHTML = mantras.map(function(m, idx){
+    if(isEdit) {
+      return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)">'
+        +'<select data-mantra-type="'+idx+'" style="background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:4px;font-size:11px;color:var(--text);width:50px" onchange="saveMantraField('+idx+',this.dataset.f||\'type\',this.value)" data-f="type">'
+        +'<option value="pace" '+(m.type==='pace'?'selected':'')+'>🏃</option>'
+        +'<option value="strategy" '+(m.type==='strategy'?'selected':'')+'>🧠</option>'
+        +'<option value="grit" '+(m.type==='grit'?'selected':'')+'>🔥</option>'
+        +'<option value="focus" '+(m.type==='focus'?'selected':'')+'>🎯</option>'
+        +'<option value="custom" '+(m.type==='custom'?'selected':'')+'>💭</option>'
+        +'</select>'
+        +'<input value="'+m.text.replace(/"/g,'&quot;')+'" style="flex:1;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--text);outline:none;font-family:inherit;font-style:italic" onblur="saveMantraField('+idx+',\'text\',this.value)">'
+        +'<button data-action="delMantra" data-del-mantra="'+m.id+'" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0">×</button>'
+        +'</div>';
+    }
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface-2);border-left:3px solid '+(typeCol[m.type]||'var(--golden)')+';border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:5px">'
+      +'<div style="font-size:18px">'+(typeIcon[m.type]||'💭')+'</div>'
+      +'<div style="flex:1;font-size:12px;color:var(--text);font-style:italic;line-height:1.5">"'+m.text+'"</div>'
+      +'</div>';
+  }).join('')
+  +(isEdit?'<button data-action="addMantraInline" style="width:100%;margin-top:6px;padding:8px;border:1px dashed var(--golden);border-radius:6px;background:transparent;color:var(--golden);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">+ Add mantra</button>':'');
+
+  var eb=document.getElementById('mantraEditBtn');
+  if(eb){eb.textContent=isEdit?'✓ Done':'✏️ Edit';eb.style.borderColor=isEdit?'var(--golden)':'var(--border)';eb.style.background=isEdit?'rgba(212,160,82,.15)':'transparent';eb.style.color=isEdit?'var(--golden)':'var(--text-2)';}
 }
+function saveMantraField(idx, field, val) {
+  if(field==='text' && !val.trim()) { delMantra(mantras[idx].id); return; }
+  mantras[idx][field] = val.trim ? val.trim() : val;
+  saveMantras();
+}
+function addMantraInline() {
+  mantras.push({id:'m'+Date.now(), text:'New mantra — click to edit', type:'grit'});
+  saveMantras(); renderMantras();
+}
+
 function openAddMantra(){ document.getElementById('addMantraModal').classList.add('open'); }
 function saveMantra(){
   var text=document.getElementById('ma-text').value.trim();var type=document.getElementById('ma-type').value;
@@ -2754,18 +2856,22 @@ var panelConfig = JSON.parse(localStorage.getItem('kc_panels') || '{}');
 var editMode = false;
 
 var PANEL_DEFS = [
-  {id:'sec-cd',       tab:'dashboard', defaultTitle:'🏁 Race Countdowns'},
-  {id:'sec-status',   tab:'dashboard', defaultTitle:'📊 Training Status'},
-  {id:'sec-aero',     tab:'dashboard', defaultTitle:'🫀 Aerobic Efficiency'},
-  {id:'sec-prob',     tab:'dashboard', defaultTitle:'🎯 Goal Probability'},
-  {id:'sec-zones',    tab:'dashboard', defaultTitle:'❤️ HR Zones & Training Load'},
-  {id:'sec-runs',     tab:'dashboard', defaultTitle:'🏃 Recent Strava Activities'},
-  {id:'sec-niggles',  tab:'dashboard', defaultTitle:'🤕 Niggle & Injury Tracker'},
-  {id:'sec-future',   tab:'dashboard', defaultTitle:'🗺️ Roadmap'},
-  {id:'sec-nutrition', tab:'raceday',  defaultTitle:'⛽ Nutrition & Pre-Race Timeline'},
-  {id:'sec-checklist', tab:'raceday',  defaultTitle:'🎒 Race Day Checklist'},
-  {id:'sec-mantras',  tab:'raceday',  defaultTitle:'🧠 Race Mantras & Mental Notes'},
-  {id:'sec-course',   tab:'raceday',  defaultTitle:'🏁 Race Course Notes'},
+  {id:'sec-cd',       tab:'dashboard',   defaultTitle:'🏁 Race Countdowns'},
+  {id:'sec-status',   tab:'dashboard',   defaultTitle:'📊 Training Status'},
+  {id:'sec-aero',     tab:'dashboard',   defaultTitle:'🫀 Aerobic Efficiency'},
+  {id:'sec-prob',     tab:'dashboard',   defaultTitle:'🎯 Goal Probability'},
+  {id:'sec-zones',    tab:'dashboard',   defaultTitle:'❤️ HR Zones & Training Load'},
+  {id:'sec-runs',     tab:'dashboard',   defaultTitle:'🏃 Recent Strava Activities'},
+  {id:'sec-niggles',  tab:'dashboard',   defaultTitle:'🤕 Niggle & Injury Tracker'},
+  {id:'sec-future',   tab:'dashboard',   defaultTitle:'🗺️ Roadmap'},
+  {id:'rd-intro',     tab:'raceday',     defaultTitle:'🏁 Race Day Command Centre'},
+  {id:'sec-nutrition', tab:'raceday',    defaultTitle:'⛽ Nutrition & Pre-Race Timeline'},
+  {id:'sec-checklist', tab:'raceday',    defaultTitle:'🎒 Race Day Checklist'},
+  {id:'sec-mantras',  tab:'raceday',     defaultTitle:'🧠 Race Mantras & Mental Notes'},
+  {id:'sec-course',   tab:'raceday',     defaultTitle:'🏁 Race Course Notes'},
+  {id:'sg-shoes',     tab:'shoes-gear',  defaultTitle:'👟 Shoe Tracker'},
+  {id:'sg-gear',      tab:'shoes-gear',  defaultTitle:'🎒 Gear Inventory'},
+  {id:'sg-wishlist',  tab:'shoes-gear',  defaultTitle:'🛒 Wishlist'},
 ];
 
 function getPanelConf(id) {
@@ -2779,15 +2885,29 @@ function savePanelConfig() {
 function applyPanelConfig() {
   PANEL_DEFS.forEach(function(def) {
     var conf = getPanelConf(def.id);
-    var el = document.getElementById(def.id);
+    var el = document.getElementById(def.id) || document.querySelector('[data-drag-id="'+def.id+'"]');
     if (!el) return;
 
-    // Title
+    // Title — check both .sec-title and first font-weight:700 heading
     var titleEl = el.querySelector('.sec-title');
+    if (!titleEl) {
+      // Draggable sections like sg-shoes use a div with font-weight:700
+      var headings = el.querySelectorAll('div');
+      for (var hi=0; hi<headings.length; hi++) {
+        if (headings[hi].style.fontWeight==='700' && headings[hi].style.fontSize) {
+          titleEl = headings[hi]; break;
+        }
+      }
+    }
     if (titleEl && conf.title) {
+      // Preserve drag handle if present
+      var handle = titleEl.querySelector('[style*="cursor:grab"]');
       titleEl.textContent = conf.title;
+      if (handle) titleEl.prepend(handle);
     } else if (titleEl && !conf.title) {
+      var handle2 = titleEl.querySelector('[style*="cursor:grab"]');
       titleEl.textContent = def.defaultTitle;
+      if (handle2) titleEl.prepend(handle2);
     }
 
     // Visibility
@@ -2809,7 +2929,7 @@ function renderPanelManager() {
   var el = document.getElementById('panelManagerList');
   if (!el) return;
 
-  var tabLabels = {dashboard:'Dashboard', raceday:'Race Day'};
+  var tabLabels = {dashboard:'Dashboard', raceday:'Race Day', 'shoes-gear':'Shoes & Gear'};
 
   el.innerHTML = PANEL_DEFS.map(function(def) {
     var conf = getPanelConf(def.id);
