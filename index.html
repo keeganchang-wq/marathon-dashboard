@@ -930,6 +930,55 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
   </table>
 </div><!-- end pe-sections --></div>
 
+<div 
+  <!-- RACE STRATEGY -->
+  <div class="section-card" id="sec-strategy" draggable="true">
+    <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Race Strategy</span><button class="sec-toggle" data-toggle="strategy">−</button></div>
+    <div class="sec-body" id="body-strategy" style="padding:14px 16px">
+
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <button id="stratHalfBtn" data-action="stratHalf" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:11px;cursor:pointer">🏃 Half · Jul 19</button>
+        <button id="stratFullBtn" data-action="stratFull" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:11px;cursor:pointer">🏆 Full · Oct 11</button>
+      </div>
+
+      <!-- HALF STRATEGY -->
+      <div id="stratHalfPanel">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">ASICS Run Melbourne · 21.1km · Gain: 161m</div>
+        <table class="tbl" style="margin-bottom:12px"><thead><tr><th>Section</th><th>Km</th><th>Route</th><th>Pace</th><th>Notes</th></tr></thead><tbody>
+          <tr><td style="color:#2ECC71;font-weight:700">CBD loop</td><td>0–4</td><td style="font-size:10px">Fed Sq → Wellington Pde → Exhibition → Flinders</td><td style="font-weight:700">5:00</td><td>Settle in, don't chase</td></tr>
+          <tr><td style="color:#2ECC71;font-weight:700">Docklands</td><td>4–10</td><td style="font-size:10px">Marvel Stadium → Harbour Esp → Lorimer St</td><td style="font-weight:700">4:52</td><td>Flat, find rhythm</td></tr>
+          <tr><td style="color:#E67E22;font-weight:700">Southbank ↩</td><td>10–14</td><td style="font-size:10px">Wurundjeri Way → City Rd → Alexandra Ave</td><td style="font-weight:700">4:52</td><td>Return east, stay smooth</td></tr>
+          <tr><td style="color:#E74C3C;font-weight:700">🏔 Shrine</td><td>14–17</td><td style="font-size:10px">Birdwood Ave → Shrine → Domain Rd</td><td style="font-weight:700">5:10</td><td>⚠ +30m climb! HR effort, not pace</td></tr>
+          <tr><td style="color:var(--golden);font-weight:700">🏟 Finish</td><td>17–21</td><td style="font-size:10px">Botanic Gardens → Anderson St → Melbourne Park</td><td style="font-weight:700">4:45</td><td>Downhill, give everything</td></tr>
+        </tbody></table>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="background:rgba(39,174,96,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#2ECC71"><strong>Key:</strong> Accept slower Shrine km. Make it up on the downhill km 17–19.</div>
+          <div style="background:rgba(231,76,60,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#E74C3C"><strong>⚠ Trap:</strong> Don't surge on the Docklands flat — save it for the hill.</div>
+        </div>
+      </div>
+
+      <!-- FULL STRATEGY -->
+      <div id="stratFullPanel" style="display:none">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">Nike Melbourne Marathon · 42.2km · Reimagined flat course · Start 6:15am</div>
+        <table class="tbl" style="margin-bottom:12px"><thead><tr><th>Section</th><th>Km</th><th>Route</th><th>Pace</th><th>Notes</th></tr></thead><tbody>
+          <tr><td style="color:#2ECC71;font-weight:700">St Kilda Rd ↓</td><td>0–5</td><td style="font-size:10px">Batman Ave → Punt Rd → Fitzroy St</td><td style="font-weight:700">5:10</td><td>Settle in, don't chase pack</td></tr>
+          <tr><td style="color:#2ECC71;font-weight:700">↓ South</td><td>5–15</td><td style="font-size:10px">Ormond Esp → Brighton Rd → Park St</td><td style="font-weight:700">4:55</td><td>Flat, bank 5–10s/km</td></tr>
+          <tr><td style="color:#E67E22;font-weight:700">↑ Coast</td><td>15–25</td><td style="font-size:10px">↩ Park St → Marine Pde → Beaconsfield Pde</td><td style="font-weight:700">4:57</td><td>⚠ Wind off the bay, stay honest</td></tr>
+          <tr><td style="color:#E74C3C;font-weight:700">Albert Park</td><td>25–35</td><td style="font-size:10px">Aughtie Dr → Lakeside Dr → Kerferd Rd</td><td style="font-weight:700">5:00</td><td>Legs heavy — hold the pace, don't panic</td></tr>
+          <tr><td style="color:var(--golden);font-weight:700">🏟 Home</td><td>35–42</td><td style="font-size:10px">Bay St → Flinders St → Batman Ave → Brunton Ave</td><td style="font-weight:700">4:50</td><td>Race the last 7km. Lap the G!</td></tr>
+        </tbody></table>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="background:rgba(39,174,96,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#2ECC71"><strong>Key:</strong> Negative split — first half 5:05/km avg, second half 4:52/km avg.</div>
+          <div style="background:rgba(231,76,60,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#E74C3C"><strong>⚠ The wall:</strong> Km 28–33. Accept it, shorten your mental focus to 1km at a time.</div>
+          <div style="background:rgba(212,160,82,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:var(--golden)"><strong>HR rule:</strong> Under 162bpm for first 30km. Then release.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end pace-efforts -->
+
 <div id="tab-milestones" class="panel">
 <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
 <div id="ms-sections">
@@ -1096,30 +1145,31 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
       <!-- HALF COURSE -->
       <div id="courseHalfPanel">
         <div id="halfElevChart" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px"></div>
-        <div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:10px;font-size:10px;color:var(--golden)"><strong>⚠ 2026 change:</strong> Half marathon runs in <strong>reverse direction</strong> this year — wider lanes, different wind exposure.</div>
+        <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:10px;font-size:10px;color:#3B82F6"><strong>ASICS Run Melbourne · Jul 19</strong> — CBD → Docklands → Southbank → Shrine 🏔 → Botanic Gardens → Melbourne Park finish. Gain: 161m.</div>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px">
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 0–4</div><div style="font-size:10px;font-weight:700;color:#2ECC71">Batman Ave</div><div style="font-size:9px;color:var(--text-3)">Settle in</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 4–8</div><div style="font-size:10px;font-weight:700;color:#2ECC71">Albert Park</div><div style="font-size:9px;color:var(--text-3)">Find rhythm</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 8–14</div><div style="font-size:10px;font-weight:700;color:#E67E22">St Kilda coast</div><div style="font-size:9px;color:var(--text-3)">⚠ Tailwind?</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 14–18</div><div style="font-size:10px;font-weight:700;color:var(--golden)">St Kilda Rd</div><div style="font-size:9px;color:var(--text-3)">Push tempo</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 18–21</div><div style="font-size:10px;font-weight:700;color:#E74C3C">MCG finish</div><div style="font-size:9px;color:var(--text-3)">🏟 Lap the G</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 0–4</div><div style="font-size:10px;font-weight:700;color:#2ECC71">CBD loop</div><div style="font-size:9px;color:var(--text-3)">Fed Sq, Wellington</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 4–10</div><div style="font-size:10px;font-weight:700;color:#2ECC71">Docklands</div><div style="font-size:9px;color:var(--text-3)">Marvel, Harbour Esp</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 10–14</div><div style="font-size:10px;font-weight:700;color:#E67E22">Southbank ↩</div><div style="font-size:9px;color:var(--text-3)">Wurundjeri, City Rd</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 14–17</div><div style="font-size:10px;font-weight:700;color:#E74C3C">Shrine 🏔 THE HILL</div><div style="font-size:9px;color:var(--text-3)">⚠ +30m climb!</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 17–21</div><div style="font-size:10px;font-weight:700;color:var(--golden)">Botanic → Finish</div><div style="font-size:9px;color:var(--text-3)">🏟 Melbourne Park</div></div>
         </div>
       </div>
 
       <!-- FULL COURSE -->
       <div id="courseFullPanel" style="display:none">
         <div id="fullElevChart" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px"></div>
+        <div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:10px;font-size:10px;color:var(--golden)"><strong>2026 REIMAGINED COURSE:</strong> Faster, flatter. South to Brighton Rd, back via coast, Albert Park loop, Flinders St home. Start <strong>6:15am</strong>.</div>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px">
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 0–8</div><div style="font-size:10px;font-weight:700;color:#2ECC71">Flinders / CBD</div><div style="font-size:9px;color:var(--text-3)">Don't chase</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 8–20</div><div style="font-size:10px;font-weight:700;color:#2ECC71">St Kilda coast</div><div style="font-size:9px;color:var(--text-3)">⚠ Wind exposed</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 20–30</div><div style="font-size:10px;font-weight:700;color:#E67E22">Albert Park loop</div><div style="font-size:9px;color:var(--text-3)">Stay controlled</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 30–36</div><div style="font-size:10px;font-weight:700;color:#E74C3C">Botanic / Shrine 🏔</div><div style="font-size:9px;color:var(--text-3)">⚠ THE WALL</div></div>
-          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 36–42</div><div style="font-size:10px;font-weight:700;color:var(--golden)">Yarra → MCG</div><div style="font-size:9px;color:var(--text-3)">🏟 Lap the G</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 0–5</div><div style="font-size:10px;font-weight:700;color:#2ECC71">St Kilda Rd ↓</div><div style="font-size:9px;color:var(--text-3)">Punt Rd, settle in</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 5–15</div><div style="font-size:10px;font-weight:700;color:#2ECC71">↓ Ormond to Brighton</div><div style="font-size:9px;color:var(--text-3)">Flat, bank time</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 15–25</div><div style="font-size:10px;font-weight:700;color:#E67E22">↑ Marine Pde coast</div><div style="font-size:9px;color:var(--text-3)">⚠ Wind off the bay</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 25–35</div><div style="font-size:10px;font-weight:700;color:#E74C3C">Albert Park loop</div><div style="font-size:9px;color:var(--text-3)">⚠ Legs heavy, grind</div></div>
+          <div style="background:var(--surface-2);border-radius:6px;padding:8px;text-align:center"><div style="font-size:9px;color:var(--text-3)">Km 35–42</div><div style="font-size:10px;font-weight:700;color:var(--golden)">Flinders → MCG</div><div style="font-size:9px;color:var(--text-3)">🏟 Lap the G!</div></div>
         </div>
       </div>
     </div>
   </div>
-</div><!-- end rd-sections --></div><!-- end ms-sections -->
+</div><!-- end rd-sections --></div><!-- end raceday -->
 
 <div id="tab-settings" class="panel">
 
@@ -1256,7 +1306,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
     </div>
   </div>
 
-</div>
+
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -1368,7 +1418,7 @@ const SESSIONS = {
 "13km Race Practice Long Run":{type:"long",km:"13km",trains:"Race-pace maintenance in taper.",blocks:[{t:"wu",x:"<strong>2km</strong> easy"},{t:"go",x:"<strong>9km</strong> @ <strong>5:05/km</strong>"},{t:"cd",x:"<strong>2km</strong> easy"}],tip:"Should feel almost easy — good sign."},
 "12km Long Run":{type:"long",km:"12km",trains:"Aerobic recovery — flushes post-race fatigue.",blocks:[{t:"wu",x:"<strong>1km</strong> easy"},{t:"go",x:"<strong>11km</strong> easy @ <strong>6:40–7:10/km</strong>"}],tip:"Post-half recovery. Walk if needed."},
 "Half Marathon Race":{type:"race",km:"21.1km",trains:"Race execution — validates fitness and pacing strategy.",blocks:[{t:"wu",x:"<strong>10–15min</strong> easy jog + 2×30s at race pace"},{t:"rc",x:"<strong>Km 0–7</strong> @ <strong>5:05/km</strong> — HOLD BACK · HR under 172"},{t:"rc",x:"<strong>Km 7–14</strong> @ <strong>4:55–5:00/km</strong>"},{t:"rc",x:"<strong>Km 14–21</strong> — race it home"},{t:"go",x:"Gel at <strong>km 7</strong>"}],tip:"#1 mistake = going out too fast. 5:05 even if it feels embarrassingly easy.",proves:'🔑 KEY CHECKPOINT: Under 1:40 = sub-3:30 likely. 1:40–1:44 = on track. Over 1:48 = adjust target.'},
-"Nike Melbourne Marathon":{type:"race",km:"42.2km",trains:"The goal. Everything from April to October built to this.",blocks:[{t:"wu",x:"<strong>10min</strong> easy before gun"},{t:"rc",x:"<strong>Km 0–10</strong> @ <strong>5:10/km</strong> — conservative · HR under 162"},{t:"rc",x:"<strong>Km 10–30</strong> @ <strong>5:00–5:07/km</strong> · HR 162–168"},{t:"rc",x:"<strong>Km 30–42</strong> — race it home"},{t:"go",x:"<strong>6 gels:</strong> km 10, 16, 22, 28, 34, 38"}],tip:"Won or lost in first 10km. Trust 5:10 early. HR under 162 for first 30km.",proves:'🏆 THE GOAL: 42.2km. Start 5:10/km. HR under 162 for 30km. Then race.'},
+"Nike Melbourne Marathon":{type:"race",km:"42.2km",trains:"The goal. Everything from April to October built to this.",blocks:[{t:"wu",x:"<strong>10min</strong> easy before gun"},{t:"rc",x:"<strong>Km 0–10</strong> @ <strong>5:10/km</strong> — conservative · HR under 162"},{t:"rc",x:"<strong>Km 10–30</strong> @ <strong>5:00–5:07/km</strong> · HR 162–168"},{t:"rc",x:"<strong>Km 30–42</strong> — race it home"},{t:"go",x:"<strong>6 gels:</strong> km 10, 16, 22, 28, 34, 38"}],tip:"Won or lost in first 10km. Trust 5:10 early. HR under 162 for first 30km.",proves:'🏆 THE GOAL: 42.2km flat course. Start 5:10/km. HR under 162 for 30km. Race the last 12.'},
 };
 
 const PLAN = [
@@ -2115,6 +2165,8 @@ document.addEventListener('click', function(e) {
       case 'resetAppearance': appearance={}; saveAppearance(); break;
       case 'probHalf': document.getElementById('probHalfPanel').style.display='block'; document.getElementById('probFullPanel').style.display='none'; document.getElementById('probHalfBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('probHalfBtn').style.borderColor='var(--golden)'; document.getElementById('probHalfBtn').style.color='var(--golden)'; document.getElementById('probFullBtn').style.background='transparent'; document.getElementById('probFullBtn').style.borderColor='var(--border)'; document.getElementById('probFullBtn').style.color='var(--text-2)'; break;
       case 'probFull': document.getElementById('probFullPanel').style.display='block'; document.getElementById('probHalfPanel').style.display='none'; document.getElementById('probFullBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('probFullBtn').style.borderColor='var(--golden)'; document.getElementById('probFullBtn').style.color='var(--golden)'; document.getElementById('probHalfBtn').style.background='transparent'; document.getElementById('probHalfBtn').style.borderColor='var(--border)'; document.getElementById('probHalfBtn').style.color='var(--text-2)'; break;
+      case 'stratHalf': document.getElementById('stratHalfPanel').style.display='block';document.getElementById('stratFullPanel').style.display='none';document.getElementById('stratHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('stratHalfBtn').style.borderColor='var(--golden)';document.getElementById('stratHalfBtn').style.color='var(--golden)';document.getElementById('stratFullBtn').style.background='transparent';document.getElementById('stratFullBtn').style.borderColor='var(--border)';document.getElementById('stratFullBtn').style.color='var(--text-2)'; break;
+      case 'stratFull': document.getElementById('stratFullPanel').style.display='block';document.getElementById('stratHalfPanel').style.display='none';document.getElementById('stratFullBtn').style.background='rgba(212,160,82,.15)';document.getElementById('stratFullBtn').style.borderColor='var(--golden)';document.getElementById('stratFullBtn').style.color='var(--golden)';document.getElementById('stratHalfBtn').style.background='transparent';document.getElementById('stratHalfBtn').style.borderColor='var(--border)';document.getElementById('stratHalfBtn').style.color='var(--text-2)'; break;
       case 'courseHalf': document.getElementById('courseHalfPanel').style.display='block';document.getElementById('courseFullPanel').style.display='none';document.getElementById('courseHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseHalfBtn').style.borderColor='var(--golden)';document.getElementById('courseHalfBtn').style.color='var(--golden)';document.getElementById('courseFullBtn').style.background='transparent';document.getElementById('courseFullBtn').style.borderColor='var(--border)';document.getElementById('courseFullBtn').style.color='var(--text-2)'; break;
       case 'courseFull': document.getElementById('courseFullPanel').style.display='block';document.getElementById('courseHalfPanel').style.display='none';document.getElementById('courseFullBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseFullBtn').style.borderColor='var(--golden)';document.getElementById('courseFullBtn').style.color='var(--golden)';document.getElementById('courseHalfBtn').style.background='transparent';document.getElementById('courseHalfBtn').style.borderColor='var(--border)';document.getElementById('courseHalfBtn').style.color='var(--text-2)'; break;
       case 'nutHalf': showNutHalf(); break;
@@ -2737,106 +2789,93 @@ function addRestDay(wk, day){
 function renderAeroEfficiency(){
   var el=document.getElementById('body-aero'); if(!el) return;
 
-  // Data
-  var paceData = [
-    {date:'Apr 26',wk:1,hr145:6.25},
-    {date:'May 6',wk:3,hr145:6.06},
-    {date:'May 17',wk:4,hr145:6.20},
-    {date:'May 24',wk:5,hr145:6.10},
-    {date:'Jun 9',wk:8,hr145:7.15},
+  // Real Strava data: pace (min/km as decimal) and avg HR for easy/long runs
+  var runs = [
+    {date:'Apr 26',km:16.0,pace:5.93,hr:152,type:'long'},
+    {date:'May 3',km:17.0,pace:6.00,hr:150,type:'long'},
+    {date:'May 6',km:8.0,pace:6.07,hr:144,type:'easy'},
+    {date:'May 10',km:18.3,pace:5.88,hr:151,type:'long'},
+    {date:'May 17',km:10.0,pace:6.53,hr:147,type:'easy'},
+    {date:'May 20',km:8.0,pace:6.00,hr:150,type:'easy'},
+    {date:'May 24',km:20.1,pace:5.87,hr:154,type:'long'},
+    {date:'Jun 9',km:5.0,pace:7.25,hr:147,type:'easy'},
   ];
-  var longRuns = [
-    {date:'Apr 26',km:16.0,drift:10.7,decouple:8.2},
-    {date:'May 3',km:17.0,drift:10.5,decouple:7.8},
-    {date:'May 10',km:18.3,drift:10.1,decouple:6.9},
-    {date:'May 24',km:20.1,drift:20.0,decouple:14.8},
-  ];
-  var easyRuns = [
-    {date:'Apr 21',pace:5.60,ego:true},{date:'Apr 28',pace:6.02,ego:false},
-    {date:'Apr 29',pace:6.06,ego:false},{date:'May 6',pace:6.06,ego:false},
-    {date:'May 8',pace:6.10,ego:false},{date:'May 14',pace:5.71,ego:true},
-    {date:'May 20',pace:6.00,ego:false},{date:'May 21',pace:5.86,ego:true},
-    {date:'May 30',pace:6.27,ego:false},{date:'Jun 9',pace:7.23,ego:false},
-  ];
-  var z2Count=easyRuns.filter(function(r){return !r.ego;}).length;
-  var egoCount=easyRuns.filter(function(r){return r.ego;}).length;
-  var z2Pct=Math.round(z2Count/easyRuns.length*100);
-  var discPct=Math.round((easyRuns.length-egoCount)/easyRuns.length*100);
-  var gc=function(v){return v>=75?'#2ECC71':v>=50?'#E67E22':'#E74C3C';};
 
-  // ── SVG: Pace@145bpm trend chart ──
-  var chartW=500,chartH=120,padL=40,padR=10,padT=10,padB=25;
+  // EFFICIENCY = pace per bpm of HR
+  // Lower = more efficient (faster pace per heartbeat)
+  // Formula: pace / HR * 100 → "seconds per km per bpm"
+  var effData = runs.map(function(r) {
+    r.eff = Math.round((r.pace / r.hr) * 10000) / 100;
+    return r;
+  });
+
+  // Best and worst efficiency
+  var best = effData.reduce(function(a,b){return a.eff<b.eff?a:b;});
+  var latest = effData[effData.length-1];
+  var trend = effData.length>=3 ? (effData[effData.length-3].eff - effData[effData.length-1].eff) : 0;
+
+  // Fitness grade
+  var grade, gradeCol;
+  if(best.eff < 4.0) { grade='A'; gradeCol='#2ECC71'; }
+  else if(best.eff < 4.3) { grade='B+'; gradeCol='#2ECC71'; }
+  else if(best.eff < 4.6) { grade='B'; gradeCol='#E67E22'; }
+  else { grade='C'; gradeCol='#E74C3C'; }
+
+  // ── SVG: Efficiency over time (lower = better, so INVERT for visual) ──
+  var chartW=500, chartH=130, padL=45, padR=10, padT=10, padB=28;
   var pW=chartW-padL-padR, pH=chartH-padT-padB;
-  var minP=5.8, maxP=7.4;
-  var points=paceData.map(function(d,i){
-    var x=padL+(i/(paceData.length-1))*pW;
-    var y=padT+((d.hr145-minP)/(maxP-minP))*pH;
+  var effs = effData.map(function(r){return r.eff;});
+  var minE=Math.min.apply(null,effs)-0.2, maxE=Math.max.apply(null,effs)+0.2;
+
+  var points=effData.map(function(d,i){
+    var x=padL+(i/(effData.length-1))*pW;
+    // INVERT: lower efficiency = higher on chart = BETTER
+    var y=padT+((d.eff-minE)/(maxE-minE))*pH;
     return {x:x,y:y,d:d};
   });
   var line=points.map(function(p,i){return(i?'L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1);}).join(' ');
   var area=line+' L'+points[points.length-1].x.toFixed(1)+','+(padT+pH)+' L'+points[0].x.toFixed(1)+','+(padT+pH)+' Z';
-  var gridLines='';
-  for(var gv=6.0;gv<=7.2;gv+=0.3){
-    var gy=padT+((gv-minP)/(maxP-minP))*pH;
-    gridLines+='<line x1="'+padL+'" x2="'+(chartW-padR)+'" y1="'+gy.toFixed(1)+'" y2="'+gy.toFixed(1)+'" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3"/><text x="'+(padL-4)+'" y="'+(gy+3).toFixed(1)+'" fill="var(--text-3)" font-size="8" text-anchor="end">'+formatPace(gv)+'</text>';
-  }
+
   var dots=points.map(function(p){
-    var col=p.d.wk===8?'#E67E22':'var(--golden)';
-    return '<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="4" fill="'+col+'" stroke="var(--surface)" stroke-width="2"/><text x="'+p.x.toFixed(1)+'" y="'+(p.y-10).toFixed(1)+'" fill="var(--text)" font-size="9" font-weight="700" text-anchor="middle">'+formatPace(p.d.hr145)+'</text>';
+    var col=p.d.type==='long'?'#3B82F6':'var(--golden)';
+    if(p.d===latest) col='#E67E22';
+    if(p.d===best) col='#2ECC71';
+    return '<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="4" fill="'+col+'" stroke="var(--surface)" stroke-width="2"/>'
+      +'<text x="'+p.x.toFixed(1)+'" y="'+(p.y-10).toFixed(1)+'" fill="var(--text)" font-size="8" font-weight="700" text-anchor="middle">'+formatPace(p.d.pace)+'</text>'
+      +'<text x="'+p.x.toFixed(1)+'" y="'+(p.y-2).toFixed(1)+'" fill="var(--text-3)" font-size="6" text-anchor="middle">'+p.d.hr+'bpm</text>';
   }).join('');
-  var xlabels=points.map(function(p){return '<text x="'+p.x.toFixed(1)+'" y="'+(chartH-2)+'" fill="var(--text-3)" font-size="8" text-anchor="middle">'+p.d.date+'</text>';}).join('');
+  var xlabels=points.map(function(p){return '<text x="'+p.x.toFixed(1)+'" y="'+(chartH-4)+'" fill="var(--text-3)" font-size="7" text-anchor="middle">'+p.d.date+'</text>';}).join('');
 
-  var paceChart='<svg viewBox="0 0 '+chartW+' '+chartH+'" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg"><rect width="'+chartW+'" height="'+chartH+'" fill="transparent"/>'+gridLines+'<path d="'+area+'" fill="rgba(212,160,82,.1)"/><path d="'+line+'" fill="none" stroke="var(--golden)" stroke-width="2.5" stroke-linejoin="round"/>'+dots+xlabels+'</svg>';
+  // Better zone
+  var betterY = padT+pH*0.15;
+  var worseY = padT+pH*0.85;
+  var zoneLabel = '<text x="'+(padL+3)+'" y="'+(betterY+4)+'" fill="#2ECC71" font-size="7" font-weight="700">↑ FITTER</text>'
+    +'<text x="'+(padL+3)+'" y="'+(worseY+4)+'" fill="#E74C3C" font-size="7" font-weight="700">↓ SLOWER</text>';
 
-  // ── SVG: Decoupling bar chart ──
-  var dcW=500,dcH=100,dcPadL=50,dcPadB=22;
-  var barW=60,barGap=20;
-  var maxDc=16;
-  var dcBars=longRuns.map(function(r,i){
-    var x=dcPadL+i*(barW+barGap);
-    var h=Math.min(1,r.decouple/maxDc)*(dcH-dcPadB-10);
-    var y=dcH-dcPadB-h;
-    var col=r.decouple<=5?'#2ECC71':r.decouple<=10?'#E67E22':'#E74C3C';
-    return '<rect x="'+x+'" y="'+y.toFixed(1)+'" width="'+barW+'" height="'+h.toFixed(1)+'" rx="3" fill="'+col+'" opacity=".8"/><text x="'+(x+barW/2)+'" y="'+(y-4).toFixed(1)+'" fill="'+col+'" font-size="10" font-weight="700" text-anchor="middle">'+r.decouple.toFixed(1)+'%</text><text x="'+(x+barW/2)+'" y="'+(dcH-8)+'" fill="var(--text-3)" font-size="8" text-anchor="middle">'+r.date+'</text><text x="'+(x+barW/2)+'" y="'+(dcH-0)+'" fill="var(--text-3)" font-size="7" text-anchor="middle">'+r.km+'km</text>';
-  }).join('');
-  // Target line at 5%
-  var targetY=dcH-dcPadB-(5/maxDc)*(dcH-dcPadB-10);
-  var dcChart='<svg viewBox="0 0 '+dcW+' '+dcH+'" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg"><line x1="'+dcPadL+'" x2="'+(dcPadL+longRuns.length*(barW+barGap))+'" y1="'+targetY.toFixed(1)+'" y2="'+targetY.toFixed(1)+'" stroke="#2ECC71" stroke-width="1" stroke-dasharray="4"/><text x="'+(dcPadL-4)+'" y="'+(targetY+3).toFixed(1)+'" fill="#2ECC71" font-size="8" text-anchor="end">5% target</text>'+dcBars+'</svg>';
+  var chart='<svg viewBox="0 0 '+chartW+' '+chartH+'" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg"><rect width="'+chartW+'" height="'+chartH+'" fill="transparent"/><path d="'+area+'" fill="rgba(212,160,82,.08)"/><path d="'+line+'" fill="none" stroke="var(--golden)" stroke-width="2" stroke-linejoin="round"/>'+dots+xlabels+zoneLabel+'</svg>';
 
-  // ── SVG: Easy run discipline dots ──
-  var dotChart=easyRuns.map(function(r,i){
-    var col=r.ego?'#E74C3C':'#2ECC71';
-    return '<div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-2)"><div style="width:10px;height:10px;border-radius:50%;background:'+col+';flex-shrink:0"></div><span style="min-width:40px">'+r.date+'</span><span style="font-weight:600;color:'+col+'">'+formatPace(r.pace)+'</span>'+(r.ego?'<span style="color:#E74C3C;font-size:9px">ego</span>':'')+'</div>';
-  }).join('');
-
-  // ── RENDER ──
   el.innerHTML =
-    // Hero metrics row
-    '<div class="g4" style="margin-bottom:14px">'
-    +'<div class="metric"><div class="metric-label">Z2 compliance</div><div class="metric-val" style="color:'+gc(z2Pct)+'">'+z2Pct+'%</div><div class="metric-sub">'+z2Count+'/'+easyRuns.length+' runs</div></div>'
-    +'<div class="metric"><div class="metric-label">Discipline</div><div class="metric-val" style="color:'+gc(discPct)+'">'+discPct+'%</div><div class="metric-sub">'+egoCount+' ego runs</div></div>'
-    +'<div class="metric"><div class="metric-label">Pace @ 145bpm</div><div class="metric-val" style="color:var(--golden)">7:09/km</div><div class="metric-sub">Jun 9 (recovery)</div></div>'
-    +'<div class="metric"><div class="metric-label">Best @ 145</div><div class="metric-val" style="color:#2ECC71">6:04/km</div><div class="metric-sub">May 6 peak</div></div>'
+    // What this section means
+    '<div style="background:rgba(212,160,82,.06);border-left:3px solid var(--golden);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--text);line-height:1.6"><strong style="color:var(--golden)">What is this?</strong> Your aerobic engine = how fast you can run at a given heart rate. As fitness improves, you run faster at the same HR. This chart tracks that over time.</div>'
+
+    // Hero metrics
+    +'<div class="g4" style="margin-bottom:14px">'
+    +'<div class="metric" style="border-color:'+gradeCol+'"><div class="metric-label">Fitness grade</div><div class="metric-val" style="color:'+gradeCol+'">'+grade+'</div><div class="metric-sub">Based on best efficiency</div></div>'
+    +'<div class="metric"><div class="metric-label">Best pace @ low HR</div><div class="metric-val" style="color:#2ECC71">'+formatPace(best.pace)+'</div><div class="metric-sub">'+best.hr+'bpm · '+best.date+'</div></div>'
+    +'<div class="metric"><div class="metric-label">Latest run</div><div class="metric-val" style="color:#E67E22">'+formatPace(latest.pace)+'</div><div class="metric-sub">'+latest.hr+'bpm · '+latest.date+'</div></div>'
+    +'<div class="metric"><div class="metric-label">Easy run HR cap</div><div class="metric-val" style="color:var(--golden)">150</div><div class="metric-sub">bpm max on easy days</div></div>'
     +'</div>'
 
-    // Pace@HR trend chart
-    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">⚡ Pace @ 145bpm — aerobic engine trend</div>'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:14px">'+paceChart
-    +'<div style="font-size:10px;color:var(--text-3);margin-top:6px;text-align:center">Lower = faster at same HR. Jun 9 spike = post-illness recovery run (expected).</div></div>'
+    // Chart
+    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:6px">Pace vs Heart Rate — each run plotted</div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px">'+chart+'</div>'
+    +'<div style="display:flex;gap:10px;font-size:9px;color:var(--text-3);margin-bottom:14px"><span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--golden);vertical-align:middle"></span> Easy run</span><span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#3B82F6;vertical-align:middle"></span> Long run</span><span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ECC71;vertical-align:middle"></span> Best</span><span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E67E22;vertical-align:middle"></span> Latest</span></div>'
 
-    // Decoupling chart
-    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);margin-bottom:8px">💓 Long run decoupling</div>'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:14px">'+dcChart
-    +'<div style="font-size:10px;color:var(--text-3);margin-top:6px;text-align:center">Under 5% = excellent aerobic fitness. May 24 spike from hotspot surges.</div></div>'
-
-    // Easy run discipline + adjustments side by side
-    +'<div class="g2" style="margin-bottom:10px">'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:8px">🏃 Easy run log</div>'+dotChart+'</div>'
-    +'<div><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">🌡</span><div><div style="font-size:11px;font-weight:700;color:var(--text)">Heat-adjusted HR</div><div style="font-size:10px;color:var(--text-2)">Winter: HR <strong style="color:#2ECC71">5–8bpm lower</strong> than summer equivalent</div></div></div></div>'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">😴</span><div><div style="font-size:11px;font-weight:700;color:var(--text)">Fatigue-adjusted HR</div><div style="font-size:10px;color:var(--text-2)">Post-illness: HR <strong style="color:#E67E22">3–5bpm higher</strong> for 1–2 weeks</div></div></div></div>'
-    +'</div></div>'
-
-    +'<div style="font-size:9px;color:var(--text-3);text-align:center">HR zones: Z1 ≤124 · Z2 125–154 · Z3 155–169 · Z4 170–184 · Z5 185+</div>';
+    // Simple takeaway
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap">'
+    +'<div style="flex:1;min-width:200px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:10px;font-weight:700;color:#2ECC71;margin-bottom:6px">✅ What\'s working</div><div style="font-size:11px;color:var(--text);line-height:1.6">May 6 was your best — 6:04/km at only 144bpm. That shows real aerobic development from consistent Z2 training.</div></div>'
+    +'<div style="flex:1;min-width:200px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:10px;font-weight:700;color:#E67E22;margin-bottom:6px">⚠ Watch for</div><div style="font-size:11px;color:var(--text);line-height:1.6">Jun 9 was slow (7:15/km) but expected post-illness. If your next easy run is under 6:30/km at HR &lt;150, fitness is intact.</div></div>'
+    +'</div>';
 }
 
 
@@ -3620,9 +3659,9 @@ function renderWeather() {
 // ── ELEVATION PROFILES ────────────────────────────────────
 function renderElevation() {
   // Half marathon elevation (21.1km, mostly flat)
-  var halfElev = [5,5,4,3,3,4,5,6,5,4,3,3,4,5,6,5,4,5,6,8,10,12,10,8,6,5,4,3,3,5,6,5,4,3,4,5,6,8,7,5,4,5];
+  var halfElev = [8,8,7,6,5,5,6,7,7,6,5,4,4,5,6,7,8,8,7,6,5,5,6,7,8,8,7,6,5,5,6,8,10,15,22,30,36,38,35,28,20,15,12,10,9,10,12,15,14,12,10,8,8,8,9,10,12,14,15,14,12,10,8,8];
   // Full marathon elevation (42.2km, hill at km 30-35)
-  var fullElev = [5,5,4,3,3,4,5,6,5,4,3,3,4,5,6,5,4,5,6,8,10,12,10,8,6,5,4,3,3,5,6,5,4,3,4,5,6,8,7,5,4,5,6,5,4,3,4,6,8,10,8,6,5,5,6,8,12,18,25,32,35,30,22,15,10,8,7,6,5,4,5,6,8,10,12,10,8,6,5,4,5,5,4,5];
+  var fullElev = [8,8,7,6,5,5,4,4,3,3,3,3,4,4,3,3,2,2,2,3,3,2,2,3,3,4,4,3,3,2,2,3,4,5,5,4,3,3,4,5,6,7,8,8,7,6,5,5,5,6,7,8,9,10,9,8,7,6,5,5,5,6,7,8,9,10,9,8,7,6,5,5,5,6,7,8,7,6,5,5,6,7,8,8];
 
   function drawElev(containerId, data, dist, markers) {
     var el = document.getElementById(containerId); if(!el) return;
@@ -3689,21 +3728,27 @@ function renderElevation() {
 
   drawElev('halfElevChart', halfElev, 21.1, [
     {km:0,label:'START',color:'#2ECC71'},
-    {km:7,label:'⛽ Gel 1',color:'var(--golden)'},
-    {km:14,label:'⛽ Gel 2',color:'var(--golden)'},
-    {km:21.1,label:'FINISH',color:'var(--golden)'},
+    {km:4,label:'Flinders',color:'var(--text-2)'},
+    {km:7,label:'⛽ Docklands',color:'var(--golden)'},
+    {km:10,label:'Lorimer',color:'var(--text-2)'},
+    {km:13,label:'⛽',color:'var(--golden)'},
+    {km:15,label:'🏔 SHRINE',color:'#E74C3C'},
+    {km:17,label:'Botanic',color:'var(--text-2)'},
+    {km:19,label:'⛽',color:'var(--golden)'},
+    {km:21.1,label:'🏟 FINISH',color:'var(--golden)'},
   ]);
 
   drawElev('fullElevChart', fullElev, 42.2, [
     {km:0,label:'START',color:'#2ECC71'},
-    {km:8,label:'⛽',color:'var(--golden)'},
-    {km:14,label:'⛽',color:'var(--golden)'},
-    {km:20,label:'⛽',color:'var(--golden)'},
-    {km:26,label:'⛽☕',color:'#E74C3C'},
-    {km:30,label:'🏔 HILL',color:'#E74C3C'},
-    {km:32,label:'⛽',color:'var(--golden)'},
-    {km:38,label:'⛽☕',color:'#E74C3C'},
-    {km:42.2,label:'🏆',color:'var(--golden)'},
+    {km:5,label:'Fitzroy St',color:'var(--text-2)'},
+    {km:10,label:'⛽ Ormond',color:'var(--golden)'},
+    {km:15,label:'↩ Park St',color:'#3B82F6'},
+    {km:20,label:'⛽ Beaconsfield',color:'var(--golden)'},
+    {km:25,label:'Aughtie Dr',color:'var(--text-2)'},
+    {km:30,label:'⛽ Lakeside',color:'var(--golden)'},
+    {km:35,label:'St Kilda Rd',color:'var(--text-2)'},
+    {km:40,label:'⛽ Flinders',color:'var(--golden)'},
+    {km:42.2,label:'🏆 MCG',color:'var(--golden)'},
   ]);
 }
 
