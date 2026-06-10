@@ -488,6 +488,46 @@ input[type=number] { -moz-appearance:textfield; }
 .coach-input:focus { border-color:var(--golden); }
 .coach-send { background:var(--golden); color:var(--blacktie); border:none; border-radius:50%; width:34px; height:34px; cursor:pointer; font-size:14px; font-weight:700; flex-shrink:0; }
 @media(max-width:480px) { .coach-panel { width:calc(100vw - 24px); right:12px; bottom:78px; } }
+
+/* ── COMPACT MODE ───────────────────────────────────────── */
+.compact-mode .topbar { height:42px; padding:0 14px; }
+.compact-mode .topbar-title { font-size:13px; }
+.compact-mode .topbar-sub { font-size:9px; }
+.compact-mode .tab-bar { top:42px; }
+.compact-mode .tab { padding:8px 12px; font-size:11px; }
+.compact-mode .panel { padding:12px; }
+.compact-mode .section-card { margin-bottom:8px; }
+.compact-mode .sec-header { padding:7px 12px; }
+.compact-mode .sec-title { font-size:12px; }
+.compact-mode .sec-body { padding:10px 12px; }
+.compact-mode .sec-badge { font-size:9px; padding:1px 6px; }
+.compact-mode .metric { padding:8px 10px; }
+.compact-mode .metric-label { font-size:9px; margin-bottom:2px; }
+.compact-mode .metric-val { font-size:18px; }
+.compact-mode .metric-sub { font-size:10px; margin-top:1px; }
+.compact-mode .g4 { gap:6px; }
+.compact-mode .g3 { gap:6px; }
+.compact-mode .g2 { gap:8px; }
+.compact-mode .tbl th { padding:5px 8px; font-size:9px; }
+.compact-mode .tbl td { padding:5px 8px; font-size:11px; }
+.compact-mode .sec-label { font-size:9px; margin-bottom:8px; padding-bottom:4px; }
+.compact-mode .alert { padding:8px 10px; font-size:11px; margin-bottom:8px; }
+.compact-mode .shoe-card { padding:10px; }
+.compact-mode .shoe-img-placeholder { height:50px; font-size:22px; margin-bottom:6px; }
+.compact-mode .shoe-name { font-size:11px; }
+.compact-mode .gear-item { padding:6px 0; }
+.compact-mode .gear-icon { width:28px; height:28px; font-size:14px; }
+.compact-mode .modal { padding:16px; }
+.compact-mode .modal h3 { font-size:14px; margin-bottom:8px; }
+.compact-mode .prog-track { height:6px; }
+.compact-mode .effort-card { padding:10px; }
+.compact-mode .effort-time { font-size:16px; }
+.compact-mode .milestone-card { padding:7px 10px; }
+.compact-mode .cal-cell { min-height:65px; }
+.compact-mode .cal-card-name { font-size:9px; }
+.compact-mode .cal-card-hdr { padding:2px 4px; font-size:7px; }
+.compact-mode .cal-card-body { padding:4px; }
+.compact-mode .coach-panel { max-height:400px; }
 </style>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#D4A052">
@@ -2670,14 +2710,11 @@ function applyAppearance() {
 
   // ── COMPACT MODE ──
   var compact = appearance.compact || false;
+  var compactClass = 'compact-mode';
   if (compact) {
-    root.style.setProperty('--section-pad', '10px');
-    document.querySelectorAll('.sec-body,.sc-body').forEach(function(b){b.style.padding='10px';});
-    document.querySelectorAll('.section-card,.sc').forEach(function(c){c.style.marginBottom='8px';});
+    document.body.classList.add(compactClass);
   } else {
-    root.style.setProperty('--section-pad', '16px');
-    document.querySelectorAll('.sec-body,.sc-body').forEach(function(b){b.style.padding='';});
-    document.querySelectorAll('.section-card,.sc').forEach(function(c){c.style.marginBottom='';});
+    document.body.classList.remove(compactClass);
   }
   setActiveBtn('btnCompactOff', 'btnCompactOn', !compact);
 
