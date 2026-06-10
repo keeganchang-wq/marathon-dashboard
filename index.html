@@ -732,6 +732,12 @@ input[type=number] { -moz-appearance:textfield; }
 
 
 <!-- ═══ NIGGLE TRACKER ═══ -->
+<!-- WEATHER-ADJUSTED PACE -->
+<div class="section-card" id="sec-weather" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🌡️ Weather-Adjusted Pace</span><span class="sec-badge" style="background:rgba(39,174,96,.15);color:#2ECC71">Melbourne live</span><button class="sec-toggle" data-toggle="weather">−</button></div>
+  <div class="sec-body" id="body-weather"></div>
+</div>
+
 <div class="section-card" id="sec-niggles" draggable="true">
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🤕 Niggle & Injury Tracker</span><button class="sec-toggle" data-toggle="niggles">−</button></div>
   <div class="sec-body" id="body-niggles">
@@ -1146,10 +1152,10 @@ input[type=number] { -moz-appearance:textfield; }
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">👤 Athlete Profile</div>
     <div class="g2" style="gap:10px">
-      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Name</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);font-weight:600">Keegan Chang</div></div>
-      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Location</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text)">Melbourne, VIC</div></div>
-      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Weight (kg)</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
-      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Max HR (bpm)</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Name</div><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);font-weight:600">Keegan Chang</div></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Location</div><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text)">Melbourne, VIC</div></div>
+      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px" for="set-weight">Weight (kg)</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
+      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px" for="set-maxhr">Max HR (bpm)</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
     </div>
   </div>
 
@@ -2024,6 +2030,7 @@ document.addEventListener('click', function(e) {
         localStorage.setItem('kc_cw_checks',JSON.stringify(cwc));
         renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderWeather();}catch(e){}
         break;
       }
       case 'toggleEditMode': toggleEditMode(); break;
@@ -2978,6 +2985,7 @@ function togglePanelVisibility(id) {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderWeather();}catch(e){}
   applyRaceTargets();
   loadTimePickers();
 }
@@ -3000,6 +3008,7 @@ function toggleEditMode() {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderWeather();}catch(e){}
   applyRaceTargets();
   loadTimePickers();
 }
@@ -3263,19 +3272,19 @@ function updateWidgetFields() {
   var h = '';
   switch(type) {
     case 'notes': case 'text':
-      h = '<label>Content</label><textarea id="wg-content" rows="4" placeholder="Write your notes here..."></textarea>';
+      h = '<label for="wg-content">Content</label><textarea id="wg-content" rows="4" placeholder="Write your notes here..."></textarea>';
       break;
     case 'countdown':
-      h = '<label>Target date</label><input id="wg-content" type="date" value="2026-10-11">';
+      h = '<label for="wg-content">Target date</label><input id="wg-content" type="date" value="2026-10-11">';
       break;
     case 'checklist':
-      h = '<label>Items (one per line)</label><textarea id="wg-items" rows="5" placeholder="Item 1\nItem 2\nItem 3"></textarea>';
+      h = '<label for="wg-items">Items (one per line)</label><textarea id="wg-items" rows="5" placeholder="Item 1\nItem 2\nItem 3"></textarea>';
       break;
     case 'metric':
-      h = '<label>Value</label><input id="wg-content" placeholder="e.g. 42.2km"><label>Subtitle</label><input id="wg-subtitle" placeholder="e.g. Personal best">';
+      h = '<label for="wg-content">Value</label><input id="wg-content" placeholder="e.g. 42.2km"><label for="wg-subtitle">Subtitle</label><input id="wg-subtitle" placeholder="e.g. Personal best">';
       break;
     case 'link':
-      h = '<label>URL</label><input id="wg-content" placeholder="https://..."><label>Description</label><input id="wg-subtitle" placeholder="What this link is for">';
+      h = '<label for="wg-content">URL</label><input id="wg-content" placeholder="https://..."><label for="wg-subtitle">Description</label><input id="wg-subtitle" placeholder="What this link is for">';
       break;
     case 'divider':
       h = '<div style="font-size:11px;color:var(--text-3);padding:8px 0">A horizontal divider — no extra fields needed.</div>';
@@ -3306,6 +3315,7 @@ function saveWidgetFromModal() {
   saveWidgets();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderWeather();}catch(e){}
   closeModal('widgetModal');
   // Switch to dashboard to see the widget
   if(!editId) {
@@ -3421,6 +3431,109 @@ function saveAllSettings() {
   setTimeout(function() { btn.textContent = orig; btn.style.background = ''; }, 2000);
 }
 
+
+// ── WEATHER-ADJUSTED PACE ─────────────────────────────────
+function renderWeather() {
+  var el = document.getElementById('body-weather'); if(!el) return;
+
+  // Melbourne forecast (updated each session via Claude)
+  var forecast = [
+    {day:'Wed Jun 11',temp:17,rain:15,wind:12,session:'Rest day'},
+    {day:'Thu Jun 12',temp:20,rain:10,wind:8,session:'5km Easy Run'},
+    {day:'Fri Jun 13',temp:17,rain:65,wind:15,session:'Rest'},
+    {day:'Sat Jun 14',temp:15,rain:0,wind:10,session:'Parkrun option'},
+    {day:'Sun Jun 15',temp:13,rain:0,wind:5,session:'5km Easy Run'},
+  ];
+
+  var current = {temp:13, condition:'Partly cloudy', humidity:72};
+
+  // Pace adjustment formula
+  function calcAdj(temp, rain, wind) {
+    var adj = 0;
+    var optimal = 10;
+    if (temp > optimal) adj += (temp - optimal) * 0.3;
+    else if (temp < 5) adj += (5 - temp) * 0.1;
+    if (rain > 40) adj += 2;
+    else if (rain > 20) adj += 1;
+    if (wind > 20) adj += 2;
+    else if (wind > 12) adj += 1;
+    return Math.round(adj * 10) / 10;
+  }
+
+  function adjPace(basePace, adjPct) {
+    return basePace * (1 + adjPct / 100);
+  }
+
+  var basePaces = {easy:6.75, tempo:5.08, interval:4.42, marathon:4.97, long:6.75};
+  var gc = function(adj) { return adj <= 1 ? '#2ECC71' : adj <= 3 ? '#E67E22' : '#E74C3C'; };
+
+  // Current conditions card
+  var nowAdj = calcAdj(current.temp, 0, 10);
+
+  el.innerHTML =
+    // Current conditions
+    '<div class="g2" style="margin-bottom:14px">'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;align-items:center;gap:14px">'
+    +'<div style="font-size:36px">🌤</div>'
+    +'<div><div style="font-size:20px;font-weight:800;color:var(--text)">'+current.temp+'°C</div>'
+    +'<div style="font-size:11px;color:var(--text-2)">'+current.condition+' · Melbourne</div>'
+    +'<div style="font-size:10px;color:var(--text-3);margin-top:2px">Humidity: '+current.humidity+'%</div></div>'
+    +'</div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">'
+    +'<div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">Current pace adjustment</div>'
+    +'<div style="font-size:28px;font-weight:800;color:'+gc(nowAdj)+'">+'+(nowAdj>0?nowAdj.toFixed(1):'0')+'%</div>'
+    +'<div style="font-size:10px;color:var(--text-2);margin-top:2px">'+(nowAdj<=1?'✅ Near-optimal conditions':'⚠ Adjust targets slightly')+'</div>'
+    +'<div style="font-size:9px;color:var(--text-3);margin-top:4px">Optimal: 8–12°C · Melbourne winter = ideal running</div>'
+    +'</div></div>'
+
+    // Pace adjustment table
+    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);margin-bottom:8px">Adjusted targets for today ('+current.temp+'°C)</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px">'
+    +['easy','tempo','marathon','interval','long'].map(function(type) {
+      var base = basePaces[type];
+      var adjusted = adjPace(base, nowAdj);
+      var labels = {easy:'Easy/Z2',tempo:'Tempo',marathon:'Marathon',interval:'Intervals',long:'Long Run'};
+      return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px;text-align:center">'
+        +'<div style="font-size:9px;color:var(--text-3);margin-bottom:3px">'+labels[type]+'</div>'
+        +'<div style="font-size:14px;font-weight:700;color:var(--text)">'+formatPace(adjusted)+'</div>'
+        +'<div style="font-size:9px;color:var(--text-3);margin-top:2px">base '+formatPace(base)+'</div>'
+        +'</div>';
+    }).join('')
+    +'</div>'
+
+    // 5-day forecast with session matching
+    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);margin-bottom:8px">5-day training forecast</div>'
+    +'<div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">'
+    +forecast.map(function(f) {
+      var adj = calcAdj(f.temp, f.rain, f.wind);
+      var icon = f.rain > 40 ? '🌧' : f.rain > 20 ? '🌦' : f.temp > 20 ? '☀️' : '⛅';
+      return '<div style="display:grid;grid-template-columns:90px 30px 50px 60px 50px 1fr 55px;align-items:center;gap:6px;padding:6px 10px;background:var(--surface-2);border-radius:5px;font-size:11px">'
+        +'<span style="color:var(--text-2);font-weight:600">'+f.day.split(' ').slice(0,2).join(' ')+'</span>'
+        +'<span>'+icon+'</span>'
+        +'<span style="font-weight:700;color:var(--text)">'+f.temp+'°C</span>'
+        +'<span style="color:'+(f.rain>40?'#3B82F6':'var(--text-3)')+'">💧 '+f.rain+'%</span>'
+        +'<span style="color:var(--text-3)">💨 '+f.wind+'km/h</span>'
+        +'<span style="color:var(--golden);font-weight:600">'+f.session+'</span>'
+        +'<span style="font-weight:700;color:'+gc(adj)+';text-align:right">+'+(adj>0?adj.toFixed(1):'0')+'%</span>'
+        +'</div>';
+    }).join('')
+    +'</div>'
+
+    // Temperature impact reference
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px">'
+    +'<div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">Temperature impact on pace</div>'
+    +'<div style="display:flex;gap:4px;height:24px;border-radius:4px;overflow:hidden;margin-bottom:6px">'
+    +'<div style="flex:1;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">❄ 0-5°C</div>'
+    +'<div style="flex:2;background:#2ECC71;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">✅ 6-15°C OPTIMAL</div>'
+    +'<div style="flex:1;background:#E67E22;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">⚠ 16-22°C</div>'
+    +'<div style="flex:1;background:#E74C3C;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:700">🔥 23°C+</div>'
+    +'</div>'
+    +'<div style="font-size:10px;color:var(--text-3)">Melbourne Jun: 8–15°C (optimal). Sep–Oct marathon prep: 14–22°C (expect 2–5% pace adjustment). Race day Oct 11: typically 12–18°C.</div>'
+    +'</div>'
+
+    +'<div style="font-size:9px;color:var(--text-3);text-align:center">Updated via Claude each session · Formula: +0.3%/°C above 10°C · +2% rain · +1% wind >12km/h</div>';
+}
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -3441,6 +3554,7 @@ window.addEventListener('load', function init() {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderWeather();}catch(e){}
   applyRaceTargets();
   loadTimePickers();
   renderWishlist();
@@ -3664,16 +3778,16 @@ if (COACH_URL) {
 
 <!-- MODALS -->
 <div class="modal-bg" id="sessModal"><div class="modal"><button class="modal-close" data-close="sessModal">✕</button><h3 id="sessModalTitle"></h3><div id="sessModalBody"></div></div></div>
-<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Price (AUD)</label><input id="sh-price" type="number" placeholder="e.g. 280"><label>Current mileage (km)</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
-<div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label>Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label>Description</label><input id="g-desc" placeholder="e.g. Black"><label>Purchase date</label><input id="g-date" type="date"><label>Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label>Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGearAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveGear">Save &amp; close</button></div></div></div>
+<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label for="sh-brand">Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label for="sh-model">Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label for="sh-name">Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label for="sh-type">Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label for="sh-use">Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label for="sh-price">Price (AUD)</label><input id="sh-price" type="number" placeholder="e.g. 280"><label for="sh-km">Current mileage (km)</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
+<div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label for="g-cat">Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label for="g-name">Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label for="g-desc">Description</label><input id="g-desc" placeholder="e.g. Black"><label for="g-date">Purchase date</label><input id="g-date" type="date"><label for="g-price">Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label for="g-notes">Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGearAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveGear">Save &amp; close</button></div></div></div>
 <div class="modal-bg" id="pasteModal"><div class="modal" style="max-width:540px"><button class="modal-close" data-close="pasteModal">✕</button><h3>📋 Paste purchase email</h3><div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Paste your purchase confirmation — I'll extract the details automatically.</div><textarea id="pasteText" rows="8" placeholder="Paste email text here..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="pasteModal">Cancel</button><button class="btn-primary" data-action="parsePaste">Extract &amp; add gear</button></div></div></div>
-<div class="modal-bg" id="addRoadmapModal"><div class="modal"><button class="modal-close" data-close="addRoadmapModal">✕</button><h3 id="rmModalTitle">📝 Add item</h3><input type="hidden" id="rm-id"><label>Priority</label><select id="rm-priority"><option value="urgent">🔴 Urgent</option><option value="want" selected>🟠 Want</option><option value="nice">🟢 Nice to have</option><option value="brainstorm">🟣 Brainstorm</option></select><label>Title</label><input id="rm-title" placeholder="What needs doing?"><label>Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addRoadmapModal">Cancel</button><button class="btn-primary" data-action="saveRoadmapItem">Save</button></div></div></div>
-<div class="modal-bg" id="addWishlistModal"><div class="modal"><button class="modal-close" data-close="addWishlistModal">✕</button><h3>🛒 Add to wishlist</h3><label>Icon</label><select id="w-icon"><option value="👟">👟 Shoes</option><option value="⌚">⌚ Watch</option><option value="🎧">🎧 Headphones</option><option value="👕">👕 Apparel</option><option value="🧦">🧦 Socks</option><option value="⛽">⛽ Nutrition</option><option value="🛒" selected>🛒 Other</option></select><label>Product name</label><input id="w-name" placeholder="e.g. ASICS Novablast 5"><label>Size / Colour</label><input id="w-size" placeholder="e.g. US 10 / White"><label>Est. price (AUD)</label><input id="w-price" type="number" placeholder="0"><label>Notes</label><textarea id="w-notes" rows="2" placeholder="Sizing, colour, where to buy..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addWishlistModal">Cancel</button><button class="btn-primary" data-action="saveWishlistAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveWishlistItem">Save &amp; close</button></div></div></div>
-<div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label>Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label>Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label>Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
-<div class="modal-bg" id="addMantraModal"><div class="modal"><button class="modal-close" data-close="addMantraModal">✕</button><h3>🧠 Add a mantra</h3><label>Type</label><select id="ma-type"><option value="pace">🏃 Pace / discipline</option><option value="strategy">🧠 Strategy</option><option value="grit">🔥 Grit / push through</option><option value="focus">🎯 Focus</option><option value="custom">💭 Other</option></select><label>Your mantra</label><textarea id="ma-text" rows="2" placeholder="What will you tell yourself at km 35?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addMantraModal">Cancel</button><button class="btn-primary" data-action="saveMantra">Save</button></div></div></div>
+<div class="modal-bg" id="addRoadmapModal"><div class="modal"><button class="modal-close" data-close="addRoadmapModal">✕</button><h3 id="rmModalTitle">📝 Add item</h3><input type="hidden" id="rm-id"><label for="rm-priority">Priority</label><select id="rm-priority"><option value="urgent">🔴 Urgent</option><option value="want" selected>🟠 Want</option><option value="nice">🟢 Nice to have</option><option value="brainstorm">🟣 Brainstorm</option></select><label for="rm-title">Title</label><input id="rm-title" placeholder="What needs doing?"><label for="rm-desc">Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addRoadmapModal">Cancel</button><button class="btn-primary" data-action="saveRoadmapItem">Save</button></div></div></div>
+<div class="modal-bg" id="addWishlistModal"><div class="modal"><button class="modal-close" data-close="addWishlistModal">✕</button><h3>🛒 Add to wishlist</h3><label for="w-icon">Icon</label><select id="w-icon"><option value="👟">👟 Shoes</option><option value="⌚">⌚ Watch</option><option value="🎧">🎧 Headphones</option><option value="👕">👕 Apparel</option><option value="🧦">🧦 Socks</option><option value="⛽">⛽ Nutrition</option><option value="🛒" selected>🛒 Other</option></select><label for="w-name">Product name</label><input id="w-name" placeholder="e.g. ASICS Novablast 5"><label for="w-size">Size / Colour</label><input id="w-size" placeholder="e.g. US 10 / White"><label for="w-price">Est. price (AUD)</label><input id="w-price" type="number" placeholder="0"><label for="w-notes">Notes</label><textarea id="w-notes" rows="2" placeholder="Sizing, colour, where to buy..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addWishlistModal">Cancel</button><button class="btn-primary" data-action="saveWishlistAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveWishlistItem">Save &amp; close</button></div></div></div>
+<div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label for="n-area">Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label for="n-severity">Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label for="n-notes">Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
+<div class="modal-bg" id="addMantraModal"><div class="modal"><button class="modal-close" data-close="addMantraModal">✕</button><h3>🧠 Add a mantra</h3><label for="ma-type">Type</label><select id="ma-type"><option value="pace">🏃 Pace / discipline</option><option value="strategy">🧠 Strategy</option><option value="grit">🔥 Grit / push through</option><option value="focus">🎯 Focus</option><option value="custom">💭 Other</option></select><label for="ma-text">Your mantra</label><textarea id="ma-text" rows="2" placeholder="What will you tell yourself at km 35?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addMantraModal">Cancel</button><button class="btn-primary" data-action="saveMantra">Save</button></div></div></div>
 
 <div class="modal-bg" id="widgetModal"><div class="modal" style="max-width:520px"><button class="modal-close" data-close="widgetModal">✕</button><h3 id="widgetModalTitle">Add Widget</h3>
-<label>Widget type</label>
+<label for="wg-type">Widget type</label>
 <select id="wg-type" style="margin-bottom:10px">
   <option value="notes">📝 Notes / Free Text</option>
   <option value="countdown">⏱ Countdown Timer</option>
@@ -3683,10 +3797,10 @@ if (COACH_URL) {
   <option value="divider">— Divider</option>
   <option value="link">🔗 Link Card</option>
 </select>
-<label>Title</label>
+<label for="wg-title">Title</label>
 <input id="wg-title" placeholder="Widget title">
 <div id="wg-extra-fields"></div>
-<label>Colour accent</label>
+<div style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:3px">Colour accent</div>
 <div style="display:flex;gap:6px;margin-bottom:10px">
   <button data-wg-color="var(--golden)" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#D4A052;cursor:pointer"></button>
   <button data-wg-color="#3B82F6" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#3B82F6;cursor:pointer"></button>
