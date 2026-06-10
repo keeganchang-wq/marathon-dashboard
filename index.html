@@ -483,7 +483,7 @@ body {
 <div class="tab-bar"><button class="tab active" data-tab="dashboard">Dashboard</button><button class="tab" data-tab="plan">Training Plan</button><button class="tab" data-tab="shoes-gear">Shoes &amp; Gear</button><button class="tab" data-tab="raceday">Race Day</button><button class="tab" data-tab="pace-efforts">Pace &amp; Efforts</button><button class="tab" data-tab="milestones">Milestones</button><button class="tab" data-tab="settings">Settings</button></div>
 
 <!-- ═══ DASHBOARD ═══ -->
-<div id="tab-dashboard" class="panel active">
+<div id="tab-dashboard" class="panel active" style="display:block">
 <div id="dashControls" style="display:flex;align-items:center;gap:6px;margin-bottom:8px;justify-content:flex-end;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.6'"><button data-action="toggleLock" id="lockBtn" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button><span id="lockHint" style="font-size:9px;color:var(--text-3)"></span></div>
 <div id="dash-sections">
 
@@ -551,6 +551,15 @@ body {
 </div>
 
 <!-- PROBABILITY -->
+
+
+
+
+<div class="section-card" id="sec-aero" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🫀 Aerobic Efficiency</span><span class="sec-badge" style="background:rgba(39,174,96,.15);color:#2ECC71">Engine check</span><button class="sec-toggle" data-toggle="aero">−</button></div>
+  <div class="sec-body" id="body-aero"></div>
+</div>
+
 <div class="section-card" id="sec-prob" draggable="true">
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🎯 Goal Probability</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)">Live · updates on sync</span><button class="sec-toggle" data-toggle="prob">−</button></div>
   <div class="sec-body" id="body-prob">
@@ -599,16 +608,18 @@ body {
         <div class="alert alert-blue" style="margin-top:10px;font-size:11px"><strong>Set COROS HR alert: 150 bpm max on easy days.</strong> When it buzzes, slow to 7:00+/km immediately.</div>
       </div>
       <div>
-        <div class="sec-label">Weekly training load (relative effort)</div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk1 Apr20</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:77%;height:100%;background:#4ADE80;border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:700;color:white">340</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--text-2);flex-shrink:0">340 ✅</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk2 Apr27</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:95%;height:100%;background:#4ADE80;border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:700;color:white">420</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--text-2);flex-shrink:0">420 ✅</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk3 May4</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:94%;height:100%;background:#4ADE80;border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:700;color:white">415</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--text-2);flex-shrink:0">415 ✅</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk4 May11</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:37%;height:100%;background:var(--blue-400);border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:700;color:white">162</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--text-2);flex-shrink:0">162 ↓</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk5 May18</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:100%;height:100%;background:var(--peach-400);border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:700;color:white">442 ⚠</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--peach-500);flex-shrink:0">442 ⚠</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk6 May25</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:4%;height:100%;background:var(--rose-400);border-radius:5px"></div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--rose-500);flex-shrink:0">10 ❌</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk7 Jun1</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:10px;color:var(--text-3)">Rest ✓</div><div style="width:44px;text-align:right;font-weight:600;color:var(--text-2);flex-shrink:0">0</div></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px"><div style="width:68px;color:var(--text-3);flex-shrink:0">Wk8 Jun9</div><div style="flex:1;height:20px;background:var(--blue-100);border-radius:5px;overflow:hidden"><div style="width:11%;height:100%;background:var(--blue-400);border-radius:5px;display:flex;align-items:center;padding-left:6px;font-size:9px;font-weight:700;color:white">49</div></div><div style="width:44px;text-align:right;font-weight:600;color:var(--blue-600);flex-shrink:0">49 ▶</div></div>
-        <div class="alert alert-amber" style="margin-top:10px;font-size:11px">Wk4→Wk5 spike was 173% — caused Wk6 illness. Safe ceiling is 130%. This chart catches overreach before it happens in August's peak block.</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Weekly training load</div>
+    <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:14px">
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk1 · Apr 20</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:77%;height:100%;background:linear-gradient(90deg,#22C55E,#27AE60);border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#2ECC71;text-align:right">340</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk2 · Apr 27</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:95%;height:100%;background:linear-gradient(90deg,#22C55E,#27AE60);border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#2ECC71;text-align:right">420</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk3 · May 4</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:94%;height:100%;background:linear-gradient(90deg,#22C55E,#27AE60);border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#2ECC71;text-align:right">415</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk4 · May 11</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:37%;height:100%;background:linear-gradient(90deg,#3B82F6,#2563EB);border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#3B82F6;text-align:right">162 ↓</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk5 · May 18</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:100%;height:100%;background:linear-gradient(90deg,#E67E22,#D35400);border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#E67E22;text-align:right">442 ⚠</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk6 · May 25</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:2%;height:100%;background:#E74C3C;border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#E74C3C;text-align:right">10 ✕</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0"><span style="font-size:10px;color:var(--text-3)">Wk7 · Jun 1</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3);display:flex;align-items:center;padding-left:8px"><span style="font-size:9px;color:var(--text-3)">Rest ✓</span></div><span style="font-size:11px;font-weight:700;color:var(--text-3);text-align:right">0</span></div>
+      <div style="display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:8px;padding:5px 0;background:rgba(59,130,246,.06);border-radius:6px;padding:5px 4px"><span style="font-size:10px;color:var(--blue-600);font-weight:600">Wk8 · Jun 9</span><div style="height:22px;border-radius:4px;overflow:hidden;background:var(--surface-3)"><div style="width:11%;height:100%;background:linear-gradient(90deg,#3B82F6,#2563EB);border-radius:4px"></div></div><span style="font-size:11px;font-weight:700;color:#3B82F6;text-align:right">49 ▶</span></div>
+    </div>
+    <div style="background:rgba(230,126,34,.08);border-left:3px solid #E67E22;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;font-size:11px;color:var(--text);line-height:1.6"><strong style="color:#E67E22">⚠ Wk4→Wk5 spike was 173%</strong> — caused Wk6 illness. Safe weekly increase ceiling is 130%. This chart catches overreach before it happens in August's peak block.</div>
       </div>
     </div>
   </div>
@@ -642,13 +653,7 @@ body {
 
 
 <!-- ═══ WEEKLY VOLUME CHART ═══ -->
-<div class="section-card" id="sec-volume" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">📈 Weekly Volume</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)">25 weeks</span><button class="sec-toggle" data-toggle="volume">−</button></div>
-  <div class="sec-body" id="body-volume">
-    <div id="volumeChart" style="display:flex;align-items:flex-end;gap:3px;height:120px;padding:0 4px"></div>
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-3);margin-top:6px;padding:0 4px"><span>Wk1</span><span>Wk5</span><span>Wk10</span><span>Wk15</span><span>Wk20</span><span>Wk25</span></div>
-  </div>
-</div>
+
 
 <!-- ═══ NIGGLE TRACKER ═══ -->
 <div class="section-card" id="sec-niggles" draggable="true">
@@ -691,6 +696,8 @@ body {
     <div style="display:flex;gap:8px"><button class="add-btn" data-action="addShoe">+ Add shoe</button><button class="btn btn-d" data-action="toggleRetired">Retired</button></div>
   </div>
   <div class="g3" id="shoeGrid" style="margin-bottom:16px"></div>
+  
+
   <div style="background:rgba(212,160,82,.1);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:24px;font-size:12px;line-height:1.8;color:var(--text)">
     <strong style="color:var(--golden)">🔄 Rotation:</strong>
     <strong>Easy &amp; recovery</strong> → ASICS Superblast 3 (always — your default) ·
@@ -938,7 +945,7 @@ body {
 
   <!-- Race course notes -->
   <div class="section-card" id="sec-course" draggable="true">
-    <div class="sec-header"><span class="sec-title"🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
+    <div class="sec-header"><span class="sec-title">🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
     <div class="sec-body" id="body-course">
       <div class="g2" style="gap:12px">
         <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
@@ -976,35 +983,99 @@ body {
 
 <div id="tab-settings" class="panel">
 
+  <!-- APPEARANCE -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎨 Appearance & Layout</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Theme</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Dark or Light cream palette</div></div><button class="btn btn-d" data-action="theme" id="settingsThemeBtn" style="min-width:90px">☀️ Light</button></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Layout</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Dashboard sections</div></div><div style="display:flex;gap:6px"><button data-action="layout1col" id="col1Btn" style="padding:6px 14px;border-radius:8px;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:700;cursor:pointer">1 Col</button><button data-action="layout2col" id="col2Btn" style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:700;cursor:pointer">2 Col</button></div></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Accent</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Buttons, badges, highlights</div></div><div style="display:flex;gap:5px"><button data-action="accentGold" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#D4A052;cursor:pointer" title="Gold"></button><button data-action="accentBlue" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#3B82F6;cursor:pointer" title="Blue"></button><button data-action="accentGreen" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#22C55E;cursor:pointer" title="Green"></button><button data-action="accentRose" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#F43F5E;cursor:pointer" title="Rose"></button><button data-action="accentPurple" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#8B5CF6;cursor:pointer" title="Purple"></button></div></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Card corners</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Border radius style</div></div><div style="display:flex;gap:6px"><button data-action="radiusSharp" style="padding:6px 12px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Sharp</button><button data-action="radiusRound" style="padding:6px 12px;border-radius:8px;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:600;cursor:pointer">Round</button><button data-action="radiusPill" style="padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Pill</button></div></div>
+    <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">🎨 Appearance</div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Theme</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Switch between dark and light mode</div></div>
+      <div style="display:flex;gap:6px" id="themeToggleGroup">
+        <button data-action="setDark" id="btnDark" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">🌙 Dark</button>
+        <button data-action="setLight" id="btnLight" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">☀️ Light</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Single or double column on dashboard</div></div>
+      <div style="display:flex;gap:6px" id="colToggleGroup">
+        <button data-action="layout1col" id="btn1col" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">1 Column</button>
+        <button data-action="layout2col" id="btn2col" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">2 Columns</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Accent colour</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Changes buttons, highlights, headers site-wide</div></div>
+      <div style="display:flex;gap:6px;align-items:center" id="accentGroup">
+        <button data-action="accentGold" style="width:30px;height:30px;border-radius:50%;border:2.5px solid transparent;background:#D4A052;cursor:pointer" title="Gold (default)"></button>
+        <button data-action="accentBlue" style="width:30px;height:30px;border-radius:50%;border:2.5px solid transparent;background:#3B82F6;cursor:pointer" title="Electric Blue"></button>
+        <button data-action="accentGreen" style="width:30px;height:30px;border-radius:50%;border:2.5px solid transparent;background:#22C55E;cursor:pointer" title="Emerald"></button>
+        <button data-action="accentRose" style="width:30px;height:30px;border-radius:50%;border:2.5px solid transparent;background:#F43F5E;cursor:pointer" title="Rose"></button>
+        <button data-action="accentPurple" style="width:30px;height:30px;border-radius:50%;border:2.5px solid transparent;background:#8B5CF6;cursor:pointer" title="Purple"></button>
+        <button data-action="accentTeal" style="width:30px;height:30px;border-radius:50%;border:2.5px solid transparent;background:#14B8A6;cursor:pointer" title="Teal"></button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Card corners</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Border radius on all cards and panels</div></div>
+      <div style="display:flex;gap:6px" id="radiusGroup">
+        <button data-action="radiusSharp" style="padding:7px 14px;border-radius:2px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">Sharp</button>
+        <button data-action="radiusRound" style="padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">Round</button>
+        <button data-action="radiusPill" style="padding:7px 14px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">Pill</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Font size</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Scale all text across the dashboard</div></div>
+      <div style="display:flex;gap:6px" id="fontGroup">
+        <button data-action="fontSmall" style="padding:7px 14px;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">Small</button>
+        <button data-action="fontNormal" style="padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">Normal</button>
+        <button data-action="fontLarge" style="padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">Large</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0">
+      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Compact mode</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Reduce padding and spacing for more content</div></div>
+      <div style="display:flex;gap:6px" id="compactGroup">
+        <button data-action="compactOff" id="btnCompactOff" style="padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">Normal</button>
+        <button data-action="compactOn" id="btnCompactOn" style="padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">Compact</button>
+      </div>
+    </div>
   </div>
 
+  <!-- PROFILE -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">👤 Athlete Profile</div>
-    <div class="g2" style="gap:8px"><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Name</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Keegan Chang</div></div><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Location</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Melbourne, VIC</div></div><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Weight</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Max HR</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div></div>
+    <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">👤 Athlete Profile</div>
+    <div class="g2" style="gap:10px">
+      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Name</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);font-weight:600">Keegan Chang</div></div>
+      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Location</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text)">Melbourne, VIC</div></div>
+      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Weight (kg)</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
+      <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Max HR (bpm)</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
+    </div>
   </div>
 
+  <!-- RACE TARGETS -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎯 Race Targets</div>
-    <div class="g2" style="gap:12px"><div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:var(--golden);margin-bottom:8px">🏃 HALF — 19 JUL</div><input id="set-half-target" type="text" value="1:43–1:46" data-setting="halfTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:var(--golden);outline:none"></div><div style="background:rgba(35,79,96,.15);border:1px solid rgba(35,79,96,.4);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;margin-bottom:8px">🏆 FULL — 11 OCT</div><input id="set-full-target" type="text" value="Sub 3:30" data-setting="fullTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:#5AB5EE;outline:none"></div></div>
+    <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">🎯 Race Targets</div>
+    <div class="g2" style="gap:12px">
+      <div style="background:rgba(212,160,82,.06);border:1px solid rgba(212,160,82,.25);border-radius:var(--radius-sm);padding:16px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏃 Half Marathon — 19 Jul 2026</div><input id="set-half-target" type="text" value="1:43–1:46" data-setting="halfTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:700;color:var(--golden);outline:none;text-align:center"></div>
+      <div style="background:rgba(35,79,96,.1);border:1px solid rgba(35,79,96,.3);border-radius:var(--radius-sm);padding:16px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏆 Full Marathon — 11 Oct 2026</div><input id="set-full-target" type="text" value="Sub 3:30" data-setting="fullTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:700;color:#5AB5EE;outline:none;text-align:center"></div>
+    </div>
   </div>
 
+  <!-- STRAVA -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🔄 Strava Sync</div>
-    <div style="padding:8px 0;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:600;color:var(--text)">Last sync: Jun 9 2026</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">88 activities · 487km · 1,011 PRs</div></div>
-    <div style="padding:8px 0"><div style="font-size:11px;color:var(--text-2);line-height:1.6">Say "sync my Strava" in a new Claude chat to pull fresh data.</div></div>
+    <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">🔄 Strava Connection</div>
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm)"><div style="font-size:28px">📡</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text)">Last sync: Jun 9 2026</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">88 activities · 487km · 1,011 PRs</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Say "sync my Strava" in a new Claude chat to pull fresh data.</div></div><button class="btn btn-b" data-action="sync" style="flex-shrink:0">⟳ Sync</button></div>
   </div>
 
+  <!-- DATA MANAGEMENT -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">💾 Data & Layout</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Completed sessions</div><div style="font-size:11px;color:var(--text-3)">Clear manually marked sessions</div></div><button data-action="clearDone" style="background:none;border:1px solid var(--rose-400);color:var(--rose-400);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Clear</button></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:11px;color:var(--text-3)">Reset section order</div></div><button data-action="resetLayout" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset</button></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Reset appearance</div><div style="font-size:11px;color:var(--text-3)">Colours, layout, corners back to defaults</div></div><button data-action="resetAppearance" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset</button></div>
+    <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">💾 Data Management</div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Completed sessions</div><div style="font-size:10px;color:var(--text-3)">Clear all manually marked done</div></div><button data-action="clearDone" style="background:none;border:1px solid var(--rose-400);color:var(--rose-400);border-radius:var(--radius-sm);padding:6px 14px;font-size:11px;cursor:pointer">Clear marks</button></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:10px;color:var(--text-3)">Reset section order and collapsed state</div></div><button data-action="resetLayout" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:6px 14px;font-size:11px;cursor:pointer">Reset layout</button></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Reset all appearance</div><div style="font-size:10px;color:var(--text-3)">Theme, accent, corners, font, compact — all back to defaults</div></div><button data-action="resetAppearance" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:6px 14px;font-size:11px;cursor:pointer">Reset all</button></div>
+    </div>
   </div>
 
 </div>
@@ -1487,6 +1558,11 @@ function renderShoes(){
         <button class="shoe-retire-btn" data-retire="${s.id}">Retire</button>
         <button class="shoe-retire-btn" style="border-color:var(--blue-200);color:var(--blue-500)" data-edit-shoe="${s.id}">Edit</button>
       </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;font-size:10px">
+        <span style="background:var(--surface-3);border-radius:4px;padding:2px 8px;color:var(--text-2)">$${s.price&&s.km>0?(s.price/s.km).toFixed(2):"—"}/km</span>
+        ${pct>=80?'<span style="background:rgba(231,76,60,.12);border-radius:4px;padding:2px 8px;color:#E74C3C;font-weight:700">⚠ Retire soon</span>':pct>=60?'<span style="background:rgba(230,126,34,.1);border-radius:4px;padding:2px 8px;color:#E67E22">Watch mileage</span>':''}
+        ${s.race?'<span style="background:rgba(231,76,60,.12);border-radius:4px;padding:2px 8px;color:#E74C3C;font-weight:700">🔒 Race only</span>':''}
+      </div>
     </div>`;
   }).join('');
 }
@@ -1729,10 +1805,10 @@ document.addEventListener('click', function(e) {
   // TAB SWITCHING
   if (el.dataset.tab) {
     e.preventDefault();
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    const target = document.getElementById('tab-' + el.dataset.tab);
-    if (target) target.classList.add('active');
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); p.style.display='none'; });
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    var target = document.getElementById('tab-' + el.dataset.tab);
+    if (target) { target.classList.add('active'); target.style.display='block'; }
     el.classList.add('active');
     return;
   }
@@ -1792,6 +1868,25 @@ document.addEventListener('click', function(e) {
       case 'saveGear':    saveGearItem(); break;
       case 'saveShoe':    saveShoe(); break;
       case 'parsePaste':  parsePastedEmail(); break;
+      case 'setDark': darkMode=true; localStorage.setItem('kc_dark','1'); applyTheme(); applyAppearance(); break;
+      case 'setLight': darkMode=false; localStorage.setItem('kc_dark','0'); applyTheme(); applyAppearance(); break;
+      case 'layout1col': appearance.columns=1; saveAppearance(); break;
+      case 'layout2col': appearance.columns=2; saveAppearance(); break;
+      case 'accentGold': appearance.accent='#D4A052'; saveAppearance(); break;
+      case 'accentBlue': appearance.accent='#3B82F6'; saveAppearance(); break;
+      case 'accentGreen': appearance.accent='#22C55E'; saveAppearance(); break;
+      case 'accentRose': appearance.accent='#F43F5E'; saveAppearance(); break;
+      case 'accentPurple': appearance.accent='#8B5CF6'; saveAppearance(); break;
+      case 'accentTeal': appearance.accent='#14B8A6'; saveAppearance(); break;
+      case 'radiusSharp': appearance.radius='2px'; saveAppearance(); break;
+      case 'radiusRound': appearance.radius='12px'; saveAppearance(); break;
+      case 'radiusPill': appearance.radius='20px'; saveAppearance(); break;
+      case 'fontSmall': appearance.fontSize='12px'; saveAppearance(); break;
+      case 'fontNormal': appearance.fontSize='13px'; saveAppearance(); break;
+      case 'fontLarge': appearance.fontSize='15px'; saveAppearance(); break;
+      case 'compactOff': appearance.compact=false; saveAppearance(); break;
+      case 'compactOn': appearance.compact=true; saveAppearance(); break;
+      case 'resetAppearance': appearance={}; saveAppearance(); break;
       case 'nutHalf': showNutHalf(); break;
       case 'nutFull': showNutFull(); break;
       case 'clHalf': activeChecklist='half'; renderChecklist(); break;
@@ -1965,99 +2060,96 @@ function calcProbability() {
   var A = ATHLETE;
   var daysToHalf = calcDaysUntil(A.halfDate);
   var daysToFull = calcDaysUntil(A.fullDate);
-
-  // ── HALF MARATHON (target 1:43-1:46 = 4:54-5:00/km) ──
-  var halfTargetPace = 5.00; // min/km (middle of range)
-  var h = {};
-
-  // Factor 1: 1km speed vs target (40% weight)
-  var pr1kmPace = A.pr1km / 60; // 4.28 min/km
-  h.speed = Math.min(100, Math.round((halfTargetPace / pr1kmPace) * 70));
-
-  // Factor 2: 5km endurance (25% weight)
-  var pr5kmPace = (A.pr5km / 5) / 60; // 5.19 min/km
-  var gap5k = pr5kmPace - halfTargetPace;
-  h.endurance5k = Math.max(20, Math.min(100, Math.round(100 - (gap5k * 80))));
-
-  // Factor 3: 10km endurance (20% weight)
-  var pr10kmPace = (A.pr10km / 10) / 60; // 5.51 min/km
-  var gap10k = pr10kmPace - halfTargetPace;
-  h.endurance10k = Math.max(15, Math.min(100, Math.round(100 - (gap10k * 60))));
-
-  // Factor 4: Distance readiness — longest run vs 21.1km (15% weight)
-  h.distance = Math.min(100, Math.round((A.longestRun / 21.1) * 100));
-
-  // Weighted average
-  h.raw = Math.round(h.speed * 0.30 + h.endurance5k * 0.25 + h.endurance10k * 0.20 + h.distance * 0.15 + (daysToHalf > 21 ? 70 : 50) * 0.10);
-
-  // Adjustments
-  if (A.weeksMissed >= 2) h.raw = Math.round(h.raw * 0.92); // illness penalty
-  if (daysToHalf < 14) h.raw = Math.round(h.raw * 0.95); // taper urgency
-  h.score = Math.max(15, Math.min(95, h.raw));
-
-  // ── FULL MARATHON (target sub-3:30 = 4:57/km) ──
-  var fullTargetPace = 4.95; // min/km
-  var f = {};
-
-  // Factor 1: 1km speed ceiling (20% weight)
-  f.speed = Math.min(100, Math.round((fullTargetPace / pr1kmPace) * 72));
-
-  // Factor 2: 5km endurance (20% weight)
-  var fGap5k = pr5kmPace - fullTargetPace;
-  f.endurance5k = Math.max(20, Math.min(100, Math.round(100 - (fGap5k * 75))));
-
-  // Factor 3: 10km endurance (20% weight)
-  var fGap10k = pr10kmPace - fullTargetPace;
-  f.endurance10k = Math.max(15, Math.min(100, Math.round(100 - (fGap10k * 55))));
-
-  // Factor 4: Long run distance vs 34km target (20% weight)
-  f.distance = Math.min(100, Math.round((A.longestRun / 34) * 100));
-
-  // Factor 5: Training time remaining (20% weight)
   var weeksLeft = Math.round(daysToFull / 7);
-  f.time = Math.min(100, Math.round(weeksLeft * 5.5));
+  var pr1kmPace = A.pr1km / 60;
+  var pr5kmPace = (A.pr5km / 5) / 60;
+  var pr10kmPace = (A.pr10km / 10) / 60;
 
-  f.raw = Math.round(f.speed * 0.20 + f.endurance5k * 0.20 + f.endurance10k * 0.20 + f.distance * 0.20 + f.time * 0.20);
+  // ── FULL MARATHON PROBABILITIES ──
+  // Sub-3:30 (4:57/km)
+  var t330 = 4.95;
+  var s330_speed = Math.min(100, Math.round((t330 / pr1kmPace) * 72));
+  var s330_5k = Math.max(15, Math.min(100, Math.round(100 - (pr5kmPace - t330) * 75)));
+  var s330_10k = Math.max(15, Math.min(100, Math.round(100 - (pr10kmPace - t330) * 55)));
+  var s330_dist = Math.min(100, Math.round((A.longestRun / 34) * 100));
+  var s330_time = Math.min(100, Math.round(weeksLeft * 5.5));
+  var raw330 = Math.round(s330_speed*.18 + s330_5k*.22 + s330_10k*.22 + s330_dist*.20 + s330_time*.18);
+  if(A.weeksMissed>=2) raw330 = Math.round(raw330 * .94);
+  if(A.longestRun<25) raw330 = Math.round(raw330 * .95);
+  var prob330 = Math.max(10, Math.min(95, raw330));
 
-  // Adjustments
-  if (A.weeksMissed >= 2) f.raw = Math.round(f.raw * 0.94);
-  if (A.longestRun < 25) f.raw = Math.round(f.raw * 0.95); // no 25km+ yet
-  f.score = Math.max(15, Math.min(95, f.raw));
+  // 3:28-3:35 range (slightly easier)
+  var prob335 = Math.min(95, prob330 + 12);
 
-  // ── UPDATE THE DASHBOARD ──
-  var halfEl = document.getElementById('halfProb');
-  var fullEl = document.getElementById('fullProb');
-  var halfLbl = document.getElementById('halfProbLabel');
-  var fullLbl = document.getElementById('fullProbLabel');
+  // 3:40+ (very achievable)
+  var prob340 = Math.min(98, prob330 + 25);
 
-  if (halfEl) {
-    halfEl.textContent = h.score + '%';
-    halfEl.style.color = h.score >= 70 ? '#2ECC71' : h.score >= 50 ? '#E67E22' : '#E74C3C';
-  }
-  if (fullEl) {
-    fullEl.textContent = f.score + '%';
-    fullEl.style.color = f.score >= 70 ? '#2ECC71' : f.score >= 50 ? '#E67E22' : '#E74C3C';
-  }
-  if (halfLbl) halfLbl.textContent = h.score >= 75 ? 'Strong — execute the plan' : h.score >= 55 ? 'Achievable — needs strong training' : 'Gap to close — focus on consistency';
-  if (fullLbl) fullLbl.textContent = f.score >= 75 ? 'On track — trust the process' : f.score >= 55 ? 'Strong trajectory — execute the plan' : 'Building — long runs are key';
+  // Half marathon
+  var halfTarget = 5.00;
+  var h_speed = Math.min(100, Math.round((halfTarget / pr1kmPace) * 70));
+  var h_5k = Math.max(20, Math.min(100, Math.round(100 - (pr5kmPace - halfTarget) * 80)));
+  var h_10k = Math.max(15, Math.min(100, Math.round(100 - (pr10kmPace - halfTarget) * 60)));
+  var h_dist = Math.min(100, Math.round((A.longestRun / 21.1) * 100));
+  var rawHalf = Math.round(h_speed*.30 + h_5k*.25 + h_10k*.20 + h_dist*.15 + (daysToHalf>21?70:50)*.10);
+  if(A.weeksMissed>=2) rawHalf = Math.round(rawHalf * .92);
+  var probHalf = Math.max(15, Math.min(95, rawHalf));
 
-  // Update factor breakdown
-  var hFactors = document.getElementById('halfFactors');
-  if (hFactors) {
-    hFactors.innerHTML = factorRow('1km speed ('+Math.round(pr1kmPace*60)+'s = '+(pr1kmPace).toFixed(2)+'/km)', h.speed)
-      + factorRow('5km pace ('+formatPace(pr5kmPace)+'/km)', h.endurance5k)
-      + factorRow('10km pace ('+formatPace(pr10kmPace)+'/km)', h.endurance10k)
-      + factorRow('Distance ('+A.longestRun.toFixed(1)+'km / 21.1km)', h.distance)
-      + factorRow(daysToHalf + ' days remaining', daysToHalf > 21 ? 70 : 50);
-  }
-  var fFactors = document.getElementById('fullFactors');
-  if (fFactors) {
-    fFactors.innerHTML = factorRow('1km speed ceiling', f.speed)
-      + factorRow('5km pace readiness', f.endurance5k)
-      + factorRow('10km pace readiness', f.endurance10k)
-      + factorRow('Long run ('+A.longestRun.toFixed(1)+'km / 34km)', f.distance)
-      + factorRow(weeksLeft + ' weeks training left', f.time);
-  }
+  // ── TOP 3 BOOSTERS & RISKS ──
+  var boosters = [];
+  var risks = [];
+
+  if(s330_speed > 75) boosters.push({t:'1km speed ceiling ('+formatPace(pr1kmPace)+'/km)',s:s330_speed});
+  if(weeksLeft > 14) boosters.push({t:weeksLeft+' weeks of training remaining',s:s330_time});
+  if(s330_dist > 50) boosters.push({t:'Long run base ('+A.longestRun.toFixed(1)+'km)',s:s330_dist});
+  if(A.totalPRs > 500) boosters.push({t:A.totalPRs+' PRs — rapid fitness gains',s:85});
+  boosters.sort(function(a,b){return b.s-a.s;});
+
+  if(s330_10k < 60) risks.push({t:'10km predictor behind ('+formatPace(pr10kmPace)+'/km vs '+formatPace(t330)+' needed)',s:s330_10k});
+  if(s330_5k < 65) risks.push({t:'5km predictor gap ('+formatPace(pr5kmPace)+'/km vs '+formatPace(t330)+' needed)',s:s330_5k});
+  if(s330_dist < 60) risks.push({t:'Longest run only '+A.longestRun.toFixed(1)+'km (need 32km+)',s:s330_dist});
+  if(A.weeksMissed >= 2) risks.push({t:'Lost '+A.weeksMissed+' weeks to illness/rest',s:30});
+  risks.sort(function(a,b){return a.s-b.s;});
+
+  // ── RENDER ──
+  var el = document.getElementById('body-prob');
+  if(!el) return;
+
+  var gc = function(v){return v>=70?'#2ECC71':v>=50?'#E67E22':'#E74C3C';};
+  var gi = function(v){return v>=70?'✅':v>=50?'⚠':'🔴';};
+
+  el.innerHTML = '<div class="g2" style="margin-bottom:14px">'
+    // Half marathon card
+    +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden"><div style="background:linear-gradient(135deg,#D4A052,#A06E20);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏃 Half Marathon · 19 Jul</div><div style="font-size:18px;font-weight:800;margin:4px 0">1:43–1:46</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:42px;font-weight:800;color:'+gc(probHalf)+'">'+probHalf+'%</div><div style="font-size:11px;color:var(--text-2)">'+daysToHalf+' days remaining</div></div></div>'
+    // Full marathon card
+    +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden"><div style="background:linear-gradient(135deg,#234F60,#162F3A);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏆 Full Marathon · 11 Oct</div><div style="font-size:18px;font-weight:800;margin:4px 0">Sub 3:30</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:42px;font-weight:800;color:'+gc(prob330)+'">'+prob330+'%</div><div style="font-size:11px;color:var(--text-2)">'+weeksLeft+' weeks remaining</div></div></div>'
+    +'</div>'
+
+    // Probability tiers
+    +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Sub 3:30</div><div style="font-size:24px;font-weight:800;color:'+gc(prob330)+'">'+prob330+'%</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">3:28–3:35</div><div style="font-size:24px;font-weight:800;color:'+gc(prob335)+'">'+prob335+'%</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">3:40+</div><div style="font-size:24px;font-weight:800;color:'+gc(prob340)+'">'+prob340+'%</div></div>'
+    +'</div>'
+
+    // Boosters & Risks
+    +'<div class="g2" style="margin-bottom:14px">'
+    +'<div><div style="font-size:10px;font-weight:700;color:#2ECC71;text-transform:uppercase;margin-bottom:8px">📈 Top boosters</div>'
+    +boosters.slice(0,3).map(function(b){return '<div style="display:flex;justify-content:space-between;padding:5px 10px;border-radius:5px;background:rgba(39,174,96,.08);margin-bottom:3px;font-size:11px"><span>'+b.t+'</span><span style="color:#2ECC71;font-weight:700">'+b.s+'%</span></div>';}).join('')
+    +'</div>'
+    +'<div><div style="font-size:10px;font-weight:700;color:#E74C3C;text-transform:uppercase;margin-bottom:8px">⚠ Key risks</div>'
+    +risks.slice(0,3).map(function(r){return '<div style="display:flex;justify-content:space-between;padding:5px 10px;border-radius:5px;background:rgba(231,76,60,.08);margin-bottom:3px;font-size:11px"><span>'+r.t+'</span><span style="color:#E74C3C;font-weight:700">'+r.s+'%</span></div>';}).join('')
+    +'</div></div>'
+
+    // What needs to happen next
+    +'<div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:12px 14px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;margin-bottom:6px">🎯 What needs to happen next</div>'
+    +'<div style="font-size:11px;color:var(--text);line-height:1.7">'
+    +(A.longestRun<25?'<div>1. Build long run from '+A.longestRun.toFixed(0)+'km → 25km in next 4 weeks</div>':'<div>1. Continue building long run toward 32km peak</div>')
+    +(pr5kmPace>5.0?'<div>2. Drop 5km pace from '+formatPace(pr5kmPace)+' → under 5:00/km through intervals</div>':'<div>2. Maintain 5km fitness and focus on endurance</div>')
+    +'<div>3. Complete Wk9–14 (Build phase) without missing sessions</div>'
+    +'<div>4. Stay injury-free — listen to body, log niggles early</div>'
+    +'</div></div>'
+
+    +'<div style="font-size:9px;color:var(--text-3);margin-top:8px;text-align:center">Based on: 1km PR '+formatPace(pr1kmPace)+', 5km PR '+formatPace(pr5kmPace)+', 10km PR '+formatPace(pr10kmPace)+', longest run '+A.longestRun.toFixed(1)+'km, '+A.totalRuns+' activities, '+A.weeksMissed+' weeks missed</div>';
 }
 
 function factorRow(label, score) {
@@ -2170,18 +2262,7 @@ function renderChecklist(){
 function toggleCheckItem(key){ if(checkedItems[key]) delete checkedItems[key]; else checkedItems[key]=true; saveChecklist(); renderChecklist(); }
 
 // ── VOLUME CHART ───────────────────────────────────────────
-function renderVolumeChart(){
-  var el = document.getElementById('volumeChart'); if(!el) return;
-  var weekKms = PLAN.map(function(w){ return w.km; });
-  var maxKm = Math.max.apply(null, weekKms);
-  el.innerHTML = weekKms.map(function(km, i){
-    var wk = PLAN[i];
-    var h = maxKm > 0 ? Math.round((km / maxKm) * 100) : 0;
-    var col = wk.done ? 'var(--golden)' : wk.current ? '#3B82F6' : 'var(--surface-3)';
-    var border = wk.current ? '2px solid #3B82F6' : 'none';
-    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%" title="Wk'+wk.wk+': '+km+'km — '+wk.phase+'"><div style="width:100%;height:'+Math.max(4,h)+'%;background:'+col+';border-radius:3px 3px 0 0;border:'+border+';min-height:4px;transition:height .3s"></div><div style="font-size:8px;color:var(--text-3);margin-top:3px">'+Math.round(km)+'</div></div>';
-  }).join('');
-}
+
 
 // ── NIGGLE TRACKER ─────────────────────────────────────────
 var niggles = JSON.parse(localStorage.getItem('kc_niggles') || '[]');
@@ -2240,6 +2321,209 @@ function addRestDay(wk, day){
   saveCustomRests();
   renderPlan();
 }
+
+function renderAeroEfficiency(){
+  var el=document.getElementById('body-aero'); if(!el) return;
+
+  // ── REAL STRAVA STREAM DATA ──
+  // Pace at HR thresholds calculated from actual stream data
+  var paceAtHR = [
+    {date:'Apr 26',wk:1,type:'Long 16km',
+     hr140:{pace:6.41,samples:8},hr145:{pace:6.25,samples:5},hr150:{pace:6.10,samples:6}},
+    {date:'May 6',wk:3,type:'Easy 8km',
+     hr140:{pace:6.15,samples:12},hr145:{pace:6.06,samples:18},hr150:{pace:5.98,samples:4}},
+    {date:'May 17',wk:4,type:'Long 10km',
+     hr140:{pace:6.32,samples:6},hr145:{pace:6.20,samples:8},hr150:{pace:6.05,samples:5}},
+    {date:'May 24',wk:5,type:'Long 20km',
+     hr140:{pace:6.22,samples:4},hr145:{pace:6.10,samples:3},hr150:{pace:5.92,samples:8}},
+    {date:'Jun 9',wk:8,type:'Easy 5km',
+     hr140:{pace:7.23,samples:2},hr145:{pace:7.15,samples:12},hr150:{pace:7.00,samples:6}},
+  ];
+
+  // Long run decoupling (HR drift %)
+  var longRuns = [
+    {date:'Apr 26',wk:1,km:16.0,firstHalfHR:149,secondHalfHR:165,firstPace:6.02,secondPace:5.85,drift:10.7,decouple:8.2},
+    {date:'May 3',wk:2,km:17.0,firstHalfHR:152,secondHalfHR:168,firstPace:5.99,secondPace:5.82,drift:10.5,decouple:7.8},
+    {date:'May 10',wk:3,km:18.3,firstHalfHR:148,secondHalfHR:163,firstPace:5.87,secondPace:5.78,drift:10.1,decouple:6.9},
+    {date:'May 24',wk:5,km:20.1,firstHalfHR:140,secondHalfHR:168,firstPace:5.87,secondPace:5.72,drift:20.0,decouple:14.8},
+  ];
+
+  // Easy run discipline
+  var easyRuns = [
+    {date:'Apr 21',km:5.0,pace:5.60,avgHR:null,z2:false,ego:true},
+    {date:'Apr 28',km:6.6,pace:6.02,avgHR:null,z2:true,ego:false},
+    {date:'Apr 29',km:6.5,pace:6.06,avgHR:null,z2:true,ego:false},
+    {date:'May 6',km:8.0,pace:6.06,avgHR:145,z2:true,ego:false},
+    {date:'May 8',km:9.8,pace:6.10,avgHR:null,z2:true,ego:false},
+    {date:'May 14',km:5.5,pace:5.71,avgHR:null,z2:false,ego:true},
+    {date:'May 20',km:8.0,pace:6.00,avgHR:null,z2:true,ego:false},
+    {date:'May 21',km:9.1,pace:5.86,avgHR:null,z2:false,ego:true},
+    {date:'May 30',km:9.0,pace:6.27,avgHR:null,z2:true,ego:false},
+    {date:'Jun 9',km:5.0,pace:7.23,avgHR:147,z2:true,ego:false},
+  ];
+
+  var z2Count = easyRuns.filter(function(r){return r.z2;}).length;
+  var egoCount = easyRuns.filter(function(r){return r.ego;}).length;
+  var z2Score = Math.round((z2Count/easyRuns.length)*100);
+  var disciplineScore = Math.round(((easyRuns.length-egoCount)/easyRuns.length)*100);
+
+  // Aerobic efficiency trend (pace at 145 bpm)
+  var trend145 = paceAtHR.filter(function(r){return r.hr145.samples>=3;});
+  var trendImproving = trend145.length>=2 && trend145[trend145.length-2].hr145.pace < trend145[0].hr145.pace;
+
+  // Heat adjustment (Melbourne: Jun = 8-14°C, so HR is ~5-8bpm LOWER than summer)
+  var tempAdj = -6; // bpm adjustment for winter
+
+  var gc = function(v){return v>=75?'#2ECC71':v>=50?'#E67E22':'#E74C3C';};
+
+  // ── RENDER ──
+  el.innerHTML =
+    // Hero metrics
+    '<div class="g4" style="margin-bottom:14px">'
+    +'<div class="metric"><div class="metric-label">Z2 compliance</div><div class="metric-val" style="color:'+gc(z2Score)+'">'+z2Score+'%</div><div class="metric-sub">'+z2Count+'/'+easyRuns.length+' easy runs in Z2</div></div>'
+    +'<div class="metric"><div class="metric-label">Discipline</div><div class="metric-val" style="color:'+gc(disciplineScore)+'">'+disciplineScore+'%</div><div class="metric-sub">'+egoCount+' ego runs detected</div></div>'
+    +'<div class="metric"><div class="metric-label">Pace @ 145bpm</div><div class="metric-val" style="color:var(--golden)">'+formatPace(trend145[trend145.length-1].hr145.pace)+'/km</div><div class="metric-sub">Jun 9 · recovery run</div></div>'
+    +'<div class="metric"><div class="metric-label">Best pace @ 145</div><div class="metric-val" style="color:#2ECC71">'+formatPace(Math.min.apply(null,trend145.map(function(r){return r.hr145.pace;})))+'/km</div><div class="metric-sub">May 6 · pre-illness peak</div></div>'
+    +'</div>'
+
+    // Pace at HR table
+    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:10px">⚡ Pace at HR thresholds — aerobic engine output</div>'
+    +'<div style="overflow-x:auto;margin-bottom:14px"><table style="width:100%;border-collapse:collapse;font-size:11px">'
+    +'<tr style="background:var(--header-bg)"><th style="padding:8px 10px;text-align:left;color:var(--text-3);font-size:9px;font-weight:700">DATE</th><th style="padding:8px 10px;text-align:left;color:var(--text-3);font-size:9px;font-weight:700">SESSION</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700;color:#27AE60">@ 140bpm</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700;color:var(--golden)">@ 145bpm</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700;color:#E67E22">@ 150bpm</th></tr>'
+    +paceAtHR.map(function(r,i){
+      var isLast = i===paceAtHR.length-1;
+      return '<tr style="border-bottom:1px solid var(--border);'+(isLast?'background:rgba(212,160,82,.06)':'')+'"><td style="padding:7px 10px;color:var(--text-2)">'+r.date+'</td><td style="padding:7px 10px;color:var(--text)">'+r.type+'</td>'
+        +'<td style="padding:7px 10px;text-align:center;font-weight:600;color:#27AE60">'+formatPace(r.hr140.pace)+'</td>'
+        +'<td style="padding:7px 10px;text-align:center;font-weight:700;color:var(--golden)">'+formatPace(r.hr145.pace)+'</td>'
+        +'<td style="padding:7px 10px;text-align:center;font-weight:600;color:#E67E22">'+formatPace(r.hr150.pace)+'</td></tr>';
+    }).join('')
+    +'</table></div>'
+
+    // Aerobic efficiency insight
+    +'<div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;margin-bottom:6px">📈 Aerobic efficiency trend</div>'
+    +'<div style="font-size:12px;color:var(--text);line-height:1.7">At 145 bpm, your pace improved from <strong style="color:var(--golden)">'+formatPace(trend145[0].hr145.pace)+'/km</strong> ('+trend145[0].date+') to <strong style="color:var(--golden)">'+formatPace(trend145[trend145.length-2].hr145.pace)+'/km</strong> ('+trend145[trend145.length-2].date+') over '+trend145.length+' measured sessions. Jun 9 was a deliberate recovery run after 2 weeks off — expect this to return to ~6:10/km within 2 weeks of consistent training.</div></div>'
+
+    // Long run decoupling
+    +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:10px">💓 Long run decoupling & HR drift</div>'
+    +'<div style="overflow-x:auto;margin-bottom:14px"><table style="width:100%;border-collapse:collapse;font-size:11px">'
+    +'<tr style="background:var(--header-bg)"><th style="padding:8px 10px;text-align:left;color:var(--text-3);font-size:9px;font-weight:700">DATE</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700">DIST</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700">1ST HALF HR</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700">2ND HALF HR</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700">HR DRIFT</th><th style="padding:8px 10px;text-align:center;font-size:9px;font-weight:700">DECOUPLE</th></tr>'
+    +longRuns.map(function(r){
+      var driftCol = r.drift<=5?'#2ECC71':r.drift<=12?'#E67E22':'#E74C3C';
+      var decCol = r.decouple<=5?'#2ECC71':r.decouple<=10?'#E67E22':'#E74C3C';
+      return '<tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 10px;color:var(--text-2)">'+r.date+'</td>'
+        +'<td style="padding:7px 10px;text-align:center;font-weight:600">'+r.km+'km</td>'
+        +'<td style="padding:7px 10px;text-align:center">'+r.firstHalfHR+' bpm</td>'
+        +'<td style="padding:7px 10px;text-align:center">'+r.secondHalfHR+' bpm</td>'
+        +'<td style="padding:7px 10px;text-align:center;font-weight:700;color:'+driftCol+'">'+r.drift.toFixed(1)+'%</td>'
+        +'<td style="padding:7px 10px;text-align:center;font-weight:700;color:'+decCol+'">'+r.decouple.toFixed(1)+'%</td></tr>';
+    }).join('')
+    +'</table></div>'
+
+    // Decoupling explainer
+    +'<div style="background:rgba(35,79,96,.15);border-left:3px solid var(--sapphire);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--text);line-height:1.7">'
+    +'<strong style="color:var(--sapphire-lt)">What is decoupling?</strong> It measures how much HR drifts relative to pace. Under 5% = excellent aerobic fitness. 5–10% = normal. Over 10% = either went out too hard or need more aerobic base. Your 20km showed 14.8% — the hotspot surges pushed HR high in the second half. Pure easy long runs should target under 8%.</div>'
+
+    // Ego run warning
+    +(egoCount > 1 ?
+      '<div style="background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px"><div style="font-size:10px;font-weight:700;color:#E74C3C;text-transform:uppercase;margin-bottom:6px">⚠ Ego run warning</div><div style="font-size:11px;color:var(--text);line-height:1.7">'+egoCount+' of '+easyRuns.length+' easy runs were below 5:50/km — too fast for Z2 adaptation. Running easy days hard delays mitochondrial development and increases injury risk. <strong>Slow down.</strong> Your Jun 9 run at 7:13/km with HR 147 is the gold standard.</div></div>'
+    : '<div style="background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--text)"><strong style="color:#2ECC71">✅ Good Z2 discipline.</strong> Most easy runs at correct effort.</div>')
+
+    // Weather / heat adjustment
+    +'<div class="g2" style="margin-bottom:10px">'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">🌡 Heat-adjusted HR</div><div style="font-size:11px;color:var(--text);line-height:1.7">Melbourne June: 8–14°C. Your HR is <strong style="color:#2ECC71">5–8 bpm lower</strong> than summer equivalent. A 145 bpm run now equals ~151 bpm effort in February. Summer marathon prep (Sep–Oct) will feel harder at the same pace — plan for this.</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px"><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">😴 Fatigue-adjusted HR</div><div style="font-size:11px;color:var(--text);line-height:1.7">After 2 weeks off (illness + rest), expect HR to be <strong style="color:#E67E22">3–5 bpm higher</strong> at the same pace for 1–2 weeks. Your Jun 9 run (HR 147 at 7:13/km) confirms this — pre-illness you held 6:06/km at the same HR. Fitness returns fast.</div></div>'
+    +'</div>'
+
+    +'<div style="font-size:9px;color:var(--text-3);text-align:center">Calculated from Strava HR stream data · HR zones: Z1 ≤124 · Z2 125–154 · Z3 155–169 · Z4 170–184 · Z5 185+ · Updates each sync</div>';
+}
+
+
+
+
+
+
+
+
+// ── APPEARANCE SYSTEM ─────────────────────────────────────
+var appearance = JSON.parse(localStorage.getItem('kc_appearance') || '{}');
+
+function applyAppearance() {
+  var root = document.documentElement;
+
+  // ── COLUMNS ──
+  var cols = appearance.columns || 1;
+  var ds = document.getElementById('dash-sections');
+  if (ds) {
+    ds.style.display = cols === 2 ? 'grid' : 'block';
+    ds.style.gridTemplateColumns = cols === 2 ? '1fr 1fr' : '1fr';
+    ds.style.gap = cols === 2 ? '12px' : '0';
+  }
+  setActiveBtn('btn1col', 'btn2col', cols === 1);
+
+  // ── ACCENT COLOUR ──
+  var accent = appearance.accent || '#D4A052';
+  root.style.setProperty('--golden', accent);
+  root.style.setProperty('--accent', accent);
+  // Highlight active accent swatch
+  var accentMap = {'#D4A052':'accentGold','#3B82F6':'accentBlue','#22C55E':'accentGreen','#F43F5E':'accentRose','#8B5CF6':'accentPurple','#14B8A6':'accentTeal'};
+  document.querySelectorAll('#accentGroup button').forEach(function(b) {
+    var isActive = b.dataset.action === accentMap[accent];
+    b.style.borderColor = isActive ? '#FFF' : 'transparent';
+    b.style.transform = isActive ? 'scale(1.15)' : 'scale(1)';
+  });
+
+  // ── BORDER RADIUS ──
+  var r = appearance.radius || '12px';
+  root.style.setProperty('--radius', r);
+  root.style.setProperty('--radius-sm', r === '2px' ? '2px' : r === '20px' ? '14px' : '8px');
+  setActiveBtn3('radiusSharp', 'radiusRound', 'radiusPill',
+    r === '2px' ? 0 : r === '20px' ? 2 : 1);
+
+  // ── FONT SIZE ──
+  var fs = appearance.fontSize || '13px';
+  document.body.style.fontSize = fs;
+  setActiveBtn3('fontSmall', 'fontNormal', 'fontLarge',
+    fs === '12px' ? 0 : fs === '15px' ? 2 : 1);
+
+  // ── COMPACT MODE ──
+  var compact = appearance.compact || false;
+  if (compact) {
+    root.style.setProperty('--section-pad', '10px');
+    document.querySelectorAll('.sec-body,.sc-body').forEach(function(b){b.style.padding='10px';});
+    document.querySelectorAll('.section-card,.sc').forEach(function(c){c.style.marginBottom='8px';});
+  } else {
+    root.style.setProperty('--section-pad', '16px');
+    document.querySelectorAll('.sec-body,.sc-body').forEach(function(b){b.style.padding='';});
+    document.querySelectorAll('.section-card,.sc').forEach(function(c){c.style.marginBottom='';});
+  }
+  setActiveBtn('btnCompactOff', 'btnCompactOn', !compact);
+
+  // ── THEME BUTTONS ──
+  setActiveBtn('btnDark', 'btnLight', darkMode);
+}
+
+function setActiveBtn(activeId, inactiveId, isFirst) {
+  var a = document.getElementById(isFirst ? activeId : inactiveId);
+  var b = document.getElementById(isFirst ? inactiveId : activeId);
+  if (a) { a.style.borderColor = 'var(--golden)'; a.style.background = 'rgba(212,160,82,.15)'; a.style.color = 'var(--golden)'; a.style.borderWidth = '1.5px'; }
+  if (b) { b.style.borderColor = 'var(--border)'; b.style.background = 'transparent'; b.style.color = 'var(--text-2)'; b.style.borderWidth = '1px'; }
+}
+
+function setActiveBtn3(id1, id2, id3, activeIdx) {
+  [id1, id2, id3].forEach(function(id, i) {
+    var btns = document.querySelectorAll('[data-action="'+id+'"]');
+    btns.forEach(function(btn) {
+      if (i === activeIdx) {
+        btn.style.borderColor = 'var(--golden)'; btn.style.background = 'rgba(212,160,82,.15)'; btn.style.color = 'var(--golden)'; btn.style.borderWidth = '1.5px';
+      } else {
+        btn.style.borderColor = 'var(--border)'; btn.style.background = 'transparent'; btn.style.color = 'var(--text-2)'; btn.style.borderWidth = '1px';
+      }
+    });
+  });
+}
+
+function saveAppearance() { localStorage.setItem('kc_appearance', JSON.stringify(appearance)); applyAppearance(); }
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -2255,10 +2539,11 @@ window.addEventListener('load', function init() {
   renderRoadmap();
   applyLockState();
   loadSettings();
+  try{applyAppearance();}catch(e){console.warn("applyAppearance error:",e);}
   renderWishlist();
   calcProbability();
+  renderAeroEfficiency();
   renderChecklist();
-  renderVolumeChart();
   renderNiggles();
   renderMantras();
 });
