@@ -933,7 +933,7 @@ input[type=number] { -moz-appearance:textfield; }
     <div style="display:flex;gap:8px;margin-bottom:12px">
       <button id="clHalfBtn" data-action="clHalf" style="padding:6px 14px;border-radius:20px;border:1px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:600;cursor:pointer">Half · Jul 19</button>
       <button id="clFullBtn" data-action="clFull" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Full · Oct 11</button>
-      <button data-action="clReset" style="margin-left:auto;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-3);font-size:10px;cursor:pointer">Reset all</button>
+      <button data-action="toggleCheckEdit" id="clEditBtn" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:10px;font-weight:600;cursor:pointer">✏️ Edit</button><button data-action="clReset" style="margin-left:6px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-3);font-size:10px;cursor:pointer">Reset</button>
     </div>
     <div id="checklistGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
   </div>
@@ -1258,12 +1258,12 @@ const PLAN = [
 // ── STATE ──────────────────────────────────────────────────────
 let completed = JSON.parse(localStorage.getItem('kc_done') || '{}');
 let shoes = JSON.parse(localStorage.getItem('kc_shoes') || 'null') || [
-  {id:'30605717',brand:'ASICS',model:'Superblast 3',name:'White',type:'daily',use:'Default daily driver — all easy runs, recovery runs &amp; long runs',km:182.2,warn:800,retire:1000,race:false},
-  {id:'30100397',brand:'Nike',model:'Alphafly 3',name:'Platinum',type:'carbon',use:'Race day Oct 11 marathon 🏆 · Break-in: Wk10 Jun 22 (5km), Wk14 Jul 16 (8km), Wk17 Aug 11 (8km)',km:14.0,warn:400,retire:500,race:true,raceTag:'🏆 MARATHON RACE SHOE'},
-  {id:'29078819',brand:'Nike',model:'Vaporfly 4',name:'White',type:'carbon',use:'Interval sessions — rotate with Adios Pro 4',km:119.5,warn:400,retire:500,race:false,raceTag:null},
-  {id:'28897817',brand:'Adidas',model:'Adios Pro 4',name:'White cloud',type:'carbon',use:'Intervals (rotate with Vaporfly 4) &amp; tempo runs',km:85.7,warn:400,retire:500,race:false},
-  {id:'29156194',brand:'Nike',model:'Vomero Plus',name:'Tan',type:'daily',use:'Easy runs, long runs (protect Superblast)',km:43.2,warn:800,retire:1000,race:false},
-  {id:'28800916',brand:'Adidas',model:'EVO SL 2',name:'',type:'daily',use:'Easy runs, recovery days',km:56.2,warn:800,retire:1000,race:false},
+  {id:'30605717',brand:'ASICS',model:'Superblast 3',name:'White',type:'daily',use:'Default daily driver — all easy runs, recovery runs &amp; long runs',km:182.2,warn:800,retire:1000,race:false,price:280},
+  {id:'30100397',brand:'Nike',model:'Alphafly 3',name:'Platinum',type:'carbon',use:'Race day Oct 11 marathon 🏆 · Break-in: Wk10 Jun 22 (5km), Wk14 Jul 16 (8km), Wk17 Aug 11 (8km)',km:14.0,warn:400,retire:500,race:true,raceTag:'🏆 MARATHON RACE SHOE',price:350},
+  {id:'29078819',brand:'Nike',model:'Vaporfly 4',name:'White',type:'carbon',use:'Interval sessions — rotate with Adios Pro 4',km:119.5,warn:400,retire:500,race:false,raceTag:null,price:350},
+  {id:'28897817',brand:'Adidas',model:'Adios Pro 4',name:'White cloud',type:'carbon',use:'Intervals (rotate with Vaporfly 4) &amp; tempo runs',km:85.7,warn:400,retire:500,race:false,price:300},
+  {id:'29156194',brand:'Nike',model:'Vomero Plus',name:'Tan',type:'daily',use:'Easy runs, long runs (protect Superblast)',km:43.2,warn:800,retire:1000,race:false,price:250},
+  {id:'28800916',brand:'Adidas',model:'EVO SL 2',name:'',type:'daily',use:'Easy runs, recovery days',km:56.2,warn:800,retire:1000,race:false,price:180},
 ];
 function saveShoes(){localStorage.setItem('kc_shoes',JSON.stringify(shoes));}
 
@@ -1604,9 +1604,9 @@ function retireShoe(id){if(!confirm('Retire this shoe?'))return;const s=shoes.fi
 function unretireShoe(id){const s=shoes.find(x=>x.id===id);if(s)s.retired=false;saveShoes();renderShoes();renderRetired();}
 function renderRetired(){const r=shoes.filter(s=>s.retired);const el=document.getElementById('retired-list');if(!el)return;if(!r.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-3);font-size:12px">No retired shoes yet.</div>';return;}el.innerHTML=r.map(s=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:20px">👟</span><div><div style="font-size:12px;font-weight:600">${s.brand} ${s.model}</div><div style="font-size:10px;color:var(--text-3)">${s.km.toFixed(0)}km · Retired</div></div><button data-unretire="${s.id}" style="margin-left:auto;font-size:10px;background:var(--blue-100);border:1px solid var(--blue-200);border-radius:6px;padding:3px 8px;color:var(--blue-600);cursor:pointer">Restore</button></div>`).join('');}
 function toggleRetired(){const s=document.getElementById('retired-section');s.style.display=s.style.display==='none'?'block':'none';renderRetired();}
-function openAddShoe(){['sh-brand','sh-model','sh-name','sh-use'].forEach(id=>document.getElementById(id).value='');document.getElementById('sh-km').value='0';document.getElementById('sh-type').value='daily';delete document.getElementById('addShoeModal').dataset.eid;document.getElementById('addShoeModal').classList.add('open');}
-function editShoe(id){const s=shoes.find(x=>x.id===id);if(!s)return;document.getElementById('sh-brand').value=s.brand;document.getElementById('sh-model').value=s.model;document.getElementById('sh-name').value=s.name||'';document.getElementById('sh-type').value=s.type;document.getElementById('sh-use').value=s.use;document.getElementById('sh-km').value=s.km;document.getElementById('addShoeModal').dataset.eid=id;document.getElementById('addShoeModal').classList.add('open');}
-function saveShoe(){const eid=document.getElementById('addShoeModal').dataset.eid;const d={brand:document.getElementById('sh-brand').value,model:document.getElementById('sh-model').value,name:document.getElementById('sh-name').value,type:document.getElementById('sh-type').value,use:document.getElementById('sh-use').value,km:parseFloat(document.getElementById('sh-km').value)||0};if(eid){const s=shoes.find(x=>x.id===eid);if(s)Object.assign(s,d);}else{d.id='m_'+Date.now();d.retired=false;shoes.push(d);}saveShoes();renderShoes();closeModal('addShoeModal');}
+function openAddShoe(){['sh-brand','sh-model','sh-name','sh-use'].forEach(id=>document.getElementById(id).value='');document.getElementById('sh-km').value='0';document.getElementById('sh-price').value='';document.getElementById('sh-type').value='daily';delete document.getElementById('addShoeModal').dataset.eid;document.getElementById('addShoeModal').classList.add('open');}
+function editShoe(id){const s=shoes.find(x=>x.id===id);if(!s)return;document.getElementById('sh-brand').value=s.brand;document.getElementById('sh-model').value=s.model;document.getElementById('sh-name').value=s.name||'';document.getElementById('sh-type').value=s.type;document.getElementById('sh-use').value=s.use;document.getElementById('sh-km').value=s.km;document.getElementById('sh-price').value=s.price||'';document.getElementById('addShoeModal').dataset.eid=id;document.getElementById('addShoeModal').classList.add('open');}
+function saveShoe(){const eid=document.getElementById('addShoeModal').dataset.eid;const d={brand:document.getElementById('sh-brand').value,model:document.getElementById('sh-model').value,name:document.getElementById('sh-name').value,type:document.getElementById('sh-type').value,use:document.getElementById('sh-use').value,km:parseFloat(document.getElementById('sh-km').value)||0,price:parseFloat(document.getElementById('sh-price').value)||0};if(eid){const s=shoes.find(x=>x.id===eid);if(s)Object.assign(s,d);}else{d.id='m_'+Date.now();d.retired=false;shoes.push(d);}saveShoes();renderShoes();closeModal('addShoeModal');}
 
 // GEAR
 const GCATS={apparel_top:{label:'Tops / Singlets',icon:'👕'},apparel_bottom:{label:'Shorts / Tights',icon:'🩳'},socks:{label:'Socks',icon:'🧦'},watch:{label:'Watch',icon:'⌚'},hr_monitor:{label:'HR Monitor',icon:'❤️'},headphones:{label:'Headphones',icon:'🎧'},sunglasses:{label:'Sunglasses',icon:'🕶️'},nutrition:{label:'Nutrition / Gels',icon:'⛽'},recovery:{label:'Recovery tools',icon:'💪'},other:{label:'Other',icon:'📦'}};
@@ -1927,7 +1927,11 @@ document.addEventListener('click', function(e) {
       case 'nutFull': showNutFull(); break;
       case 'clHalf': activeChecklist='half'; renderChecklist(); break;
       case 'clFull': activeChecklist='full'; renderChecklist(); break;
-      case 'clReset': checkedItems={}; saveChecklist(); renderChecklist(); break;
+      case 'toggleCheckEdit': window.checklistEditMode=!window.checklistEditMode; renderChecklist(); break;
+      case 'addCheckItem': { var ci=parseInt(el.dataset.clCat); addCheckItem(ci); break; }
+      case 'editCheckItem': { var eci=parseInt(el.dataset.clCat),eii=parseInt(el.dataset.clIdx); editCheckItem(eci,eii); break; }
+      case 'delCheckItem': { var dci=parseInt(el.dataset.clCat),dii=parseInt(el.dataset.clIdx); if(confirm('Remove this item?')) delCheckItem(dci,dii); break; }
+      case 'clReset': checkedItems={}; CHECKLISTS=JSON.parse(JSON.stringify(DEFAULT_CHECKLISTS)); saveChecklist(); saveChecklists(); renderChecklist(); break;
       case 'addNiggle': openAddNiggle(); break;
       case 'saveNiggle': saveNiggle(); break;
       case 'addMantra': openAddMantra(); break;
@@ -2279,7 +2283,7 @@ function showNutHalf(){ document.getElementById('nutHalfPanel').style.display='b
 function showNutFull(){ document.getElementById('nutFullPanel').style.display='block'; document.getElementById('nutHalfPanel').style.display='none'; document.getElementById('nutFullBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('nutFullBtn').style.borderColor='var(--golden)'; document.getElementById('nutFullBtn').style.color='var(--golden)'; document.getElementById('nutHalfBtn').style.background='transparent'; document.getElementById('nutHalfBtn').style.borderColor='var(--border)'; document.getElementById('nutHalfBtn').style.color='var(--text-2)'; }
 
 // ── RACE CHECKLIST ─────────────────────────────────────────
-var CHECKLISTS = {
+var DEFAULT_CHECKLISTS = {
   half: [
     {cat:'Kit',items:['Race bib pinned to singlet','ASICS Superblast 3','COROS PACE 4 charged','Shokz OpenRun Pro charged','Race singlet','Race shorts','Running socks','Sunglasses (if sunny)']},
     {cat:'Nutrition',items:['2× gels (1 plain, 1 caffeine)','1× pre-race gel','Water bottle for morning','Coffee/caffeine for 5:15am']},
@@ -2293,6 +2297,8 @@ var CHECKLISTS = {
     {cat:'Logistics',items:['Phone charged','Transport planned','Warm throwaway layer','Post-race change of clothes','Cash/card','Compression socks for after']},
   ]
 };
+var CHECKLISTS = JSON.parse(localStorage.getItem('kc_checklists') || 'null') || JSON.parse(JSON.stringify(DEFAULT_CHECKLISTS));
+function saveChecklists(){ localStorage.setItem('kc_checklists', JSON.stringify(CHECKLISTS)); }
 var checkedItems = JSON.parse(localStorage.getItem('kc_checklist') || '{}');
 var activeChecklist = 'half';
 function saveChecklist(){ localStorage.setItem('kc_checklist', JSON.stringify(checkedItems)); }
@@ -2300,20 +2306,49 @@ function renderChecklist(){
   var grid = document.getElementById('checklistGrid'); if(!grid) return;
   var list = CHECKLISTS[activeChecklist];
   var total=0, done=0;
-  grid.innerHTML = list.map(function(cat){
-    return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;margin-bottom:6px">'+cat.cat+'</div>'+cat.items.map(function(item){
+  var isEdit = !!window.checklistEditMode;
+
+  grid.innerHTML = list.map(function(cat, catIdx){
+    return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase">'+cat.cat+'</div>'+(isEdit?'<button data-action="addCheckItem" data-cl-cat="'+catIdx+'" style="background:none;border:1px dashed var(--golden);color:var(--golden);border-radius:6px;padding:2px 8px;font-size:9px;cursor:pointer;font-weight:600">+ Add</button>':'')+'</div>'+cat.items.map(function(item, itemIdx){
       var key = activeChecklist + '_' + item;
       var checked = !!checkedItems[key];
       total++; if(checked) done++;
-      return '<div data-check="'+key+'" style="display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer;font-size:11px;color:'+(checked?'var(--text-3)':'var(--text)')+';'+(checked?'text-decoration:line-through;opacity:.5;':'')+'"><div style="width:16px;height:16px;border-radius:4px;border:1.5px solid '+(checked?'#2ECC71':'var(--border)')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;background:'+(checked?'rgba(39,174,96,.2)':'transparent')+'">'+(checked?'<span style="color:#2ECC71;font-size:11px">✓</span>':'')+'</div>'+item+'</div>';
+      return '<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><div data-check="'+key+'" style="width:16px;height:16px;border-radius:4px;border:1.5px solid '+(checked?'#2ECC71':'var(--border)')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;background:'+(checked?'rgba(39,174,96,.2)':'transparent')+';cursor:pointer">'+(checked?'<span style="color:#2ECC71;font-size:11px">✓</span>':'')+'</div><span data-check="'+key+'" style="flex:1;font-size:11px;color:'+(checked?'var(--text-3)':'var(--text)')+';'+(checked?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer">'+item+'</span>'+(isEdit?'<button data-action="editCheckItem" data-cl-cat="'+catIdx+'" data-cl-idx="'+itemIdx+'" style="background:none;border:none;color:var(--golden);cursor:pointer;font-size:11px;padding:0 3px">✏️</button><button data-action="delCheckItem" data-cl-cat="'+catIdx+'" data-cl-idx="'+itemIdx+'" style="background:none;border:none;color:var(--rose-400);cursor:pointer;font-size:13px;padding:0 3px">×</button>':'')+'</div>';
     }).join('')+'</div>';
   }).join('');
+
   var counter = document.getElementById('checklistCount');
   if(counter) counter.textContent = done + '/' + total + ' packed';
-  // Toggle buttons
   var hb=document.getElementById('clHalfBtn'),fb=document.getElementById('clFullBtn');
   if(hb){hb.style.background=activeChecklist==='half'?'rgba(212,160,82,.15)':'transparent';hb.style.borderColor=activeChecklist==='half'?'var(--golden)':'var(--border)';hb.style.color=activeChecklist==='half'?'var(--golden)':'var(--text-2)';}
   if(fb){fb.style.background=activeChecklist==='full'?'rgba(212,160,82,.15)':'transparent';fb.style.borderColor=activeChecklist==='full'?'var(--golden)':'var(--border)';fb.style.color=activeChecklist==='full'?'var(--golden)':'var(--text-2)';}
+  // Update edit button
+  var eb=document.getElementById('clEditBtn');
+  if(eb){eb.style.borderColor=isEdit?'var(--golden)':'var(--border)';eb.style.background=isEdit?'rgba(212,160,82,.15)':'transparent';eb.style.color=isEdit?'var(--golden)':'var(--text-2)';eb.textContent=isEdit?'✏️ Done editing':'✏️ Edit';}
+}
+function addCheckItem(catIdx) {
+  var item = prompt('Add checklist item:');
+  if (!item || !item.trim()) return;
+  CHECKLISTS[activeChecklist][catIdx].items.push(item.trim());
+  saveChecklists(); renderChecklist();
+}
+function editCheckItem(catIdx, itemIdx) {
+  var current = CHECKLISTS[activeChecklist][catIdx].items[itemIdx];
+  var newVal = prompt('Edit item:', current);
+  if (newVal === null) return;
+  if (!newVal.trim()) { delCheckItem(catIdx, itemIdx); return; }
+  // Update checked state key
+  var oldKey = activeChecklist + '_' + current;
+  var newKey = activeChecklist + '_' + newVal.trim();
+  if (checkedItems[oldKey]) { checkedItems[newKey] = true; delete checkedItems[oldKey]; saveChecklist(); }
+  CHECKLISTS[activeChecklist][catIdx].items[itemIdx] = newVal.trim();
+  saveChecklists(); renderChecklist();
+}
+function delCheckItem(catIdx, itemIdx) {
+  var item = CHECKLISTS[activeChecklist][catIdx].items[itemIdx];
+  CHECKLISTS[activeChecklist][catIdx].items.splice(itemIdx, 1);
+  delete checkedItems[activeChecklist + '_' + item];
+  saveChecklist(); saveChecklists(); renderChecklist();
 }
 function toggleCheckItem(key){ if(checkedItems[key]) delete checkedItems[key]; else checkedItems[key]=true; saveChecklist(); renderChecklist(); }
 
@@ -2953,7 +2988,7 @@ document.addEventListener('change', function(e) {
 
 <!-- MODALS -->
 <div class="modal-bg" id="sessModal"><div class="modal"><button class="modal-close" data-close="sessModal">✕</button><h3 id="sessModalTitle"></h3><div id="sessModalBody"></div></div></div>
-<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Starting km</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
+<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Price (AUD)</label><input id="sh-price" type="number" placeholder="e.g. 280"><label>Starting km</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
 <div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label>Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label>Description</label><input id="g-desc" placeholder="e.g. Black"><label>Purchase date</label><input id="g-date" type="date"><label>Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label>Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGearAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveGear">Save &amp; close</button></div></div></div>
 <div class="modal-bg" id="pasteModal"><div class="modal" style="max-width:540px"><button class="modal-close" data-close="pasteModal">✕</button><h3>📋 Paste purchase email</h3><div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Paste your purchase confirmation — I'll extract the details automatically.</div><textarea id="pasteText" rows="8" placeholder="Paste email text here..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="pasteModal">Cancel</button><button class="btn-primary" data-action="parsePaste">Extract &amp; add gear</button></div></div></div>
 <div class="modal-bg" id="addRoadmapModal"><div class="modal"><button class="modal-close" data-close="addRoadmapModal">✕</button><h3 id="rmModalTitle">📝 Add item</h3><input type="hidden" id="rm-id"><label>Priority</label><select id="rm-priority"><option value="urgent">🔴 Urgent</option><option value="want" selected>🟠 Want</option><option value="nice">🟢 Nice to have</option><option value="brainstorm">🟣 Brainstorm</option></select><label>Title</label><input id="rm-title" placeholder="What needs doing?"><label>Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addRoadmapModal">Cancel</button><button class="btn-primary" data-action="saveRoadmapItem">Save</button></div></div></div>
