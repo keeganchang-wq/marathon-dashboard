@@ -1,0 +1,16 @@
+{
+  "name": "Keegan Chang · Marathon Dashboard",
+  "short_name": "Marathon",
+  "description": "Nike Melbourne Marathon 2026 training dashboard",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E0E0E",
+  "theme_color": "#D4A052",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230E0E0E'/><text x='50' y='68' text-anchor='middle' font-size='55'>🏃</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
