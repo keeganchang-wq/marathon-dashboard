@@ -662,7 +662,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
       </div>
     </div>
   </div>
-</div>
+
 
 <!-- TRAINING STATUS -->
 <div class="section-card" id="sec-status" draggable="true">
@@ -815,6 +815,8 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
 
 
 <div class="section-card" id="sec-future" draggable="true"><div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Roadmap — what's being built next</span><button class="sec-toggle" data-toggle="future">−</button></div><div class="sec-body" id="body-future"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span><span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span><span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span><span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span><span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span></div><div style="display:flex;gap:6px"><button data-action="addRmInline" style="background:var(--surface-3);border:1px dashed var(--golden);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--golden);cursor:pointer">+ Add</button><button data-action="toggleRmEdit" id="rmEditBtn" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">✏️ Edit</button><button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Sort</button></div></div><div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div></div>
+</div><!-- end dash-sections -->
+
 
 </div><!-- end dash-sections -->
 </div><!-- end tab-dashboard -->
@@ -847,7 +849,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
   <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px">💰 Spend Tracker</div>
   <div style="background:var(--surface);border:1px solid var(--golden);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--golden);margin-bottom:4px">💰 Total spend</div><div style="font-size:22px;font-weight:800;color:var(--golden)" id="spendTotal">$0 AUD</div></div><div style="display:flex;gap:16px"><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="shoeSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Shoes</div></div><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="gearSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Gear</div></div></div></div></div>
   <div id="retired-section" style="display:none;margin-bottom:16px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Retired shoes</div><div id="retired-list" style="padding:16px;text-align:center;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No retired shoes yet.</div></div>
-  </div><!-- end sg-shoes -->
+  <!-- end sg-shoes -->
 <div style="border-top:1px solid var(--border);margin:8px 0 20px"></div>
   <div draggable="true" data-drag-id="sg-gear" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
     <div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🎒 Gear Inventory</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Tap condition badge to cycle: New → Good → Worn → Replace</div></div>
@@ -875,6 +877,8 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
   </div><!-- end sg-gear -->
 <div draggable="true" data-drag-id="sg-wishlist" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
 </div>
+</div><!-- end sg-sections -->
+
 
 
 </div>
@@ -981,7 +985,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
       <div style="font-size:11px;opacity:.8" data-rd-full-target>Target: Sub 3:30 · Alphafly 3</div>
     </div>
   </div>
-</div><!-- end rd-intro -->
+<!-- end rd-intro -->
   <div class="section-card" id="sec-nutrition" draggable="true">
   <div class="sec-header"><span class="sec-title">⛽ Race Day — Nutrition & Pre-Race Timeline</span><button class="sec-toggle" data-toggle="nutrition">−</button></div>
   <div class="sec-body" id="body-nutrition">
@@ -1164,6 +1168,8 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
 
     </div>
   </div>
+</div><!-- end rd-sections -->
+
 
 </div><!-- end rd-sections --></div><!-- end raceday -->
 
