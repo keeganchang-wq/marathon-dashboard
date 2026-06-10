@@ -700,6 +700,8 @@ body {
     <strong>Full marathon Oct 11</strong> → Alphafly 3 🏆<br>
     <strong style="color:var(--golden)">⚡ Alphafly break-in:</strong> Wk10 Jun 22 (5km) · Wk14 Jul 16 (8km) · Wk17 Aug 11 (8km) → lock away until Oct 11
   </div>
+  <div style="border-top:2px solid var(--border);margin:24px 0 16px"></div>
+  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px">💰 Spend Tracker</div>
   <div style="background:var(--surface);border:1px solid var(--golden);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--golden);margin-bottom:4px">💰 Total spend</div><div style="font-size:22px;font-weight:800;color:var(--golden)" id="spendTotal">$0 AUD</div></div><div style="display:flex;gap:16px"><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="shoeSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Shoes</div></div><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="gearSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Gear</div></div></div></div></div>
   <div id="retired-section" style="display:none;margin-bottom:16px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Retired shoes</div><div id="retired-list" style="padding:16px;text-align:center;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No retired shoes yet.</div></div>
   </div><!-- end sg-shoes -->
@@ -719,8 +721,9 @@ body {
     </div>
     <input type="file" id="fileInputEl" style="display:none" accept=".pdf,.png,.jpg,.jpeg,.eml,.txt">
   </div>
-  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Current gear</div>
-  <div class="section-card"><div class="sec-body" style="padding:8px 16px" id="gearItems"></div></div>
+  <div style="border-top:2px solid var(--border);margin:20px 0 16px"></div>
+  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px">📦 Current Gear</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px" id="gearItems"></div>
 
   </div><!-- end sg-gear -->
 <div draggable="true" data-drag-id="sg-wishlist" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
