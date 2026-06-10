@@ -477,7 +477,7 @@ body {
 </div>
 <div class="sync-bar-wrap"><div class="sync-bar" id="syncBar"></div></div>
 <div class="sync-label" id="syncLabel"></div>
-<div class="tab-bar"><button class="tab active" data-tab="dashboard">Dashboard</button><button class="tab" data-tab="plan">Training Plan</button><button class="tab" data-tab="shoes-gear">Shoes &amp; Gear</button><button class="tab" data-tab="pace-efforts">Pace &amp; Efforts</button><button class="tab" data-tab="milestones">Milestones</button><button class="tab" data-tab="settings">Settings</button></div>
+<div class="tab-bar"><button class="tab active" data-tab="dashboard">Dashboard</button><button class="tab" data-tab="plan">Training Plan</button><button class="tab" data-tab="shoes-gear">Shoes &amp; Gear</button><button class="tab" data-tab="pace-efforts">Pace &amp; Efforts</button><button class="tab" data-tab="milestones">Milestones</button><button class="tab" data-tab="raceday">Race Day</button><button class="tab" data-tab="settings">Settings</button></div>
 
 <!-- ═══ DASHBOARD ═══ -->
 <div id="tab-dashboard" class="panel active">
@@ -633,99 +633,10 @@ body {
 <!-- COMING SOON -->
 
 <!-- ═══ RACE DAY: NUTRITION TIMER ═══ -->
-<div class="section-card" id="sec-nutrition" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">⛽ Race Day — Nutrition & Pre-Race Timeline</span><button class="sec-toggle" data-toggle="nutrition">−</button></div>
-  <div class="sec-body" id="body-nutrition">
 
-    <!-- RACE SELECTOR -->
-    <div style="display:flex;gap:8px;margin-bottom:14px">
-      <button id="nutHalfBtn" data-action="nutHalf" style="flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:12px;cursor:pointer">🏃 Half Marathon · Jul 19</button>
-      <button id="nutFullBtn" data-action="nutFull" style="flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:12px;cursor:pointer">🏆 Full Marathon · Oct 11</button>
-    </div>
-
-    <!-- HALF MARATHON TIMELINE -->
-    <div id="nutHalfPanel">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">🌙 Night before — Jul 18</div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">7:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Carb dinner</strong> — pasta/rice + lean protein. Nothing new. 2–3 glasses water.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Lay out race kit</strong> — bib pinned, Superblast 3, watch charged, 2× gels in pocket.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:30pm</div><div style="font-size:11px;color:var(--text)"><strong>Lights out</strong> — 7.5+ hrs sleep. Set alarm for 3:30am.</div></div>
-      </div>
-
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">☀️ Race morning — Jul 19 · Gun: 7:00am</div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:30am</div><div style="font-size:11px;color:var(--text)"><strong>Wake up</strong> — immediately drink 500ml water.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:45am</div><div style="font-size:11px;color:var(--text)"><strong>Breakfast</strong> — 2× toast + honey + banana + coffee. ~400 cal. Nothing new.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:15am</div><div style="font-size:11px;color:var(--text)"><strong>Caffeine</strong> — 200mg (coffee or caffeine pill). Peak at ~6:45am.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:30am</div><div style="font-size:11px;color:var(--text)"><strong>Travel to venue.</strong> Sip water on the way. Stop drinking at 6:15am.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">6:15am</div><div style="font-size:11px;color:var(--text)"><strong>Arrive + toilet.</strong> Last hydration. Pin bib. Double-knot shoes.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #27AE60"><div style="min-width:60px;font-size:11px;font-weight:700;color:#27AE60">6:35am</div><div style="font-size:11px;color:var(--text)"><strong>Warm-up jog</strong> — 10min very easy + 2×30s at race pace + dynamic stretches.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:45am</div><div style="font-size:11px;color:var(--text)"><strong>Pre-race gel</strong> — 1× plain gel + sip of water. Last fuel before gun.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:50am</div><div style="font-size:11px;color:var(--text)"><strong>Line up in corral.</strong> Deep breaths. Trust the training.</div></div>
-        <div style="display:flex;gap:10px;padding:10px 12px;background:rgba(212,160,82,.12);border-radius:6px;border-left:4px solid var(--golden)"><div style="min-width:60px;font-size:12px;font-weight:800;color:var(--golden)">7:00am</div><div style="font-size:12px;font-weight:700;color:var(--golden)">🔫 GUN — GO. Start at 5:05/km. HR under 172.</div></div>
-      </div>
-
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">⛽ During race — gel clock</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
-        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Pre-race gel</div><div style="font-size:16px;font-weight:800;color:var(--golden)">6:45am</div><div style="font-size:10px;color:var(--text-2)">Plain gel · 15min before gun</div></div>
-        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">⛽ Gel 1 · km 7</div><div style="font-size:16px;font-weight:800;color:var(--golden)">7:35am</div><div style="font-size:10px;color:var(--text-2)">Plain gel · take with water</div></div>
-        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">⛽ Gel 2 · km 14</div><div style="font-size:16px;font-weight:800;color:var(--golden)">8:10am</div><div style="font-size:10px;color:var(--text-2)">Caffeine gel · final push fuel</div></div>
-      </div>
-      <div style="font-size:11px;color:var(--text-2);line-height:1.6;background:rgba(35,79,96,.15);border-radius:6px;padding:10px 12px"><strong>Aid stations:</strong> Water at every station. Sip, don't gulp. Walk 5 steps through the station if needed — losing 3 seconds is better than choking. Sports drink at alternating stations if stomach tolerates it.</div>
-    </div>
-
-    <!-- FULL MARATHON TIMELINE -->
-    <div id="nutFullPanel" style="display:none">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">🌙 Night before — Oct 10</div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">6:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Carb dinner</strong> — large pasta/rice + chicken. Extra bread roll. 3 glasses water. Nothing spicy, nothing new.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">8:30pm</div><div style="font-size:11px;color:var(--text)"><strong>Lay out race kit</strong> — bib pinned to singlet, Alphafly 3 🏆, watch charged, 6× gels + 1 pre-race. Body Glide on feet/thighs/nipples.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Lights out</strong> — 7+ hrs sleep. Alarm 3:15am. Trust the taper.</div></div>
-      </div>
-
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">☀️ Race morning — Oct 11 · Gun: 7:00am</div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:15am</div><div style="font-size:11px;color:var(--text)"><strong>Wake up</strong> — drink 500ml water immediately.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:30am</div><div style="font-size:11px;color:var(--text)"><strong>Breakfast</strong> — oats + honey + banana + 2× toast + coffee. ~600 cal. Extra carbs vs half.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:00am</div><div style="font-size:11px;color:var(--text)"><strong>Caffeine</strong> — 200mg. Peak at ~6:30am. Save caffeine gels for km 26+.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:15am</div><div style="font-size:11px;color:var(--text)"><strong>Small top-up</strong> — half banana or rice cake. Last solid food.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:30am</div><div style="font-size:11px;color:var(--text)"><strong>Travel to venue.</strong> Sip water. Stop at 6:15am.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">6:15am</div><div style="font-size:11px;color:var(--text)"><strong>Arrive + toilet.</strong> Apply Body Glide. Pin bib. Triple-check shoe laces.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #27AE60"><div style="min-width:60px;font-size:11px;font-weight:700;color:#27AE60">6:35am</div><div style="font-size:11px;color:var(--text)"><strong>Warm-up</strong> — 10min easy jog + 2×30s at marathon pace. Dynamic stretches.</div></div>
-        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:45am</div><div style="font-size:11px;color:var(--text)"><strong>Pre-race gel</strong> — 1× plain gel + water sip.</div></div>
-        <div style="display:flex;gap:10px;padding:10px 12px;background:rgba(212,160,82,.12);border-radius:6px;border-left:4px solid var(--golden)"><div style="min-width:60px;font-size:12px;font-weight:800;color:var(--golden)">7:00am</div><div style="font-size:12px;font-weight:700;color:var(--golden)">🔫 GUN — GO. Start at 5:10/km. HR UNDER 162. Trust the plan.</div></div>
-      </div>
-
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">⛽ During race — 6 gel clock</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px">
-        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">Pre-race</div><div style="font-size:14px;font-weight:800;color:var(--golden)">6:45am</div><div style="font-size:9px;color:var(--text-2)">Plain gel</div></div>
-        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 1 · km 8</div><div style="font-size:14px;font-weight:800;color:var(--golden)">7:40am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
-        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 2 · km 14</div><div style="font-size:14px;font-weight:800;color:var(--golden)">8:10am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
-        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 3 · km 20</div><div style="font-size:14px;font-weight:800;color:var(--golden)">8:40am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">
-        <div style="background:var(--surface-2);border:1px solid #E74C3C;border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:#E74C3C;text-transform:uppercase;margin-bottom:3px">⛽ 4 · km 26 ☕</div><div style="font-size:14px;font-weight:800;color:#E74C3C">9:10am</div><div style="font-size:9px;color:var(--text-2)">CAFFEINE gel</div></div>
-        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 5 · km 32</div><div style="font-size:14px;font-weight:800;color:var(--golden)">9:41am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
-        <div style="background:var(--surface-2);border:1px solid #E74C3C;border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:#E74C3C;text-transform:uppercase;margin-bottom:3px">⛽ 6 · km 38 ☕</div><div style="font-size:14px;font-weight:800;color:#E74C3C">10:11am</div><div style="font-size:9px;color:var(--text-2)">CAFFEINE gel</div></div>
-        <div style="background:rgba(212,160,82,.12);border:1.5px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--golden);text-transform:uppercase;margin-bottom:3px">🏆 FINISH</div><div style="font-size:14px;font-weight:800;color:var(--golden)">~10:30am</div><div style="font-size:9px;color:var(--text-2)">3:28–3:35</div></div>
-      </div>
-      <div style="font-size:11px;color:var(--text-2);line-height:1.6;background:rgba(35,79,96,.15);border-radius:6px;padding:10px 12px"><strong>Strategy:</strong> Plain gels first 3, caffeine at km 26 and 38 for the final push. Walk 3 seconds through aid stations. Water every station, sports drink every other. If stomach issues: skip a gel, take water only, re-attempt next station.</div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══ RACE DAY CHECKLIST ═══ -->
-<div class="section-card" id="sec-checklist" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🎒 Race Day Checklist</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)" id="checklistCount">0/0</span><button class="sec-toggle" data-toggle="checklist">−</button></div>
-  <div class="sec-body" id="body-checklist">
-    <div style="display:flex;gap:8px;margin-bottom:12px">
-      <button id="clHalfBtn" data-action="clHalf" style="padding:6px 14px;border-radius:20px;border:1px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:600;cursor:pointer">Half · Jul 19</button>
-      <button id="clFullBtn" data-action="clFull" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Full · Oct 11</button>
-      <button data-action="clReset" style="margin-left:auto;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-3);font-size:10px;cursor:pointer">Reset all</button>
-    </div>
-    <div id="checklistGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
-  </div>
-</div>
+
 
 <!-- ═══ WEEKLY VOLUME CHART ═══ -->
 <div class="section-card" id="sec-volume" draggable="true">
@@ -749,13 +660,7 @@ body {
 </div>
 
 <!-- ═══ RACE MANTRAS ═══ -->
-<div class="section-card" id="sec-mantras" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🧠 Race Mantras & Mental Notes</span><button class="sec-toggle" data-toggle="mantras">−</button></div>
-  <div class="sec-body" id="body-mantras">
-    <div id="mantraList"></div>
-    <button class="add-btn" data-action="addMantra" style="font-size:11px;padding:5px 12px;margin-top:8px">+ Add mantra</button>
-  </div>
-</div>
+
 
 <div class="section-card" id="sec-future" draggable="true"><div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Roadmap — what's being built next</span><button class="sec-toggle" data-toggle="future">−</button></div><div class="sec-body" id="body-future"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span><span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span><span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span><span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span><span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span></div><div style="display:flex;gap:6px"><button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Urgency ↑</button><button class="add-btn" data-action="addRoadmapItem" style="font-size:11px;padding:5px 12px">+ Add item</button></div></div><div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div></div>
 
@@ -881,6 +786,166 @@ body {
     <div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:16px">🔒 Upcoming — 7 milestones</div>
       <div id="ms-upcoming" style="position:relative;padding-left:30px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RACE DAY ═══ -->
+<div id="tab-raceday" class="panel">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div style="font-size:18px;font-weight:700;color:var(--text)">🏁 Race Day Command Centre</div>
+    <div style="font-size:11px;color:var(--text-2)">Everything you need for Jul 19 and Oct 11</div>
+  </div>
+
+  <!-- Race countdown mini -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+    <div style="background:linear-gradient(135deg,#D4A052,#A06E20);border-radius:var(--radius);padding:14px 18px;color:white">
+      <div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em">🏃 Half Marathon</div>
+      <div style="font-size:18px;font-weight:800;margin:4px 0">Sunday 19 July</div>
+      <div style="font-size:11px;opacity:.8">Target: 1:43–1:46 · Superblast 3</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#234F60,#162F3A);border-radius:var(--radius);padding:14px 18px;color:white">
+      <div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em">🏆 Full Marathon</div>
+      <div style="font-size:18px;font-weight:800;margin:4px 0">Sunday 11 October</div>
+      <div style="font-size:11px;opacity:.8">Target: Sub 3:30 · Alphafly 3</div>
+    </div>
+  </div>
+
+  <div class="section-card" id="sec-nutrition">
+  <div class="sec-header"><span class="sec-title">⛽ Race Day — Nutrition & Pre-Race Timeline</span><button class="sec-toggle" data-toggle="nutrition">−</button></div>
+  <div class="sec-body" id="body-nutrition">
+
+    <!-- RACE SELECTOR -->
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button id="nutHalfBtn" data-action="nutHalf" style="flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:12px;cursor:pointer">🏃 Half Marathon · Jul 19</button>
+      <button id="nutFullBtn" data-action="nutFull" style="flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:12px;cursor:pointer">🏆 Full Marathon · Oct 11</button>
+    </div>
+
+    <!-- HALF MARATHON TIMELINE -->
+    <div id="nutHalfPanel">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">🌙 Night before — Jul 18</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">7:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Carb dinner</strong> — pasta/rice + lean protein. Nothing new. 2–3 glasses water.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Lay out race kit</strong> — bib pinned, Superblast 3, watch charged, 2× gels in pocket.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:30pm</div><div style="font-size:11px;color:var(--text)"><strong>Lights out</strong> — 7.5+ hrs sleep. Set alarm for 3:30am.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">☀️ Race morning — Jul 19 · Gun: 7:00am</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:30am</div><div style="font-size:11px;color:var(--text)"><strong>Wake up</strong> — immediately drink 500ml water.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:45am</div><div style="font-size:11px;color:var(--text)"><strong>Breakfast</strong> — 2× toast + honey + banana + coffee. ~400 cal. Nothing new.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:15am</div><div style="font-size:11px;color:var(--text)"><strong>Caffeine</strong> — 200mg (coffee or caffeine pill). Peak at ~6:45am.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:30am</div><div style="font-size:11px;color:var(--text)"><strong>Travel to venue.</strong> Sip water on the way. Stop drinking at 6:15am.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">6:15am</div><div style="font-size:11px;color:var(--text)"><strong>Arrive + toilet.</strong> Last hydration. Pin bib. Double-knot shoes.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #27AE60"><div style="min-width:60px;font-size:11px;font-weight:700;color:#27AE60">6:35am</div><div style="font-size:11px;color:var(--text)"><strong>Warm-up jog</strong> — 10min very easy + 2×30s at race pace + dynamic stretches.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:45am</div><div style="font-size:11px;color:var(--text)"><strong>Pre-race gel</strong> — 1× plain gel + sip of water. Last fuel before gun.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:50am</div><div style="font-size:11px;color:var(--text)"><strong>Line up in corral.</strong> Deep breaths. Trust the training.</div></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:rgba(212,160,82,.12);border-radius:6px;border-left:4px solid var(--golden)"><div style="min-width:60px;font-size:12px;font-weight:800;color:var(--golden)">7:00am</div><div style="font-size:12px;font-weight:700;color:var(--golden)">🔫 GUN — GO. Start at 5:05/km. HR under 172.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">⛽ During race — gel clock</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Pre-race gel</div><div style="font-size:16px;font-weight:800;color:var(--golden)">6:45am</div><div style="font-size:10px;color:var(--text-2)">Plain gel · 15min before gun</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">⛽ Gel 1 · km 7</div><div style="font-size:16px;font-weight:800;color:var(--golden)">7:35am</div><div style="font-size:10px;color:var(--text-2)">Plain gel · take with water</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">⛽ Gel 2 · km 14</div><div style="font-size:16px;font-weight:800;color:var(--golden)">8:10am</div><div style="font-size:10px;color:var(--text-2)">Caffeine gel · final push fuel</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-2);line-height:1.6;background:rgba(35,79,96,.15);border-radius:6px;padding:10px 12px"><strong>Aid stations:</strong> Water at every station. Sip, don't gulp. Walk 5 steps through the station if needed — losing 3 seconds is better than choking. Sports drink at alternating stations if stomach tolerates it.</div>
+    </div>
+
+    <!-- FULL MARATHON TIMELINE -->
+    <div id="nutFullPanel" style="display:none">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">🌙 Night before — Oct 10</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">6:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Carb dinner</strong> — large pasta/rice + chicken. Extra bread roll. 3 glasses water. Nothing spicy, nothing new.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">8:30pm</div><div style="font-size:11px;color:var(--text)"><strong>Lay out race kit</strong> — bib pinned to singlet, Alphafly 3 🏆, watch charged, 6× gels + 1 pre-race. Body Glide on feet/thighs/nipples.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Lights out</strong> — 7+ hrs sleep. Alarm 3:15am. Trust the taper.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">☀️ Race morning — Oct 11 · Gun: 7:00am</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:15am</div><div style="font-size:11px;color:var(--text)"><strong>Wake up</strong> — drink 500ml water immediately.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:30am</div><div style="font-size:11px;color:var(--text)"><strong>Breakfast</strong> — oats + honey + banana + 2× toast + coffee. ~600 cal. Extra carbs vs half.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:00am</div><div style="font-size:11px;color:var(--text)"><strong>Caffeine</strong> — 200mg. Peak at ~6:30am. Save caffeine gels for km 26+.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:15am</div><div style="font-size:11px;color:var(--text)"><strong>Small top-up</strong> — half banana or rice cake. Last solid food.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:30am</div><div style="font-size:11px;color:var(--text)"><strong>Travel to venue.</strong> Sip water. Stop at 6:15am.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">6:15am</div><div style="font-size:11px;color:var(--text)"><strong>Arrive + toilet.</strong> Apply Body Glide. Pin bib. Triple-check shoe laces.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #27AE60"><div style="min-width:60px;font-size:11px;font-weight:700;color:#27AE60">6:35am</div><div style="font-size:11px;color:var(--text)"><strong>Warm-up</strong> — 10min easy jog + 2×30s at marathon pace. Dynamic stretches.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:45am</div><div style="font-size:11px;color:var(--text)"><strong>Pre-race gel</strong> — 1× plain gel + water sip.</div></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:rgba(212,160,82,.12);border-radius:6px;border-left:4px solid var(--golden)"><div style="min-width:60px;font-size:12px;font-weight:800;color:var(--golden)">7:00am</div><div style="font-size:12px;font-weight:700;color:var(--golden)">🔫 GUN — GO. Start at 5:10/km. HR UNDER 162. Trust the plan.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">⛽ During race — 6 gel clock</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">Pre-race</div><div style="font-size:14px;font-weight:800;color:var(--golden)">6:45am</div><div style="font-size:9px;color:var(--text-2)">Plain gel</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 1 · km 8</div><div style="font-size:14px;font-weight:800;color:var(--golden)">7:40am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 2 · km 14</div><div style="font-size:14px;font-weight:800;color:var(--golden)">8:10am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 3 · km 20</div><div style="font-size:14px;font-weight:800;color:var(--golden)">8:40am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">
+        <div style="background:var(--surface-2);border:1px solid #E74C3C;border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:#E74C3C;text-transform:uppercase;margin-bottom:3px">⛽ 4 · km 26 ☕</div><div style="font-size:14px;font-weight:800;color:#E74C3C">9:10am</div><div style="font-size:9px;color:var(--text-2)">CAFFEINE gel</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 5 · km 32</div><div style="font-size:14px;font-weight:800;color:var(--golden)">9:41am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+        <div style="background:var(--surface-2);border:1px solid #E74C3C;border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:#E74C3C;text-transform:uppercase;margin-bottom:3px">⛽ 6 · km 38 ☕</div><div style="font-size:14px;font-weight:800;color:#E74C3C">10:11am</div><div style="font-size:9px;color:var(--text-2)">CAFFEINE gel</div></div>
+        <div style="background:rgba(212,160,82,.12);border:1.5px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--golden);text-transform:uppercase;margin-bottom:3px">🏆 FINISH</div><div style="font-size:14px;font-weight:800;color:var(--golden)">~10:30am</div><div style="font-size:9px;color:var(--text-2)">3:28–3:35</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-2);line-height:1.6;background:rgba(35,79,96,.15);border-radius:6px;padding:10px 12px"><strong>Strategy:</strong> Plain gels first 3, caffeine at km 26 and 38 for the final push. Walk 3 seconds through aid stations. Water every station, sports drink every other. If stomach issues: skip a gel, take water only, re-attempt next station.</div>
+    </div>
+  </div>
+</div>
+
+  <div class="section-card" id="sec-checklist">
+  <div class="sec-header"><span class="sec-title">🎒 Race Day Checklist</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)" id="checklistCount">0/0</span><button class="sec-toggle" data-toggle="checklist">−</button></div>
+  <div class="sec-body" id="body-checklist">
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button id="clHalfBtn" data-action="clHalf" style="padding:6px 14px;border-radius:20px;border:1px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:600;cursor:pointer">Half · Jul 19</button>
+      <button id="clFullBtn" data-action="clFull" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Full · Oct 11</button>
+      <button data-action="clReset" style="margin-left:auto;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-3);font-size:10px;cursor:pointer">Reset all</button>
+    </div>
+    <div id="checklistGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
+  </div>
+</div>
+
+  <div class="section-card" id="sec-mantras">
+  <div class="sec-header"><span class="sec-title">🧠 Race Mantras & Mental Notes</span><button class="sec-toggle" data-toggle="mantras">−</button></div>
+  <div class="sec-body" id="body-mantras">
+    <div id="mantraList"></div>
+    <button class="add-btn" data-action="addMantra" style="font-size:11px;padding:5px 12px;margin-top:8px">+ Add mantra</button>
+  </div>
+</div>
+
+  <!-- Race course notes -->
+  <div class="section-card" id="sec-course">
+    <div class="sec-header"><span class="sec-title">🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
+    <div class="sec-body" id="body-course">
+      <div class="g2" style="gap:12px">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--golden);margin-bottom:8px">🏃 Half Marathon Course</div>
+          <div style="font-size:11px;color:var(--text-2);line-height:1.8">
+            <strong>Start/Finish:</strong> Batman Avenue, Melbourne<br>
+            <strong>Surface:</strong> 100% road, mostly flat<br>
+            <strong>Key points:</strong><br>
+            · Km 0–3: Along the Yarra — easy start, don't get caught up in the crowd pace<br>
+            · Km 3–7: St Kilda Road stretch — long and straight, find your rhythm<br>
+            · Km 7–14: Beaconsfield Parade — coastal section, possible headwind<br>
+            · Km 14–18: Return via Albert Park — this is where you race<br>
+            · Km 18–21: Final push back to city — everything you've got<br>
+            <strong style="color:var(--golden)">⚠ Wind:</strong> The St Kilda coastal section (km 7–14) often has headwind. Tuck behind a group. Don't fight it alone.
+          </div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
+          <div style="font-size:11px;font-weight:700;color:#5AB5EE;margin-bottom:8px">🏆 Full Marathon Course</div>
+          <div style="font-size:11px;color:var(--text-2);line-height:1.8">
+            <strong>Start/Finish:</strong> Batman Avenue, Melbourne<br>
+            <strong>Surface:</strong> 100% road, mostly flat, one hill<br>
+            <strong>Key points:</strong><br>
+            · Km 0–10: City loop — conservative, bank time by NOT going fast<br>
+            · Km 10–21: Same as half course — St Kilda, coastal<br>
+            · Km 21–30: Return loop via Albert Park Lake — stay controlled<br>
+            · Km 30–35: The Tan / Botanical Gardens — THE HARD PART<br>
+            · Km 35–42: Final city stretch — race it home<br>
+            <strong style="color:#E74C3C">⚠ The Wall:</strong> Km 30–35 is where the marathon starts. Everything before is just getting there. Stay fuelled. One km at a time.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
