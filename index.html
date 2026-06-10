@@ -464,6 +464,10 @@ body {
 .cal-cell.cal-empty:hover { background:rgba(212,160,82,.08) !important; }
 .cal-cell.cal-empty:hover div { color:var(--golden) !important; border-color:var(--golden) !important; }
 
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+input[type=number] { -moz-appearance:textfield; }
 </style>
 </head>
 <body>
@@ -501,7 +505,7 @@ body {
           <div style="text-align:center"><span style="font-size:30px;font-weight:800;line-height:1;display:block" id="hm">--</span><span style="font-size:9px;opacity:.7;text-transform:uppercase">min</span></div>
           <div style="text-align:center"><span style="font-size:30px;font-weight:800;line-height:1;display:block" id="hs">--</span><span style="font-size:9px;opacity:.7;text-transform:uppercase">sec</span></div>
         </div>
-        <div style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">Target: 1:43–1:46</div>
+        <div style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">Target: <span data-target-half>1:43–1:46</span></div>
       </div>
       <div style="background:linear-gradient(135deg,#234F60,#2E6880);border-radius:var(--radius);padding:18px 20px;color:white;position:relative">
         <div style="font-size:11px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em">🏆 Nike Melbourne Marathon</div>
@@ -512,7 +516,7 @@ body {
           <div style="text-align:center"><span style="font-size:30px;font-weight:800;line-height:1;display:block" id="fm">--</span><span style="font-size:9px;opacity:.7;text-transform:uppercase">min</span></div>
           <div style="text-align:center"><span style="font-size:30px;font-weight:800;line-height:1;display:block" id="fs">--</span><span style="font-size:9px;opacity:.7;text-transform:uppercase">sec</span></div>
         </div>
-        <div style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">Target: 3:28–3:35</div>
+        <div style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">Target: <span data-target-full>3:28–3:35</span></div>
       </div>
     </div>
   </div>
@@ -784,8 +788,8 @@ body {
   </table>
   <table class="tbl">
     <tr><th>Race</th><th>Date</th><th>Target</th><th>Km 0–7</th><th>Middle</th><th>Final</th><th>HR cap</th></tr>
-    <tr><td><b>Half</b></td><td>19 Jul</td><td style="color:var(--golden)">1:43–1:46</td><td>5:05/km — hold back</td><td>4:55–5:00/km</td><td>Race it home</td><td>170–176 bpm</td></tr>
-    <tr><td><b>Full</b></td><td>11 Oct</td><td style="color:var(--golden)">3:28–3:35</td><td>5:10/km — conservative</td><td>5:00–5:07/km</td><td>Race from km 30</td><td>&lt;165 first 30km</td></tr>
+    <tr><td><b>Half</b></td><td>19 Jul</td><td style="color:var(--golden)" data-target-half>1:43–1:46</td><td>5:05/km — hold back</td><td>4:55–5:00/km</td><td>Race it home</td><td>170–176 bpm</td></tr>
+    <tr><td><b>Full</b></td><td>11 Oct</td><td style="color:var(--golden)" data-target-full>3:28–3:35</td><td>5:10/km — conservative</td><td>5:00–5:07/km</td><td>Race from km 30</td><td>&lt;165 first 30km</td></tr>
   </table>
 </div><!-- end pe-sections --></div>
 
@@ -833,12 +837,12 @@ body {
     <div style="background:linear-gradient(135deg,#D4A052,#A06E20);border-radius:var(--radius);padding:14px 18px;color:white">
       <div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em">🏃 Half Marathon</div>
       <div style="font-size:18px;font-weight:800;margin:4px 0">Sunday 19 July</div>
-      <div style="font-size:11px;opacity:.8">Target: 1:43–1:46 · Superblast 3</div>
+      <div style="font-size:11px;opacity:.8" data-rd-half-target>Target: 1:43–1:46 · Superblast 3</div>
     </div>
     <div style="background:linear-gradient(135deg,#234F60,#162F3A);border-radius:var(--radius);padding:14px 18px;color:white">
       <div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em">🏆 Full Marathon</div>
       <div style="font-size:18px;font-weight:800;margin:4px 0">Sunday 11 October</div>
-      <div style="font-size:11px;opacity:.8">Target: Sub 3:30 · Alphafly 3</div>
+      <div style="font-size:11px;opacity:.8" data-rd-full-target>Target: Sub 3:30 · Alphafly 3</div>
     </div>
   </div>
 </div><!-- end rd-intro -->
@@ -1073,8 +1077,22 @@ body {
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">🎯 Race Targets</div>
     <div class="g2" style="gap:12px">
-      <div style="background:rgba(212,160,82,.06);border:1px solid rgba(212,160,82,.25);border-radius:var(--radius-sm);padding:16px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏃 Half Marathon — 19 Jul 2026</div><input id="set-half-target" type="text" value="1:43–1:46" data-setting="halfTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:700;color:var(--golden);outline:none;text-align:center"></div>
-      <div style="background:rgba(35,79,96,.1);border:1px solid rgba(35,79,96,.3);border-radius:var(--radius-sm);padding:16px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏆 Full Marathon — 11 Oct 2026</div><input id="set-full-target" type="text" value="Sub 3:30" data-setting="fullTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:700;color:#5AB5EE;outline:none;text-align:center"></div>
+      <div style="background:rgba(212,160,82,.06);border:1px solid rgba(212,160,82,.25);border-radius:var(--radius-sm);padding:16px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏃 Half Marathon — 19 Jul 2026</div><div style="display:flex;align-items:center;justify-content:center;gap:4px">
+              <input id="set-half-h" type="number" min="0" max="9" value="1" style="width:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 4px;font-size:18px;font-weight:700;color:var(--golden);outline:none;text-align:center;-moz-appearance:textfield" onchange="updateHalfTarget()">
+              <span style="font-size:18px;font-weight:700;color:var(--golden)">:</span>
+              <input id="set-half-m" type="number" min="0" max="59" value="43" style="width:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 4px;font-size:18px;font-weight:700;color:var(--golden);outline:none;text-align:center;-moz-appearance:textfield" onchange="updateHalfTarget()">
+              <span style="font-size:18px;font-weight:700;color:var(--golden)">:</span>
+              <input id="set-half-s" type="number" min="0" max="59" value="0" style="width:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 4px;font-size:18px;font-weight:700;color:var(--golden);outline:none;text-align:center;-moz-appearance:textfield" onchange="updateHalfTarget()">
+            </div>
+            <input id="set-half-target" type="hidden" value="1:43:00" data-setting="halfTarget"></div>
+      <div style="background:rgba(35,79,96,.1);border:1px solid rgba(35,79,96,.3);border-radius:var(--radius-sm);padding:16px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏆 Full Marathon — 11 Oct 2026</div><div style="display:flex;align-items:center;justify-content:center;gap:4px">
+              <input id="set-full-h" type="number" min="0" max="9" value="3" style="width:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 4px;font-size:18px;font-weight:700;color:#5AB5EE;outline:none;text-align:center;-moz-appearance:textfield" onchange="updateFullTarget()">
+              <span style="font-size:18px;font-weight:700;color:#5AB5EE">:</span>
+              <input id="set-full-m" type="number" min="0" max="59" value="25" style="width:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 4px;font-size:18px;font-weight:700;color:#5AB5EE;outline:none;text-align:center;-moz-appearance:textfield" onchange="updateFullTarget()">
+              <span style="font-size:18px;font-weight:700;color:#5AB5EE">:</span>
+              <input id="set-full-s" type="number" min="0" max="59" value="0" style="width:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 4px;font-size:18px;font-weight:700;color:#5AB5EE;outline:none;text-align:center;-moz-appearance:textfield" onchange="updateFullTarget()">
+            </div>
+            <input id="set-full-target" type="hidden" value="3:25:00" data-setting="fullTarget"></div>
     </div>
   </div>
 
@@ -2076,6 +2094,26 @@ function calcDaysUntil(dateStr) {
 
 function calcProbability() {
   var A = ATHLETE;
+  var stg = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+  var halfTargetLabel = stg.halfTarget || '1:43:00';
+  var fullTargetLabel = stg.fullTarget || '3:30:00';
+
+  // Parse target times into required pace per km
+  function parseTimeToMin(t) {
+    var p = String(t).replace(/[^0-9:]/g,'').split(':');
+    var h = parseInt(p[0]) || 0;
+    var m = parseInt(p[1]) || 0;
+    var s = parseInt(p[2]) || 0;
+    return h * 60 + m + s / 60;
+  }
+  var fullTotalMin = parseTimeToMin(fullTargetLabel);
+  if (fullTotalMin < 120 || fullTotalMin > 360) fullTotalMin = 210;
+  var fullTargetPace = fullTotalMin / 42.195;
+
+  var halfTotalMin = parseTimeToMin(halfTargetLabel);
+  if (halfTotalMin < 50 || halfTotalMin > 180) halfTotalMin = 103;
+  var halfTargetPaceVal = halfTotalMin / 21.1;
+
   var daysToHalf = calcDaysUntil(A.halfDate);
   var daysToFull = calcDaysUntil(A.fullDate);
   var weeksLeft = Math.round(daysToFull / 7);
@@ -2084,8 +2122,8 @@ function calcProbability() {
   var pr10kmPace = (A.pr10km / 10) / 60;
 
   // ── FULL MARATHON PROBABILITIES ──
-  // Sub-3:30 (4:57/km)
-  var t330 = 4.95;
+  // Dynamic target pace from settings
+  var t330 = fullTargetPace;
   var s330_speed = Math.min(100, Math.round((t330 / pr1kmPace) * 72));
   var s330_5k = Math.max(15, Math.min(100, Math.round(100 - (pr5kmPace - t330) * 75)));
   var s330_10k = Math.max(15, Math.min(100, Math.round(100 - (pr10kmPace - t330) * 55)));
@@ -2103,7 +2141,7 @@ function calcProbability() {
   var prob340 = Math.min(98, prob330 + 25);
 
   // Half marathon
-  var halfTarget = 5.00;
+  var halfTarget = halfTargetPaceVal;
   var h_speed = Math.min(100, Math.round((halfTarget / pr1kmPace) * 70));
   var h_5k = Math.max(20, Math.min(100, Math.round(100 - (pr5kmPace - halfTarget) * 80)));
   var h_10k = Math.max(15, Math.min(100, Math.round(100 - (pr10kmPace - halfTarget) * 60)));
@@ -2137,16 +2175,16 @@ function calcProbability() {
 
   el.innerHTML = '<div class="g2" style="margin-bottom:14px">'
     // Half marathon card
-    +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden"><div style="background:linear-gradient(135deg,#D4A052,#A06E20);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏃 Half Marathon · 19 Jul</div><div style="font-size:18px;font-weight:800;margin:4px 0">1:43–1:46</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:42px;font-weight:800;color:'+gc(probHalf)+'">'+probHalf+'%</div><div style="font-size:11px;color:var(--text-2)">'+daysToHalf+' days remaining</div></div></div>'
+    +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden"><div style="background:linear-gradient(135deg,#D4A052,#A06E20);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏃 Half Marathon · 19 Jul</div><div style="font-size:18px;font-weight:800;margin:4px 0">'+halfTargetLabel+'</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:42px;font-weight:800;color:'+gc(probHalf)+'">'+probHalf+'%</div><div style="font-size:11px;color:var(--text-2)">'+daysToHalf+' days remaining</div></div></div>'
     // Full marathon card
-    +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden"><div style="background:linear-gradient(135deg,#234F60,#162F3A);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏆 Full Marathon · 11 Oct</div><div style="font-size:18px;font-weight:800;margin:4px 0">Sub 3:30</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:42px;font-weight:800;color:'+gc(prob330)+'">'+prob330+'%</div><div style="font-size:11px;color:var(--text-2)">'+weeksLeft+' weeks remaining</div></div></div>'
+    +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden"><div style="background:linear-gradient(135deg,#234F60,#162F3A);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏆 Full Marathon · 11 Oct</div><div style="font-size:18px;font-weight:800;margin:4px 0">'+fullTargetLabel+'</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:42px;font-weight:800;color:'+gc(prob330)+'">'+prob330+'%</div><div style="font-size:11px;color:var(--text-2)">'+weeksLeft+' weeks remaining</div></div></div>'
     +'</div>'
 
     // Probability tiers
     +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Sub 3:30</div><div style="font-size:24px;font-weight:800;color:'+gc(prob330)+'">'+prob330+'%</div></div>'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">3:28–3:35</div><div style="font-size:24px;font-weight:800;color:'+gc(prob335)+'">'+prob335+'%</div></div>'
-    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">3:40+</div><div style="font-size:24px;font-weight:800;color:'+gc(prob340)+'">'+prob340+'%</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Target: '+fullTargetLabel+'</div><div style="font-size:24px;font-weight:800;color:'+gc(prob330)+'">'+prob330+'%</div><div style="font-size:9px;color:var(--text-3);margin-top:2px">'+formatPace(fullTargetPace)+'/km</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">+5 min easier</div><div style="font-size:24px;font-weight:800;color:'+gc(prob335)+'">'+prob335+'%</div><div style="font-size:9px;color:var(--text-3);margin-top:2px">'+formatPace(fullTargetPace+0.12)+'/km</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">+15 min easier</div><div style="font-size:24px;font-weight:800;color:'+gc(prob340)+'">'+prob340+'%</div><div style="font-size:9px;color:var(--text-3);margin-top:2px">'+formatPace(fullTargetPace+0.36)+'/km</div></div>'
     +'</div>'
 
     // Boosters & Risks
@@ -2167,7 +2205,7 @@ function calcProbability() {
     +'<div>4. Stay injury-free — listen to body, log niggles early</div>'
     +'</div></div>'
 
-    +'<div style="font-size:9px;color:var(--text-3);margin-top:8px;text-align:center">Based on: 1km PR '+formatPace(pr1kmPace)+', 5km PR '+formatPace(pr5kmPace)+', 10km PR '+formatPace(pr10kmPace)+', longest run '+A.longestRun.toFixed(1)+'km, '+A.totalRuns+' activities, '+A.weeksMissed+' weeks missed</div>';
+    +'<div style="font-size:9px;color:var(--text-3);margin-top:8px;text-align:center">Target pace: '+formatPace(fullTargetPace)+'/km · Based on: 1km PR '+formatPace(pr1kmPace)+', 5km PR '+formatPace(pr5kmPace)+', 10km PR '+formatPace(pr10kmPace)+', longest run '+A.longestRun.toFixed(1)+'km, '+A.totalRuns+' activities, '+A.weeksMissed+' weeks missed</div>';
 }
 
 function factorRow(label, score) {
@@ -2639,6 +2677,8 @@ function togglePanelVisibility(id) {
   savePanelConfig();
   applyPanelConfig();
   renderPanelManager();
+  applyRaceTargets();
+  loadTimePickers();
 }
 
 function savePanelTitle(id, title) {
@@ -2657,6 +2697,118 @@ function toggleEditMode() {
   editMode = !editMode;
   applyPanelConfig();
   renderPanelManager();
+  applyRaceTargets();
+  loadTimePickers();
+}
+
+
+// ── DYNAMIC RACE TARGETS ──────────────────────────────────
+function applyRaceTargets() {
+  var settings = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+  var halfTarget = settings.halfTarget || '1:43–1:46';
+  var fullTarget = settings.fullTarget || 'Sub 3:30';
+
+  // Update ALL target displays across the site
+  document.querySelectorAll('[data-target-half]').forEach(function(el) {
+    el.textContent = halfTarget;
+  });
+  document.querySelectorAll('[data-target-full]').forEach(function(el) {
+    el.textContent = fullTarget;
+  });
+
+  // Update countdown card targets
+  var halfBadge = document.querySelector('#body-cd [data-target-half]');
+  var fullBadge = document.querySelector('#body-cd [data-target-full]');
+
+  // Update race day intro cards
+  document.querySelectorAll('[data-rd-half-target]').forEach(function(el) {
+    el.textContent = 'Target: ' + halfTarget + ' · Superblast 3';
+  });
+  document.querySelectorAll('[data-rd-full-target]').forEach(function(el) {
+    el.textContent = 'Target: ' + fullTarget + ' · Alphafly 3';
+  });
+
+  // Update settings inputs to reflect stored values
+  var hi = document.getElementById('set-half-target');
+  var fi = document.getElementById('set-full-target');
+  if (hi && hi !== document.activeElement) hi.value = halfTarget;
+  if (fi && fi !== document.activeElement) fi.value = fullTarget;
+}
+
+// Listen for target input changes
+document.addEventListener('input', function(e) {
+  if (e.target.dataset.setting === 'halfTarget' || e.target.dataset.setting === 'fullTarget') {
+    var s = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+    s[e.target.dataset.setting] = e.target.value;
+    localStorage.setItem('kc_settings', JSON.stringify(s));
+    applyRaceTargets();
+  loadTimePickers();
+    try { calcProbability(); } catch(ex) {}
+  }
+});
+
+
+// ── TIME PICKER FUNCTIONS ─────────────────────────────────
+function padZ(n) { return n < 10 ? '0' + n : '' + n; }
+
+function updateHalfTarget() {
+  var h = parseInt(document.getElementById('set-half-h').value) || 0;
+  var m = parseInt(document.getElementById('set-half-m').value) || 0;
+  var s = parseInt(document.getElementById('set-half-s').value) || 0;
+  // Clamp
+  if (m > 59) { document.getElementById('set-half-m').value = 59; m = 59; }
+  if (s > 59) { document.getElementById('set-half-s').value = 59; s = 59; }
+  var formatted = h + ':' + padZ(m) + ':' + padZ(s);
+  document.getElementById('set-half-target').value = formatted;
+  var stg = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+  stg.halfTarget = formatted;
+  localStorage.setItem('kc_settings', JSON.stringify(stg));
+  applyRaceTargets();
+  loadTimePickers();
+  try { calcProbability(); } catch(e) {}
+}
+
+function updateFullTarget() {
+  var h = parseInt(document.getElementById('set-full-h').value) || 0;
+  var m = parseInt(document.getElementById('set-full-m').value) || 0;
+  var s = parseInt(document.getElementById('set-full-s').value) || 0;
+  if (m > 59) { document.getElementById('set-full-m').value = 59; m = 59; }
+  if (s > 59) { document.getElementById('set-full-s').value = 59; s = 59; }
+  var formatted = h + ':' + padZ(m) + ':' + padZ(s);
+  document.getElementById('set-full-target').value = formatted;
+  var stg = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+  stg.fullTarget = formatted;
+  localStorage.setItem('kc_settings', JSON.stringify(stg));
+  applyRaceTargets();
+  loadTimePickers();
+  try { calcProbability(); } catch(e) {}
+}
+
+// Load saved targets into time pickers on init
+function loadTimePickers() {
+  var stg = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+  if (stg.halfTarget) {
+    var p = stg.halfTarget.split(':');
+    if (p.length >= 2) {
+      var hh = document.getElementById('set-half-h');
+      var hm = document.getElementById('set-half-m');
+      var hs = document.getElementById('set-half-s');
+      if (hh) hh.value = parseInt(p[0]) || 0;
+      if (hm) hm.value = parseInt(p[1]) || 0;
+      if (hs && p[2]) hs.value = parseInt(p[2]) || 0;
+    }
+  }
+  if (stg.fullTarget) {
+    var q = stg.fullTarget.split(':');
+    if (q.length >= 2) {
+      var fh = document.getElementById('set-full-h');
+      var fm = document.getElementById('set-full-m');
+      var fs = document.getElementById('set-full-s');
+      if (fh) fh.value = parseInt(q[0]) || 0;
+      if (fm) fm.value = parseInt(q[1]) || 0;
+      if (fs && q[2]) fs.value = parseInt(q[2]) || 0;
+    }
+  }
 }
 
 window.addEventListener('load', function init() {
@@ -2677,6 +2829,8 @@ window.addEventListener('load', function init() {
   try{applyAppearance();}catch(e){console.warn("applyAppearance error:",e);}
   applyPanelConfig();
   renderPanelManager();
+  applyRaceTargets();
+  loadTimePickers();
   renderWishlist();
   calcProbability();
   renderAeroEfficiency();
@@ -2763,6 +2917,21 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   var dash = document.getElementById('tab-dashboard');
   if (dash) dash.style.display = 'block';
+});
+
+
+// ── SETTINGS → ATHLETE propagation ────────────────────────
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'set-weight') {
+    ATHLETE.weight = parseFloat(e.target.value) || 74;
+    saveSetting('weight', e.target.value);
+  }
+  if (e.target.id === 'set-maxhr') {
+    ATHLETE.maxHR = parseInt(e.target.value) || 184;
+    saveSetting('maxhr', e.target.value);
+    // Recalculate probability with new maxHR
+    try { calcProbability(); } catch(e) {}
+  }
 });
 
 </script>
