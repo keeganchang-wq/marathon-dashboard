@@ -839,18 +839,10 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
     <div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>👟 Shoe Tracker</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Live from Strava · 6 active shoes</div></div>
     <div style="display:flex;gap:8px"><button class="add-btn" data-action="addShoe">+ Add shoe</button><button class="btn btn-d" data-action="toggleRetired">Retired</button></div>
   </div>
-  <div class="g3" id="shoeGrid" style="margin-bottom:16px"></div>
+  <div id="shoeGrid" style="margin-bottom:16px"></div>
   
 
-  <div style="background:rgba(212,160,82,.1);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:24px;font-size:12px;line-height:1.8;color:var(--text)">
-    <strong style="color:var(--golden)">🔄 Rotation:</strong>
-    <strong>Easy &amp; recovery</strong> → ASICS Superblast 3 (always — your default) ·
-    <strong>Intervals</strong> → Alternate Adios Pro 4 ↔ Vaporfly 4 ·
-    <strong>Tempo</strong> → Adios Pro 4 ·
-    <strong>Long runs &amp; Half marathon</strong> → Superblast 3 ·
-    <strong>Full marathon Oct 11</strong> → Alphafly 3 🏆<br>
-    <strong style="color:var(--golden)">⚡ Alphafly break-in:</strong> Wk10 Jun 22 (5km) · Wk14 Jul 16 (8km) · Wk17 Aug 11 (8km) → lock away until Oct 11
-  </div>
+  
   <div style="border-top:2px solid var(--border);margin:24px 0 16px"></div>
   <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px">💰 Spend Tracker</div>
   <div style="background:var(--surface);border:1px solid var(--golden);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--golden);margin-bottom:4px">💰 Total spend</div><div style="font-size:22px;font-weight:800;color:var(--golden)" id="spendTotal">$0 AUD</div></div><div style="display:flex;gap:16px"><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="shoeSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Shoes</div></div><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="gearSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Gear</div></div></div></div></div>
@@ -1467,6 +1459,8 @@ let shoes = JSON.parse(localStorage.getItem('kc_shoes') || 'null') || [
   {id:'29156194',brand:'Nike',model:'Vomero Plus',name:'Tan',type:'daily',use:'Easy runs, long runs (protect Superblast)',km:43.2,warn:800,retire:1000,race:false,price:250},
   {id:'28800916',brand:'Adidas',model:'EVO SL 2',name:'',type:'daily',use:'Easy runs, recovery days',km:56.2,warn:800,retire:1000,race:false,price:180},
 ];
+var showRetired = false;
+
 function saveShoes(){localStorage.setItem('kc_shoes',JSON.stringify(shoes));}
 
 let gearList = JSON.parse(localStorage.getItem('kc_gear') || 'null') || [
@@ -1774,33 +1768,50 @@ async function runSync(){
 // SHOES
 const SL={daily:{warn:800,retire:1000},carbon:{warn:400,retire:500},tempo:{warn:400,retire:500},recovery:{warn:800,retire:1000}};
 function renderShoes(){
-  const grid=document.getElementById('shoeGrid');if(!grid)return;
-  grid.innerHTML=shoes.filter(s=>!s.retired).map(s=>{
-    const lim=SL[s.type]||{warn:500,retire:700};const pct=Math.min(100,Math.round(s.km/lim.retire*100));
-    const fc=pct>=80?'#E74C3C':pct>=60?'#E67E22':'var(--golden)';
-    const bc=s.raceTag?.includes('MARATHON')?'var(--golden)':s.race?'var(--sapphire)':null;
-    return`<div class="shoe-card" style="${bc?`border-color:${bc}`:''}">
-      ${s.raceTag?`<div class="shoe-badge" style="background:${bc};color:white">${s.raceTag}</div>`:''}
-      <div class="shoe-img-placeholder" style="${s.raceTag?'margin-top:6px':''}">👟</div>
-      <div class="shoe-name">${s.brand} ${s.model}</div>
-      <div class="shoe-sub">${s.name||''} · ${s.type==='carbon'?'⚡ carbon':s.type==='daily'?'👟 daily':'🔥 '+s.type}</div>
-      <div class="shoe-prog-wrap">
-        <div class="shoe-prog-lbl"><span style="font-weight:700;color:${pct>=80?'var(--rose-500)':pct>=60?'var(--peach-500)':'var(--mint-600)'}">${s.km.toFixed(0)}km total</span><span>Retire: ${lim.retire}km</span></div>
-        <div class="prog-track"><div class="prog-fill" style="width:${pct}%;background:${fc}"></div></div>
-        <div style="font-size:10px;color:var(--text-3);margin-top:2px">${pct}% of life · ~${Math.max(0,lim.retire-s.km).toFixed(0)}km remaining</div>
-      </div>
-      <div style="font-size:10px;color:var(--text-2);line-height:1.5;background:var(--surface-3);border-radius:6px;padding:6px 8px"><strong style="color:var(--golden)">Use for:</strong> ${s.use}</div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <button class="shoe-retire-btn" data-retire="${s.id}">Retire</button>
-        <button class="shoe-retire-btn" style="border-color:var(--blue-200);color:var(--blue-500)" data-edit-shoe="${s.id}">Edit</button>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;font-size:10px">
-        <span style="background:var(--surface-3);border-radius:4px;padding:2px 8px;color:var(--text-2)">$${s.price&&s.km>0?(s.price/s.km).toFixed(2):"—"}/km</span>
-        ${pct>=80?'<span style="background:rgba(231,76,60,.12);border-radius:4px;padding:2px 8px;color:#E74C3C;font-weight:700">⚠ Retire soon</span>':pct>=60?'<span style="background:rgba(230,126,34,.1);border-radius:4px;padding:2px 8px;color:#E67E22">Watch mileage</span>':''}
-        ${s.race?'<span style="background:rgba(231,76,60,.12);border-radius:4px;padding:2px 8px;color:#E74C3C;font-weight:700">🔒 Race only</span>':''}
-      </div>
-    </div>`;
-  }).join('');
+  var el=document.getElementById('shoeGrid'); if(!el) return;
+  var active=shoes.filter(function(s){return !s.retired;});
+  var retired=shoes.filter(function(s){return s.retired;});
+
+  // Update header count
+  var hdr=document.querySelector('#sg-shoes .sec-badge,#sg-shoes [style*="sec-badge"]');
+
+  el.innerHTML = active.map(function(s){
+    var pct=Math.round((s.km/(s.retire||1000))*100);
+    var barCol=pct>80?'#E74C3C':pct>50?'#E67E22':'#2ECC71';
+    var costKm=s.price&&s.km>0?'$'+(s.price/s.km).toFixed(2)+'/km':'';
+    var typeIcon=s.type==='carbon'?'⚡':'🏃';
+    var isRace=s.race||s.id==='30100397';
+
+    return '<div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface-2);border:1px solid '+(isRace?'var(--golden)':'var(--border)')+';border-radius:var(--radius-sm);margin-bottom:6px;position:relative'+(isRace?';border-left:3px solid var(--golden)':'')+'">'
+      // Name & type
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;font-weight:700;color:var(--text)">'+s.brand+' '+s.model+'</span>'+(isRace?'<span style="font-size:8px;background:var(--golden);color:var(--blacktie);padding:1px 6px;border-radius:10px;font-weight:700">🏆 RACE</span>':'')+'</div>'
+      +'<div style="font-size:10px;color:var(--text-3);margin-top:2px">'+(s.name?s.name+' · ':'')+typeIcon+' '+(s.type||'daily')+(s.use?' · '+s.use:'')+'</div>'
+      +'</div>'
+      // Mileage bar
+      +'<div style="width:120px;flex-shrink:0">'
+      +'<div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px"><span style="font-weight:700;color:'+barCol+'">'+Math.round(s.km)+'km</span><span style="color:var(--text-3)">'+(s.retire||1000)+'km</span></div>'
+      +'<div style="height:5px;background:var(--surface-3);border-radius:3px;overflow:hidden"><div style="width:'+Math.min(pct,100)+'%;height:100%;background:'+barCol+';border-radius:3px"></div></div>'
+      +'</div>'
+      // Cost
+      +'<div style="width:65px;text-align:right;flex-shrink:0"><div style="font-size:11px;font-weight:700;color:var(--text)">'+(costKm||'—')+'</div>'+(s.price?'<div style="font-size:9px;color:var(--text-3)">$'+s.price+'</div>':'')+'</div>'
+      // Actions
+      +'<div style="display:flex;gap:4px;flex-shrink:0">'
+      +'<button data-edit-shoe="'+s.id+'" style="background:none;border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-size:9px;color:var(--text-2);cursor:pointer">Edit</button>'
+      +'<button data-retire="'+s.id+'" style="background:none;border:1px solid rgba(231,76,60,.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#E74C3C;cursor:pointer">Retire</button>'
+      +'</div></div>';
+  }).join('')
+
+  // Rotation guide (compact)
+  +'<div style="background:rgba(39,174,96,.06);border:1px solid rgba(39,174,96,.2);border-radius:var(--radius-sm);padding:8px 12px;margin-top:8px;font-size:10px;color:var(--text);line-height:1.6">'
+  +'<strong style="color:#2ECC71">🔄 Rotation:</strong> Easy → Superblast 3 · Intervals → Adios Pro 4 ↔ Vaporfly 4 · Long runs → Superblast 3 · <strong style="color:var(--golden)">Race day → Alphafly 3 🏆</strong>'
+  +'</div>'
+
+  // Retired (if showing)
+  +(showRetired&&retired.length?'<div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px">Retired</div>'
+  +retired.map(function(s){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:6px 10px;opacity:.4;font-size:11px;color:var(--text-3)"><span>'+s.brand+' '+s.model+'</span><span>'+Math.round(s.km)+'km</span><button data-unretire="'+s.id+'" style="background:none;border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:9px;color:var(--text-3);cursor:pointer;margin-left:auto">Restore</button></div>';
+  }).join(''):'');
 }
 function retireShoe(id){if(!confirm('Retire this shoe?'))return;const s=shoes.find(x=>x.id===id);if(s)s.retired=true;saveShoes();renderShoes();renderRetired();}
 function unretireShoe(id){const s=shoes.find(x=>x.id===id);if(s)s.retired=false;saveShoes();renderShoes();renderRetired();}
