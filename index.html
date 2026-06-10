@@ -1330,6 +1330,7 @@ function renderPlan(){
         + '<div class="cal-card-km">' + km + '</div>'
         + (isDoneSess ? '<div class="cal-card-done">✓ Done</div>' : '')
         + (sm ? '<div style="font-size:8px;color:#2ECC71;margin-top:1px">📡 <a href="https://www.strava.com/activities/'+sm.id+'" target="_blank" style="color:#2ECC71;text-decoration:none">Strava ↗</a></div>' : '')
+        + '<div data-action="viewSession" data-view-wk="'+week.wk+'" data-view-day="'+s.day+'" data-view-key="'+(s.key||'')+'" data-view-done="'+isDone+'" style="margin-top:4px;padding:3px 0;text-align:center;font-size:9px;font-weight:700;color:var(--golden);cursor:pointer;border-top:1px solid var(--border);opacity:.7">View workout ↗</div>'
         + '</div>'
         + '</div>'
         + '</div>';
@@ -1362,22 +1363,7 @@ function renderPlan(){
 
 function initCalDrag(){
   document.querySelectorAll('[data-cal-drag]').forEach(function(card){
-    // Click to open session modal (track drag to avoid false opens)
-    var wasDragged = false;
-    card.addEventListener('mousedown', function(){ wasDragged = false; });
-    card.addEventListener('mousemove', function(){ wasDragged = true; });
-    card.addEventListener('click', function(e){
-      if(wasDragged) return;
-      var sd = card.dataset.sess;
-      if(!sd) sd = card.getAttribute('data-sess');
-      if(!sd){ var p = card.closest('[data-sess]'); if(p) sd = p.dataset.sess; }
-      if(sd){
-        var pp = sd.split('|');
-        if(pp[2]) openSessModal(parseInt(pp[0]), pp[1], pp[2], pp[3]==='true');
-      }
-    });
     card.addEventListener('dragstart', function(e){
-      wasDragged = true;
       e.dataTransfer.setData('text/plain', card.dataset.calDrag);
       e.dataTransfer.effectAllowed = 'move';
       card.style.opacity = '0.4';
@@ -1787,6 +1773,26 @@ document.addEventListener('click', function(e) {
       case 'saveGear':    saveGearItem(); break;
       case 'saveShoe':    saveShoe(); break;
       case 'parsePaste':  parsePastedEmail(); break;
+      case 'viewSession': {
+        var vkey=el.dataset.viewKey;
+        if(!vkey) break;
+        var vs=SESSIONS[vkey];
+        if(!vs) break;
+        var vwk=el.dataset.viewWk, vday=el.dataset.viewDay;
+        var col=TC[vs.type]||'#333';
+        var bhtml=vs.blocks.map(function(b){
+          var bc={wu:'#27AE60',go:'#E74C3C',rest:'#666',cd:'#3B82F6',rc:'var(--golden)'};
+          var bl={wu:'WU',go:'GO',rest:'REST',cd:'CD',rc:'RACE'};
+          return '<div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;border-radius:6px;background:var(--surface-2);margin-bottom:5px"><div style="width:26px;height:26px;border-radius:5px;background:'+(bc[b.t]||'#666')+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">'+(bl[b.t]||'GO')+'</div><div style="font-size:12px;color:var(--text);line-height:1.6;flex:1">'+b.x+'</div></div>';
+        }).join('');
+        document.getElementById('sessModalTitle').innerHTML='<span style="color:'+col+'">'+TL[vs.type]+'</span> — '+vkey+' <span style="font-size:12px;color:var(--text-3)">Wk'+vwk+' '+vday+'</span>';
+        document.getElementById('sessModalBody').innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:12px"><span style="background:'+col+';color:white;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">'+vs.km+'</span></div>'
+          +(vs.trains?'<div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6"><strong>What this trains:</strong> '+vs.trains+'</div>':'')
+          +'<div style="margin-bottom:10px">'+bhtml+'</div>'
+          +(vs.tip?'<div style="background:rgba(212,160,82,.1);border-left:3px solid var(--golden);border-radius:0 6px 6px 0;padding:9px 12px;font-size:12px;color:var(--text);line-height:1.6"><strong>Coach tip:</strong> '+vs.tip+'</div>':'');
+        document.getElementById('sessModal').classList.add('open');
+        break;
+      }
       case 'nutHalf': showNutHalf(); break;
       case 'nutFull': showNutFull(); break;
       case 'clHalf': activeChecklist='half'; renderChecklist(); break;
@@ -2257,6 +2263,7 @@ window.addEventListener('load', function init() {
   renderNiggles();
   renderMantras();
 });
+
 </script>
 <div class="modal-bg" id="addWishlistModal"><div class="modal"><button class="modal-close" data-close="addWishlistModal">✕</button><h3>🛒 Add to wishlist</h3><label>Icon</label><select id="w-icon"><option value="👟">👟 Shoes</option><option value="⌚">⌚ Watch</option><option value="🎧">🎧 Headphones</option><option value="👕">👕 Apparel</option><option value="🧦">🧦 Socks</option><option value="⛽">⛽ Nutrition</option><option value="🛒" selected>🛒 Other</option></select><label>Product name</label><input id="w-name" placeholder="e.g. ASICS Novablast 5"><label>Size / Colour</label><input id="w-size" placeholder="e.g. US 10 / White"><label>Est. price (AUD)</label><input id="w-price" type="number" placeholder="0"><label>Notes</label><textarea id="w-notes" rows="2" placeholder="Sizing, colour, where to buy..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addWishlistModal">Cancel</button><button class="btn-primary" data-action="saveWishlistAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveWishlistItem">Save &amp; close</button></div></div></div>
 <div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label>Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label>Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label>Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
