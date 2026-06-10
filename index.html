@@ -631,6 +631,132 @@ body {
 </div>
 
 <!-- COMING SOON -->
+
+<!-- ═══ RACE DAY: NUTRITION TIMER ═══ -->
+<div class="section-card" id="sec-nutrition" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">⛽ Race Day — Nutrition & Pre-Race Timeline</span><button class="sec-toggle" data-toggle="nutrition">−</button></div>
+  <div class="sec-body" id="body-nutrition">
+
+    <!-- RACE SELECTOR -->
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button id="nutHalfBtn" data-action="nutHalf" style="flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:12px;cursor:pointer">🏃 Half Marathon · Jul 19</button>
+      <button id="nutFullBtn" data-action="nutFull" style="flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:12px;cursor:pointer">🏆 Full Marathon · Oct 11</button>
+    </div>
+
+    <!-- HALF MARATHON TIMELINE -->
+    <div id="nutHalfPanel">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">🌙 Night before — Jul 18</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">7:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Carb dinner</strong> — pasta/rice + lean protein. Nothing new. 2–3 glasses water.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Lay out race kit</strong> — bib pinned, Superblast 3, watch charged, 2× gels in pocket.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:30pm</div><div style="font-size:11px;color:var(--text)"><strong>Lights out</strong> — 7.5+ hrs sleep. Set alarm for 3:30am.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">☀️ Race morning — Jul 19 · Gun: 7:00am</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:30am</div><div style="font-size:11px;color:var(--text)"><strong>Wake up</strong> — immediately drink 500ml water.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:45am</div><div style="font-size:11px;color:var(--text)"><strong>Breakfast</strong> — 2× toast + honey + banana + coffee. ~400 cal. Nothing new.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:15am</div><div style="font-size:11px;color:var(--text)"><strong>Caffeine</strong> — 200mg (coffee or caffeine pill). Peak at ~6:45am.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:30am</div><div style="font-size:11px;color:var(--text)"><strong>Travel to venue.</strong> Sip water on the way. Stop drinking at 6:15am.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">6:15am</div><div style="font-size:11px;color:var(--text)"><strong>Arrive + toilet.</strong> Last hydration. Pin bib. Double-knot shoes.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #27AE60"><div style="min-width:60px;font-size:11px;font-weight:700;color:#27AE60">6:35am</div><div style="font-size:11px;color:var(--text)"><strong>Warm-up jog</strong> — 10min very easy + 2×30s at race pace + dynamic stretches.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:45am</div><div style="font-size:11px;color:var(--text)"><strong>Pre-race gel</strong> — 1× plain gel + sip of water. Last fuel before gun.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:50am</div><div style="font-size:11px;color:var(--text)"><strong>Line up in corral.</strong> Deep breaths. Trust the training.</div></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:rgba(212,160,82,.12);border-radius:6px;border-left:4px solid var(--golden)"><div style="min-width:60px;font-size:12px;font-weight:800;color:var(--golden)">7:00am</div><div style="font-size:12px;font-weight:700;color:var(--golden)">🔫 GUN — GO. Start at 5:05/km. HR under 172.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">⛽ During race — gel clock</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Pre-race gel</div><div style="font-size:16px;font-weight:800;color:var(--golden)">6:45am</div><div style="font-size:10px;color:var(--text-2)">Plain gel · 15min before gun</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">⛽ Gel 1 · km 7</div><div style="font-size:16px;font-weight:800;color:var(--golden)">7:35am</div><div style="font-size:10px;color:var(--text-2)">Plain gel · take with water</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">⛽ Gel 2 · km 14</div><div style="font-size:16px;font-weight:800;color:var(--golden)">8:10am</div><div style="font-size:10px;color:var(--text-2)">Caffeine gel · final push fuel</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-2);line-height:1.6;background:rgba(35,79,96,.15);border-radius:6px;padding:10px 12px"><strong>Aid stations:</strong> Water at every station. Sip, don't gulp. Walk 5 steps through the station if needed — losing 3 seconds is better than choking. Sports drink at alternating stations if stomach tolerates it.</div>
+    </div>
+
+    <!-- FULL MARATHON TIMELINE -->
+    <div id="nutFullPanel" style="display:none">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">🌙 Night before — Oct 10</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">6:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Carb dinner</strong> — large pasta/rice + chicken. Extra bread roll. 3 glasses water. Nothing spicy, nothing new.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">8:30pm</div><div style="font-size:11px;color:var(--text)"><strong>Lay out race kit</strong> — bib pinned to singlet, Alphafly 3 🏆, watch charged, 6× gels + 1 pre-race. Body Glide on feet/thighs/nipples.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--sapphire)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--sapphire)">9:00pm</div><div style="font-size:11px;color:var(--text)"><strong>Lights out</strong> — 7+ hrs sleep. Alarm 3:15am. Trust the taper.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">☀️ Race morning — Oct 11 · Gun: 7:00am</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:15am</div><div style="font-size:11px;color:var(--text)"><strong>Wake up</strong> — drink 500ml water immediately.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">3:30am</div><div style="font-size:11px;color:var(--text)"><strong>Breakfast</strong> — oats + honey + banana + 2× toast + coffee. ~600 cal. Extra carbs vs half.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:00am</div><div style="font-size:11px;color:var(--text)"><strong>Caffeine</strong> — 200mg. Peak at ~6:30am. Save caffeine gels for km 26+.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:15am</div><div style="font-size:11px;color:var(--text)"><strong>Small top-up</strong> — half banana or rice cake. Last solid food.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">5:30am</div><div style="font-size:11px;color:var(--text)"><strong>Travel to venue.</strong> Sip water. Stop at 6:15am.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #E67E22"><div style="min-width:60px;font-size:11px;font-weight:700;color:#E67E22">6:15am</div><div style="font-size:11px;color:var(--text)"><strong>Arrive + toilet.</strong> Apply Body Glide. Pin bib. Triple-check shoe laces.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid #27AE60"><div style="min-width:60px;font-size:11px;font-weight:700;color:#27AE60">6:35am</div><div style="font-size:11px;color:var(--text)"><strong>Warm-up</strong> — 10min easy jog + 2×30s at marathon pace. Dynamic stretches.</div></div>
+        <div style="display:flex;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--golden)"><div style="min-width:60px;font-size:11px;font-weight:700;color:var(--golden)">6:45am</div><div style="font-size:11px;color:var(--text)"><strong>Pre-race gel</strong> — 1× plain gel + water sip.</div></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:rgba(212,160,82,.12);border-radius:6px;border-left:4px solid var(--golden)"><div style="min-width:60px;font-size:12px;font-weight:800;color:var(--golden)">7:00am</div><div style="font-size:12px;font-weight:700;color:var(--golden)">🔫 GUN — GO. Start at 5:10/km. HR UNDER 162. Trust the plan.</div></div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">⛽ During race — 6 gel clock</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">Pre-race</div><div style="font-size:14px;font-weight:800;color:var(--golden)">6:45am</div><div style="font-size:9px;color:var(--text-2)">Plain gel</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 1 · km 8</div><div style="font-size:14px;font-weight:800;color:var(--golden)">7:40am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 2 · km 14</div><div style="font-size:14px;font-weight:800;color:var(--golden)">8:10am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 3 · km 20</div><div style="font-size:14px;font-weight:800;color:var(--golden)">8:40am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">
+        <div style="background:var(--surface-2);border:1px solid #E74C3C;border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:#E74C3C;text-transform:uppercase;margin-bottom:3px">⛽ 4 · km 26 ☕</div><div style="font-size:14px;font-weight:800;color:#E74C3C">9:10am</div><div style="font-size:9px;color:var(--text-2)">CAFFEINE gel</div></div>
+        <div style="background:var(--surface-2);border:1px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:3px">⛽ 5 · km 32</div><div style="font-size:14px;font-weight:800;color:var(--golden)">9:41am</div><div style="font-size:9px;color:var(--text-2)">Plain</div></div>
+        <div style="background:var(--surface-2);border:1px solid #E74C3C;border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:#E74C3C;text-transform:uppercase;margin-bottom:3px">⛽ 6 · km 38 ☕</div><div style="font-size:14px;font-weight:800;color:#E74C3C">10:11am</div><div style="font-size:9px;color:var(--text-2)">CAFFEINE gel</div></div>
+        <div style="background:rgba(212,160,82,.12);border:1.5px solid var(--golden);border-radius:var(--radius-sm);padding:10px;text-align:center"><div style="font-size:9px;color:var(--golden);text-transform:uppercase;margin-bottom:3px">🏆 FINISH</div><div style="font-size:14px;font-weight:800;color:var(--golden)">~10:30am</div><div style="font-size:9px;color:var(--text-2)">3:28–3:35</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-2);line-height:1.6;background:rgba(35,79,96,.15);border-radius:6px;padding:10px 12px"><strong>Strategy:</strong> Plain gels first 3, caffeine at km 26 and 38 for the final push. Walk 3 seconds through aid stations. Water every station, sports drink every other. If stomach issues: skip a gel, take water only, re-attempt next station.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RACE DAY CHECKLIST ═══ -->
+<div class="section-card" id="sec-checklist" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🎒 Race Day Checklist</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)" id="checklistCount">0/0</span><button class="sec-toggle" data-toggle="checklist">−</button></div>
+  <div class="sec-body" id="body-checklist">
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button id="clHalfBtn" data-action="clHalf" style="padding:6px 14px;border-radius:20px;border:1px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:600;cursor:pointer">Half · Jul 19</button>
+      <button id="clFullBtn" data-action="clFull" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Full · Oct 11</button>
+      <button data-action="clReset" style="margin-left:auto;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-3);font-size:10px;cursor:pointer">Reset all</button>
+    </div>
+    <div id="checklistGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
+  </div>
+</div>
+
+<!-- ═══ WEEKLY VOLUME CHART ═══ -->
+<div class="section-card" id="sec-volume" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">📈 Weekly Volume</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)">25 weeks</span><button class="sec-toggle" data-toggle="volume">−</button></div>
+  <div class="sec-body" id="body-volume">
+    <div id="volumeChart" style="display:flex;align-items:flex-end;gap:3px;height:120px;padding:0 4px"></div>
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-3);margin-top:6px;padding:0 4px"><span>Wk1</span><span>Wk5</span><span>Wk10</span><span>Wk15</span><span>Wk20</span><span>Wk25</span></div>
+  </div>
+</div>
+
+<!-- ═══ NIGGLE TRACKER ═══ -->
+<div class="section-card" id="sec-niggles" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🤕 Niggle & Injury Tracker</span><button class="sec-toggle" data-toggle="niggles">−</button></div>
+  <div class="sec-body" id="body-niggles">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:11px;color:var(--text-2)">Log any pain or tightness · Track patterns before they become injuries</div>
+      <button class="add-btn" data-action="addNiggle" style="font-size:11px;padding:5px 12px">+ Log niggle</button>
+    </div>
+    <div id="niggleList"></div>
+  </div>
+</div>
+
+<!-- ═══ RACE MANTRAS ═══ -->
+<div class="section-card" id="sec-mantras" draggable="true">
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🧠 Race Mantras & Mental Notes</span><button class="sec-toggle" data-toggle="mantras">−</button></div>
+  <div class="sec-body" id="body-mantras">
+    <div id="mantraList"></div>
+    <button class="add-btn" data-action="addMantra" style="font-size:11px;padding:5px 12px;margin-top:8px">+ Add mantra</button>
+  </div>
+</div>
+
 <div class="section-card" id="sec-future" draggable="true"><div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Roadmap — what's being built next</span><button class="sec-toggle" data-toggle="future">−</button></div><div class="sec-body" id="body-future"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:10px;color:#E74C3C;font-weight:700">🔴 Urgent</span><span style="font-size:10px;color:#E67E22;font-weight:700">🟠 Want</span><span style="font-size:10px;color:#27AE60;font-weight:700">🟢 Nice to have</span><span style="font-size:10px;color:#8E44AD;font-weight:700">🟣 Brainstorm</span><span style="font-size:10px;color:var(--text-3)">· Click to complete · ✏️ Edit · × Delete</span></div><div style="display:flex;gap:6px"><button id="rmSortBtn" data-action="toggleRmSort" style="background:var(--surface-3);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--text-2);cursor:pointer">↕ Urgency ↑</button><button class="add-btn" data-action="addRoadmapItem" style="font-size:11px;padding:5px 12px">+ Add item</button></div></div><div id="roadmapGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div></div>
 
 </div><!-- end dash-sections -->
@@ -1456,7 +1582,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 // EVENT DELEGATION — replaces all inline onclick handlers (CSP-safe)
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('click', function(e) {
-  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del],[data-strava]');
+  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del],[data-strava],[data-check],[data-del-niggle],[data-del-mantra]');
   if (!el) return;
 
   // TAB SWITCHING
@@ -1525,6 +1651,15 @@ document.addEventListener('click', function(e) {
       case 'saveGear':    saveGearItem(); break;
       case 'saveShoe':    saveShoe(); break;
       case 'parsePaste':  parsePastedEmail(); break;
+      case 'nutHalf': showNutHalf(); break;
+      case 'nutFull': showNutFull(); break;
+      case 'clHalf': activeChecklist='half'; renderChecklist(); break;
+      case 'clFull': activeChecklist='full'; renderChecklist(); break;
+      case 'clReset': checkedItems={}; saveChecklist(); renderChecklist(); break;
+      case 'addNiggle': openAddNiggle(); break;
+      case 'saveNiggle': saveNiggle(); break;
+      case 'addMantra': openAddMantra(); break;
+      case 'saveMantra': saveMantra(); break;
       case 'addWishlistItem': openAddWishlistItem(); break;
       case 'saveGearAnother': saveGearAnother(); break;
       case 'saveWishlistAnother': saveWishlistAnother(); break;
@@ -1549,6 +1684,9 @@ document.addEventListener('click', function(e) {
   // GEAR CYCLE / DELETE
   if (el.dataset.cycle) { cycleGearCond(el.dataset.cycle); return; }
   if (el.dataset.delGear) { delGear(el.dataset.delGear); return; }
+  if (el.dataset.check) { toggleCheckItem(el.dataset.check); return; }
+  if (el.dataset.delNiggle) { delNiggle(el.dataset.delNiggle); return; }
+  if (el.dataset.delMantra) { delMantra(el.dataset.delMantra); return; }
   if (el.dataset.strava) { window.open('https://www.strava.com/activities/' + el.dataset.strava, '_blank'); return; }
   if (el.dataset.editGear) { editGear(el.dataset.editGear); return; }
   if (el.dataset.wishBuy) { toggleWishBought(el.dataset.wishBuy); return; }
@@ -1845,6 +1983,109 @@ function generateDebrief(sessType, sessKey, sm) {
     +'</div>';
 }
 
+
+// ── NUTRITION PANEL TOGGLE ─────────────────────────────────
+function showNutHalf(){ document.getElementById('nutHalfPanel').style.display='block'; document.getElementById('nutFullPanel').style.display='none'; document.getElementById('nutHalfBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('nutHalfBtn').style.borderColor='var(--golden)'; document.getElementById('nutHalfBtn').style.color='var(--golden)'; document.getElementById('nutFullBtn').style.background='transparent'; document.getElementById('nutFullBtn').style.borderColor='var(--border)'; document.getElementById('nutFullBtn').style.color='var(--text-2)'; }
+function showNutFull(){ document.getElementById('nutFullPanel').style.display='block'; document.getElementById('nutHalfPanel').style.display='none'; document.getElementById('nutFullBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('nutFullBtn').style.borderColor='var(--golden)'; document.getElementById('nutFullBtn').style.color='var(--golden)'; document.getElementById('nutHalfBtn').style.background='transparent'; document.getElementById('nutHalfBtn').style.borderColor='var(--border)'; document.getElementById('nutHalfBtn').style.color='var(--text-2)'; }
+
+// ── RACE CHECKLIST ─────────────────────────────────────────
+var CHECKLISTS = {
+  half: [
+    {cat:'Kit',items:['Race bib pinned to singlet','ASICS Superblast 3','COROS PACE 4 charged','Shokz OpenRun Pro charged','Race singlet','Race shorts','Running socks','Sunglasses (if sunny)']},
+    {cat:'Nutrition',items:['2× gels (1 plain, 1 caffeine)','1× pre-race gel','Water bottle for morning','Coffee/caffeine for 5:15am']},
+    {cat:'Body',items:['Body Glide / vaseline (nipples, feet, thighs)','Sunscreen','Hair tie / headband']},
+    {cat:'Logistics',items:['Phone charged','Transport planned','Warm throwaway layer','Post-race change of clothes','Cash/card for after']},
+  ],
+  full: [
+    {cat:'Kit',items:['Race bib pinned to singlet','Nike Alphafly 3 🏆','COROS PACE 4 charged','Race singlet','Race shorts','Running socks','Sunglasses','Arm sleeves (if cold)']},
+    {cat:'Nutrition',items:['6× gels (4 plain, 2 caffeine)','1× pre-race gel','Gel belt or shorts with pockets','Water bottle for morning','Coffee/caffeine','Banana for 5:15am top-up']},
+    {cat:'Body',items:['Body Glide (nipples, feet, inner thighs, underarms)','Sunscreen','Blister tape if needed','Hair tie / headband']},
+    {cat:'Logistics',items:['Phone charged','Transport planned','Warm throwaway layer','Post-race change of clothes','Cash/card','Compression socks for after']},
+  ]
+};
+var checkedItems = JSON.parse(localStorage.getItem('kc_checklist') || '{}');
+var activeChecklist = 'half';
+function saveChecklist(){ localStorage.setItem('kc_checklist', JSON.stringify(checkedItems)); }
+function renderChecklist(){
+  var grid = document.getElementById('checklistGrid'); if(!grid) return;
+  var list = CHECKLISTS[activeChecklist];
+  var total=0, done=0;
+  grid.innerHTML = list.map(function(cat){
+    return '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;margin-bottom:6px">'+cat.cat+'</div>'+cat.items.map(function(item){
+      var key = activeChecklist + '_' + item;
+      var checked = !!checkedItems[key];
+      total++; if(checked) done++;
+      return '<div data-check="'+key+'" style="display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer;font-size:11px;color:'+(checked?'var(--text-3)':'var(--text)')+';'+(checked?'text-decoration:line-through;opacity:.5;':'')+'"><div style="width:16px;height:16px;border-radius:4px;border:1.5px solid '+(checked?'#2ECC71':'var(--border)')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;background:'+(checked?'rgba(39,174,96,.2)':'transparent')+'">'+(checked?'<span style="color:#2ECC71;font-size:11px">✓</span>':'')+'</div>'+item+'</div>';
+    }).join('')+'</div>';
+  }).join('');
+  var counter = document.getElementById('checklistCount');
+  if(counter) counter.textContent = done + '/' + total + ' packed';
+  // Toggle buttons
+  var hb=document.getElementById('clHalfBtn'),fb=document.getElementById('clFullBtn');
+  if(hb){hb.style.background=activeChecklist==='half'?'rgba(212,160,82,.15)':'transparent';hb.style.borderColor=activeChecklist==='half'?'var(--golden)':'var(--border)';hb.style.color=activeChecklist==='half'?'var(--golden)':'var(--text-2)';}
+  if(fb){fb.style.background=activeChecklist==='full'?'rgba(212,160,82,.15)':'transparent';fb.style.borderColor=activeChecklist==='full'?'var(--golden)':'var(--border)';fb.style.color=activeChecklist==='full'?'var(--golden)':'var(--text-2)';}
+}
+function toggleCheckItem(key){ if(checkedItems[key]) delete checkedItems[key]; else checkedItems[key]=true; saveChecklist(); renderChecklist(); }
+
+// ── VOLUME CHART ───────────────────────────────────────────
+function renderVolumeChart(){
+  var el = document.getElementById('volumeChart'); if(!el) return;
+  var weekKms = PLAN.map(function(w){ return w.km; });
+  var maxKm = Math.max.apply(null, weekKms);
+  el.innerHTML = weekKms.map(function(km, i){
+    var wk = PLAN[i];
+    var h = maxKm > 0 ? Math.round((km / maxKm) * 100) : 0;
+    var col = wk.done ? 'var(--golden)' : wk.current ? '#3B82F6' : 'var(--surface-3)';
+    var border = wk.current ? '2px solid #3B82F6' : 'none';
+    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%" title="Wk'+wk.wk+': '+km+'km — '+wk.phase+'"><div style="width:100%;height:'+Math.max(4,h)+'%;background:'+col+';border-radius:3px 3px 0 0;border:'+border+';min-height:4px;transition:height .3s"></div><div style="font-size:8px;color:var(--text-3);margin-top:3px">'+Math.round(km)+'</div></div>';
+  }).join('');
+}
+
+// ── NIGGLE TRACKER ─────────────────────────────────────────
+var niggles = JSON.parse(localStorage.getItem('kc_niggles') || '[]');
+function saveNiggles(){ localStorage.setItem('kc_niggles', JSON.stringify(niggles)); }
+function renderNiggles(){
+  var el = document.getElementById('niggleList'); if(!el) return;
+  if(!niggles.length){ el.innerHTML='<div style="text-align:center;padding:16px;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No niggles logged — great news! 💪</div>'; return; }
+  var sevCol = {low:'#27AE60',medium:'#E67E22',high:'#E74C3C'};
+  el.innerHTML = niggles.map(function(n){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid '+(sevCol[n.severity]||'var(--border)')+';border-radius:var(--radius-sm);margin-bottom:5px"><div style="flex:1"><div style="font-size:11px;font-weight:700;color:var(--text)">'+n.area+' — <span style="color:'+(sevCol[n.severity]||'var(--text-2)')+'">'+n.severity+'</span></div><div style="font-size:10px;color:var(--text-2)">'+n.date+(n.notes?' · '+n.notes:'')+'</div></div><button data-del-niggle="'+n.id+'" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:14px">×</button></div>';
+  }).join('');
+}
+function openAddNiggle(){ document.getElementById('addNiggleModal').classList.add('open'); }
+function saveNiggle(){
+  var area=document.getElementById('n-area').value;var sev=document.getElementById('n-severity').value;var notes=document.getElementById('n-notes').value.trim();
+  if(!area)return;
+  niggles.unshift({id:'n'+Date.now(),area:area,severity:sev,date:new Date().toISOString().split('T')[0],notes:notes});
+  saveNiggles();renderNiggles();closeModal('addNiggleModal');
+}
+function delNiggle(id){ niggles=niggles.filter(function(x){return x.id!==id;}); saveNiggles(); renderNiggles(); }
+
+// ── MANTRAS ────────────────────────────────────────────────
+var mantras = JSON.parse(localStorage.getItem('kc_mantras') || 'null') || [
+  {id:'m1',text:'The first 10km are free. Don\'t pay for them early.',type:'pace'},
+  {id:'m2',text:'HR under 162 for 30km. Then race.',type:'strategy'},
+  {id:'m3',text:'You didn\'t train since January to quit at km 33.',type:'grit'},
+  {id:'m4',text:'One more km. Always just one more km.',type:'grit'},
+  {id:'m5',text:'Pain is temporary. A PB is forever.',type:'grit'},
+];
+function saveMantras(){ localStorage.setItem('kc_mantras', JSON.stringify(mantras)); }
+function renderMantras(){
+  var el = document.getElementById('mantraList'); if(!el) return;
+  var typeCol = {pace:'var(--golden)',strategy:'var(--sapphire-lt)',grit:'#E74C3C',focus:'#27AE60',custom:'#8E44AD'};
+  el.innerHTML = mantras.map(function(m){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface-2);border-left:3px solid '+(typeCol[m.type]||'var(--golden)')+';border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:5px"><div style="font-size:18px">'+(m.type==='pace'?'🏃':m.type==='strategy'?'🧠':m.type==='grit'?'🔥':m.type==='focus'?'🎯':'💭')+'</div><div style="flex:1;font-size:12px;color:var(--text);font-style:italic;line-height:1.5">"'+m.text+'"</div><button data-del-mantra="'+m.id+'" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:14px">×</button></div>';
+  }).join('');
+}
+function openAddMantra(){ document.getElementById('addMantraModal').classList.add('open'); }
+function saveMantra(){
+  var text=document.getElementById('ma-text').value.trim();var type=document.getElementById('ma-type').value;
+  if(!text)return;
+  mantras.push({id:'m'+Date.now(),text:text,type:type});
+  saveMantras();renderMantras();closeModal('addMantraModal');
+}
+function delMantra(id){ mantras=mantras.filter(function(x){return x.id!==id;}); saveMantras(); renderMantras(); }
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -1862,8 +2103,14 @@ window.addEventListener('load', function init() {
   loadSettings();
   renderWishlist();
   calcProbability();
+  renderChecklist();
+  renderVolumeChart();
+  renderNiggles();
+  renderMantras();
 });
 </script>
 <div class="modal-bg" id="addWishlistModal"><div class="modal"><button class="modal-close" data-close="addWishlistModal">✕</button><h3>🛒 Add to wishlist</h3><label>Icon</label><select id="w-icon"><option value="👟">👟 Shoes</option><option value="⌚">⌚ Watch</option><option value="🎧">🎧 Headphones</option><option value="👕">👕 Apparel</option><option value="🧦">🧦 Socks</option><option value="⛽">⛽ Nutrition</option><option value="🛒" selected>🛒 Other</option></select><label>Product name</label><input id="w-name" placeholder="e.g. ASICS Novablast 5"><label>Size / Colour</label><input id="w-size" placeholder="e.g. US 10 / White"><label>Est. price (AUD)</label><input id="w-price" type="number" placeholder="0"><label>Notes</label><textarea id="w-notes" rows="2" placeholder="Sizing, colour, where to buy..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addWishlistModal">Cancel</button><button class="btn-primary" data-action="saveWishlistAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveWishlistItem">Save &amp; close</button></div></div></div>
+<div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label>Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label>Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label>Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
+<div class="modal-bg" id="addMantraModal"><div class="modal"><button class="modal-close" data-close="addMantraModal">✕</button><h3>🧠 Add a mantra</h3><label>Type</label><select id="ma-type"><option value="pace">🏃 Pace / discipline</option><option value="strategy">🧠 Strategy</option><option value="grit">🔥 Grit / push through</option><option value="focus">🎯 Focus</option><option value="custom">💭 Other</option></select><label>Your mantra</label><textarea id="ma-text" rows="2" placeholder="What will you tell yourself at km 35?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addMantraModal">Cancel</button><button class="btn-primary" data-action="saveMantra">Save</button></div></div></div>
 </body>
 </html>
