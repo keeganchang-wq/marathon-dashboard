@@ -2363,6 +2363,14 @@ function calcProbability() {
     // HALF panel
     +'<div id="probHalfPanel">'
     +'<div style="border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px"><div style="background:linear-gradient(135deg,#D4A052,#A06E20);padding:14px 18px;color:white"><div style="font-size:10px;font-weight:700;opacity:.85;text-transform:uppercase">🏃 Half Marathon · '+daysToHalf+' days</div><div style="font-size:20px;font-weight:800;margin:4px 0">'+halfTargetLabel+'</div><div style="font-size:11px;opacity:.8">'+formatPace(halfTargetPace)+'/km race pace</div></div><div style="padding:14px 16px;text-align:center"><div style="font-size:48px;font-weight:800;color:'+gc(probHalf)+'">'+probHalf+'%</div><div style="font-size:11px;color:var(--text-2)">probability of hitting target</div></div></div>'
+
+    // Half tiers
+    +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">Target: '+halfTargetLabel+'</div><div style="font-size:24px;font-weight:800;color:'+gc(probHalf)+'">'+probHalf+'%</div><div style="font-size:9px;color:var(--text-3);margin-top:2px">'+formatPace(halfTargetPace)+'/km</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">+3 min easier</div><div style="font-size:24px;font-weight:800;color:'+gc(Math.min(95,probHalf+10))+'">'+Math.min(95,probHalf+10)+'%</div><div style="font-size:9px;color:var(--text-3);margin-top:2px">'+formatPace(halfTargetPace+0.14)+'/km</div></div>'
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:9px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px">+8 min easier</div><div style="font-size:24px;font-weight:800;color:'+gc(Math.min(98,probHalf+22))+'">'+Math.min(98,probHalf+22)+'%</div><div style="font-size:9px;color:var(--text-3);margin-top:2px">'+formatPace(halfTargetPace+0.38)+'/km</div></div>'
+    +'</div>'
+
     +renderFactors(hBoosters, hRisks, halfTargetPace, 21, weeksToHalf, true)
     +'</div>'
 
