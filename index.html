@@ -1330,9 +1330,9 @@ function renderPlan(){
         + '<div class="cal-card-km">' + km + '</div>'
         + (isDoneSess ? '<div class="cal-card-done">✓ Done</div>' : '')
         + (sm ? '<div style="font-size:8px;color:#2ECC71;margin-top:1px">📡 <a href="https://www.strava.com/activities/'+sm.id+'" target="_blank" style="color:#2ECC71;text-decoration:none">Strava ↗</a></div>' : '')
-        + '<div data-action="viewSession" data-view-wk="'+week.wk+'" data-view-day="'+s.day+'" data-view-key="'+(s.key||'')+'" data-view-done="'+isDone+'" style="margin-top:4px;padding:3px 0;text-align:center;font-size:9px;font-weight:700;color:var(--golden);cursor:pointer;border-top:1px solid var(--border);opacity:.7">View workout ↗</div>'
         + '</div>'
         + '</div>'
+        + '<div data-action="viewSession" data-view-wk="'+week.wk+'" data-view-day="'+s.day+'" data-view-key="'+(s.key||'')+'" data-view-done="'+isDone+'" style="padding:4px 0;text-align:center;font-size:9px;font-weight:700;color:var(--golden);cursor:pointer;background:var(--surface-3);border-radius:0 0 6px 6px;border:1px solid var(--border);border-top:none">▶ View workout</div>'
         + '</div>';
     }).join('');
 
