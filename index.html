@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface-2)">
+      <div><div style="font-size:14px;font-weight:700;color:var(--text)">🛒 Wishlist</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Track gear and shoes you want to buy</div></div>
+      <button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button>
+    </div>
+    <div style="padding:12px 16px" id="wishlistItems"></div>
+  </div><!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -722,8 +728,12 @@ body {
     <input type="file" id="fileInputEl" style="display:none" accept=".pdf,.png,.jpg,.jpeg,.eml,.txt">
   </div>
   <div style="border-top:2px solid var(--border);margin:20px 0 16px"></div>
-  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px">📦 Current Gear</div>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px" id="gearItems"></div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface-2)">
+      <div><div style="font-size:14px;font-weight:700;color:var(--text)">📦 Current Gear</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Tap condition to cycle · ✏️ to edit · × to delete</div></div>
+    </div>
+    <div style="padding:12px 16px" id="gearItems"></div>
+  </div>
 
   </div><!-- end sg-gear -->
 <div draggable="true" data-drag-id="sg-wishlist" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
