@@ -1281,6 +1281,13 @@ function renderPlan(){
       sessMap[actualDay] = s;
     });
 
+    // Add custom rest days
+    DAYS.forEach(function(d){
+      if(!sessMap[d] && customRests[week.wk + '__' + d]){
+        sessMap[d] = {day:d, type:'rest', name:'Rest', key:null, custom:true};
+      }
+    });
+
     // Count done
     var wDone = 0, wTotal = 0;
     week.sessions.forEach(function(s){
@@ -1298,12 +1305,11 @@ function renderPlan(){
     var dayCells = DAYS.map(function(dayName){
       var s = sessMap[dayName];
       if(!s){
-        // Empty day — drop target for rescheduling
-        return '<div class="cal-cell cal-empty" data-cal-drop="' + week.wk + '|' + dayName + '"></div>';
+        return '<div class="cal-cell cal-empty" data-cal-drop="' + week.wk + '|' + dayName + '" data-cal-add="' + week.wk + '|' + dayName + '" style="cursor:pointer" title="Click to add rest day"><div style="display:flex;align-items:center;justify-content:center;height:100%;opacity:.15;font-size:20px;user-select:none">+</div></div>';
       }
 
       if(s.type === 'rest'){
-        return '<div class="cal-cell cal-rest"><div class="cal-card-rest">😴<br>Rest</div></div>';
+        return '<div class="cal-cell cal-rest" data-cal-drop="' + week.wk + '|' + dayName + '"><div class="cal-card" draggable="true" data-cal-drag="' + week.wk + '|' + s.day + '|' + dayName + '" data-sess="' + week.wk + '|' + s.day + '||false" style="text-align:center;padding:8px 4px;cursor:grab"><div class="cal-card-hdr" style="background:#333">REST</div><div class="cal-card-body" style="padding:8px"><div style="font-size:16px">😴</div><div style="font-size:10px;color:var(--text-3)">Rest day</div></div></div></div>';
       }
 
       var k = sid(week.wk, s.day); // use original day for completion tracking
@@ -1694,7 +1700,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 // EVENT DELEGATION — replaces all inline onclick handlers (CSP-safe)
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('click', function(e) {
-  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del],[data-strava],[data-check],[data-del-niggle],[data-del-mantra]');
+  const el = e.target.closest('[data-tab],[data-toggle],[data-action],[data-wk],[data-sess],[data-done],[data-done-modal],[data-close],[data-retire],[data-edit-shoe],[data-unretire],[data-cycle],[data-del-gear],[data-rm],[data-rm-del],[data-rm-edit],[data-edit-gear],[data-wish-buy],[data-wish-del],[data-strava],[data-check],[data-del-niggle],[data-del-mantra],[data-cal-add]');
   if (!el) return;
 
   // TAB SWITCHING
@@ -1796,6 +1802,7 @@ document.addEventListener('click', function(e) {
   // GEAR CYCLE / DELETE
   if (el.dataset.cycle) { cycleGearCond(el.dataset.cycle); return; }
   if (el.dataset.delGear) { delGear(el.dataset.delGear); return; }
+  if (el.dataset.calAdd) { var p=el.dataset.calAdd.split('|'); addRestDay(p[0],p[1]); return; }
   if (el.dataset.check) { toggleCheckItem(el.dataset.check); return; }
   if (el.dataset.delNiggle) { delNiggle(el.dataset.delNiggle); return; }
   if (el.dataset.delMantra) { delMantra(el.dataset.delMantra); return; }
@@ -2198,6 +2205,18 @@ function saveMantra(){
 }
 function delMantra(id){ mantras=mantras.filter(function(x){return x.id!==id;}); saveMantras(); renderMantras(); }
 
+
+// ── CUSTOM REST DAYS ───────────────────────────────────────
+var customRests = JSON.parse(localStorage.getItem('kc_custom_rests') || '{}');
+function saveCustomRests(){ localStorage.setItem('kc_custom_rests', JSON.stringify(customRests)); }
+
+function addRestDay(wk, day){
+  var key = wk + '__' + day;
+  if(customRests[key]){ delete customRests[key]; } // toggle off if already rest
+  else { customRests[key] = true; }
+  saveCustomRests();
+  renderPlan();
+}
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
