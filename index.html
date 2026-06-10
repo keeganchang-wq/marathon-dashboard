@@ -529,7 +529,7 @@ body {
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">📊 Training Status</span><span class="sec-badge t-green">✅ Back on track</span><button class="sec-toggle" data-toggle="status">−</button></div>
   <div class="sec-body" id="body-status">
     <div class="g4" style="margin-bottom:14px">
-      <div class="metric"><div class="metric-label">Latest run</div><div class="metric-val">Today ✅</div><div class="metric-sub">5km · 7:13/km · HR 147</div><span class="metric-tag t-green">First Z2 easy run</span></div>
+      <div class="metric"><div class="metric-label">Latest run</div><div class="metric-val" id="latestRunDate">Jun 9</div><div class="metric-sub">5km · 7:13/km · HR 147</div><span class="metric-tag t-green">First Z2 easy run</span></div>
       <div class="metric"><div class="metric-label">Longest run</div><div class="metric-val">20.1km</div><div class="metric-sub">24 May · Albert Park</div><span class="metric-tag t-amber">Target: 34km</span></div>
       <div class="metric"><div class="metric-label">1km PR</div><div class="metric-val">4:17</div><div class="metric-sub">4:17/km · May 26</div><span class="metric-tag t-green">Ahead of target</span></div>
       <div class="metric"><div class="metric-label">Total PRs</div><div class="metric-val">1,011</div><div class="metric-sub">Since Jan 13 2026</div><span class="metric-tag t-blue">Exceptional rate</span></div>
@@ -2312,6 +2312,21 @@ document.addEventListener('click', function(evt) {
   });
 }, true);
 
+
+// ── Latest run relative date ──────────────────────────────
+(function(){
+  var el = document.getElementById('latestRunDate');
+  if (!el) return;
+  var runDate = new Date('2026-06-09');
+  var now = new Date();
+  now.setHours(0,0,0,0);
+  runDate.setHours(0,0,0,0);
+  var diff = Math.round((now - runDate) / 86400000);
+  if (diff === 0) el.textContent = 'Today ✅';
+  else if (diff === 1) el.textContent = 'Yesterday ✅';
+  else if (diff < 7) el.textContent = diff + ' days ago';
+  else el.textContent = 'Jun 9';
+})();
 </script>
 
 
