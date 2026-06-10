@@ -481,12 +481,12 @@ body {
 
 <!-- ═══ DASHBOARD ═══ -->
 <div id="tab-dashboard" class="panel active">
-<div id="dashControls" style="display:flex;align-items:center;gap:6px;margin-bottom:8px;justify-content:flex-end;opacity:.6;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.6'"><button data-action="toggleLock" id="lockBtn" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button><span id="lockHint" style="font-size:9px;color:var(--text-3)"></span></div>
+<div id="dashControls" style="display:flex;align-items:center;gap:6px;margin-bottom:8px;justify-content:flex-end;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.6'"><button data-action="toggleLock" id="lockBtn" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button><span id="lockHint" style="font-size:9px;color:var(--text-3)"></span></div>
 <div id="dash-sections">
 
 <!-- COUNTDOWNS -->
 <div class="section-card" id="sec-cd" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="sec-title">>>>>🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
   <div class="sec-body" id="body-cd">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div style="background:linear-gradient(135deg,#D4A052,#C08A3A);border-radius:var(--radius);padding:18px 20px;color:white;position:relative">
@@ -680,8 +680,10 @@ body {
 
 <!-- ═══ PACE GUIDE ═══ -->
 <div id="tab-shoes-gear" class="panel">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div><div style="font-size:16px;font-weight:700;color:var(--text)">👟 Shoe Tracker</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Live from Strava · 6 active shoes</div></div>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
+<div id="sg-sections">
+  <div draggable="true" data-drag-id="sg-shoes" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>👟 Shoe Tracker</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Live from Strava · 6 active shoes</div></div>
     <div style="display:flex;gap:8px"><button class="add-btn" data-action="addShoe">+ Add shoe</button><button class="btn btn-d" data-action="toggleRetired">Retired</button></div>
   </div>
   <div class="g3" id="shoeGrid" style="margin-bottom:16px"></div>
@@ -696,9 +698,10 @@ body {
   </div>
   <div style="background:var(--surface);border:1px solid var(--golden);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--golden);margin-bottom:4px">💰 Total spend</div><div style="font-size:22px;font-weight:800;color:var(--golden)" id="spendTotal">$0 AUD</div></div><div style="display:flex;gap:16px"><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="shoeSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Shoes</div></div><div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--text)" id="gearSpend">$0</div><div style="font-size:10px;color:var(--text-3)">Gear</div></div></div></div></div>
   <div id="retired-section" style="display:none;margin-bottom:16px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Retired shoes</div><div id="retired-list" style="padding:16px;text-align:center;color:var(--text-3);font-size:12px;background:var(--surface-2);border-radius:var(--radius);border:1px dashed var(--border)">No retired shoes yet.</div></div>
-  <div style="border-top:1px solid var(--border);margin:8px 0 20px"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div><div style="font-size:16px;font-weight:700;color:var(--text)">🎒 Gear Inventory</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Tap condition badge to cycle: New → Good → Worn → Replace</div></div>
+  </div><!-- end sg-shoes -->
+<div style="border-top:1px solid var(--border);margin:8px 0 20px"></div>
+  <div draggable="true" data-drag-id="sg-gear" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🎒 Gear Inventory</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Tap condition badge to cycle: New → Good → Worn → Replace</div></div>
     <button class="add-btn" data-action="addGear">+ Add gear</button>
   </div>
   <div class="upload-area" id="uploadAreaInner" style="margin-bottom:16px">
@@ -715,10 +718,13 @@ body {
   <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px">Current gear</div>
   <div class="section-card"><div class="sec-body" style="padding:8px 16px" id="gearItems"></div></div>
 
-  <div style="border-top:1px solid var(--border);margin:20px 0 16px"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)">🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
+  </div><!-- end sg-gear -->
+<div draggable="true" data-drag-id="sg-wishlist" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
 </div>
 
 <div id="tab-pace-efforts" class="panel">
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
+<div id="pe-sections">
   <div class="g4" style="margin-bottom:20px">
     <div class="metric"><div class="metric-label">10km PB</div><div class="metric-val" style="color:var(--golden)">50:03</div><div class="metric-sub">May 17 · Strava verified</div></div>
     <div class="metric"><div class="metric-label">1km PR</div><div class="metric-val" style="color:var(--golden)">4:17</div><div class="metric-sub">May 26 · Olympic Park</div></div>
@@ -761,9 +767,11 @@ body {
     <tr><td><b>Half</b></td><td>19 Jul</td><td style="color:var(--golden)">1:43–1:46</td><td>5:05/km — hold back</td><td>4:55–5:00/km</td><td>Race it home</td><td>170–176 bpm</td></tr>
     <tr><td><b>Full</b></td><td>11 Oct</td><td style="color:var(--golden)">3:28–3:35</td><td>5:10/km — conservative</td><td>5:00–5:07/km</td><td>Race from km 30</td><td>&lt;165 first 30km</td></tr>
   </table>
-</div>
+</div><!-- end pe-sections --></div>
 
 <div id="tab-milestones" class="panel">
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
+<div id="ms-sections">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px">
     <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--golden);margin-bottom:14px">🏃 Jan 13 → Oct 11 2026</div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;text-align:center">
@@ -792,8 +800,10 @@ body {
 
 <!-- ═══ RACE DAY ═══ -->
 <div id="tab-raceday" class="panel">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <div style="font-size:18px;font-weight:700;color:var(--text)">🏁 Race Day Command Centre</div>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
+  <div id="rd-sections">
+<div draggable="true" data-drag-id="rd-intro" style="margin-bottom:12px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div style="font-size:18px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🏁 Race Day Command Centre</div>
     <div style="font-size:11px;color:var(--text-2)">Everything you need for Jul 19 and Oct 11</div>
   </div>
 
@@ -810,8 +820,8 @@ body {
       <div style="font-size:11px;opacity:.8">Target: Sub 3:30 · Alphafly 3</div>
     </div>
   </div>
-
-  <div class="section-card" id="sec-nutrition">
+</div><!-- end rd-intro -->
+  <div class="section-card" id="sec-nutrition" draggable="true">
   <div class="sec-header"><span class="sec-title">⛽ Race Day — Nutrition & Pre-Race Timeline</span><button class="sec-toggle" data-toggle="nutrition">−</button></div>
   <div class="sec-body" id="body-nutrition">
 
@@ -892,7 +902,7 @@ body {
   </div>
 </div>
 
-  <div class="section-card" id="sec-checklist">
+  <div class="section-card" id="sec-checklist" draggable="true">
   <div class="sec-header"><span class="sec-title">🎒 Race Day Checklist</span><span class="sec-badge" style="background:rgba(212,160,82,.15);color:var(--golden)" id="checklistCount">0/0</span><button class="sec-toggle" data-toggle="checklist">−</button></div>
   <div class="sec-body" id="body-checklist">
     <div style="display:flex;gap:8px;margin-bottom:12px">
@@ -904,7 +914,7 @@ body {
   </div>
 </div>
 
-  <div class="section-card" id="sec-mantras">
+  <div class="section-card" id="sec-mantras" draggable="true">
   <div class="sec-header"><span class="sec-title">🧠 Race Mantras & Mental Notes</span><button class="sec-toggle" data-toggle="mantras">−</button></div>
   <div class="sec-body" id="body-mantras">
     <div id="mantraList"></div>
@@ -913,7 +923,7 @@ body {
 </div>
 
   <!-- Race course notes -->
-  <div class="section-card" id="sec-course">
+  <div class="section-card" id="sec-course" draggable="true">
     <div class="sec-header"><span class="sec-title">🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
     <div class="sec-body" id="body-course">
       <div class="g2" style="gap:12px">
@@ -948,7 +958,7 @@ body {
       </div>
     </div>
   </div>
-</div>
+</div><!-- end rd-sections --></div><!-- end ms-sections --></div>
 
 <div id="tab-settings" class="panel">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
@@ -1182,14 +1192,51 @@ function restoreCollapsed(){Object.keys(collapsed).forEach(id=>{const b=document
 
 let dragSrc=null;
 function initDrag(){
-  const c=document.getElementById('dash-sections');if(!c)return;
-  c.querySelectorAll('.section-card[draggable]').forEach(card=>{
-    card.addEventListener('dragstart',e=>{dragSrc=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
-    card.addEventListener('dragend',()=>{card.classList.remove('dragging');c.querySelectorAll('.section-card').forEach(x=>x.classList.remove('drag-over'));saveOrder();});
-    card.addEventListener('dragover',e=>{e.preventDefault();if(card!==dragSrc)card.classList.add('drag-over');});
-    card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
-    card.addEventListener('drop',e=>{e.preventDefault();if(dragSrc&&card!==dragSrc){const cards=[...c.querySelectorAll('.section-card')];const si=cards.indexOf(dragSrc),ti=cards.indexOf(card);si<ti?c.insertBefore(dragSrc,card.nextSibling):c.insertBefore(dragSrc,card);}card.classList.remove('drag-over');});
+  // Init drag on all tab containers that have draggable children
+  ['dash-sections','sg-sections','rd-sections','pe-sections','ms-sections'].forEach(function(cid){
+    initContainerDrag(cid);
   });
+}
+function initContainerDrag(containerId){
+  var c = document.getElementById(containerId); if(!c) return;
+  var orderKey = 'kc_order_' + containerId;
+  c.querySelectorAll('[draggable="true"]').forEach(function(card){
+    card.addEventListener('dragstart', function(e){
+      if(panelsLocked){e.preventDefault();return;}
+      dragSrc=card;card.style.opacity='0.4';e.dataTransfer.effectAllowed='move';
+    });
+    card.addEventListener('dragend', function(){
+      card.style.opacity='1';
+      c.querySelectorAll('[draggable]').forEach(function(x){x.classList.remove('drag-over');});
+      // Save order
+      localStorage.setItem(orderKey, JSON.stringify([].map.call(c.querySelectorAll('[draggable="true"]'), function(x){return x.id||x.dataset.dragId||'';})));
+    });
+    card.addEventListener('dragover', function(e){
+      if(panelsLocked)return;
+      e.preventDefault();if(card!==dragSrc)card.classList.add('drag-over');
+    });
+    card.addEventListener('dragleave', function(){card.classList.remove('drag-over');});
+    card.addEventListener('drop', function(e){
+      if(panelsLocked)return;
+      e.preventDefault();
+      if(dragSrc&&card!==dragSrc){
+        var cards=[].slice.call(c.querySelectorAll('[draggable="true"]'));
+        var si=cards.indexOf(dragSrc),ti=cards.indexOf(card);
+        if(si<ti) c.insertBefore(dragSrc,card.nextSibling);
+        else c.insertBefore(dragSrc,card);
+      }
+      card.classList.remove('drag-over');
+      localStorage.setItem(orderKey, JSON.stringify([].map.call(c.querySelectorAll('[draggable="true"]'), function(x){return x.id||x.dataset.dragId||'';})));
+    });
+  });
+  // Restore saved order
+  try{
+    var saved = JSON.parse(localStorage.getItem(orderKey)||'[]');
+    if(saved.length) saved.forEach(function(id){
+      var el = id ? (document.getElementById(id) || c.querySelector('[data-drag-id="'+id+'"]')) : null;
+      if(el) c.appendChild(el);
+    });
+  }catch(e){}
 }
 function saveOrder(){localStorage.setItem('kc_order',JSON.stringify([...document.querySelectorAll('#dash-sections .section-card')].map(x=>x.id)));}
 function restoreLayout(){if(!sectionOrder.length)return;const c=document.getElementById('dash-sections');if(!c)return;sectionOrder.forEach(id=>{const el=document.getElementById(id);if(el)c.appendChild(el);});}
@@ -1811,7 +1858,7 @@ function openAddRoadmapItem(){document.getElementById('rm-id').value='';document
 function editRoadmapItem(id){var i=roadmapItems.find(function(x){return x.id===id;});if(!i)return;document.getElementById('rm-id').value=id;document.getElementById('rm-title').value=i.title;document.getElementById('rm-desc').value=i.desc||'';document.getElementById('rm-priority').value=i.priority||'want';document.getElementById('rmModalTitle').textContent='✏️ Edit item';document.getElementById('addRoadmapModal').classList.add('open');}
 function saveRoadmapItem(){var id=document.getElementById('rm-id').value;var title=document.getElementById('rm-title').value.trim();var desc=document.getElementById('rm-desc').value.trim();var priority=document.getElementById('rm-priority').value;if(!title)return;if(id){var i=roadmapItems.find(function(x){return x.id===id;});if(i){i.title=title;i.desc=desc;i.priority=priority;}}else{roadmapItems.push({id:'rm_'+Date.now(),priority:priority,title:title,desc:desc,done:false});}saveRoadmap();renderRoadmap();closeModal('addRoadmapModal');}
 var panelsLocked=localStorage.getItem('kc_locked')==='1';
-function applyLockState(){var c=document.getElementById('dash-sections');if(!c)return;var btn=document.getElementById('lockBtn');var hint=document.getElementById('lockHint');if(btn){btn.textContent=panelsLocked?'🔒':'🔓';btn.style.borderColor=panelsLocked?'rgba(231,76,60,.3)':'var(--border)';btn.style.color=panelsLocked?'#E74C3C':'var(--text-3)';}if(hint)hint.textContent=panelsLocked?'locked':'';c.querySelectorAll('.section-card').forEach(function(card){card.draggable=!panelsLocked;var h=card.querySelector('.drag-handle');if(h){h.style.opacity=panelsLocked?'0.2':'1';h.style.cursor=panelsLocked?'default':'grab';h.style.pointerEvents=panelsLocked?'none':'auto';}});}
+function applyLockState(){var c=document.getElementById('dash-sections');if(!c)return;var btn=document.getElementById('lockBtn');var hint=document.getElementById('lockHint');if(btn){btn.textContent=panelsLocked?'🔒':'🔓';btn.style.borderColor=panelsLocked?'rgba(231,76,60,.3)':'var(--border)';btn.style.color=panelsLocked?'#E74C3C':'var(--text-3)';}if(hint)hint.textContent=panelsLocked?'locked':'';document.querySelectorAll('#dash-sections [draggable],#sg-sections [draggable],#rd-sections [draggable],#pe-sections [draggable],#ms-sections [draggable]').forEach(function(card){card.draggable=!panelsLocked;var h=card.querySelector('.drag-handle');if(h){h.style.opacity=panelsLocked?'0.2':'1';h.style.cursor=panelsLocked?'default':'grab';h.style.pointerEvents=panelsLocked?'none':'auto';}});}
 function toggleLock(){panelsLocked=!panelsLocked;localStorage.setItem('kc_locked',panelsLocked?'1':'0');applyLockState();}
 function collapseAll(){document.querySelectorAll('#dash-sections .sec-body').forEach(function(b){if(!b.classList.contains('collapsed')){b.classList.add('collapsed');var id=b.id?b.id.replace('body-',''):null;var btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='+';if(id)collapsed[id]=true;}});localStorage.setItem('kc_coll',JSON.stringify(collapsed));}
 function expandAll(){document.querySelectorAll('#dash-sections .sec-body').forEach(function(b){b.classList.remove('collapsed');var id=b.id?b.id.replace('body-',''):null;var btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='−';if(id)delete collapsed[id];});localStorage.setItem('kc_coll',JSON.stringify(collapsed));}
@@ -2178,4 +2225,5 @@ window.addEventListener('load', function init() {
 <div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label>Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label>Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label>Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
 <div class="modal-bg" id="addMantraModal"><div class="modal"><button class="modal-close" data-close="addMantraModal">✕</button><h3>🧠 Add a mantra</h3><label>Type</label><select id="ma-type"><option value="pace">🏃 Pace / discipline</option><option value="strategy">🧠 Strategy</option><option value="grit">🔥 Grit / push through</option><option value="focus">🎯 Focus</option><option value="custom">💭 Other</option></select><label>Your mantra</label><textarea id="ma-text" rows="2" placeholder="What will you tell yourself at km 35?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addMantraModal">Cancel</button><button class="btn-primary" data-action="saveMantra">Save</button></div></div></div>
 </body>
-</html>
+</html></div><!-- end sg-wishlist -->
+</div><!-- end sg-sections -->
