@@ -1062,7 +1062,10 @@ input[type=number] { -moz-appearance:textfield; }
 
   <!-- APPEARANCE -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
-    <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">🎨 Appearance</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div style="font-size:14px;font-weight:700;color:var(--golden)">🎨 Appearance</div>
+      <button data-action="saveAll" id="saveAllBtn" style="padding:8px 24px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:var(--golden);color:var(--blacktie)">💾 Save All Settings</button>
+    </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
       <div><div style="font-size:12px;font-weight:600;color:var(--text)">Theme</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Switch between dark and light mode</div></div>
@@ -1997,6 +2000,7 @@ document.addEventListener('click', function(e) {
       case 'fontLarge': appearance.fontSize='large'; saveAppearance(); break;
       case 'compactOff': appearance.compact=false; saveAppearance(); break;
       case 'compactOn': appearance.compact=true; saveAppearance(); break;
+      case 'saveAll': saveAllSettings(); break;
       case 'toggleCoach': toggleCoach(); break;
       case 'sendCoach': sendCoachMessage(); break;
       case 'coachSetup': coachSetup(); break;
@@ -3233,6 +3237,58 @@ var PEAK_WEEK = {label:'May 18', km:47.8};
 var TOTAL_KM = 537;
 var TOTAL_RUNS = 72;
 var AVG_KM_WEEK = 25.6;
+
+
+// ── SAVE ALL SETTINGS ─────────────────────────────────────
+function saveAllSettings() {
+  // 1. Appearance
+  localStorage.setItem('kc_appearance', JSON.stringify(appearance));
+  // 2. Theme
+  localStorage.setItem('kc_dark', darkMode ? '1' : '0');
+  // 3. Panel config
+  savePanelConfig();
+  // 4. Settings (weight, maxHR, targets)
+  var stg = JSON.parse(localStorage.getItem('kc_settings') || '{}');
+  var w = document.getElementById('set-weight'); if(w) stg.weight = w.value;
+  var hr = document.getElementById('set-maxhr'); if(hr) stg.maxhr = hr.value;
+  // Targets from time pickers
+  var hh = document.getElementById('set-half-h'), hm = document.getElementById('set-half-m'), hs = document.getElementById('set-half-s');
+  if(hh && hm && hs) stg.halfTarget = (parseInt(hh.value)||0) + ':' + padZ(parseInt(hm.value)||0) + ':' + padZ(parseInt(hs.value)||0);
+  var fh = document.getElementById('set-full-h'), fm = document.getElementById('set-full-m'), fs2 = document.getElementById('set-full-s');
+  if(fh && fm && fs2) stg.fullTarget = (parseInt(fh.value)||0) + ':' + padZ(parseInt(fm.value)||0) + ':' + padZ(parseInt(fs2.value)||0);
+  localStorage.setItem('kc_settings', JSON.stringify(stg));
+  // 5. Collapsed state
+  localStorage.setItem('kc_coll', JSON.stringify(collapsed));
+  // 6. Lock state
+  localStorage.setItem('kc_locked', panelsLocked ? '1' : '0');
+  // 7. Shoes & gear
+  saveShoes();
+  saveGear();
+  // 8. Checklists
+  saveChecklist();
+  saveChecklists();
+  // 9. Custom widgets
+  saveWidgets();
+  // 10. Roadmap
+  saveRoadmap();
+  // 11. Wishlist
+  saveWishlist();
+  // 12. Niggles & mantras
+  saveNiggles();
+  saveMantras();
+  // 13. Apply everything
+  applyRaceTargets();
+  try { calcProbability(); } catch(e) {}
+  try { applyAppearance(); } catch(e) {}
+  applyPanelConfig();
+
+  // Visual confirmation
+  var btn = document.getElementById('saveAllBtn');
+  var orig = btn.textContent;
+  btn.textContent = '✅ Saved!';
+  btn.style.background = '#2ECC71';
+  setTimeout(function() { btn.textContent = orig; btn.style.background = ''; }, 2000);
+}
 
 window.addEventListener('load', function init() {
   applyTheme();
