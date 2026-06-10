@@ -932,52 +932,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
 
 <div 
   <!-- RACE STRATEGY -->
-  <div class="section-card" id="sec-strategy" draggable="true">
-    <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Race Strategy</span><button class="sec-toggle" data-toggle="strategy">−</button></div>
-    <div class="sec-body" id="body-strategy" style="padding:14px 16px">
-
-      <div style="display:flex;gap:8px;margin-bottom:14px">
-        <button id="stratHalfBtn" data-action="stratHalf" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:11px;cursor:pointer">🏃 Half · Jul 19</button>
-        <button id="stratFullBtn" data-action="stratFull" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:11px;cursor:pointer">🏆 Full · Oct 11</button>
-      </div>
-
-      <!-- HALF STRATEGY -->
-      <div id="stratHalfPanel">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">ASICS Run Melbourne · 21.1km · Gain: 161m</div>
-        <table class="tbl" style="margin-bottom:12px"><thead><tr><th>Section</th><th>Km</th><th>Route</th><th>Pace</th><th>Notes</th></tr></thead><tbody>
-          <tr><td style="color:#2ECC71;font-weight:700">CBD loop</td><td>0–4</td><td style="font-size:10px">Fed Sq → Wellington Pde → Exhibition → Flinders</td><td style="font-weight:700">5:00</td><td>Settle in, don't chase</td></tr>
-          <tr><td style="color:#2ECC71;font-weight:700">Docklands</td><td>4–10</td><td style="font-size:10px">Marvel Stadium → Harbour Esp → Lorimer St</td><td style="font-weight:700">4:52</td><td>Flat, find rhythm</td></tr>
-          <tr><td style="color:#E67E22;font-weight:700">Southbank ↩</td><td>10–14</td><td style="font-size:10px">Wurundjeri Way → City Rd → Alexandra Ave</td><td style="font-weight:700">4:52</td><td>Return east, stay smooth</td></tr>
-          <tr><td style="color:#E74C3C;font-weight:700">🏔 Shrine</td><td>14–17</td><td style="font-size:10px">Birdwood Ave → Shrine → Domain Rd</td><td style="font-weight:700">5:10</td><td>⚠ +30m climb! HR effort, not pace</td></tr>
-          <tr><td style="color:var(--golden);font-weight:700">🏟 Finish</td><td>17–21</td><td style="font-size:10px">Botanic Gardens → Anderson St → Melbourne Park</td><td style="font-weight:700">4:45</td><td>Downhill, give everything</td></tr>
-        </tbody></table>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <div style="background:rgba(39,174,96,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#2ECC71"><strong>Key:</strong> Accept slower Shrine km. Make it up on the downhill km 17–19.</div>
-          <div style="background:rgba(231,76,60,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#E74C3C"><strong>⚠ Trap:</strong> Don't surge on the Docklands flat — save it for the hill.</div>
-        </div>
-      </div>
-
-      <!-- FULL STRATEGY -->
-      <div id="stratFullPanel" style="display:none">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">Nike Melbourne Marathon · 42.2km · Reimagined flat course · Start 6:15am</div>
-        <table class="tbl" style="margin-bottom:12px"><thead><tr><th>Section</th><th>Km</th><th>Route</th><th>Pace</th><th>Notes</th></tr></thead><tbody>
-          <tr><td style="color:#2ECC71;font-weight:700">St Kilda Rd ↓</td><td>0–5</td><td style="font-size:10px">Batman Ave → Punt Rd → Fitzroy St</td><td style="font-weight:700">5:10</td><td>Settle in, don't chase pack</td></tr>
-          <tr><td style="color:#2ECC71;font-weight:700">↓ South</td><td>5–15</td><td style="font-size:10px">Ormond Esp → Brighton Rd → Park St</td><td style="font-weight:700">4:55</td><td>Flat, bank 5–10s/km</td></tr>
-          <tr><td style="color:#E67E22;font-weight:700">↑ Coast</td><td>15–25</td><td style="font-size:10px">↩ Park St → Marine Pde → Beaconsfield Pde</td><td style="font-weight:700">4:57</td><td>⚠ Wind off the bay, stay honest</td></tr>
-          <tr><td style="color:#E74C3C;font-weight:700">Albert Park</td><td>25–35</td><td style="font-size:10px">Aughtie Dr → Lakeside Dr → Kerferd Rd</td><td style="font-weight:700">5:00</td><td>Legs heavy — hold the pace, don't panic</td></tr>
-          <tr><td style="color:var(--golden);font-weight:700">🏟 Home</td><td>35–42</td><td style="font-size:10px">Bay St → Flinders St → Batman Ave → Brunton Ave</td><td style="font-weight:700">4:50</td><td>Race the last 7km. Lap the G!</td></tr>
-        </tbody></table>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <div style="background:rgba(39,174,96,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#2ECC71"><strong>Key:</strong> Negative split — first half 5:05/km avg, second half 4:52/km avg.</div>
-          <div style="background:rgba(231,76,60,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#E74C3C"><strong>⚠ The wall:</strong> Km 28–33. Accept it, shorten your mental focus to 1km at a time.</div>
-          <div style="background:rgba(212,160,82,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:var(--golden)"><strong>HR rule:</strong> Under 162bpm for first 30km. Then release.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div><!-- end pace-efforts -->
+  </div><!-- end pace-efforts -->
 
 <div id="tab-milestones" class="panel">
 <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
@@ -1169,6 +1124,52 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
       </div>
     </div>
   </div>
+
+<div class="section-card" id="sec-strategy" draggable="true">
+    <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🗺️ Race Strategy</span><button class="sec-toggle" data-toggle="strategy">−</button></div>
+    <div class="sec-body" id="body-strategy" style="padding:14px 16px">
+
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <button id="stratHalfBtn" data-action="stratHalf" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:11px;cursor:pointer">🏃 Half · Jul 19</button>
+        <button id="stratFullBtn" data-action="stratFull" style="flex:1;padding:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:11px;cursor:pointer">🏆 Full · Oct 11</button>
+      </div>
+
+      <!-- HALF STRATEGY -->
+      <div id="stratHalfPanel">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">ASICS Run Melbourne · 21.1km · Gain: 161m</div>
+        <table class="tbl" style="margin-bottom:12px"><thead><tr><th>Section</th><th>Km</th><th>Route</th><th>Pace</th><th>Notes</th></tr></thead><tbody>
+          <tr><td style="color:#2ECC71;font-weight:700">CBD loop</td><td>0–4</td><td style="font-size:10px">Fed Sq → Wellington Pde → Exhibition → Flinders</td><td style="font-weight:700">5:00</td><td>Settle in, don't chase</td></tr>
+          <tr><td style="color:#2ECC71;font-weight:700">Docklands</td><td>4–10</td><td style="font-size:10px">Marvel Stadium → Harbour Esp → Lorimer St</td><td style="font-weight:700">4:52</td><td>Flat, find rhythm</td></tr>
+          <tr><td style="color:#E67E22;font-weight:700">Southbank ↩</td><td>10–14</td><td style="font-size:10px">Wurundjeri Way → City Rd → Alexandra Ave</td><td style="font-weight:700">4:52</td><td>Return east, stay smooth</td></tr>
+          <tr><td style="color:#E74C3C;font-weight:700">🏔 Shrine</td><td>14–17</td><td style="font-size:10px">Birdwood Ave → Shrine → Domain Rd</td><td style="font-weight:700">5:10</td><td>⚠ +30m climb! HR effort, not pace</td></tr>
+          <tr><td style="color:var(--golden);font-weight:700">🏟 Finish</td><td>17–21</td><td style="font-size:10px">Botanic Gardens → Anderson St → Melbourne Park</td><td style="font-weight:700">4:45</td><td>Downhill, give everything</td></tr>
+        </tbody></table>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="background:rgba(39,174,96,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#2ECC71"><strong>Key:</strong> Accept slower Shrine km. Make it up on the downhill km 17–19.</div>
+          <div style="background:rgba(231,76,60,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#E74C3C"><strong>⚠ Trap:</strong> Don't surge on the Docklands flat — save it for the hill.</div>
+        </div>
+      </div>
+
+      <!-- FULL STRATEGY -->
+      <div id="stratFullPanel" style="display:none">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--golden);margin-bottom:8px">Nike Melbourne Marathon · 42.2km · Reimagined flat course · Start 6:15am</div>
+        <table class="tbl" style="margin-bottom:12px"><thead><tr><th>Section</th><th>Km</th><th>Route</th><th>Pace</th><th>Notes</th></tr></thead><tbody>
+          <tr><td style="color:#2ECC71;font-weight:700">St Kilda Rd ↓</td><td>0–5</td><td style="font-size:10px">Batman Ave → Punt Rd → Fitzroy St</td><td style="font-weight:700">5:10</td><td>Settle in, don't chase pack</td></tr>
+          <tr><td style="color:#2ECC71;font-weight:700">↓ South</td><td>5–15</td><td style="font-size:10px">Ormond Esp → Brighton Rd → Park St</td><td style="font-weight:700">4:55</td><td>Flat, bank 5–10s/km</td></tr>
+          <tr><td style="color:#E67E22;font-weight:700">↑ Coast</td><td>15–25</td><td style="font-size:10px">↩ Park St → Marine Pde → Beaconsfield Pde</td><td style="font-weight:700">4:57</td><td>⚠ Wind off the bay, stay honest</td></tr>
+          <tr><td style="color:#E74C3C;font-weight:700">Albert Park</td><td>25–35</td><td style="font-size:10px">Aughtie Dr → Lakeside Dr → Kerferd Rd</td><td style="font-weight:700">5:00</td><td>Legs heavy — hold the pace, don't panic</td></tr>
+          <tr><td style="color:var(--golden);font-weight:700">🏟 Home</td><td>35–42</td><td style="font-size:10px">Bay St → Flinders St → Batman Ave → Brunton Ave</td><td style="font-weight:700">4:50</td><td>Race the last 7km. Lap the G!</td></tr>
+        </tbody></table>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="background:rgba(39,174,96,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#2ECC71"><strong>Key:</strong> Negative split — first half 5:05/km avg, second half 4:52/km avg.</div>
+          <div style="background:rgba(231,76,60,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:#E74C3C"><strong>⚠ The wall:</strong> Km 28–33. Accept it, shorten your mental focus to 1km at a time.</div>
+          <div style="background:rgba(212,160,82,.08);border-radius:6px;padding:6px 10px;font-size:10px;color:var(--golden)"><strong>HR rule:</strong> Under 162bpm for first 30km. Then release.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div><!-- end rd-sections --></div><!-- end raceday -->
 
 <div id="tab-settings" class="panel">
