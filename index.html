@@ -341,9 +341,8 @@ body {
 /* ── MODALS ─────────────────────────────────────────────────── */
 .modal-bg {
   display:none; position:fixed; inset:0;
-  background:rgba(0,0,0,.75); z-index:200;
+  background:rgba(0,0,0,.85); z-index:99999;
   align-items:center; justify-content:center;
-  backdrop-filter:blur(4px);
 }
 .modal-bg.open { display:flex; }
 .modal { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px; max-width:480px; width:92%; box-shadow:var(--shadow-md); max-height:85vh; overflow-y:auto; }
@@ -489,7 +488,7 @@ body {
 
 <!-- COUNTDOWNS -->
 <div class="section-card" id="sec-cd" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="drag-handle" style="cursor:grab;color:var(--text-3);font-size:12px">⠿</span><span class="sec-title">>>>>🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title"🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
   <div class="sec-body" id="body-cd">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div style="background:linear-gradient(135deg,#D4A052,#C08A3A);border-radius:var(--radius);padding:18px 20px;color:white;position:relative">
@@ -725,7 +724,9 @@ body {
 <div draggable="true" data-drag-id="sg-wishlist" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:16px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🛒 Wishlist</div><div style="font-size:11px;color:var(--text-2);margin-top:2px">Track gear and shoes you want to buy</div></div><button class="add-btn" data-action="addWishlistItem" style="font-size:11px;padding:5px 12px">+ Add to wishlist</button></div><div id="wishlistItems"></div>
 </div>
 
-<div id="tab-pace-efforts" class="panel">
+
+</div>
+</div><div id="tab-pace-efforts" class="panel">
 <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
 <div id="pe-sections">
   <div class="g4" style="margin-bottom:20px">
@@ -802,11 +803,12 @@ body {
 </div>
 
 <!-- ═══ RACE DAY ═══ -->
-<div id="tab-raceday" class="panel">
+
+</div><div id="tab-raceday" class="panel">
 <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:6px;opacity:.7;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.7'"><button data-action="toggleLock" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">🔓</button><button data-action="collapseAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↑</button><button data-action="expandAll" style="background:none;border:1px solid var(--border);border-radius:14px;padding:3px 10px;cursor:pointer;font-size:10px;color:var(--text-3)">↓</button></div>
   <div id="rd-sections">
 <div draggable="true" data-drag-id="rd-intro" style="margin-bottom:12px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <div style="font-size:18px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span>🏁 Race Day Command Centre</div>
+    <div style="font-size:18px;font-weight:700;color:var(--text)"><span style="cursor:grab;color:var(--text-3);margin-right:6px;font-size:12px">⠿</span🏁 Race Day Command Centre</div>
     <div style="font-size:11px;color:var(--text-2)">Everything you need for Jul 19 and Oct 11</div>
   </div>
 
@@ -927,7 +929,7 @@ body {
 
   <!-- Race course notes -->
   <div class="section-card" id="sec-course" draggable="true">
-    <div class="sec-header"><span class="sec-title">🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
+    <div class="sec-header"><span class="sec-title"🏁 Race Course Notes</span><button class="sec-toggle" data-toggle="course">−</button></div>
     <div class="sec-body" id="body-course">
       <div class="g2" style="gap:12px">
         <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
@@ -961,7 +963,7 @@ body {
       </div>
     </div>
   </div>
-</div><!-- end rd-sections --></div><!-- end ms-sections --></div>
+</div><!-- end rd-sections --></div><!-- end ms-sections -->
 
 <div id="tab-settings" class="panel">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
@@ -1000,11 +1002,11 @@ body {
 </div>
 
 <!-- MODALS -->
-<div class="modal-bg" id="sessModal"><div class="modal"><button class="modal-close" data-close="sessModal">✕</button><h3 id="sessModalTitle"></h3><div id="sessModalBody"></div></div></div>
-<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Starting km</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
-<div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label>Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label>Description</label><input id="g-desc" placeholder="e.g. Black"><label>Purchase date</label><input id="g-date" type="date"><label>Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label>Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGearAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveGear">Save &amp; close</button></div></div></div>
-<div class="modal-bg" id="pasteModal"><div class="modal" style="max-width:540px"><button class="modal-close" data-close="pasteModal">✕</button><h3>📋 Paste purchase email</h3><div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Paste your purchase confirmation — I'll extract the details automatically.</div><textarea id="pasteText" rows="8" placeholder="Paste email text here..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="pasteModal">Cancel</button><button class="btn-primary" data-action="parsePaste">Extract &amp; add gear</button></div></div></div>
-<div class="modal-bg" id="addRoadmapModal"><div class="modal"><button class="modal-close" data-close="addRoadmapModal">✕</button><h3 id="rmModalTitle">📝 Add item</h3><input type="hidden" id="rm-id"><label>Priority</label><select id="rm-priority"><option value="urgent">🔴 Urgent</option><option value="want" selected>🟠 Want</option><option value="nice">🟢 Nice to have</option><option value="brainstorm">🟣 Brainstorm</option></select><label>Title</label><input id="rm-title" placeholder="What needs doing?"><label>Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addRoadmapModal">Cancel</button><button class="btn-primary" data-action="saveRoadmapItem">Save</button></div></div></div>
+
+
+
+
+
 <script>
 // ═══════════════════════════════════════════════════════════════
 // ALL DATA DEFINED FIRST — no functions execute until window.load
@@ -1332,7 +1334,7 @@ function renderPlan(){
         + (sm ? '<div style="font-size:8px;color:#2ECC71;margin-top:1px">📡 <a href="https://www.strava.com/activities/'+sm.id+'" target="_blank" style="color:#2ECC71;text-decoration:none">Strava ↗</a></div>' : '')
         + '</div>'
         + '</div>'
-        + '<div data-action="viewSession" data-view-wk="'+week.wk+'" data-view-day="'+s.day+'" data-view-key="'+(s.key||'')+'" data-view-done="'+isDone+'" style="padding:4px 0;text-align:center;font-size:9px;font-weight:700;color:var(--golden);cursor:pointer;background:var(--surface-3);border-radius:0 0 6px 6px;border:1px solid var(--border);border-top:none">▶ View workout</div>'
+        + '<button class="cal-view-btn" data-vkey="'+(s.key||'')+'" data-vwk="'+week.wk+'" data-vday="'+s.day+'" data-vdone="'+isDone+'" style="width:100%;padding:5px 0;text-align:center;font-size:9px;font-weight:700;color:var(--golden);cursor:pointer;background:var(--surface-3);border-radius:0 0 6px 6px;border:1px solid var(--border);border-top:none;font-family:inherit">▶ View workout</button>'
         + '</div>';
     }).join('');
 
@@ -1773,26 +1775,6 @@ document.addEventListener('click', function(e) {
       case 'saveGear':    saveGearItem(); break;
       case 'saveShoe':    saveShoe(); break;
       case 'parsePaste':  parsePastedEmail(); break;
-      case 'viewSession': {
-        var vkey=el.dataset.viewKey;
-        if(!vkey) break;
-        var vs=SESSIONS[vkey];
-        if(!vs) break;
-        var vwk=el.dataset.viewWk, vday=el.dataset.viewDay;
-        var col=TC[vs.type]||'#333';
-        var bhtml=vs.blocks.map(function(b){
-          var bc={wu:'#27AE60',go:'#E74C3C',rest:'#666',cd:'#3B82F6',rc:'var(--golden)'};
-          var bl={wu:'WU',go:'GO',rest:'REST',cd:'CD',rc:'RACE'};
-          return '<div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;border-radius:6px;background:var(--surface-2);margin-bottom:5px"><div style="width:26px;height:26px;border-radius:5px;background:'+(bc[b.t]||'#666')+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">'+(bl[b.t]||'GO')+'</div><div style="font-size:12px;color:var(--text);line-height:1.6;flex:1">'+b.x+'</div></div>';
-        }).join('');
-        document.getElementById('sessModalTitle').innerHTML='<span style="color:'+col+'">'+TL[vs.type]+'</span> — '+vkey+' <span style="font-size:12px;color:var(--text-3)">Wk'+vwk+' '+vday+'</span>';
-        document.getElementById('sessModalBody').innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:12px"><span style="background:'+col+';color:white;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">'+vs.km+'</span></div>'
-          +(vs.trains?'<div style="background:rgba(35,79,96,.2);border-left:3px solid var(--sapphire);border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6"><strong>What this trains:</strong> '+vs.trains+'</div>':'')
-          +'<div style="margin-bottom:10px">'+bhtml+'</div>'
-          +(vs.tip?'<div style="background:rgba(212,160,82,.1);border-left:3px solid var(--golden);border-radius:0 6px 6px 0;padding:9px 12px;font-size:12px;color:var(--text);line-height:1.6"><strong>Coach tip:</strong> '+vs.tip+'</div>':'');
-        document.getElementById('sessModal').classList.add('open');
-        break;
-      }
       case 'nutHalf': showNutHalf(); break;
       case 'nutFull': showNutFull(); break;
       case 'clHalf': activeChecklist='half'; renderChecklist(); break;
@@ -2264,7 +2246,61 @@ window.addEventListener('load', function init() {
   renderMantras();
 });
 
+
+// ── STANDALONE: View workout popup ─────────────────────────
+document.addEventListener('click', function(evt) {
+  var btn = evt.target;
+  if (!btn.classList || !btn.classList.contains('cal-view-btn')) return;
+  evt.preventDefault();
+  evt.stopPropagation();
+  evt.stopImmediatePropagation();
+  var key = btn.getAttribute('data-vkey');
+  if (!key) return;
+  var sess = SESSIONS[key];
+  if (!sess) return;
+  var wk = btn.getAttribute('data-vwk') || '';
+  var day = btn.getAttribute('data-vday') || '';
+  var col = TC[sess.type] || '#333';
+  var colors = {wu:'#27AE60', go:'#E74C3C', rest:'#666', cd:'#3B82F6', rc:'var(--golden)'};
+  var labels = {wu:'WU', go:'GO', rest:'REST', cd:'CD', rc:'RACE'};
+  var blocksHtml = sess.blocks.map(function(b) {
+    return '<div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;border-radius:6px;background:#222;margin-bottom:5px">'
+      + '<div style="width:26px;height:26px;border-radius:5px;background:' + (colors[b.t]||'#666') + ';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">' + (labels[b.t]||'GO') + '</div>'
+      + '<div style="font-size:12px;color:#F5EEDF;line-height:1.6;flex:1">' + b.x + '</div></div>';
+  }).join('');
+  // Create overlay from scratch
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999999;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Arial,sans-serif';
+  overlay.innerHTML = '<div style="background:#1A1A1A;border:1px solid #2E2E2E;border-radius:12px;max-width:520px;width:90%;max-height:85vh;overflow-y:auto;padding:24px;position:relative">'
+    + '<button style="position:absolute;top:12px;right:14px;background:none;border:none;color:#7A7060;font-size:22px;cursor:pointer;padding:4px 8px" id="wpClose">✕</button>'
+    + '<h3 style="margin:0 0 14px;font-size:16px;color:#F5EEDF"><span style="color:' + col + '">' + (TL[sess.type]||'Session') + '</span> — ' + key + ' <span style="font-size:12px;color:#7A7060">Wk' + wk + ' ' + day + '</span></h3>'
+    + '<div style="margin-bottom:12px"><span style="background:' + col + ';color:white;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700">' + sess.km + '</span></div>'
+    + (sess.trains ? '<div style="background:rgba(35,79,96,.2);border-left:3px solid #234F60;border-radius:0 6px 6px 0;padding:9px 12px;margin-bottom:10px;font-size:12px;color:#F5EEDF;line-height:1.6"><strong>What this trains:</strong> ' + sess.trains + '</div>' : '')
+    + '<div style="margin-bottom:10px">' + blocksHtml + '</div>'
+    + (sess.tip ? '<div style="background:rgba(212,160,82,.1);border-left:3px solid #D4A052;border-radius:0 6px 6px 0;padding:9px 12px;font-size:12px;color:#F5EEDF;line-height:1.6"><strong style="color:#D4A052">Coach tip:</strong> ' + sess.tip + '</div>' : '')
+    + '</div>';
+  document.body.appendChild(overlay);
+  // Close handlers
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay || e.target.id === 'wpClose') { overlay.remove(); }
+  });
+  document.addEventListener('keydown', function esc(e) {
+    if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); }
+  });
+}, true);
+
 </script>
+
+
+
+
+
+<!-- ═══ ALL MODALS (at body end for z-index safety) ═══ -->
+<div class="modal-bg" id="sessModal"><div class="modal"><button class="modal-close" data-close="sessModal">✕</button><h3 id="sessModalTitle"></h3><div id="sessModalBody"></div></div></div>
+<div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Starting km</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
+<div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label>Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label>Description</label><input id="g-desc" placeholder="e.g. Black"><label>Purchase date</label><input id="g-date" type="date"><label>Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label>Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGearAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveGear">Save &amp; close</button></div></div></div>
+<div class="modal-bg" id="pasteModal"><div class="modal" style="max-width:540px"><button class="modal-close" data-close="pasteModal">✕</button><h3>📋 Paste purchase email</h3><div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Paste your purchase confirmation — I'll extract the details automatically.</div><textarea id="pasteText" rows="8" placeholder="Paste email text here..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="pasteModal">Cancel</button><button class="btn-primary" data-action="parsePaste">Extract &amp; add gear</button></div></div></div>
+<div class="modal-bg" id="addRoadmapModal"><div class="modal"><button class="modal-close" data-close="addRoadmapModal">✕</button><h3 id="rmModalTitle">📝 Add item</h3><input type="hidden" id="rm-id"><label>Priority</label><select id="rm-priority"><option value="urgent">🔴 Urgent</option><option value="want" selected>🟠 Want</option><option value="nice">🟢 Nice to have</option><option value="brainstorm">🟣 Brainstorm</option></select><label>Title</label><input id="rm-title" placeholder="What needs doing?"><label>Description (optional)</label><textarea id="rm-desc" rows="3" placeholder="More detail..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addRoadmapModal">Cancel</button><button class="btn-primary" data-action="saveRoadmapItem">Save</button></div></div></div>
 <div class="modal-bg" id="addWishlistModal"><div class="modal"><button class="modal-close" data-close="addWishlistModal">✕</button><h3>🛒 Add to wishlist</h3><label>Icon</label><select id="w-icon"><option value="👟">👟 Shoes</option><option value="⌚">⌚ Watch</option><option value="🎧">🎧 Headphones</option><option value="👕">👕 Apparel</option><option value="🧦">🧦 Socks</option><option value="⛽">⛽ Nutrition</option><option value="🛒" selected>🛒 Other</option></select><label>Product name</label><input id="w-name" placeholder="e.g. ASICS Novablast 5"><label>Size / Colour</label><input id="w-size" placeholder="e.g. US 10 / White"><label>Est. price (AUD)</label><input id="w-price" type="number" placeholder="0"><label>Notes</label><textarea id="w-notes" rows="2" placeholder="Sizing, colour, where to buy..."></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addWishlistModal">Cancel</button><button class="btn-primary" data-action="saveWishlistAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveWishlistItem">Save &amp; close</button></div></div></div>
 <div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label>Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label>Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label>Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
 <div class="modal-bg" id="addMantraModal"><div class="modal"><button class="modal-close" data-close="addMantraModal">✕</button><h3>🧠 Add a mantra</h3><label>Type</label><select id="ma-type"><option value="pace">🏃 Pace / discipline</option><option value="strategy">🧠 Strategy</option><option value="grit">🔥 Grit / push through</option><option value="focus">🎯 Focus</option><option value="custom">💭 Other</option></select><label>Your mantra</label><textarea id="ma-text" rows="2" placeholder="What will you tell yourself at km 35?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addMantraModal">Cancel</button><button class="btn-primary" data-action="saveMantra">Save</button></div></div></div>
