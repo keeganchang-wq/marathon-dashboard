@@ -1263,7 +1263,11 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
 <!-- PROFILE -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">👤 Athlete Profile</div>
-    <div class="g2" style="gap:10px">
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+        <button id="masterHalfBtn" data-action="switchRaceHalf" style="flex:1;padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-weight:700;font-size:13px;cursor:pointer;transition:all .15s">🏃 Half Marathon · Jul 19</button>
+        <button id="masterFullBtn" data-action="switchRaceFull" style="flex:1;padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;color:var(--text-2);font-weight:700;font-size:13px;cursor:pointer;transition:all .15s">🏆 Full Marathon · Oct 11</button>
+      </div>
+      <div class="g2" style="gap:10px">
       <div><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Name</div><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);font-weight:600">Keegan Chang</div></div>
       <div><div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Location</div><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text)">Melbourne, VIC</div></div>
       <div><label style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px" for="set-weight">Weight (kg)</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);outline:none"></div>
@@ -2174,11 +2178,19 @@ document.querySelectorAll('.modal-bg').forEach(function(m) {
       case 'resetAppearance': appearance={}; saveAppearance(); break;
       case 'probHalf': document.getElementById('probHalfPanel').style.display='block'; document.getElementById('probFullPanel').style.display='none'; document.getElementById('probHalfBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('probHalfBtn').style.borderColor='var(--golden)'; document.getElementById('probHalfBtn').style.color='var(--golden)'; document.getElementById('probFullBtn').style.background='transparent'; document.getElementById('probFullBtn').style.borderColor='var(--border)'; document.getElementById('probFullBtn').style.color='var(--text-2)'; break;
       case 'probFull': document.getElementById('probFullPanel').style.display='block'; document.getElementById('probHalfPanel').style.display='none'; document.getElementById('probFullBtn').style.background='rgba(212,160,82,.15)'; document.getElementById('probFullBtn').style.borderColor='var(--golden)'; document.getElementById('probFullBtn').style.color='var(--golden)'; document.getElementById('probHalfBtn').style.background='transparent'; document.getElementById('probHalfBtn').style.borderColor='var(--border)'; document.getElementById('probHalfBtn').style.color='var(--text-2)'; break;
-      case 'stratHalf': document.getElementById('stratHalfPanel').style.display='block';document.getElementById('stratFullPanel').style.display='none';document.getElementById('stratHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('stratHalfBtn').style.borderColor='var(--golden)';document.getElementById('stratHalfBtn').style.color='var(--golden)';document.getElementById('stratFullBtn').style.background='transparent';document.getElementById('stratFullBtn').style.borderColor='var(--border)';document.getElementById('stratFullBtn').style.color='var(--text-2)'; break;
+      case 'stratHalf': switchRace('half'); break;
+      case 'stratFull': switchRace('full'); break;
+      case 'OLD_stratHalf': document.getElementById('stratHalfPanel').style.display='block';document.getElementById('stratFullPanel').style.display='none';document.getElementById('stratHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('stratHalfBtn').style.borderColor='var(--golden)';document.getElementById('stratHalfBtn').style.color='var(--golden)';document.getElementById('stratFullBtn').style.background='transparent';document.getElementById('stratFullBtn').style.borderColor='var(--border)';document.getElementById('stratFullBtn').style.color='var(--text-2)'; break;
       case 'stratFull': document.getElementById('stratFullPanel').style.display='block';document.getElementById('stratHalfPanel').style.display='none';document.getElementById('stratFullBtn').style.background='rgba(212,160,82,.15)';document.getElementById('stratFullBtn').style.borderColor='var(--golden)';document.getElementById('stratFullBtn').style.color='var(--golden)';document.getElementById('stratHalfBtn').style.background='transparent';document.getElementById('stratHalfBtn').style.borderColor='var(--border)';document.getElementById('stratHalfBtn').style.color='var(--text-2)'; break;
-      case 'courseHalf': document.getElementById('courseHalfPanel').style.display='block';document.getElementById('courseFullPanel').style.display='none';document.getElementById('courseHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseHalfBtn').style.borderColor='var(--golden)';document.getElementById('courseHalfBtn').style.color='var(--golden)';document.getElementById('courseFullBtn').style.background='transparent';document.getElementById('courseFullBtn').style.borderColor='var(--border)';document.getElementById('courseFullBtn').style.color='var(--text-2)'; break;
+      case 'switchRaceHalf': switchRace('half'); break;
+      case 'switchRaceFull': switchRace('full'); break;
+      case 'courseHalf': switchRace('half'); break;
+      case 'courseFull': switchRace('full'); break;
+      case 'OLD_courseHalf': document.getElementById('courseHalfPanel').style.display='block';document.getElementById('courseFullPanel').style.display='none';document.getElementById('courseHalfBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseHalfBtn').style.borderColor='var(--golden)';document.getElementById('courseHalfBtn').style.color='var(--golden)';document.getElementById('courseFullBtn').style.background='transparent';document.getElementById('courseFullBtn').style.borderColor='var(--border)';document.getElementById('courseFullBtn').style.color='var(--text-2)'; break;
       case 'courseFull': document.getElementById('courseFullPanel').style.display='block';document.getElementById('courseHalfPanel').style.display='none';document.getElementById('courseFullBtn').style.background='rgba(212,160,82,.15)';document.getElementById('courseFullBtn').style.borderColor='var(--golden)';document.getElementById('courseFullBtn').style.color='var(--golden)';document.getElementById('courseHalfBtn').style.background='transparent';document.getElementById('courseHalfBtn').style.borderColor='var(--border)';document.getElementById('courseHalfBtn').style.color='var(--text-2)'; break;
-      case 'nutHalf': showNutHalf(); break;
+      case 'nutHalf': switchRace('half'); break;
+      case 'nutFull': switchRace('full'); break;
+      case 'OLD_nutHalf': showNutHalf(); break;
       case 'nutFull': showNutFull(); break;
       case 'clHalf': activeChecklist='half'; renderChecklist(); break;
       case 'clFull': activeChecklist='full'; renderChecklist(); break;
@@ -3700,6 +3712,47 @@ function renderElevation() {
     {km:40,label:'⛽ Flinders',color:'var(--golden)'},
     {km:42.2,label:'🏆 MCG',color:'var(--golden)'},
   ]);
+}
+
+
+// ── MASTER RACE TOGGLE ────────────────────────────────────
+var activeRace = 'half'; // 'half' or 'full'
+
+function switchRace(race) {
+  activeRace = race;
+  var isHalf = race === 'half';
+  var masterH = document.getElementById('masterHalfBtn');
+  var masterF = document.getElementById('masterFullBtn');
+  if(masterH) { masterH.style.background=isHalf?'rgba(212,160,82,.15)':'transparent'; masterH.style.borderColor=isHalf?'var(--golden)':'var(--border)'; masterH.style.color=isHalf?'var(--golden)':'var(--text-2)'; }
+  if(masterF) { masterF.style.background=!isHalf?'rgba(212,160,82,.15)':'transparent'; masterF.style.borderColor=!isHalf?'var(--golden)':'var(--border)'; masterF.style.color=!isHalf?'var(--golden)':'var(--text-2)'; }
+
+  // Sync Nutrition
+  var nutH=document.getElementById('nutHalfPanel'), nutF=document.getElementById('nutFullPanel');
+  if(nutH) nutH.style.display=isHalf?'block':'none';
+  if(nutF) nutF.style.display=!isHalf?'block':'none';
+  var nH=document.getElementById('nutHalfBtn'), nF=document.getElementById('nutFullBtn');
+  if(nH){nH.style.background=isHalf?'rgba(212,160,82,.15)':'transparent';nH.style.borderColor=isHalf?'var(--golden)':'var(--border)';nH.style.color=isHalf?'var(--golden)':'var(--text-2)';}
+  if(nF){nF.style.background=!isHalf?'rgba(212,160,82,.15)':'transparent';nF.style.borderColor=!isHalf?'var(--golden)':'var(--border)';nF.style.color=!isHalf?'var(--golden)':'var(--text-2)';}
+
+  // Sync Checklist
+  activeChecklist = isHalf ? 'half' : 'full';
+  renderChecklist();
+
+  // Sync Course Notes
+  var cH=document.getElementById('courseHalfPanel'), cF=document.getElementById('courseFullPanel');
+  if(cH) cH.style.display=isHalf?'block':'none';
+  if(cF) cF.style.display=!isHalf?'block':'none';
+  var chB=document.getElementById('courseHalfBtn'), cfB=document.getElementById('courseFullBtn');
+  if(chB){chB.style.background=isHalf?'rgba(212,160,82,.15)':'transparent';chB.style.borderColor=isHalf?'var(--golden)':'var(--border)';chB.style.color=isHalf?'var(--golden)':'var(--text-2)';}
+  if(cfB){cfB.style.background=!isHalf?'rgba(212,160,82,.15)':'transparent';cfB.style.borderColor=!isHalf?'var(--golden)':'var(--border)';cfB.style.color=!isHalf?'var(--golden)':'var(--text-2)';}
+
+  // Sync Race Strategy
+  var sH=document.getElementById('stratHalfPanel'), sF=document.getElementById('stratFullPanel');
+  if(sH) sH.style.display=isHalf?'block':'none';
+  if(sF) sF.style.display=!isHalf?'block':'none';
+  var shB=document.getElementById('stratHalfBtn'), sfB=document.getElementById('stratFullBtn');
+  if(shB){shB.style.background=isHalf?'rgba(212,160,82,.15)':'transparent';shB.style.borderColor=isHalf?'var(--golden)':'var(--border)';shB.style.color=isHalf?'var(--golden)':'var(--text-2)';}
+  if(sfB){sfB.style.background=!isHalf?'rgba(212,160,82,.15)':'transparent';sfB.style.borderColor=!isHalf?'var(--golden)':'var(--border)';sfB.style.color=!isHalf?'var(--golden)':'var(--text-2)';}
 }
 
 window.addEventListener('load', function init() {
