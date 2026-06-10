@@ -1362,7 +1362,22 @@ function renderPlan(){
 
 function initCalDrag(){
   document.querySelectorAll('[data-cal-drag]').forEach(function(card){
+    // Click to open session modal (track drag to avoid false opens)
+    var wasDragged = false;
+    card.addEventListener('mousedown', function(){ wasDragged = false; });
+    card.addEventListener('mousemove', function(){ wasDragged = true; });
+    card.addEventListener('click', function(e){
+      if(wasDragged) return;
+      var sd = card.dataset.sess;
+      if(!sd) sd = card.getAttribute('data-sess');
+      if(!sd){ var p = card.closest('[data-sess]'); if(p) sd = p.dataset.sess; }
+      if(sd){
+        var pp = sd.split('|');
+        if(pp[2]) openSessModal(parseInt(pp[0]), pp[1], pp[2], pp[3]==='true');
+      }
+    });
     card.addEventListener('dragstart', function(e){
+      wasDragged = true;
       e.dataTransfer.setData('text/plain', card.dataset.calDrag);
       e.dataTransfer.effectAllowed = 'move';
       card.style.opacity = '0.4';
