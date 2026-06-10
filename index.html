@@ -2606,6 +2606,35 @@ document.addEventListener('click', function(evt) {
   else if (diff < 7) el.textContent = diff + ' days ago';
   else el.textContent = 'Jun 9';
 })();
+
+// ── FORCE SETTINGS TAB TO WORK ────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  // Find settings tab button and add direct handler
+  var tabs = document.querySelectorAll('[data-tab]');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+      // Hide all panels
+      document.querySelectorAll('.panel').forEach(function(p) {
+        p.style.display = 'none';
+        p.classList.remove('active');
+      });
+      // Show target panel
+      var id = 'tab-' + tab.getAttribute('data-tab');
+      var panel = document.getElementById(id);
+      if (panel) {
+        panel.style.display = 'block';
+        panel.classList.add('active');
+      }
+      // Update tab styling
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+    });
+  });
+  // Ensure dashboard is visible on load
+  var dash = document.getElementById('tab-dashboard');
+  if (dash) { dash.style.display = 'block'; dash.classList.add('active'); }
+});
+
 </script>
 
 
