@@ -587,6 +587,9 @@ input[type=number] { -moz-appearance:textfield; }
 html { scroll-behavior:smooth; }
 /* Better focus states */
 input:focus, select:focus, textarea:focus { border-color:var(--golden) !important; box-shadow:0 0 0 2px rgba(212,160,82,.2); }
+
+/* Fix modal z-index to always overlay */
+.modal-bg { position:fixed !important; z-index:999999 !important; }
 </style>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#D4A052">
@@ -2159,6 +2162,11 @@ document.addEventListener('click', function(e) {
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
+
+// ── FIX: Move all modals to body root level for z-index safety ──
+document.querySelectorAll('.modal-bg').forEach(function(m) {
+  document.body.appendChild(m);
+});
         break;
       }
       case 'toggleEditMode': toggleEditMode(); break;
@@ -3106,6 +3114,11 @@ function togglePanelVisibility(id) {
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
+
+// ── FIX: Move all modals to body root level for z-index safety ──
+document.querySelectorAll('.modal-bg').forEach(function(m) {
+  document.body.appendChild(m);
+});
   applyRaceTargets();
   loadTimePickers();
 }
@@ -3130,6 +3143,11 @@ function toggleEditMode() {
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
+
+// ── FIX: Move all modals to body root level for z-index safety ──
+document.querySelectorAll('.modal-bg').forEach(function(m) {
+  document.body.appendChild(m);
+});
   applyRaceTargets();
   loadTimePickers();
 }
@@ -3438,6 +3456,11 @@ function saveWidgetFromModal() {
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
+
+// ── FIX: Move all modals to body root level for z-index safety ──
+document.querySelectorAll('.modal-bg').forEach(function(m) {
+  document.body.appendChild(m);
+});
   closeModal('widgetModal');
   // Switch to dashboard to see the widget
   if(!editId) {
@@ -3701,6 +3724,11 @@ window.addEventListener('load', function init() {
   try{renderWeeklyChart();}catch(e){}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
+
+// ── FIX: Move all modals to body root level for z-index safety ──
+document.querySelectorAll('.modal-bg').forEach(function(m) {
+  document.body.appendChild(m);
+});
   applyRaceTargets();
   loadTimePickers();
   renderWishlist();
