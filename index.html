@@ -1003,8 +1003,9 @@ input[type=number] { -moz-appearance:textfield; }
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
       <div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Single or double column on dashboard</div></div>
       <div style="display:flex;gap:6px" id="colToggleGroup">
-        <button data-action="layout1col" id="btn1col" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">1 Column</button>
-        <button data-action="layout2col" id="btn2col" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">2 Columns</button>
+        <button data-action="layout1col" id="btn1col" style="padding:7px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden)">1 Col</button>
+        <button data-action="layout2col" id="btn2col" style="padding:7px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">2 Col</button>
+        
       </div>
     </div>
 
@@ -1915,9 +1916,9 @@ document.addEventListener('click', function(e) {
       case 'radiusSharp': appearance.radius='2px'; saveAppearance(); break;
       case 'radiusRound': appearance.radius='12px'; saveAppearance(); break;
       case 'radiusPill': appearance.radius='20px'; saveAppearance(); break;
-      case 'fontSmall': appearance.fontSize='12px'; saveAppearance(); break;
-      case 'fontNormal': appearance.fontSize='13px'; saveAppearance(); break;
-      case 'fontLarge': appearance.fontSize='15px'; saveAppearance(); break;
+      case 'fontSmall': appearance.fontSize='small'; saveAppearance(); break;
+      case 'fontNormal': appearance.fontSize='normal'; saveAppearance(); break;
+      case 'fontLarge': appearance.fontSize='large'; saveAppearance(); break;
       case 'compactOff': appearance.compact=false; saveAppearance(); break;
       case 'compactOn': appearance.compact=true; saveAppearance(); break;
       case 'toggleEditMode': toggleEditMode(); break;
@@ -2541,15 +2542,36 @@ var appearance = JSON.parse(localStorage.getItem('kc_appearance') || '{}');
 function applyAppearance() {
   var root = document.documentElement;
 
-  // ── COLUMNS ──
-  var cols = appearance.columns || 1;
+  // ── COLUMNS (masonry-style using CSS columns) ──
+  var cols = Math.min(appearance.columns || 1, 2);
   var ds = document.getElementById('dash-sections');
   if (ds) {
-    ds.style.display = cols === 2 ? 'grid' : 'block';
-    ds.style.gridTemplateColumns = cols === 2 ? '1fr 1fr' : '1fr';
-    ds.style.gap = cols === 2 ? '12px' : '0';
+    if (cols > 1) {
+      ds.style.display = 'block';
+      ds.style.columnCount = cols;
+      ds.style.columnGap = '14px';
+      ds.style.gridTemplateColumns = '';
+      // Prevent cards from breaking across columns
+      var cards = ds.querySelectorAll('.section-card');
+      cards.forEach(function(c) { c.style.breakInside = 'avoid'; c.style.marginBottom = '14px'; });
+    } else {
+      ds.style.display = 'block';
+      ds.style.columnCount = '';
+      ds.style.columnGap = '';
+      var cards = ds.querySelectorAll('.section-card');
+      cards.forEach(function(c) { c.style.breakInside = ''; });
+    }
   }
-  setActiveBtn('btn1col', 'btn2col', cols === 1);
+  // Highlight active column button
+  ['btn1col','btn2col'].forEach(function(id, i) {
+    var b = document.getElementById(id);
+    if (!b) return;
+    var active = (i + 1) === cols;
+    b.style.borderColor = active ? 'var(--golden)' : 'var(--border)';
+    b.style.background = active ? 'rgba(212,160,82,.15)' : 'transparent';
+    b.style.color = active ? 'var(--golden)' : 'var(--text-2)';
+    b.style.borderWidth = active ? '1.5px' : '1px';
+  });
 
   // ── ACCENT COLOUR ──
   var accent = appearance.accent || '#D4A052';
@@ -2571,10 +2593,13 @@ function applyAppearance() {
     r === '2px' ? 0 : r === '20px' ? 2 : 1);
 
   // ── FONT SIZE ──
-  var fs = appearance.fontSize || '13px';
-  document.body.style.fontSize = fs;
+  var fs = appearance.fontSize || '100%';
+  var scaleMap = {'small':'90%','normal':'100%','large':'115%'};
+  var scale = scaleMap[fs] || fs;
+  document.documentElement.style.fontSize = scale;
+  document.body.style.setProperty('zoom', fs==='small'?'0.9':fs==='large'?'1.1':'1');
   setActiveBtn3('fontSmall', 'fontNormal', 'fontLarge',
-    fs === '12px' ? 0 : fs === '15px' ? 2 : 1);
+    fs === 'small' ? 0 : fs === 'large' ? 2 : 1);
 
   // ── COMPACT MODE ──
   var compact = appearance.compact || false;
