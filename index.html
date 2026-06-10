@@ -2348,7 +2348,20 @@ function openAddRoadmapItem(){document.getElementById('rm-id').value='';document
 function editRoadmapItem(id){var i=roadmapItems.find(function(x){return x.id===id;});if(!i)return;document.getElementById('rm-id').value=id;document.getElementById('rm-title').value=i.title;document.getElementById('rm-desc').value=i.desc||'';document.getElementById('rm-priority').value=i.priority||'want';document.getElementById('rmModalTitle').textContent='✏️ Edit item';document.getElementById('addRoadmapModal').classList.add('open');}
 function saveRoadmapItem(){var id=document.getElementById('rm-id').value;var title=document.getElementById('rm-title').value.trim();var desc=document.getElementById('rm-desc').value.trim();var priority=document.getElementById('rm-priority').value;if(!title)return;if(id){var i=roadmapItems.find(function(x){return x.id===id;});if(i){i.title=title;i.desc=desc;i.priority=priority;}}else{roadmapItems.push({id:'rm_'+Date.now(),priority:priority,title:title,desc:desc,done:false});}saveRoadmap();renderRoadmap();closeModal('addRoadmapModal');}
 var panelsLocked=localStorage.getItem('kc_locked')==='1';
-function applyLockState(){var c=document.getElementById('dash-sections');if(!c)return;var btn=document.getElementById('lockBtn');var hint=document.getElementById('lockHint');if(btn){btn.textContent=panelsLocked?'🔒':'🔓';btn.style.borderColor=panelsLocked?'rgba(231,76,60,.3)':'var(--border)';btn.style.color=panelsLocked?'#E74C3C':'var(--text-3)';}if(hint)hint.textContent=panelsLocked?'locked':'';document.querySelectorAll('#dash-sections [draggable],#sg-sections [draggable],#rd-sections [draggable],#pe-sections [draggable],#ms-sections [draggable]').forEach(function(card){card.draggable=!panelsLocked;var h=card.querySelector('.drag-handle');if(h){h.style.opacity=panelsLocked?'0.2':'1';h.style.cursor=panelsLocked?'default':'grab';h.style.pointerEvents=panelsLocked?'none':'auto';}});}
+function applyLockState(){
+  // Update ALL lock buttons across every tab
+  document.querySelectorAll('[data-action="toggleLock"]').forEach(function(btn){
+    btn.textContent=panelsLocked?'🔒':'🔓';
+    btn.style.borderColor=panelsLocked?'rgba(231,76,60,.3)':'var(--border)';
+    btn.style.color=panelsLocked?'#E74C3C':'var(--text-3)';
+  });
+  // Update all draggable items across all section containers
+  document.querySelectorAll('#dash-sections [draggable],#sg-sections [draggable],#rd-sections [draggable],#pe-sections [draggable],#ms-sections [draggable]').forEach(function(card){
+    card.draggable=!panelsLocked;
+    var h=card.querySelector('.drag-handle,[style*="cursor:grab"]');
+    if(h){h.style.opacity=panelsLocked?'0.2':'1';h.style.cursor=panelsLocked?'default':'grab';h.style.pointerEvents=panelsLocked?'none':'auto';}
+  });
+}
 function toggleLock(){panelsLocked=!panelsLocked;localStorage.setItem('kc_locked',panelsLocked?'1':'0');applyLockState();}
 function collapseAll(){document.querySelectorAll('#dash-sections .sec-body').forEach(function(b){if(!b.classList.contains('collapsed')){b.classList.add('collapsed');var id=b.id?b.id.replace('body-',''):null;var btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='+';if(id)collapsed[id]=true;}});localStorage.setItem('kc_coll',JSON.stringify(collapsed));}
 function expandAll(){document.querySelectorAll('#dash-sections .sec-body').forEach(function(b){b.classList.remove('collapsed');var id=b.id?b.id.replace('body-',''):null;var btn=b.parentElement.querySelector('.sec-toggle');if(btn)btn.textContent='−';if(id)delete collapsed[id];});localStorage.setItem('kc_coll',JSON.stringify(collapsed));}
