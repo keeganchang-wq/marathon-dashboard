@@ -461,6 +461,9 @@ body {
 .cal-card[draggable="true"] { cursor:grab; }
 .cal-card[draggable="true"]:active { cursor:grabbing; opacity:.7; }
 @media(max-width:700px) { .cal-grid { grid-template-columns:repeat(7,1fr); } .cal-cell { min-height:60px; } .cal-card-name { font-size:9px; } }
+
+.cal-cell.cal-empty:hover { background:rgba(212,160,82,.08) !important; }
+.cal-cell.cal-empty:hover div { color:var(--golden) !important; border-color:var(--golden) !important; }
 </style>
 </head>
 <body>
@@ -1305,7 +1308,7 @@ function renderPlan(){
     var dayCells = DAYS.map(function(dayName){
       var s = sessMap[dayName];
       if(!s){
-        return '<div class="cal-cell cal-empty" data-cal-drop="' + week.wk + '|' + dayName + '" data-cal-add="' + week.wk + '|' + dayName + '" style="cursor:pointer" title="Click to add rest day"><div style="display:flex;align-items:center;justify-content:center;height:100%;opacity:.15;font-size:20px;user-select:none">+</div></div>';
+        return '<div class="cal-cell cal-empty" data-cal-drop="' + week.wk + '|' + dayName + '" data-cal-add="' + week.wk + '|' + dayName + '" style="cursor:pointer" title="Click to add rest day"><div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:4px"><div style="width:24px;height:24px;border-radius:50%;border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-3);transition:all .2s">+</div><div style="font-size:8px;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em">Rest</div></div></div>';
       }
 
       if(s.type === 'rest'){
