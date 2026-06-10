@@ -1043,7 +1043,22 @@ body {
     </div>
   </div>
 
-  <!-- PROFILE -->
+  
+  <!-- PANEL MANAGER -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div><div style="font-size:14px;font-weight:700;color:var(--golden)">🎛️ Panel Manager</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">Control visibility, titles, and order of every section</div></div>
+      <div style="display:flex;gap:6px">
+        <button data-action="toggleEditMode" id="editModeBtn" style="padding:7px 16px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-2)">✏️ Edit Mode</button>
+      </div>
+    </div>
+    <div id="panelManagerList" style="display:flex;flex-direction:column;gap:4px"></div>
+    <div style="margin-top:12px;font-size:10px;color:var(--text-3);line-height:1.6">
+      <strong>Edit Mode:</strong> When enabled, hidden panels show with a dashed border so you can re-enable them. Toggle off to apply changes.
+    </div>
+  </div>
+
+<!-- PROFILE -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:14px;font-weight:700;color:var(--golden);margin-bottom:16px">👤 Athlete Profile</div>
     <div class="g2" style="gap:10px">
@@ -1887,6 +1902,8 @@ document.addEventListener('click', function(e) {
       case 'fontLarge': appearance.fontSize='15px'; saveAppearance(); break;
       case 'compactOff': appearance.compact=false; saveAppearance(); break;
       case 'compactOn': appearance.compact=true; saveAppearance(); break;
+      case 'toggleEditMode': toggleEditMode(); break;
+      case 'togglePanel': { var pid=el.dataset.panelId; if(pid) togglePanelVisibility(pid); break; }
       case 'resetAppearance': appearance={}; saveAppearance(); break;
       case 'nutHalf': showNutHalf(); break;
       case 'nutFull': showNutFull(); break;
@@ -2525,6 +2542,123 @@ function setActiveBtn3(id1, id2, id3, activeIdx) {
 
 function saveAppearance() { localStorage.setItem('kc_appearance', JSON.stringify(appearance)); applyAppearance(); }
 
+
+// ── PANEL MANAGER ─────────────────────────────────────────
+var panelConfig = JSON.parse(localStorage.getItem('kc_panels') || '{}');
+var editMode = false;
+
+var PANEL_DEFS = [
+  {id:'sec-cd',       tab:'dashboard', defaultTitle:'🏁 Race Countdowns'},
+  {id:'sec-status',   tab:'dashboard', defaultTitle:'📊 Training Status'},
+  {id:'sec-aero',     tab:'dashboard', defaultTitle:'🫀 Aerobic Efficiency'},
+  {id:'sec-prob',     tab:'dashboard', defaultTitle:'🎯 Goal Probability'},
+  {id:'sec-zones',    tab:'dashboard', defaultTitle:'❤️ HR Zones & Training Load'},
+  {id:'sec-runs',     tab:'dashboard', defaultTitle:'🏃 Recent Strava Activities'},
+  {id:'sec-niggles',  tab:'dashboard', defaultTitle:'🤕 Niggle & Injury Tracker'},
+  {id:'sec-future',   tab:'dashboard', defaultTitle:'🗺️ Roadmap'},
+  {id:'sec-nutrition', tab:'raceday',  defaultTitle:'⛽ Nutrition & Pre-Race Timeline'},
+  {id:'sec-checklist', tab:'raceday',  defaultTitle:'🎒 Race Day Checklist'},
+  {id:'sec-mantras',  tab:'raceday',  defaultTitle:'🧠 Race Mantras & Mental Notes'},
+  {id:'sec-course',   tab:'raceday',  defaultTitle:'🏁 Race Course Notes'},
+];
+
+function getPanelConf(id) {
+  return panelConfig[id] || {};
+}
+
+function savePanelConfig() {
+  localStorage.setItem('kc_panels', JSON.stringify(panelConfig));
+}
+
+function applyPanelConfig() {
+  PANEL_DEFS.forEach(function(def) {
+    var conf = getPanelConf(def.id);
+    var el = document.getElementById(def.id);
+    if (!el) return;
+
+    // Title
+    var titleEl = el.querySelector('.sec-title');
+    if (titleEl && conf.title) {
+      titleEl.textContent = conf.title;
+    } else if (titleEl && !conf.title) {
+      titleEl.textContent = def.defaultTitle;
+    }
+
+    // Visibility
+    if (conf.hidden && !editMode) {
+      el.style.display = 'none';
+    } else if (conf.hidden && editMode) {
+      el.style.display = '';
+      el.style.opacity = '0.35';
+      el.style.border = '2px dashed var(--golden)';
+    } else {
+      el.style.display = '';
+      el.style.opacity = '';
+      el.style.border = '';
+    }
+  });
+}
+
+function renderPanelManager() {
+  var el = document.getElementById('panelManagerList');
+  if (!el) return;
+
+  var tabLabels = {dashboard:'Dashboard', raceday:'Race Day'};
+
+  el.innerHTML = PANEL_DEFS.map(function(def) {
+    var conf = getPanelConf(def.id);
+    var title = conf.title || def.defaultTitle;
+    var hidden = !!conf.hidden;
+    var tabLabel = tabLabels[def.tab] || def.tab;
+
+    return '<div style="display:grid;grid-template-columns:40px 1fr 70px 80px;align-items:center;gap:8px;padding:8px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);'+(hidden?'opacity:.5':'') +'">'
+      // Toggle
+      +'<button data-action="togglePanel" data-panel-id="'+def.id+'" style="width:34px;height:22px;border-radius:11px;border:none;cursor:pointer;position:relative;background:'+(hidden?'var(--surface-3)':'var(--golden)')+';transition:background .2s"><div style="width:16px;height:16px;border-radius:50%;background:white;position:absolute;top:3px;'+(hidden?'left:3px':'left:15px')+';transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)"></div></button>'
+      // Title (editable)
+      +'<div style="display:flex;align-items:center;gap:8px"><input data-panel-title="'+def.id+'" value="'+title.replace(/"/g,'&quot;')+'" style="flex:1;background:transparent;border:1px solid transparent;border-radius:6px;padding:4px 8px;font-size:12px;font-weight:600;color:var(--text);outline:none;font-family:inherit;transition:border-color .2s" onfocus="this.style.borderColor=\'var(--golden)\'" onblur="this.style.borderColor=\'transparent\';savePanelTitle(\''+def.id+'\',this.value)"></div>'
+      // Tab badge
+      +'<span style="font-size:9px;color:var(--text-3);text-align:center;background:var(--surface-3);border-radius:10px;padding:2px 6px">'+tabLabel+'</span>'
+      // Status
+      +'<span style="font-size:10px;font-weight:600;text-align:center;color:'+(hidden?'var(--rose-400)':'#2ECC71')+'">'+(hidden?'Hidden':'Visible')+'</span>'
+      +'</div>';
+  }).join('');
+
+  // Update edit mode button
+  var btn = document.getElementById('editModeBtn');
+  if (btn) {
+    btn.style.borderColor = editMode ? 'var(--golden)' : 'var(--border)';
+    btn.style.background = editMode ? 'rgba(212,160,82,.15)' : 'transparent';
+    btn.style.color = editMode ? 'var(--golden)' : 'var(--text-2)';
+    btn.textContent = editMode ? '✏️ Edit Mode ON' : '✏️ Edit Mode';
+  }
+}
+
+function togglePanelVisibility(id) {
+  if (!panelConfig[id]) panelConfig[id] = {};
+  panelConfig[id].hidden = !panelConfig[id].hidden;
+  savePanelConfig();
+  applyPanelConfig();
+  renderPanelManager();
+}
+
+function savePanelTitle(id, title) {
+  if (!panelConfig[id]) panelConfig[id] = {};
+  var def = PANEL_DEFS.find(function(d){return d.id===id;});
+  if (title === def.defaultTitle || !title.trim()) {
+    delete panelConfig[id].title;
+  } else {
+    panelConfig[id].title = title.trim();
+  }
+  savePanelConfig();
+  applyPanelConfig();
+}
+
+function toggleEditMode() {
+  editMode = !editMode;
+  applyPanelConfig();
+  renderPanelManager();
+}
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -2541,6 +2675,8 @@ window.addEventListener('load', function init() {
   applyLockState();
   loadSettings();
   try{applyAppearance();}catch(e){console.warn("applyAppearance error:",e);}
+  applyPanelConfig();
+  renderPanelManager();
   renderWishlist();
   calcProbability();
   renderAeroEfficiency();
