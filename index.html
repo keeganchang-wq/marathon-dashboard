@@ -463,6 +463,7 @@ body {
 
 .cal-cell.cal-empty:hover { background:rgba(212,160,82,.08) !important; }
 .cal-cell.cal-empty:hover div { color:var(--golden) !important; border-color:var(--golden) !important; }
+#tab-settings.active { display:block !important; }
 </style>
 </head>
 <body>
@@ -488,7 +489,7 @@ body {
 
 <!-- COUNTDOWNS -->
 <div class="section-card" id="sec-cd" draggable="true">
-  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title"🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
+  <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
   <div class="sec-body" id="body-cd">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div style="background:linear-gradient(135deg,#D4A052,#C08A3A);border-radius:var(--radius);padding:18px 20px;color:white;position:relative">
@@ -673,6 +674,7 @@ body {
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
     <div><strong style="font-size:14px">25-Week Runna Plan</strong><div style="font-size:11px;color:var(--text-2);margin-top:2px">Apr 20 → Oct 11 · Tue / Wed / Thu / Sun · Tap any session card for full workout detail</div></div>
     <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+      <span id="planKm" class="metric-tag t-gold" style="background:rgba(212,160,82,.15);color:var(--golden);border:1px solid rgba(212,160,82,.4)">0km / 0km</span>
       <span id="planProg" class="metric-tag t-blue">Loading...</span>
       <button class="btn btn-blue" data-action="jumpCurrent">↓ Current week</button>
     </div>
@@ -966,46 +968,39 @@ body {
 </div><!-- end rd-sections --></div><!-- end ms-sections -->
 
 <div id="tab-settings" class="panel">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎨 Appearance & Layout</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Theme</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Dark or Light cream palette</div></div><button class="btn btn-d" data-action="theme" id="settingsThemeBtn" style="min-width:90px">☀️ Light</button></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Layout</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Dashboard sections</div></div><div style="display:flex;gap:6px"><button data-action="layout1col" id="col1Btn" style="padding:6px 14px;border-radius:8px;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:700;cursor:pointer">1 Col</button><button data-action="layout2col" id="col2Btn" style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:700;cursor:pointer">2 Col</button></div></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Accent</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Buttons, badges, highlights</div></div><div style="display:flex;gap:5px"><button data-action="accentGold" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#D4A052;cursor:pointer" title="Gold"></button><button data-action="accentBlue" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#3B82F6;cursor:pointer" title="Blue"></button><button data-action="accentGreen" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#22C55E;cursor:pointer" title="Green"></button><button data-action="accentRose" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#F43F5E;cursor:pointer" title="Rose"></button><button data-action="accentPurple" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#8B5CF6;cursor:pointer" title="Purple"></button></div></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Card corners</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Border radius style</div></div><div style="display:flex;gap:6px"><button data-action="radiusSharp" style="padding:6px 12px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Sharp</button><button data-action="radiusRound" style="padding:6px 12px;border-radius:8px;border:1.5px solid var(--golden);background:rgba(212,160,82,.15);color:var(--golden);font-size:11px;font-weight:600;cursor:pointer">Round</button><button data-action="radiusPill" style="padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:11px;font-weight:600;cursor:pointer">Pill</button></div></div>
+  </div>
+
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">👤 Athlete Profile</div>
-    <div class="g2" style="gap:8px">
-      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Name</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Keegan Chang</div></div>
-      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Location</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Melbourne, VIC</div></div>
-      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Weight (kg)</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div>
-      <div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Max HR (bpm)</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div>
-    </div>
+    <div class="g2" style="gap:8px"><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Name</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Keegan Chang</div></div><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Location</label><div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text)">Melbourne, VIC</div></div><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Weight</label><input id="set-weight" type="number" value="74" data-setting="weight" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div><div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Max HR</label><input id="set-maxhr" type="number" value="184" data-setting="maxhr" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text);outline:none"></div></div>
   </div>
+
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎯 Race Targets</div>
-    <div class="g2" style="gap:12px">
-      <div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:var(--golden);margin-bottom:8px">🏃 HALF MARATHON — 19 JUL</div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Target time</label><input id="set-half-target" type="text" value="1:43–1:46" data-setting="halfTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:var(--golden);outline:none"></div>
-      <div style="background:rgba(35,79,96,.15);border:1px solid rgba(35,79,96,.4);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;margin-bottom:8px">🏆 FULL MARATHON — 11 OCT</div><label style="font-size:11px;font-weight:600;color:var(--text-2);display:block;margin-bottom:4px">Target time</label><input id="set-full-target" type="text" value="Sub 3:30" data-setting="fullTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:#5AB5EE;outline:none"></div>
-    </div>
+    <div class="g2" style="gap:12px"><div style="background:rgba(212,160,82,.08);border:1px solid rgba(212,160,82,.3);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:var(--golden);margin-bottom:8px">🏃 HALF — 19 JUL</div><input id="set-half-target" type="text" value="1:43–1:46" data-setting="halfTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:var(--golden);outline:none"></div><div style="background:rgba(35,79,96,.15);border:1px solid rgba(35,79,96,.4);border-radius:var(--radius-sm);padding:14px"><div style="font-size:10px;font-weight:700;color:#5AB5EE;margin-bottom:8px">🏆 FULL — 11 OCT</div><input id="set-full-target" type="text" value="Sub 3:30" data-setting="fullTarget" style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;color:#5AB5EE;outline:none"></div></div>
   </div>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🎨 Appearance</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
-      <div><div style="font-size:12px;font-weight:600;color:var(--text)">Dark / Light mode</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Dark is default · Light uses luxury cream palette</div></div>
-      <button class="btn btn-d" data-action="theme" id="settingsThemeBtn" style="min-width:90px">🌙 Dark</button>
-    </div>
-  </div>
+
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
     <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">🔄 Strava Sync</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Last sync</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Jun 9 2026 · 88 activities · 1,011 PRs</div></div><button class="btn btn-b" data-action="sync">⟳ Sync now</button></div>
-    <div style="padding:8px 0"><div style="font-size:12px;font-weight:600;color:var(--text)">How to get fresh data</div><div style="font-size:11px;color:var(--text-2);margin-top:3px;line-height:1.6">Say "sync my Strava" in a new chat message. I'll pull live data, update the file, and you push to GitHub — live in 30 seconds.</div></div>
+    <div style="padding:8px 0;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:600;color:var(--text)">Last sync: Jun 9 2026</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">88 activities · 487km · 1,011 PRs</div></div>
+    <div style="padding:8px 0"><div style="font-size:11px;color:var(--text-2);line-height:1.6">Say "sync my Strava" in a new Claude chat to pull fresh data.</div></div>
   </div>
+
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
-    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">💾 Data &amp; Layout</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Completed sessions</div><div style="font-size:11px;color:var(--text-3)">Stored in browser localStorage</div></div><button data-action="clearDone" style="background:none;border:1px solid var(--rose-400);color:var(--rose-400);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Clear marks</button></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:11px;color:var(--text-3)">Section order and collapsed state</div></div><button data-action="resetLayout" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset layout</button></div>
+    <div style="font-size:13px;font-weight:700;color:var(--golden);margin-bottom:14px">💾 Data & Layout</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Completed sessions</div><div style="font-size:11px;color:var(--text-3)">Clear manually marked sessions</div></div><button data-action="clearDone" style="background:none;border:1px solid var(--rose-400);color:var(--rose-400);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Clear</button></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Dashboard layout</div><div style="font-size:11px;color:var(--text-3)">Reset section order</div></div><button data-action="resetLayout" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset</button></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div><div style="font-size:12px;font-weight:600;color:var(--text)">Reset appearance</div><div style="font-size:11px;color:var(--text-3)">Colours, layout, corners back to defaults</div></div><button data-action="resetAppearance" style="background:none;border:1px solid var(--border);color:var(--text-3);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer">Reset</button></div>
   </div>
+
 </div>
-
-<!-- MODALS -->
-
-
-
-
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -1356,6 +1351,21 @@ function renderPlan(){
 
   // Update progress pill
   var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  // Calculate km totals
+  var totalKm = 0, doneKm = 0;
+  PLAN.forEach(function(week) {
+    week.sessions.forEach(function(s) {
+      if (s.type === 'rest') return;
+      var sess = s.key ? SESSIONS[s.key] : null;
+      var km = sess ? parseFloat(sess.km) || 0 : 0;
+      totalKm += km;
+      var k = sid(week.wk, s.day);
+      var sm = null; try { sm = getStravaMatch(week.wk, s.day); } catch(e) {}
+      if (week.done || completed[k] || sm) doneKm += km;
+    });
+  });
+  var kmEl = document.getElementById('planKm');
+  if (kmEl) kmEl.textContent = Math.round(doneKm) + 'km / ' + Math.round(totalKm) + 'km';
   var el = document.getElementById('planProg');
   if(el) el.textContent = done + '/' + total + ' sessions · ' + pct + '% complete';
 
