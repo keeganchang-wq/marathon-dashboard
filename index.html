@@ -463,7 +463,7 @@ body {
 
 .cal-cell.cal-empty:hover { background:rgba(212,160,82,.08) !important; }
 .cal-cell.cal-empty:hover div { color:var(--golden) !important; border-color:var(--golden) !important; }
-#tab-settings.active { display:block !important; }
+
 </style>
 </head>
 <body>
@@ -982,6 +982,8 @@ body {
 </div><!-- end rd-sections --></div><!-- end ms-sections -->
 
 <div id="tab-settings" class="panel">
+<div style="background:#E74C3C;color:white;padding:20px;text-align:center;font-size:18px;font-weight:800;border-radius:12px;margin-bottom:16px">⚙️ SETTINGS — If you can see this red box, the tab works!</div>
+
 
   <!-- APPEARANCE -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px">
@@ -2609,30 +2611,23 @@ document.addEventListener('click', function(evt) {
 
 // ── FORCE SETTINGS TAB TO WORK ────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
-  // Find settings tab button and add direct handler
   var tabs = document.querySelectorAll('[data-tab]');
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function(e) {
-      // Hide all panels
+      // Hide ALL content pages (both .panel and .settings-page)
       document.querySelectorAll('.panel').forEach(function(p) {
         p.style.display = 'none';
-        p.classList.remove('active');
       });
-      // Show target panel
-      var id = 'tab-' + tab.getAttribute('data-tab');
-      var panel = document.getElementById(id);
-      if (panel) {
-        panel.style.display = 'block';
-        panel.classList.add('active');
-      }
-      // Update tab styling
+      // Show target
+      var panel = document.getElementById('tab-' + tab.getAttribute('data-tab'));
+      if (panel) panel.style.display = 'block';
+      // Update tab buttons
       tabs.forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
     });
   });
-  // Ensure dashboard is visible on load
   var dash = document.getElementById('tab-dashboard');
-  if (dash) { dash.style.display = 'block'; dash.classList.add('active'); }
+  if (dash) dash.style.display = 'block';
 });
 
 </script>
@@ -2642,6 +2637,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- ═══ ALL MODALS (at body end for z-index safety) ═══ -->
+
+
+
+
+
+
+
+
+
+
+<!-- MODALS -->
 <div class="modal-bg" id="sessModal"><div class="modal"><button class="modal-close" data-close="sessModal">✕</button><h3 id="sessModalTitle"></h3><div id="sessModalBody"></div></div></div>
 <div class="modal-bg" id="addShoeModal"><div class="modal"><button class="modal-close" data-close="addShoeModal">✕</button><h3>Add a shoe</h3><label>Brand</label><input id="sh-brand" placeholder="e.g. Nike"><label>Model</label><input id="sh-model" placeholder="e.g. Vaporfly 4"><label>Nickname</label><input id="sh-name" placeholder="e.g. Pink"><label>Type</label><select id="sh-type"><option value="daily">Daily trainer</option><option value="carbon">Carbon race shoe</option><option value="tempo">Tempo</option><option value="recovery">Recovery</option></select><label>Use</label><input id="sh-use" placeholder="e.g. Easy runs, race day"><label>Starting km</label><input id="sh-km" type="number" value="0"><div class="modal-footer"><button class="btn-cancel" data-close="addShoeModal">Cancel</button><button class="btn-primary" data-action="saveShoe">Add shoe</button></div></div></div>
 <div class="modal-bg" id="addGearModal"><div class="modal"><button class="modal-close" data-close="addGearModal">✕</button><h3 id="addGearTitle">Add gear</h3><label>Category</label><select id="g-cat"><option value="apparel_top">Top / Singlet</option><option value="apparel_bottom">Shorts / Tights</option><option value="socks">Socks</option><option value="watch">Watch</option><option value="hr_monitor">HR Monitor</option><option value="headphones">Headphones</option><option value="sunglasses">Sunglasses</option><option value="nutrition">Nutrition / Gels</option><option value="recovery">Recovery tools</option><option value="other">Other</option></select><label>Brand &amp; Model</label><input id="g-name" placeholder="e.g. COROS PACE 3"><label>Description</label><input id="g-desc" placeholder="e.g. Black"><label>Purchase date</label><input id="g-date" type="date"><label>Price (AUD)</label><input id="g-price" type="number" placeholder="0"><label>Notes</label><textarea id="g-notes" rows="2"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addGearModal">Cancel</button><button class="btn-primary" data-action="saveGearAnother" style="background:var(--sapphire);color:white">Save &amp; add another</button><button class="btn-primary" data-action="saveGear">Save &amp; close</button></div></div></div>
@@ -2651,5 +2657,4 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="modal-bg" id="addNiggleModal"><div class="modal"><button class="modal-close" data-close="addNiggleModal">✕</button><h3>🤕 Log a niggle</h3><label>Body area</label><select id="n-area"><option value="Left knee">Left knee</option><option value="Right knee">Right knee</option><option value="Left calf">Left calf</option><option value="Right calf">Right calf</option><option value="Left shin">Left shin</option><option value="Right shin">Right shin</option><option value="Left ankle">Left ankle</option><option value="Right ankle">Right ankle</option><option value="Left hip">Left hip</option><option value="Right hip">Right hip</option><option value="Lower back">Lower back</option><option value="Left foot">Left foot</option><option value="Right foot">Right foot</option><option value="Left hamstring">Left hamstring</option><option value="Right hamstring">Right hamstring</option><option value="Other">Other</option></select><label>Severity</label><select id="n-severity"><option value="low">🟢 Low — mild tightness</option><option value="medium">🟠 Medium — noticeable pain</option><option value="high">🔴 High — sharp/concerning</option></select><label>Notes</label><textarea id="n-notes" rows="2" placeholder="When does it hurt? What triggered it?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addNiggleModal">Cancel</button><button class="btn-primary" data-action="saveNiggle">Log it</button></div></div></div>
 <div class="modal-bg" id="addMantraModal"><div class="modal"><button class="modal-close" data-close="addMantraModal">✕</button><h3>🧠 Add a mantra</h3><label>Type</label><select id="ma-type"><option value="pace">🏃 Pace / discipline</option><option value="strategy">🧠 Strategy</option><option value="grit">🔥 Grit / push through</option><option value="focus">🎯 Focus</option><option value="custom">💭 Other</option></select><label>Your mantra</label><textarea id="ma-text" rows="2" placeholder="What will you tell yourself at km 35?"></textarea><div class="modal-footer"><button class="btn-cancel" data-close="addMantraModal">Cancel</button><button class="btn-primary" data-action="saveMantra">Save</button></div></div></div>
 </body>
-</html></div><!-- end sg-wishlist -->
-</div><!-- end sg-sections -->
+</html>
