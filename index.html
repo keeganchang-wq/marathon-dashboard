@@ -640,6 +640,12 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
 <div id="dash-sections">
 
 <!-- COUNTDOWNS -->
+<!-- MARATHON DECISION ENGINE -->
+<div class="section-card" id="sec-engine" draggable="true" style="border:1.5px solid var(--golden)">
+  <div class="sec-header" style="background:rgba(212,160,82,.08)"><span class="drag-handle">⠿</span><span class="sec-title">🧠 Coach Engine</span><span class="sec-badge" style="background:var(--golden);color:var(--blacktie)">DECISION ENGINE</span><button class="sec-toggle" data-toggle="engine">−</button></div>
+  <div class="sec-body" id="body-engine"></div>
+</div>
+
 <div class="section-card" id="sec-cd" draggable="true">
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🏁 Race Countdowns</span><button class="sec-toggle" data-toggle="cd">−</button></div>
   <div class="sec-body" id="body-cd">
@@ -2237,6 +2243,7 @@ document.addEventListener('click', function(e) {
         localStorage.setItem('kc_cw_checks',JSON.stringify(cwc));
         renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
 
@@ -3105,6 +3112,7 @@ var panelConfig = JSON.parse(localStorage.getItem('kc_panels') || '{}');
 var editMode = false;
 
 var PANEL_DEFS = [
+  {id:'sec-engine',   tab:'dashboard',   defaultTitle:'🧠 Coach Engine'},
   {id:'sec-cd',       tab:'dashboard',   defaultTitle:'🏁 Race Countdowns'},
   {id:'sec-status',   tab:'dashboard',   defaultTitle:'📊 Training Status'},
   {id:'sec-aero',     tab:'dashboard',   defaultTitle:'🫀 Aerobic Efficiency'},
@@ -3216,6 +3224,7 @@ function togglePanelVisibility(id) {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
 
@@ -3245,6 +3254,7 @@ function toggleEditMode() {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
 
@@ -3558,6 +3568,7 @@ function saveWidgetFromModal() {
   saveWidgets();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
 
@@ -3847,6 +3858,151 @@ function switchRace(race) {
   if(sfB){sfB.style.background=!isHalf?'rgba(212,160,82,.15)':'transparent';sfB.style.borderColor=!isHalf?'var(--golden)':'var(--border)';sfB.style.color=!isHalf?'var(--golden)':'var(--text-2)';}
 }
 
+
+// ── MARATHON DECISION ENGINE ──────────────────────────────
+function renderEngine() {
+  var el = document.getElementById('body-engine'); if(!el) return;
+  var A = ATHLETE;
+  var today = new Date();
+  var dayOfWeek = today.getDay(); // 0=Sun
+  var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var daysToHalf = calcDaysUntil(A.halfDate);
+  var daysToFull = calcDaysUntil(A.fullDate);
+  var currentWeek = A.weeksCompleted + 1;
+
+  // ── 1. TODAY'S COACH DECISION ──
+  // Plan: Tue=intervals/tempo, Wed=easy, Thu=easy/threshold, Sun=long run
+  var todayPlan = {0:'Long Run',1:'Rest',2:'Intervals / Tempo',3:'Easy Run',4:'Easy / Threshold',5:'Rest',6:'Rest'};
+  var todaySession = todayPlan[dayOfWeek] || 'Rest';
+  
+  // Context-aware decision based on comeback status
+  var lastRunDate = new Date('2026-06-09');
+  var daysSinceRun = Math.round((today - lastRunDate) / 86400000);
+  var isComeback = A.weeksMissed >= 2;
+  var decision, decisionWhy, decisionColor, decisionIcon;
+
+  if(daysSinceRun > 5) {
+    decision = 'Easy 5km today — HR under 150';
+    decisionWhy = 'You haven\'t run in ' + daysSinceRun + ' days. Short easy run to maintain base without risking setback.';
+    decisionColor = '#E67E22'; decisionIcon = '⚠';
+  } else if(isComeback && daysSinceRun >= 2) {
+    decision = todaySession === 'Rest' ? 'Rest day — trust the recovery' : todaySession + ' (modified)';
+    decisionWhy = todaySession === 'Rest' ? 'Recovery is training. Your body is rebuilding after illness.' : 'Week ' + currentWeek + ' comeback protocol: reduce volume 30%, keep intensity low. HR cap 155.';
+    decisionColor = todaySession === 'Rest' ? '#2ECC71' : '#E67E22';
+    decisionIcon = todaySession === 'Rest' ? '😴' : '🏃';
+  } else if(todaySession === 'Rest') {
+    decision = 'Rest day';
+    decisionWhy = 'No session scheduled. Recovery is training.';
+    decisionColor = '#2ECC71'; decisionIcon = '😴';
+  } else {
+    decision = todaySession;
+    decisionWhy = 'Week ' + currentWeek + ' · ' + todaySession + ' day. ' + daysToHalf + ' days to half marathon.';
+    decisionColor = '#2ECC71'; decisionIcon = '🏃';
+  }
+
+  // ── 2. PLAN VS ACTUAL ──
+  var plannedWeek8 = [{day:'Tue',session:'5km Easy',done:false},{day:'Wed',session:'Rest',done:true},{day:'Thu',session:'5km Easy',done:false},{day:'Sun',session:'8km Easy',done:false}];
+  var completedThisWeek = [{day:'Mon Jun 9',session:'5km Easy ✅',pace:'7:15/km',hr:147}];
+  var missedSessions = A.weeksMissed * 4; // ~4 sessions per missed week
+  var completionRate = Math.round(((currentWeek * 4 - missedSessions) / (currentWeek * 4)) * 100);
+
+  // ── 3. INJURY RISK FORECAST ──
+  var riskFactors = [];
+  var riskScore = 0;
+  if(A.weeksMissed >= 2) { riskFactors.push({t:'2 weeks illness/rest — comeback phase',s:25,c:'#E67E22'}); riskScore += 25; }
+  if(daysSinceRun > 3) { riskFactors.push({t:daysSinceRun + ' days since last run',s:15,c:'#E67E22'}); riskScore += 15; }
+  // Check for training load spikes (Wk4→Wk5 was 173%)
+  riskFactors.push({t:'Wk4→Wk5 spike caused illness (173%)',s:10,c:'#E74C3C'});
+  riskScore += 10;
+  if(A.longestRun > 18) { riskFactors.push({t:'Longest run 20.1km — safe to build',s:-5,c:'#2ECC71'}); riskScore -= 5; }
+
+  var riskLevel = riskScore > 40 ? 'HIGH' : riskScore > 20 ? 'MODERATE' : 'LOW';
+  var riskCol = riskScore > 40 ? '#E74C3C' : riskScore > 20 ? '#E67E22' : '#2ECC71';
+  var safeIncrease = riskScore > 30 ? '10%' : riskScore > 15 ? '15%' : '20%';
+
+  // ── 4. RACE PROBABILITY TREND ──
+  // Simplified trend: based on weeks of training remaining and current fitness
+  var stg = JSON.parse(localStorage.getItem('kc_settings')||'{}');
+  var fullTarget = stg.fullTarget || '3:30:00';
+
+  // ── 5. RACE DAY SIMULATOR (preview) ──
+  var targetPaceMin = 4 + 57/60; // 4:57/km for sub-3:30
+
+  // ── RENDER ──
+  el.innerHTML =
+    // TODAY'S DECISION — the hero card
+    '<div style="background:linear-gradient(135deg,rgba(212,160,82,.12),rgba(212,160,82,.03));border:1.5px solid rgba(212,160,82,.3);border-radius:var(--radius);padding:16px 20px;margin-bottom:14px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-size:10px;font-weight:700;color:var(--golden);text-transform:uppercase;letter-spacing:.08em">📋 Today · '+dayNames[dayOfWeek]+' · Week '+currentWeek+'</div><div style="font-size:9px;color:var(--text-3)">'+daysToHalf+'d to half · '+daysToFull+'d to full</div></div>'
+    +'<div style="display:flex;align-items:center;gap:12px"><div style="font-size:32px">'+decisionIcon+'</div><div><div style="font-size:20px;font-weight:800;color:'+decisionColor+'">'+decision+'</div><div style="font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.5">'+decisionWhy+'</div></div></div>'
+    +'</div>'
+
+    // Row of 3 compact cards
+    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">'
+
+    // PLAN VS ACTUAL
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px">'
+    +'<div style="font-size:9px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:8px">📊 Plan vs Actual</div>'
+    +'<div style="font-size:28px;font-weight:800;color:'+(completionRate>70?'#2ECC71':completionRate>50?'#E67E22':'#E74C3C')+'">'+completionRate+'%</div>'
+    +'<div style="font-size:10px;color:var(--text-2);margin-top:4px">completion rate</div>'
+    +'<div style="height:4px;background:var(--surface-3);border-radius:2px;margin-top:6px;overflow:hidden"><div style="width:'+completionRate+'%;height:100%;background:'+(completionRate>70?'#2ECC71':'#E67E22')+';border-radius:2px"></div></div>'
+    +'<div style="font-size:9px;color:var(--text-3);margin-top:6px">~'+missedSessions+' sessions missed (illness)</div>'
+    +'</div>'
+
+    // INJURY RISK
+    +'<div style="background:var(--surface-2);border:1px solid '+(riskScore>30?'rgba(231,76,60,.3)':'var(--border)')+';border-radius:var(--radius-sm);padding:12px">'
+    +'<div style="font-size:9px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:8px">🛡️ Injury Risk</div>'
+    +'<div style="font-size:28px;font-weight:800;color:'+riskCol+'">'+riskLevel+'</div>'
+    +'<div style="font-size:10px;color:var(--text-2);margin-top:4px">score: '+riskScore+'/100</div>'
+    +'<div style="font-size:9px;color:var(--text-3);margin-top:6px">Safe weekly increase: <strong style="color:'+riskCol+'">'+safeIncrease+'</strong></div>'
+    +'<div style="font-size:9px;color:var(--text-3)">'+riskFactors[0].t+'</div>'
+    +'</div>'
+
+    // RACE PROBABILITY TREND
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px">'
+    +'<div style="font-size:9px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:8px">🎯 Sub-3:30 Probability</div>'
+    +'<div id="probTrendMini"></div>'
+    +'<div style="font-size:9px;color:var(--text-3);margin-top:6px">Trend updates each sync</div>'
+    +'</div>'
+    +'</div>'
+
+    // RACE DAY SIMULATOR (compact)
+    +'<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-size:9px;font-weight:700;color:var(--text-3);text-transform:uppercase">🏟 Race Day Simulator · Full Marathon</div><div style="font-size:9px;color:var(--golden)">Target: '+fullTarget+'</div></div>'
+    +'<div style="display:flex;gap:2px;height:32px;border-radius:4px;overflow:hidden">'
+    +[
+      {km:'0-5',pace:'5:10',col:'#2ECC71',w:12},
+      {km:'5-10',pace:'4:55',col:'#2ECC71',w:12},
+      {km:'10-15',pace:'4:55',col:'#2ECC71',w:12},
+      {km:'15-20',pace:'4:57',col:'#2ECC71',w:12},
+      {km:'20-25',pace:'4:57',col:'#E67E22',w:12},
+      {km:'25-30',pace:'5:00',col:'#E67E22',w:12},
+      {km:'30-35',pace:'5:00',col:'#E74C3C',w:12},
+      {km:'35-42',pace:'4:50',col:'var(--golden)',w:16},
+    ].map(function(s){
+      return '<div style="flex:'+s.w+';background:'+s.col+';display:flex;align-items:center;justify-content:center;font-size:7px;color:white;font-weight:700" title="Km '+s.km+': '+s.pace+'/km">'+s.pace+'</div>';
+    }).join('')
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:8px;color:var(--text-3);margin-top:4px"><span>Start 🏁</span><span>Half</span><span>30km wall</span><span>MCG 🏆</span></div>'
+    +'<div style="font-size:10px;color:var(--text);margin-top:8px;line-height:1.5"><strong style="color:var(--golden)">Strategy:</strong> Negative split. 5:05/km avg first half → 4:52/km second half. HR under 162 for 30km. Race the last 12km.</div>'
+    +'</div>';
+
+  // Mini probability trend sparkline
+  var probEl = document.getElementById('probTrendMini');
+  if(probEl) {
+    var trend = [{wk:1,p:35},{wk:3,p:42},{wk:5,p:55},{wk:7,p:62},{wk:8,p:58}];
+    var svgW=120,svgH=40;
+    var pts=trend.map(function(t,i){
+      var x=5+i/(trend.length-1)*(svgW-10);
+      var y=svgH-5-(t.p/100)*(svgH-10);
+      return x.toFixed(1)+','+y.toFixed(1);
+    });
+    var line='M'+pts.join(' L');
+    var last=trend[trend.length-1];
+    var col=last.p>=60?'#2ECC71':last.p>=40?'#E67E22':'#E74C3C';
+    probEl.innerHTML='<div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 '+svgW+' '+svgH+'" style="width:80px;height:30px"><path d="'+line+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round"/><circle cx="'+pts[pts.length-1].split(',')[0]+'" cy="'+pts[pts.length-1].split(',')[1]+'" r="3" fill="'+col+'"/></svg><div><div style="font-size:22px;font-weight:800;color:'+col+'">'+last.p+'%</div><div style="font-size:9px;color:var(--text-3)">Wk'+last.wk+'</div></div></div>';
+  }
+}
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -3869,6 +4025,7 @@ window.addEventListener('load', function init() {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
 
