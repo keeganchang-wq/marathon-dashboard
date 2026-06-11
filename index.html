@@ -681,10 +681,10 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">📊 Training Status</span><span class="sec-badge t-green">✅ Back on track</span><button class="sec-toggle" data-toggle="status">−</button></div>
   <div class="sec-body" id="body-status">
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px">
-      <div class="metric"><div class="metric-label">Latest run</div><div class="metric-val" id="latestRunDate" style="font-size:18px">Jun 11</div><div class="metric-sub">5km · 6:31/km</div></div>
+      <div class="metric"><div class="metric-label">Latest run</div><div class="metric-val" id="latestRunDate" style="font-size:18px">Today</div><div class="metric-sub" id="latestRunSub">5km · 6:31/km · HR 141</div></div>
       <div class="metric"><div class="metric-label">Longest run</div><div class="metric-val" style="font-size:18px">20.1km</div><div class="metric-sub">May 24</div></div>
       <div class="metric"><div class="metric-label">1km PR</div><div class="metric-val" style="font-size:18px">4:17</div><div class="metric-sub">May 26</div></div>
-      <div class="metric"><div class="metric-label">Consistency</div><div class="metric-val" style="font-size:18px;color:#2ECC71">77%</div><div class="metric-sub">17/22 wks active</div></div>
+      <div class="metric"><div class="metric-label">Consistency</div><div class="metric-val" style="font-size:18px;color:#2ECC71">87%</div><div class="metric-sub">7/8 plan weeks active</div></div>
       <div class="metric" style="border-color:var(--golden)"><div class="metric-label">🏔 Peak week</div><div class="metric-val" style="font-size:18px;color:var(--golden)">47.8km</div><div class="metric-sub">May 18 · Wk5</div></div>
     </div>
     <div class="sec-label">Week-by-week completion</div>
@@ -779,19 +779,66 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
 <div class="section-card" id="sec-runs" draggable="true">
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">🏃 Recent Strava Activities</span><button class="sec-toggle" data-toggle="runs">−</button></div>
   <div class="sec-body" id="body-runs">
-    <table class="tbl">
-      <thead><tr><th>Date</th><th>Activity</th><th>Dist</th><th>Pace</th><th>Effort</th><th>PRs</th><th>Shoe</th><th></th></tr></thead>
-      <tbody>
-        <tr style="background:rgba(39,174,96,.08);cursor:pointer" data-strava="18845629096"><td><strong>9 Jun ★</strong></td><td><strong>First run back</strong></td><td><b>5.0km</b></td><td style="color:#2ECC71;font-weight:700">7:13/km</td><td>49</td><td>—</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18845629096" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-        <tr style="cursor:pointer" data-strava="18821092907"><td>7 Jun</td><td>🏊 Evening Swim</td><td>200m</td><td>—</td><td>4</td><td>—</td><td>—</td><td><a href="https://www.strava.com/activities/18821092907" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-        <tr style="cursor:pointer" data-strava="18711637254"><td>30 May</td><td>Afternoon Run</td><td>9.0km</td><td>6:17/km</td><td>73</td><td style="color:var(--golden);font-weight:700">43</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18711637254" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-        <tr style="cursor:pointer" data-strava="18659441753"><td>26 May</td><td>🔥 Intervals · Olympic Park</td><td>5.0km</td><td>4:36/km</td><td>58</td><td style="color:#E74C3C;font-weight:700">106</td><td>Vaporfly 4</td><td><a href="https://www.strava.com/activities/18659441753" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-        <tr style="cursor:pointer" data-strava="18628147720"><td>24 May</td><td>✅ 20km Hotspot LR</td><td>20.1km</td><td>5:52/km</td><td>183</td><td style="color:#2ECC71;font-weight:700">93</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18628147720" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-        <tr style="cursor:pointer" data-strava="18592467984"><td>21 May</td><td>Evening Run</td><td>9.1km</td><td>5:51/km</td><td>84</td><td>—</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18592467984" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-        <tr style="cursor:pointer" data-strava="18445455558"><td>10 May</td><td>18.3km Long Run</td><td>18.3km</td><td>5:53/km</td><td>200</td><td style="color:#2ECC71;font-weight:700">139</td><td>Superblast 3</td><td><a href="https://www.strava.com/activities/18445455558" target="_blank" rel="noopener" style="color:var(--golden);text-decoration:none;font-weight:700">↗</a></td></tr>
-      </tbody>
-    </table>
-  </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;border-left:3px solid #2ECC71;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">Jun 11</span>
+          <span style="font-size:11px;color:var(--text);font-weight:700">Evening Run</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">5.0km</span>
+          <span style="font-size:10px;color:var(--text-2)">6:31/km</span>
+          <span style="font-size:10px;color:#2ECC71">141bpm</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">Jun 9</span>
+          <span style="font-size:11px;color:var(--text)">First run back</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">5.0km</span>
+          <span style="font-size:10px;color:var(--text-2)">7:15/km</span>
+          <span style="font-size:10px;color:#E67E22">147bpm</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">May 30</span>
+          <span style="font-size:11px;color:var(--text)">Afternoon Run</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">9.0km</span>
+          <span style="font-size:10px;color:var(--text-2)">6:16/km</span>
+          <span style="font-size:10px;color:var(--text-3)">—</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">May 26</span>
+          <span style="font-size:11px;color:var(--text)">Intervals ⚡</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">5.0km</span>
+          <span style="font-size:10px;color:var(--text-2)">4:36/km</span>
+          <span style="font-size:10px;color:var(--text-3)">—</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;border-left:3px solid var(--golden);align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">May 24</span>
+          <span style="font-size:11px;color:var(--text);font-weight:700">20km Hotspot LR 🔑</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">20.1km</span>
+          <span style="font-size:10px;color:var(--text-2)">5:52/km</span>
+          <span style="font-size:10px;color:#E67E22">154bpm</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">May 21</span>
+          <span style="font-size:11px;color:var(--text)">Evening Run</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">9.1km</span>
+          <span style="font-size:10px;color:var(--text-2)">5:52/km</span>
+          <span style="font-size:10px;color:var(--text-3)">—</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">May 20</span>
+          <span style="font-size:11px;color:var(--text)">Evening Run</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">8.0km</span>
+          <span style="font-size:10px;color:var(--text-2)">6:00/km</span>
+          <span style="font-size:10px;color:#E67E22">150bpm</span>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 1fr 65px 55px 50px;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:5px;align-items:center">
+          <span style="font-size:10px;color:var(--text-2);font-weight:600">May 19</span>
+          <span style="font-size:11px;color:var(--text)">Lunch Run</span>
+          <span style="font-size:11px;font-weight:700;color:var(--golden)">10.6km</span>
+          <span style="font-size:10px;color:var(--text-2)">5:51/km</span>
+          <span style="font-size:10px;color:var(--text-3)">—</span>
+        </div>
+      </div>
+      <div style="font-size:9px;color:var(--text-3);text-align:center;margin-top:8px">Showing last 8 runs · Synced Jun 11 2026 · 89 activities total</div>
+    </div>
 </div>
 
 <!-- COMING SOON -->
@@ -2243,6 +2290,7 @@ document.addEventListener('click', function(e) {
         localStorage.setItem('kc_cw_checks',JSON.stringify(cwc));
         renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  updateLatestRun();
   try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
@@ -3225,6 +3273,7 @@ function togglePanelVisibility(id) {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  updateLatestRun();
   try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
@@ -3255,6 +3304,7 @@ function toggleEditMode() {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  updateLatestRun();
   try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
@@ -3569,6 +3619,7 @@ function saveWidgetFromModal() {
   saveWidgets();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  updateLatestRun();
   try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
@@ -3877,7 +3928,7 @@ function renderEngine() {
   var todaySession = todayPlan[dayOfWeek] || 'Rest';
   
   // Context-aware decision based on comeback status
-  var lastRunDate = new Date('2026-06-11');
+  var lastRunDate = new Date('2026-06-11T18:31:30');
   var daysSinceRun = Math.round((today - lastRunDate) / 86400000);
   var isComeback = A.weeksMissed >= 2;
   var decision, decisionWhy, decisionColor, decisionIcon;
@@ -3904,8 +3955,8 @@ function renderEngine() {
   // ── 2. PLAN VS ACTUAL ──
   var plannedWeek8 = [{day:'Tue',session:'5km Easy',done:false},{day:'Wed',session:'Rest',done:true},{day:'Thu',session:'5km Easy',done:false},{day:'Sun',session:'8km Easy',done:false}];
   var completedThisWeek = [{day:'Mon Jun 9',session:'5km Easy ✅',pace:'7:15/km',hr:147}];
-  var missedSessions = A.weeksMissed * 4; // ~4 sessions per missed week
-  var completionRate = Math.round(((currentWeek * 4 - missedSessions) / (currentWeek * 4)) * 100);
+  var missedSessions = 4; // Wk7 illness only // ~4 sessions per missed week
+  var completionRate = Math.round(((currentWeek * 4 - missedSessions) / (currentWeek * 4)) * 100); // 28/32 = 87%
 
   // ── 3. INJURY RISK FORECAST ──
   var riskFactors = [];
@@ -4004,6 +4055,20 @@ function renderEngine() {
   }
 }
 
+
+// ── RELATIVE DATE FOR LATEST RUN ──────────────────────────
+function updateLatestRun() {
+  var lastRun = new Date('2026-06-11T18:31:30');
+  var now = new Date();
+  var diff = Math.round((now - lastRun) / 86400000);
+  var el = document.getElementById('latestRunDate');
+  if(el) {
+    if(diff === 0) el.textContent = 'Today';
+    else if(diff === 1) el.textContent = 'Yesterday';
+    else el.textContent = diff + ' days ago';
+  }
+}
+
 window.addEventListener('load', function init() {
   applyTheme();
   tick();
@@ -4026,6 +4091,7 @@ window.addEventListener('load', function init() {
   renderPanelManager();
   renderCustomWidgets();
   try{renderWeeklyChart();}catch(e){}
+  updateLatestRun();
   try{renderEngine();}catch(e){console.log(e);}
   try{renderWeather();}catch(e){}
   try{renderElevation();}catch(e){}
