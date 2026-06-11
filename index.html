@@ -1513,6 +1513,19 @@ const PLAN = [
   {wk:24,dates:"Sep 28–Oct 4",phase:"Taper",km:40.6,done:false,sessions:[{day:"Tue",type:"interval",name:"Rolling 300s",key:"Rolling 300s 6.6km"},{day:"Wed",type:"easy",name:"11km Easy Run",key:"11km Easy Run"},{day:"Thu",type:"interval",name:"Broken 600s",key:"Broken 600s 10km"},{day:"Sun",type:"long",name:"13km Race Practice LR",key:"13km Race Practice Long Run"}]},
   {wk:25,dates:"Oct 5–11",phase:"Race",km:57.9,done:false,sessions:[{day:"Tue",type:"easy",name:"7.5km Easy Run",key:"7.5km Easy Run"},{day:"Wed",type:"rest",name:"Rest",key:null},{day:"Thu",type:"tempo",name:"Taper Two Miler",key:"Taper Two Miler 8.2km"},{day:"Sun",type:"race",name:"🏆 NIKE MELBOURNE MARATHON",key:"Nike Melbourne Marathon"}]},
 ];
+// Compute dates for plan sessions
+var planStart = new Date('2026-04-20');
+var dayMap = {Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
+PLAN.forEach(function(wk) {
+  var weekStart = new Date(planStart.getTime() + (wk.wk - 1) * 7 * 86400000);
+  wk.sessions.forEach(function(s) {
+    if (s.day && dayMap[s.day] !== undefined) {
+      var d = new Date(weekStart.getTime() + dayMap[s.day] * 86400000);
+      s.date = d.toISOString().split('T')[0];
+    }
+  });
+});
+
 
 // ── STATE ──────────────────────────────────────────────────────
 let completed = JSON.parse(localStorage.getItem('kc_done') || '{}');
@@ -1832,7 +1845,8 @@ function initCalDrag(){
         reschedules[wk + '__' + origDay] = targetDay;
       }
       saveReschedules();
-      renderPlan();
+      autoSyncPlan();
+  renderPlan();
       // Show brief notification
       var b = document.createElement('div');
       b.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--golden);color:var(--blacktie);padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.4)';
@@ -2951,6 +2965,7 @@ function addRestDay(wk, day){
   if(customRests[key]){ delete customRests[key]; } // toggle off if already rest
   else { customRests[key] = true; }
   saveCustomRests();
+  autoSyncPlan();
   renderPlan();
 }
 
@@ -4066,6 +4081,76 @@ function updateLatestRun() {
     if(diff === 0) el.textContent = 'Today';
     else if(diff === 1) el.textContent = 'Yesterday';
     else el.textContent = diff + ' days ago';
+  }
+}
+
+
+// ── STRAVA RUN LOG (for auto-matching plan sessions) ──────
+var STRAVA_RUNS = [
+  {date:'2026-04-21',km:5.0,pace:'5:36',name:'Superblast trial'},
+  {date:'2026-04-22',km:8.7,pace:'6:02',name:'Evening Run'},
+  {date:'2026-04-22',km:5.0,pace:'4:58',name:'5km'},
+  {date:'2026-04-23',km:7.7,pace:'5:59',name:'Evening Run'},
+  {date:'2026-04-26',km:16.0,pace:'6:01',name:'Morning LR'},
+  {date:'2026-04-28',km:6.6,pace:'6:01',name:'Evening Run'},
+  {date:'2026-04-29',km:6.5,pace:'6:04',name:'Evening Run'},
+  {date:'2026-04-30',km:11.0,pace:'6:06',name:'Evening Run'},
+  {date:'2026-05-03',km:17.0,pace:'5:59',name:'Afternoon LR'},
+  {date:'2026-05-05',km:9.4,pace:'6:02',name:'Tempo 3-2-1'},
+  {date:'2026-05-06',km:8.0,pace:'6:04',name:'Evening Run'},
+  {date:'2026-05-08',km:9.8,pace:'6:06',name:'Evening Run'},
+  {date:'2026-05-10',km:18.3,pace:'5:52',name:'Morning LR'},
+  {date:'2026-05-12',km:6.4,pace:'6:32',name:'Lunch Run'},
+  {date:'2026-05-13',km:6.5,pace:'6:00',name:'6.5km Easy'},
+  {date:'2026-05-14',km:5.5,pace:'5:43',name:'Evening Run'},
+  {date:'2026-05-17',km:10.0,pace:'6:32',name:'Morning Run'},
+  {date:'2026-05-19',km:10.6,pace:'5:51',name:'Lunch Run'},
+  {date:'2026-05-20',km:8.0,pace:'6:00',name:'Evening Run'},
+  {date:'2026-05-21',km:9.1,pace:'5:52',name:'Evening Run'},
+  {date:'2026-05-24',km:20.1,pace:'5:52',name:'20km Hotspot LR'},
+  {date:'2026-05-26',km:5.0,pace:'4:36',name:'Intervals'},
+  {date:'2026-05-26',km:2.1,pace:'7:03',name:'WU/CD'},
+  {date:'2026-05-29',km:3.1,pace:'5:50',name:'Evening Run'},
+  {date:'2026-05-30',km:9.0,pace:'6:16',name:'Afternoon Run'},
+  {date:'2026-06-09',km:5.0,pace:'7:15',name:'First run back'},
+  {date:'2026-06-11',km:5.0,pace:'6:31',name:'Evening Run'},
+];
+
+// Auto-mark plan sessions as done based on Strava runs
+function autoSyncPlan() {
+  var done = JSON.parse(localStorage.getItem('kc_done') || '{}');
+  var changed = false;
+
+  PLAN.forEach(function(wk) {
+    wk.sessions.forEach(function(s) {
+      if (!s.date || s.type === 'rest') return;
+      var key = 'wk' + wk.wk + '_' + s.day;
+      if (done[key]) return; // already marked
+
+      // Find a matching Strava run on this date
+      var planDate = s.date; // YYYY-MM-DD
+      var planKm = parseFloat(s.km) || 0;
+
+      var match = STRAVA_RUNS.find(function(r) {
+        if (r.date !== planDate) return false;
+        // Match if distance is within 30% of planned (or any run on rest-turned-run days)
+        if (planKm > 0) {
+          var diff = Math.abs(r.km - planKm) / planKm;
+          return diff < 0.4; // 40% tolerance
+        }
+        return r.km > 0;
+      });
+
+      if (match) {
+        done[key] = true;
+        changed = true;
+      }
+    });
+  });
+
+  if (changed) {
+    localStorage.setItem('kc_done', JSON.stringify(done));
+    console.log('✅ Auto-synced plan with Strava:', Object.keys(done).length, 'sessions marked done');
   }
 }
 
