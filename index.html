@@ -609,7 +609,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
   <div></div>
   <div class="topbar-center">
     <div class="topbar-title">🏃 Keegan Chang · Marathon Dashboard</div>
-    <div class="topbar-sub" id="syncStatus">Synced: Jun 9 2026 · 88 activities · last run today</div>
+    <div class="topbar-sub" id="syncStatus">Synced: Jun 11 2026 · 89 activities · last run today</div>
   </div>
   <div class="topbar-right">
     <button class="btn btn-dark" data-action="theme" id="themeBtn">🌙 Dark</button>
@@ -681,7 +681,7 @@ input:focus, select:focus, textarea:focus { border-color:var(--golden) !importan
   <div class="sec-header"><span class="drag-handle">⠿</span><span class="sec-title">📊 Training Status</span><span class="sec-badge t-green">✅ Back on track</span><button class="sec-toggle" data-toggle="status">−</button></div>
   <div class="sec-body" id="body-status">
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px">
-      <div class="metric"><div class="metric-label">Latest run</div><div class="metric-val" id="latestRunDate" style="font-size:18px">Jun 9</div><div class="metric-sub">5km · 7:13/km</div></div>
+      <div class="metric"><div class="metric-label">Latest run</div><div class="metric-val" id="latestRunDate" style="font-size:18px">Jun 11</div><div class="metric-sub">5km · 6:31/km</div></div>
       <div class="metric"><div class="metric-label">Longest run</div><div class="metric-val" style="font-size:18px">20.1km</div><div class="metric-sub">May 24</div></div>
       <div class="metric"><div class="metric-label">1km PR</div><div class="metric-val" style="font-size:18px">4:17</div><div class="metric-sub">May 26</div></div>
       <div class="metric"><div class="metric-label">Consistency</div><div class="metric-val" style="font-size:18px;color:#2ECC71">77%</div><div class="metric-sub">17/22 wks active</div></div>
@@ -1470,7 +1470,7 @@ const PLAN = [
 // ── STATE ──────────────────────────────────────────────────────
 let completed = JSON.parse(localStorage.getItem('kc_done') || '{}');
 let shoes = JSON.parse(localStorage.getItem('kc_shoes') || 'null') || [
-  {id:'30605717',brand:'ASICS',model:'Superblast 3',name:'White',type:'daily',use:'Default daily driver — all easy runs, recovery runs &amp; long runs',km:182.2,warn:800,retire:1000,race:false,price:280},
+  {id:'30605717',brand:'ASICS',model:'Superblast 3',name:'White',type:'daily',use:'Default daily driver — all easy runs, recovery runs &amp; long runs',km:187.2,warn:800,retire:1000,race:false,price:280},
   {id:'30100397',brand:'Nike',model:'Alphafly 3',name:'Platinum',type:'carbon',use:'Race day Oct 11 marathon 🏆 · Break-in: Wk10 Jun 22 (5km), Wk14 Jul 16 (8km), Wk17 Aug 11 (8km)',km:14.0,warn:400,retire:500,race:true,raceTag:'🏆 MARATHON RACE SHOE',price:350},
   {id:'29078819',brand:'Nike',model:'Vaporfly 4',name:'White',type:'carbon',use:'Interval sessions — rotate with Adios Pro 4',km:119.5,warn:400,retire:500,race:false,raceTag:null,price:350},
   {id:'28897817',brand:'Adidas',model:'Adios Pro 4',name:'White cloud',type:'carbon',use:'Intervals (rotate with Vaporfly 4) &amp; tempo runs',km:85.7,warn:400,retire:500,race:false,price:300},
@@ -2919,6 +2919,7 @@ function renderAeroEfficiency(){
     {date:'May 20',km:8.0,pace:6.00,hr:150,type:'easy'},
     {date:'May 24',km:20.1,pace:5.87,hr:154,type:'long'},
     {date:'Jun 9',km:5.0,pace:7.25,hr:147,type:'easy'},
+    {date:'Jun 11',km:5.0,pace:6.52,hr:141,type:'easy'},
   ];
 
   // EFFICIENCY = pace per bpm of HR
@@ -3590,7 +3591,7 @@ document.querySelectorAll('.modal-bg').forEach(function(m) {
 
 
 // ── WEEKLY MILEAGE CHART ──────────────────────────────────
-var WEEKLY_DATA=[{d:'Jan 12',km:23.6,runs:5,re:0,prs:40},{d:'Jan 19',km:12.8,runs:3,re:0,prs:20},{d:'Jan 26',km:3.9,runs:1,re:29,prs:0},{d:'Feb 02',km:16.3,runs:5,re:125,prs:28},{d:'Feb 09',km:26.2,runs:5,re:331,prs:81},{d:'Feb 16',km:16.1,runs:4,re:118,prs:31},{d:'Feb 23',km:23.9,runs:4,re:241,prs:15},{d:'Mar 02',km:23.6,runs:3,re:223,prs:0},{d:'Mar 09',km:32.7,runs:4,re:320,prs:0},{d:'Mar 16',km:24.0,runs:4,re:210,prs:0},{d:'Mar 23',km:24.5,runs:2,re:449,prs:44},{d:'Mar 30',km:25.0,runs:2,re:346,prs:70},{d:'Apr 06',km:22.5,runs:3,re:219,prs:0},{d:'Apr 13',km:46.2,runs:5,re:480,prs:174},{d:'Apr 20',km:37.4,runs:4,re:340,prs:84},{d:'Apr 27',km:41.1,runs:4,re:420,prs:43},{d:'May 04',km:45.5,runs:4,re:415,prs:164},{d:'May 11',km:28.4,runs:4,re:162,prs:23},{d:'May 18',km:47.8,runs:4,re:442,prs:93},{d:'May 25',km:20.4,runs:3,re:166,prs:149},{d:'Jun 08',km:5.0,runs:1,re:49,prs:0}];
+var WEEKLY_DATA=[{d:'Jan 12',km:23.6,runs:5,re:0,prs:40},{d:'Jan 19',km:12.8,runs:3,re:0,prs:20},{d:'Jan 26',km:3.9,runs:1,re:29,prs:0},{d:'Feb 02',km:16.3,runs:5,re:125,prs:28},{d:'Feb 09',km:26.2,runs:5,re:331,prs:81},{d:'Feb 16',km:16.1,runs:4,re:118,prs:31},{d:'Feb 23',km:23.9,runs:4,re:241,prs:15},{d:'Mar 02',km:23.6,runs:3,re:223,prs:0},{d:'Mar 09',km:32.7,runs:4,re:320,prs:0},{d:'Mar 16',km:24.0,runs:4,re:210,prs:0},{d:'Mar 23',km:24.5,runs:2,re:449,prs:44},{d:'Mar 30',km:25.0,runs:2,re:346,prs:70},{d:'Apr 06',km:22.5,runs:3,re:219,prs:0},{d:'Apr 13',km:46.2,runs:5,re:480,prs:174},{d:'Apr 20',km:37.4,runs:4,re:340,prs:84},{d:'Apr 27',km:41.1,runs:4,re:420,prs:43},{d:'May 04',km:45.5,runs:4,re:415,prs:164},{d:'May 11',km:28.4,runs:4,re:162,prs:23},{d:'May 18',km:47.8,runs:4,re:442,prs:93},{d:'May 25',km:20.4,runs:3,re:166,prs:149},{d:'Jun 08',km:10.0,runs:2,re:78,prs:0}];
 
 function renderWeeklyChart() {
   var el = document.getElementById('weeklyChart'); if(!el) return;
@@ -3876,7 +3877,7 @@ function renderEngine() {
   var todaySession = todayPlan[dayOfWeek] || 'Rest';
   
   // Context-aware decision based on comeback status
-  var lastRunDate = new Date('2026-06-09');
+  var lastRunDate = new Date('2026-06-11');
   var daysSinceRun = Math.round((today - lastRunDate) / 86400000);
   var isComeback = A.weeksMissed >= 2;
   var decision, decisionWhy, decisionColor, decisionIcon;
